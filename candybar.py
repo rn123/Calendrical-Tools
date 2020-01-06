@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import datetime, json
+import datetime
+import json
 from calendar import TextCalendar, Calendar, HTMLCalendar
-from IPython.core.display import display, HTML
-from pycalcal import *
+from pycalcal import *  
 
 cal = TextCalendar()
 print(cal.formatyear(2020))
