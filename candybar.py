@@ -296,13 +296,13 @@ class LaTeXCandyBar(CandyBar):
         if len(first_of_month) == 1:
             indx = first_of_month[0]
             #print 'indx = ', indx
-            top = r'\cline{{{}-8}}\n'.format(indx+1+1)
+            top = r'\cline{{{}-8}}'.format(indx+1+1) + '\n'
             wf = '&'.join(self.formatday(d,i,indx) for (i,d) in enumerate(theweek[1]) )+ r'\\' + '\n'
             wf = str(theweek[0]['iso']) + '&' + wf
             if indx == 0:
                 output = top + wf
             else: 
-                bottom = '\cline{{2-{}}}\n'.format(indx+1)
+                bottom = r'\cline{{2-{}}}'.format(indx+1) + '\n'
                 output = top + wf + bottom
         else:           ## Regular week.
             wf = '&'.join(self.formatday(d,i,-1) for (i,d) in enumerate(theweek[1])) + r'\\' + '\n'
