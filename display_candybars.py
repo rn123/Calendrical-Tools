@@ -14,19 +14,38 @@ print(cal.formatyear(2020))
 cal = candybar.TextCandyBar()
 cal.prcandybar(2020)
 
-year = 2020
-cal = candybar.LaTeXCandyBar()
-new_moons_data = [(n, pcc.nth_new_moon(n)) for n in range(24970,24985)]
-new_moons = {}
-for record in new_moons_data:
-    n = record[0] 
-    nnm = pcc.nth_new_moon(n)
-    nm = pcc.gregorian_from_fixed(nnm)
-    key = int(nnm)
-    new_moons[key] = (n, nm, nnm)
+# Brute force way to get a list of new moons occuring during the year. First 
+# approximate the number of new moons since the year 0 (using simple observation
+# that length of month alternates between 29 and 30 days). Use astronomical
+# approximation to get precise dates of new moons in the year.
+def many_moons(fixed_date, epoch=0):
+	# Use part of formula for islamic_from_fixed:
+	# year       = quotient(30 * (date - ISLAMIC_EPOCH) + 10646, 10631)
+	# but replace ISLAMIC_EPOCH with and epoch of 0 to approximate the 
+	# number of new moons since the epoch.
+	# TODO: grok the cycle of leap year formula behind this approximation.
+	year  = pcc.quotient(30 * (fixed_date - epoch) + 10646, 10631)
+	no_moons = year*12
+	return no_moons
 
+def new_moons_in_year(year):
+	fixed_date = pcc.fixed_from_gregorian([year, 1, 1])
+	no_moons = many_moons(year)
+	new_moons_data = [(n, pcc.nth_new_moon(n)) for n in range(no_moons - 12,no_moons + 13)]
+	new_moons = {}
+	for n, nnm in new_moons_data:
+	    nm = pcc.gregorian_from_fixed(nnm)
+	    key = int(nnm)
+	    if nm[0] == year:
+	    	new_moons[key] = (n, nm, nnm)
+
+	return new_moons
+
+cal = candybar.LaTeXCandyBar()
+year = 2020
+new_moons = new_moons_in_year(year)
 wks, iso = cal.isoweeks(year)
-#print wks
+
 weeks = []
 for w in wks:
     iso_week_number = pcc.iso_week(pcc.iso_from_fixed(w[0][0]))
