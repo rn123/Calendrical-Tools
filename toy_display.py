@@ -76,15 +76,16 @@ lunar_template_text = r'''\begin{tabular}{c}
 {% endfor %}
 \end{tabular}'''
 lunar_template = Template(lunar_template_text)
-tab = lunar_template.render(weeks=formatted_weeks)
+lunar_tab = lunar_template.render(weeks=formatted_weeks)
+
+candybar_tab = cal.prweeks(weeks, new_moons)
 
 template = Template(template_text)
-
-output = template.render(gregorian_data=tab,
-    lunar_data=tab,
-    hebrew_data=tab,
-    islamic_data=tab,
-    chinese_data=tab)
+output = template.render(gregorian_data=candybar_tab,
+    lunar_data=lunar_tab,
+    hebrew_data=candybar_tab,
+    islamic_data=candybar_tab,
+    chinese_data=candybar_tab)
 
 with open('cal.tex', 'w') as fp:
     fp.write(output)
