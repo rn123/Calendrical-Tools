@@ -386,7 +386,7 @@ for w in wks:
     week = [week_data]
     week.append([standard_day(gregorian_from_fixed(d[0])) for d in w])
     weeks.append(week)
-print(cal.prweeks(weeks))
+# print(cal.prweeks(weeks))
 # print('&')
 # print(r"""
 # \begin{tabular}{c}
