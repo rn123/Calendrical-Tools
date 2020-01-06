@@ -38,7 +38,6 @@ cal = candybar.LaTeXCandyBar()
 year = 2020
 new_moons = new_moons_in_year(year)
 wks, iso = cal.isoweeks(year)
-print(new_moons)
 
 weeks = []
 for w in wks:
