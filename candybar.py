@@ -3,7 +3,7 @@
 
 import datetime
 import json
-from pycalcal import *  
+import pycalcal as pcc 
 
 class CandyBar():
     firstweekday = 0
@@ -44,10 +44,10 @@ class CandyBar():
         """
         ## Use pycalcal to find first Thursday of the year. Returns an integer 
         ## day count of days elapsed since 1/1/1 (rata die -- fixed day).
-        first_thursday = nth_kday(1, 4, [g_year, 1, 1])
+        first_thursday = pcc.nth_kday(1, 4, [g_year, 1, 1])
         ## Back up and enumerate days starting the week before.
         days = [first_thursday - 3 - 7 + j for j in range(0,54*7)]
-        days_dates = [(d,gregorian_from_fixed(d)) for d in days]
+        days_dates = [(d, pcc.gregorian_from_fixed(d)) for d in days]
         ## List of weeks, starting on Mondays  
         weeks = [days_dates[i:i+7] for i in range(0, len(days_dates), 7)]
 
@@ -56,7 +56,7 @@ class CandyBar():
         iso_list = []
         for w in weeks:
             # Key is the year and month of the starting Monday.
-            key = str(standard_year(w[0][1])) + '_' + str(standard_month(w[0][1]))
+            key = str(pcc.standard_year(w[0][1])) + '_' + str(pcc.standard_month(w[0][1]))
             if key not in iso.keys():
                 iso[key] = 1
             else:
@@ -64,7 +64,7 @@ class CandyBar():
         ## A dictionary was used to accumulate count. Now create sorted list of 
         ## months with count of how many iso weeks (Mondays) start in that month.
         for k in iso.keys():
-            pair = list(map(int,k.split('_')))
+            pair = list(map(int, k.split('_')))
             iso_list.append([pair[0], pair[1], iso[k]])
             iso_list.sort()
         return (weeks, iso_list)
@@ -109,7 +109,7 @@ class CandyBar():
         date -= datetime.timedelta(days=days)
         oneday = datetime.timedelta(days=1)
         while True:
-            yield hebrew_from_fixed(fixed_from_gregorian([date.year,date.month,date.day]))
+            yield pcc.hebrew_from_fixed(pcc.fixed_from_gregorian([date.year, date.month, date.day]))
             date += oneday
             if date.year != g_year and date.weekday() == self.firstweekday:
                 break
@@ -121,23 +121,23 @@ class CandyBar():
         """
         for date in self.iteryeardates(g_year):
             if date.year != g_year:
-                fd = fixed_from_gregorian([date.year,date.month,date.day])
-                d = hebrew_from_fixed(fd)
-                day_value = standard_day(d)
-                month_value = standard_month(d)
-                year_value = standard_year(d)
+                fd = pcc.fixed_from_gregorian([date.year, date.month, date.day])
+                d = pcc.hebrew_from_fixed(fd)
+                day_value = pcc.standard_day(d)
+                month_value = pcc.standard_month(d)
+                year_value = pcc.standard_year(d)
                 yield [(0, date.weekday()),(year_value, month_value)]
             else:
-                fd = fixed_from_gregorian([date.year,date.month,date.day])
+                fd = pcc.fixed_from_gregorian([date.year, date.month, date.day])
                 if cal_type == 'hebrew':
-                    d = hebrew_from_fixed(fd)
-                    day_value = standard_day(d)
-                    month_value = standard_month(d)
-                    year_value = standard_year(d)
+                    d = pcc.hebrew_from_fixed(fd)
+                    day_value = pcc.standard_day(d)
+                    month_value = pcc.standard_month(d)
+                    year_value = pcc.standard_year(d)
                 elif cal_type == 'chinese':
-                    d = chinese_from_fixed(fd)
-                    day_value = chinese_day(d)
-                    month_value = chinese_month(d)
+                    d = pcc.chinese_from_fixed(fd)
+                    day_value = pcc.chinese_day(d)
+                    month_value = pcc.chinese_month(d)
                 else:
                     print('type %s not implemented' % cal_type)
                     return
@@ -177,7 +177,7 @@ class TextCandyBar(CandyBar):
 
     def prcandybar(self, year):
         weeks, iso_list = self.isoweeks(year)
-        iso_week_numbers = [iso_week(iso_from_fixed(w[0][0])) for w in weeks]
+        iso_week_numbers = [pcc.iso_week(pcc.iso_from_fixed(w[0][0])) for w in weeks]
         for iw, w in zip(iso_week_numbers, weeks):
             print('{:2}'.format(iw) + '\t' + self.formatweek(w))
 
@@ -248,7 +248,7 @@ class LaTeXCandyBar(CandyBar):
             #print first_of_month, theweek
             if 'new_moon_fixed' in theweek[0].keys():
                 i_new_moon = theweek[0]['new_moon_fixed']
-                t_new_moon = clock_from_moment(new_moons[i_new_moon][2])
+                t_new_moon = pcc.clock_from_moment(new_moons[i_new_moon][2])
                 hour = int(t_new_moon[0])
                 minute = int(t_new_moon[1])
                 #print type(hour), type(minute)
@@ -259,21 +259,21 @@ class LaTeXCandyBar(CandyBar):
                 if 'molad' in theweek[0].keys():
                     #print theweek
                     n = theweek[0]['raw'][6][0]
-                    d = hebrew_from_fixed(n)
+                    d = pcc.hebrew_from_fixed(n)
                     #print n,d
                     #print standard_year(d),standard_month(d)
-                    i_molad = molad(standard_month(d),standard_year(d))
-                    d_molad = hebrew_from_fixed(i_molad)
+                    i_molad = pcc.molad(pcc.standard_month(d), pcc.standard_year(d))
+                    d_molad = pcc.hebrew_from_fixed(i_molad)
                     #print i_molad,d_molad
-                    d_molad = '{}-{}-{}'.format(standard_year(d_molad),
-                            standard_month(d_molad), int(standard_day(d_molad)))
+                    d_molad = '{}-{}-{}'.format(pcc.standard_year(d_molad),
+                            pcc.standard_month(d_molad), int(pcc.standard_day(d_molad)))
                     #d_molad = '{:.3} {}'.format(DAYS_OF_WEEK_NAMES[d_molad],d_pretty)
                     #d_molad = '{}'.format(d_pretty)
-                    t_molad = clock_from_moment(i_molad)
+                    t_molad = pcc.clock_from_moment(i_molad)
                     hour = int(t_molad[0])
                     minute = int(t_molad[1])
                     #print hour, minute,t_molad
-                    ts_molad = '{:02d}:{:02d}'.format(hour,minute)
+                    ts_molad = '{:02d}:{:02d}'.format(hour, minute)
                     ts_molad = r'\rotatebox{{270}}{{\small {}}}'.format(ts_molad)
                     ts_molad = r'\multirow{{4}}{{4mm}}[6mm]{{{}}}'.format(ts_molad)
                     ts = r'\rotatebox{{270}}{{\small {}}}'.format(d_molad)
@@ -290,7 +290,7 @@ class LaTeXCandyBar(CandyBar):
             indx = first_of_month[0]
             #print 'indx = ', indx
             top = r'\cline{{{}-8}}'.format(indx+1+1) + '\n'
-            wf = '&'.join(self.formatday(d,i,indx) for (i,d) in enumerate(theweek[1]) )+ r'\\' + '\n'
+            wf = '&'.join(self.formatday(d, i, indx) for (i,d) in enumerate(theweek[1]))+ r'\\' + '\n'
             wf = str(theweek[0]['iso']) + '&' + wf
             if indx == 0:
                 output = top + wf
@@ -298,7 +298,7 @@ class LaTeXCandyBar(CandyBar):
                 bottom = r'\cline{{2-{}}}'.format(indx+1) + '\n'
                 output = top + wf + bottom
         else:           ## Regular week.
-            wf = '&'.join(self.formatday(d,i,-1) for (i,d) in enumerate(theweek[1])) + r'\\' + '\n'
+            wf = '&'.join(self.formatday(d, i, -1) for (i,d) in enumerate(theweek[1])) + r'\\' + '\n'
             wf = str(theweek[0]['iso']) + '&' + wf
             output = wf
         return output
@@ -330,7 +330,7 @@ class LaTeXCandyBar(CandyBar):
             weeks, iso_list = self.isoweeks(year)
         #	for w in weeks: print self.formatweek(w)
         else:
-            data = [d for d in self.iteryeardays2_Hebrew(year,cal_type)]
+            data = [d for d in self.iteryeardays2_Hebrew(year, cal_type)]
             days = [d[0] for d in data]
             for d in data:
                 if d[1] not in month_list:
