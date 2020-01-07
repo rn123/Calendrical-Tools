@@ -37,7 +37,8 @@ def new_moons_in_year(year):
 def weeks_data(wks, calendar_type='gregorian'):
     from_fixed_functions = {'gregorian': pcc.gregorian_from_fixed,
                             'hebrew': pcc.hebrew_from_fixed,
-                            'islamic': pcc.islamic_from_fixed}
+                            'islamic': pcc.islamic_from_fixed,
+                            'chinese': pcc.chinese_from_fixed}
     weeks = []
     for w in wks:
         iso_week_number = pcc.iso_week(pcc.iso_from_fixed(w[0][0]))
@@ -50,7 +51,10 @@ def weeks_data(wks, calendar_type='gregorian'):
                 week_data['new_moon_fixed'] = d[0]
     #             print(week_data)
         week = [week_data]
-        week.append([pcc.standard_day(from_fixed_functions[calendar_type](d[0])) for d in w])
+        if calendar_type == 'chinese':
+            week.append([pcc.chinese_day(from_fixed_functions[calendar_type](d[0])) for d in w])
+        else:
+            week.append([pcc.standard_day(from_fixed_functions[calendar_type](d[0])) for d in w])
         weeks.append(week)
     return weeks
 
@@ -67,6 +71,9 @@ hebrew_tab = cal.prweeks(hebrew_weeks, new_moons)
 
 islamic_weeks = weeks_data(wks, calendar_type='islamic')
 islamic_tab = cal.prweeks(islamic_weeks, new_moons)
+
+chinese_weeks = weeks_data(wks, calendar_type='chinese')
+chinese_tab = cal.prweeks(chinese_weeks, new_moons)
 
 formatted_weeks = []
 for w in gregorian_weeks:
@@ -96,7 +103,7 @@ output = template.render(gregorian_data=gregorian_tab,
     lunar_data=lunar_tab,
     hebrew_data=hebrew_tab,
     islamic_data=islamic_tab,
-    chinese_data=islamic_tab)
+    chinese_data=chinese_tab)
 
 with open('cal.tex', 'w') as fp:
     fp.write(output)
