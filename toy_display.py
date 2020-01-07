@@ -3,6 +3,7 @@
 
 import datetime
 from jinja2 import Template
+from tqdm import tqdm
 
 import pycalcal as pcc
 import candybar
@@ -40,7 +41,7 @@ def weeks_data(wks, calendar_type='gregorian'):
                             'islamic': pcc.islamic_from_fixed,
                             'chinese': pcc.chinese_from_fixed}
     weeks = []
-    for w in wks:
+    for w in tqdm(wks):
         iso_week_number = pcc.iso_week(pcc.iso_from_fixed(w[0][0]))
         week_data = {}
         week_data['iso'] = iso_week_number
