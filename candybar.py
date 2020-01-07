@@ -247,32 +247,27 @@ class LaTeXCandyBar(CandyBar):
         """
         print_iso_numbers = True 
         indx = 0
-#         print(theweek)
-        first_of_month = [i for (i,x) in enumerate(theweek[1]) if x == 1]
-        if 'new_moon' in theweek[0].keys(): 
-            nm = theweek[0]['new_moon'][-1]
-            for (i,dd) in enumerate(theweek[1]):
-                if dd == nm: theweek[1][i] = r'\newmoon'
-            #print first_of_month, theweek
-            if 'new_moon_fixed' in theweek[0].keys():
-                i_new_moon = theweek[0]['new_moon_fixed']
+        first_of_month = [i for (i, x) in enumerate(theweek[1]) if x == 1]
+        week_details_dict, week_days_list = theweek
+        if 'new_moon' in week_details_dict: 
+            nm = week_details_dict['new_moon'][-1]
+            for (i, dd) in enumerate(week_days_list):
+                if dd == nm: 
+                    week_days_list[i] = r'\newmoon'
+            if 'new_moon_fixed' in week_details_dict:
+                i_new_moon = week_details_dict['new_moon_fixed']
                 t_new_moon = pcc.clock_from_moment(new_moons[i_new_moon][2])
                 hour = int(t_new_moon[0])
                 minute = int(t_new_moon[1])
-                #print type(hour), type(minute)
-                ts = '{:02d}:{:02d}'.format(hour,minute)
+                ts = '{:02d}:{:02d}'.format(hour, minute)
                 #ts = ':'.join(str(t) for t in clock_from_moment(new_moons[i][2])[0:2])
                 ts = r'\rotatebox{{270}}{{\small {}}}'.format(ts)
                 ts = r'\multirow{{4}}{{4mm}}[6mm]{{{}}}'.format(ts)
-                if 'molad' in theweek[0].keys():
-                    #print theweek
-                    n = theweek[0]['raw'][6][0]
+                if 'molad' in week_details_dict:
+                    n = week_days_list['raw'][6][0]
                     d = pcc.hebrew_from_fixed(n)
-                    #print n,d
-                    #print standard_year(d),standard_month(d)
                     i_molad = pcc.molad(pcc.standard_month(d), pcc.standard_year(d))
                     d_molad = pcc.hebrew_from_fixed(i_molad)
-                    #print i_molad,d_molad
                     d_molad = '{}-{}-{}'.format(pcc.standard_year(d_molad),
                             pcc.standard_month(d_molad), int(pcc.standard_day(d_molad)))
                     #d_molad = '{:.3} {}'.format(DAYS_OF_WEEK_NAMES[d_molad],d_pretty)
@@ -280,7 +275,6 @@ class LaTeXCandyBar(CandyBar):
                     t_molad = pcc.clock_from_moment(i_molad)
                     hour = int(t_molad[0])
                     minute = int(t_molad[1])
-                    #print hour, minute,t_molad
                     ts_molad = '{:02d}:{:02d}'.format(hour, minute)
                     ts_molad = r'\rotatebox{{270}}{{\small {}}}'.format(ts_molad)
                     ts_molad = r'\multirow{{4}}{{4mm}}[6mm]{{{}}}'.format(ts_molad)
@@ -288,26 +282,22 @@ class LaTeXCandyBar(CandyBar):
                     ts = r'\multirow{{4}}{{4mm}}[6mm]{{{}}}'.format(ts)
             else: 
                 ts = 'test'
-            #print theweek[1]
             theweek[1].append(ts)
             if 'molad' in theweek[0].keys():
                 theweek[1].append(ts_molad)
-            #print theweek[1]
-            #print  r'{}'.format(ts)+ r'\\'
         if len(first_of_month) == 1:
             indx = first_of_month[0]
-            #print 'indx = ', indx
-            top = r'\cline{{{}-8}}'.format(indx+1+1) + '\n'
-            wf = '&'.join(self.formatday(d, i, indx) for (i,d) in enumerate(theweek[1]))+ r'\\' + '\n'
-            wf = str(theweek[0]['iso']) + '&' + wf
+            top = r'\cline{{{}-8}}'.format(indx + 1 + 1) + '\n'
+            wf = '&'.join(self.formatday(d, i, indx) for (i,d) in enumerate(theweek[1]))
+            wf = str(week_details_dict['iso']) + '&' + wf + r'\\' + '\n'
             if indx == 0:
                 output = top + wf
             else: 
                 bottom = r'\cline{{2-{}}}'.format(indx+1) + '\n'
                 output = top + wf + bottom
         else:           ## Regular week.
-            wf = '&'.join(self.formatday(d, i, -1) for (i,d) in enumerate(theweek[1])) + r'\\' + '\n'
-            wf = str(theweek[0]['iso']) + '&' + wf
+            wf = '&'.join(self.formatday(d, i, -1) for (i,d) in enumerate(theweek[1]))
+            wf = str(week_details_dict['iso']) + '&' + wf + r'\\' + '\n'
             output = wf
         return output
 

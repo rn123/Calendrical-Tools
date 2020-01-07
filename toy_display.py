@@ -34,31 +34,42 @@ def new_moons_in_year(year):
 
     return new_moons
 
+def weeks_data(wks, calendar_type='gregorian'):
+    from_fixed_functions = {'gregorian': pcc.gregorian_from_fixed,
+                            'hebrew': pcc.hebrew_from_fixed,
+                            'islamic': pcc.islamic_from_fixed}
+    weeks = []
+    for w in wks:
+        iso_week_number = pcc.iso_week(pcc.iso_from_fixed(w[0][0]))
+        week_data = {}
+        week_data['iso'] = iso_week_number
+        week_data['raw'] = w
+        for d in w:
+            if d[0] in new_moons.keys():
+                week_data['new_moon'] = from_fixed_functions[calendar_type](d[0])
+                week_data['new_moon_fixed'] = d[0]
+    #             print(week_data)
+        week = [week_data]
+        week.append([pcc.standard_day(from_fixed_functions[calendar_type](d[0])) for d in w])
+        weeks.append(week)
+    return weeks
+
 cal = candybar.LaTeXCandyBar()
 year = 2020
 new_moons = new_moons_in_year(year)
 wks, iso = cal.isoweeks(year)
 
-weeks = []
-for w in wks:
-    iso_week_number = pcc.iso_week(pcc.iso_from_fixed(w[0][0]))
-    week_data = {}
-    week_data['iso'] = iso_week_number
-    week_data['raw'] = w
-    for d in w:
-        if d[0] in new_moons.keys():
-            week_data['new_moon'] = pcc.gregorian_from_fixed(d[0])
-            week_data['new_moon_fixed'] = d[0]
-#             print(week_data)
-    week = [week_data]
-    week.append([pcc.standard_day(pcc.gregorian_from_fixed(d[0])) for d in w])
-    weeks.append(week)
+gregorian_weeks = weeks_data(wks, calendar_type='gregorian')
+gregorian_tab = cal.prweeks(gregorian_weeks, new_moons)
 
-with open('calendar_template.tex') as fd:
-    template_text = fd.read()
+hebrew_weeks = weeks_data(wks, calendar_type='hebrew')
+hebrew_tab = cal.prweeks(hebrew_weeks, new_moons)
+
+islamic_weeks = weeks_data(wks, calendar_type='islamic')
+islamic_tab = cal.prweeks(islamic_weeks, new_moons)
 
 formatted_weeks = []
-for w in weeks:
+for w in gregorian_weeks:
     output = ''
     if 'new_moon' in w[0].keys():
         i = w[0]['new_moon_fixed']
@@ -77,14 +88,15 @@ lunar_template_text = r'''\begin{tabular}{c}
 lunar_template = Template(lunar_template_text)
 lunar_tab = lunar_template.render(weeks=formatted_weeks)
 
-candybar_tab = cal.prweeks(weeks, new_moons)
-
+with open('calendar_template.tex') as fd:
+    template_text = fd.read()
 template = Template(template_text)
-output = template.render(gregorian_data=candybar_tab,
+
+output = template.render(gregorian_data=gregorian_tab,
     lunar_data=lunar_tab,
-    hebrew_data=candybar_tab,
-    islamic_data=candybar_tab,
-    chinese_data=candybar_tab)
+    hebrew_data=hebrew_tab,
+    islamic_data=islamic_tab,
+    chinese_data=islamic_tab)
 
 with open('cal.tex', 'w') as fp:
     fp.write(output)
