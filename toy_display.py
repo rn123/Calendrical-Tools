@@ -30,8 +30,7 @@ def new_moons_in_year(year):
     for n, nnm in new_moons_data:
         nm = pcc.gregorian_from_fixed(nnm)
         key = int(nnm)
-        if nm[0] == year:
-            new_moons[key] = (n, nm, nnm)
+        new_moons[key] = (n, nm, nnm)
 
     return new_moons
 
