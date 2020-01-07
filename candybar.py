@@ -4,6 +4,7 @@
 import datetime
 import json
 import pycalcal as pcc 
+from jinja2 import Template
 
 class CandyBar():
     firstweekday = 0
@@ -195,6 +196,13 @@ class LaTeXCandyBar(CandyBar):
     'Elul','Tishri','Marheshvan', 'Kislev', 'Tevet',
     'Shevat', 'Adar', 'Adar II']}
 
+    candybar_template_text = r'''
+    \begin{tabular}{l|ccccccc|rr}
+        {% for w in weeks -%} 
+            {{ w }}
+        {%- endfor %} 
+    \end{tabular}'''
+
     def formatmonthnames(self, year, cal_type, month_list):
         month_names = self.months[cal_type] # Could include leap months not
                                                                         # in current year.
@@ -344,10 +352,7 @@ class LaTeXCandyBar(CandyBar):
         return output
 
     def prweeks(self, weeks, new_moons=None):
-        month_list = []
 
-        output = r'\begin{tabular}{l|ccccccc|rr}' + '\n'
-        for w in weeks: 
-            output += self.formatweek(w, new_moons)
-        output += r'\end{tabular}' + '\n'
+        candybar_template = Template(self.candybar_template_text)
+        output = candybar_template.render(weeks=[self.formatweek(w, new_moons) for w in weeks])
         return output
