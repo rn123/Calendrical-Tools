@@ -99,7 +99,18 @@ with open('calendar_template.tex') as fd:
     template_text = fd.read()
 template = Template(template_text)
 
-output = template.render(gregorian_data=gregorian_tab,
+# Hebrew calendar year
+hstart = pcc.standard_year(pcc.hebrew_from_fixed(pcc.fixed_from_gregorian([year,1,1])))
+hend = pcc.standard_year(pcc.hebrew_from_fixed(pcc.fixed_from_gregorian([year,12,1])))
+
+# Islamic calendar year
+istart = pcc.standard_year(pcc.islamic_from_fixed(pcc.fixed_from_gregorian([year,1,1])))
+iend = pcc.standard_year(pcc.islamic_from_fixed(pcc.fixed_from_gregorian([year,12,1])))
+
+year_display = r'{}& Phases & {}/{}& {}/{}&{}'.format(year, hstart, hend, istart, iend, year) 
+
+output = template.render(year_display=year_display,
+    gregorian_data=gregorian_tab,
     lunar_data=lunar_tab,
     hebrew_data=hebrew_tab,
     islamic_data=islamic_tab,
