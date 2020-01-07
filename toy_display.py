@@ -2,6 +2,9 @@
 # coding: utf-8
 
 import datetime
+import json
+from pathlib import Path
+
 from jinja2 import Template
 from tqdm import tqdm
 
@@ -40,22 +43,33 @@ def weeks_data(wks, calendar_type='gregorian'):
                             'islamic': pcc.islamic_from_fixed,
                             'chinese': pcc.chinese_from_fixed}
     weeks = []
-    for w in tqdm(wks):
-        iso_week_number = pcc.iso_week(pcc.iso_from_fixed(w[0][0]))
-        week_data = {}
-        week_data['iso'] = iso_week_number
-        week_data['raw'] = w
-        for d in w:
-            if d[0] in new_moons.keys():
-                week_data['new_moon'] = from_fixed_functions[calendar_type](d[0])
-                week_data['new_moon_fixed'] = d[0]
-    #             print(week_data)
-        week = [week_data]
-        if calendar_type == 'chinese':
-            week.append([pcc.chinese_day(from_fixed_functions[calendar_type](d[0])) for d in w])
-        else:
-            week.append([pcc.standard_day(from_fixed_functions[calendar_type](d[0])) for d in w])
-        weeks.append(week)
+    cache_file = 'chinese_lunar_' + str(year)
+    CACHE_FILE_EXISTS = False
+    if Path(cache_file).exists() and (calendar_type == 'chinese'):
+        CACHE_FILE_EXISTS = True
+        with open(cache_file) as fp:
+            weeks = json.load(fp)
+    else:
+        for w in tqdm(wks):
+            iso_week_number = pcc.iso_week(pcc.iso_from_fixed(w[0][0]))
+            week_data = {}
+            week_data['iso'] = iso_week_number
+            week_data['raw'] = w
+            for d in w:
+                if d[0] in new_moons.keys():
+                    week_data['new_moon'] = from_fixed_functions[calendar_type](d[0])
+                    week_data['new_moon_fixed'] = d[0]
+            week = [week_data]
+            if calendar_type == 'chinese':
+                week.append([pcc.chinese_day(from_fixed_functions[calendar_type](d[0])) for d in w])
+            else:
+                week.append([pcc.standard_day(from_fixed_functions[calendar_type](d[0])) for d in w])
+            weeks.append(week)
+
+    if (CACHE_FILE_EXISTS == False) and (calendar_type == 'chinese'):
+        with open(cache_file, 'w') as fp:
+            json.dump(weeks, fp)
+
     return weeks
 
 cal = candybar.LaTeXCandyBar()
