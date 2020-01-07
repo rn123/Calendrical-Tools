@@ -88,9 +88,9 @@ for w in gregorian_weeks:
     formatted_weeks.append(output)
 
 lunar_template_text = r'''\begin{tabular}{c}
-{% for w in weeks %}
+{% for w in weeks -%}
     {{ w }} \\
-{% endfor %}
+{%- endfor %}
 \end{tabular}'''
 lunar_template = Template(lunar_template_text)
 lunar_tab = lunar_template.render(weeks=formatted_weeks)
