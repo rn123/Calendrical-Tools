@@ -118,6 +118,8 @@ for w in gregorian_weeks:
         output += ('')
     formatted_weeks.append(output)
 
+print('Oh no!')
+
 lunar_template_text = r'''\begin{tabular}{c}
 {% for w in weeks -%}
     {{ w }} \\
