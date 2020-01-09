@@ -10,6 +10,12 @@ from . import pycalcal as pcc
 
 class CandyBar:
     firstweekday = 0
+
+    def __init__(self, year):
+        wks, iso = self.isoweeks(year)
+        self.wks = wks
+        self.iso = iso
+
     #     def itersolar(self, start, end):
     #          # Assumption: cal=calendar.CandyBar(6) <-- 1st day of week is Sunday.
     #          daymap = {'6':'1', '0':'2','1':'3','2':'4','3':'5','4':'6','5':'7'}
