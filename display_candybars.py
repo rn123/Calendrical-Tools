@@ -99,7 +99,6 @@ def main(year=2020, start=None):
     islamic_weeks = weeks_data(wks, new_moons=new_moons, calendar_type="islamic")
     islamic_tab = cal.prweeks(islamic_weeks, new_moons)
 
-
     cache_file = "chinese_lunar_" + str(year)
     CACHE_FILE_EXISTS = False
     if Path(cache_file).exists():
@@ -108,10 +107,10 @@ def main(year=2020, start=None):
             chinese_weeks = json.load(fp)
     else:
         chinese_weeks = weeks_data(wks, new_moons=new_moons, calendar_type="chinese")
-        
+
     chinese_tab = cal.prweeks(chinese_weeks, new_moons)
 
-    if (CACHE_FILE_EXISTS is False):
+    if CACHE_FILE_EXISTS is False:
         with open(cache_file, "w") as fp:
             json.dump(chinese_weeks, fp)
 
