@@ -3,8 +3,9 @@
 
 import datetime
 import json
-from . import pycalcal as pcc
 from jinja2 import Template
+
+from . import pycalcal as pcc
 
 
 class CandyBar:
