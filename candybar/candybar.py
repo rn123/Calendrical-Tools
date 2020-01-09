@@ -3,7 +3,7 @@
 
 import datetime
 import json
-import pycalcal as pcc
+from . import pycalcal as pcc
 from jinja2 import Template
 
 

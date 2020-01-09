@@ -8,8 +8,8 @@ from pathlib import Path
 from jinja2 import Template
 from tqdm import tqdm
 
-import pycalcal as pcc
-import candybar
+from candybar import pycalcal as pcc
+from candybar import candybar as candybar
 
 # Brute force way to get a list of new moons occuring during the year. First
 # approximate the number of new moons since the year 0 (using simple
