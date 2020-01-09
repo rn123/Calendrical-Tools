@@ -136,7 +136,9 @@ def main(year=2020):
     hstart = pcc.standard_year(
         pcc.hebrew_from_fixed(pcc.fixed_from_gregorian([year, 1, 1]))
     )
-    hend = pcc.standard_year(pcc.hebrew_from_fixed(pcc.fixed_from_gregorian([year, 12, 1])))
+    hend = pcc.standard_year(
+        pcc.hebrew_from_fixed(pcc.fixed_from_gregorian([year, 12, 1]))
+    )
 
     # Islamic calendar year
     istart = pcc.standard_year(
@@ -163,5 +165,5 @@ def main(year=2020):
         fp.write(output)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main(2020)
