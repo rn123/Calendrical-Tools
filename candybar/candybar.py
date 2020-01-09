@@ -3,6 +3,8 @@
 
 import datetime
 import json
+from pathlib import Path
+
 from jinja2 import Template
 from tqdm import tqdm
 
@@ -29,15 +31,27 @@ class CandyBar:
 
     def __init__(self, year):
         wks, iso = self.isoweeks(year)
-        self.wks = wks
+        self._wks = wks
         self.iso = iso
         self.new_moons = self.new_moons_in_year(year)
         self.weeks = {}
 
+        self.cache_file = "output/chinese_lunar_" + str(year)
+        self.CACHE_FILE_EXISTS = False
+
         for calendar_type in ["gregorian", "islamic", "hebrew", "chinese"]:
-            self.weeks[calendar_type] = self.weeks_data(
-                wks=self.wks, new_moons=self.new_moons, calendar_type=calendar_type
-            )
+            if (calendar_type == "chinese") and Path(self.cache_file).exists():
+                self.CACHE_FILE_EXISTS = True
+                with open(self.cache_file) as fp:
+                    self.weeks["chinese"] = json.load(fp)
+            else:
+                self.weeks[calendar_type] = self.weeks_data(
+                    wks=self._wks, new_moons=self.new_moons, calendar_type=calendar_type
+                )
+
+            if (calendar_type == "chinese") and (self.CACHE_FILE_EXISTS is False):
+                with open(self.cache_file, "w") as fp:
+                    json.dump(self.weeks["chinese"], fp)
 
     #     def itersolar(self, start, end):
     #          # Assumption: cal=calendar.CandyBar(6) <-- 1st day of week is Sunday.

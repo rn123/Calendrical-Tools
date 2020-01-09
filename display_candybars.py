@@ -21,36 +21,6 @@ from_fixed_functions = {
 }
 
 
-def chinese_day(d):
-    return pcc.chinese_day(from_fixed_functions["chinese"](d))
-
-
-def standard_day(d, calendar_type="gregorian"):
-    return pcc.standard_day(from_fixed_functions[calendar_type](d))
-
-
-def weeks_data(wks, new_moons=None, calendar_type="gregorian"):
-    weeks = []
-    for w in tqdm(wks):
-        iso_week_number = pcc.iso_week(pcc.iso_from_fixed(w[0][0]))
-        week_data = {}
-        week_data["iso"] = iso_week_number
-        week_data["raw"] = w
-        for d in w:
-            if d[0] in new_moons:
-                new_moon = from_fixed_functions[calendar_type](d[0])
-                week_data["new_moon"] = new_moon
-                week_data["new_moon_fixed"] = d[0]
-        week = [week_data]
-        if calendar_type == "chinese":
-            week.append([chinese_day(d[0]) for d in w])
-        else:
-            week.append([standard_day(d[0], calendar_type) for d in w])
-        weeks.append(week)
-
-    return weeks
-
-
 @click.command()
 @click.option("--start", default=1, help="ISO week number.")
 @click.option("--year", default=2020, help="The calendar year.")
@@ -58,35 +28,9 @@ def main(year=2020, start=None):
     year = int(year)
     cal = candybar.LaTeXCandyBar(year)
     new_moons = cal.new_moons
-    wks = cal.wks
-    iso = cal.iso
-
-    gregorian_weeks = weeks_data(wks, new_moons=new_moons, calendar_type="gregorian")
-    gregorian_tab = cal.prweeks(gregorian_weeks, new_moons)
-
-    hebrew_weeks = weeks_data(wks, new_moons=new_moons, calendar_type="hebrew")
-    hebrew_tab = cal.prweeks(hebrew_weeks, new_moons)
-
-    islamic_weeks = weeks_data(wks, new_moons=new_moons, calendar_type="islamic")
-    islamic_tab = cal.prweeks(islamic_weeks, new_moons)
-
-    cache_file = "output/chinese_lunar_" + str(year)
-    CACHE_FILE_EXISTS = False
-    if Path(cache_file).exists():
-        CACHE_FILE_EXISTS = True
-        with open(cache_file) as fp:
-            chinese_weeks = json.load(fp)
-    else:
-        chinese_weeks = weeks_data(wks, new_moons=new_moons, calendar_type="chinese")
-
-    chinese_tab = cal.prweeks(chinese_weeks, new_moons)
-
-    if CACHE_FILE_EXISTS is False:
-        with open(cache_file, "w") as fp:
-            json.dump(chinese_weeks, fp)
 
     formatted_weeks = []
-    for w in gregorian_weeks:
+    for w in cal.weeks["gregorian"]:
         output = ""
         if "new_moon" in w[0]:
             i = w[0]["new_moon_fixed"]
@@ -131,11 +75,11 @@ def main(year=2020, start=None):
 
     output = template.render(
         year_display=year_display,
-        gregorian_data=gregorian_tab,
+        gregorian_data=cal.prweeks(cal.weeks["gregorian"], new_moons),
         lunar_data=lunar_tab,
-        hebrew_data=hebrew_tab,
-        islamic_data=islamic_tab,
-        chinese_data=chinese_tab,
+        hebrew_data=cal.prweeks(cal.weeks["hebrew"], new_moons),
+        islamic_data=cal.prweeks(cal.weeks["islamic"], new_moons),
+        chinese_data=cal.prweeks(cal.weeks["chinese"], new_moons),
     )
 
     outfile = "output/cal_" + str(year) + ".tex"
