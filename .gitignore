@@ -4,3 +4,4 @@
 *.dvi
 *.pdf
 candybar/__pycache__
+chinese_lunar_*
