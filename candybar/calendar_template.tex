@@ -1,0 +1,21 @@
+\documentclass[9pt, landscape]{article}
+\usepackage{calc, layouts, graphicx, wasysym, multirow, array}
+\usepackage[lmargin=40pt, tmargin=40pt, bmargin=0pt]{geometry}
+\pagestyle{empty}
+\begin{document}
+
+\resizebox{!}{9cm}{
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		Gregorian & Lunar & Hebrew & Islamic & Chinese \\
+		{{ year_display -}}  \\
+		\hline
+		{{ gregorian_data }} &
+		{{ lunar_data }}     &
+		{{ hebrew_data }}    &
+		{{ islamic_data }}   &
+		{{ chinese_data }}   \\
+		\hline
+	\end{tabular}
+	}
+\end{document}
