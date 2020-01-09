@@ -7,6 +7,7 @@ from pathlib import Path
 
 from jinja2 import Template
 from tqdm import tqdm
+import click
 
 from candybar import pycalcal as pcc
 from candybar import candybar as candybar
@@ -90,8 +91,12 @@ def weeks_data(wks, new_moons=None, calendar_type="gregorian"):
 
     return weeks
 
-
-def main(year=2020):
+@click.command()
+@click.option('--start', default=1, help='ISO week number.')
+@click.option('--year', default=2020,
+              help='The calendar year.')
+def main(year=2020, start=None):
+    year = int(year)
     cal = candybar.LaTeXCandyBar()
     new_moons = new_moons_in_year(year)
     wks, iso = cal.isoweeks(year)
@@ -166,4 +171,4 @@ def main(year=2020):
 
 
 if __name__ == "__main__":
-    main(2020)
+    main()
