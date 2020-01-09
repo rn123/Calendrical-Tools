@@ -32,7 +32,12 @@ class CandyBar:
         self.wks = wks
         self.iso = iso
         self.new_moons = self.new_moons_in_year(year)
-        self.weeks = self.weeks_data(wks=self.wks, new_moons=self.new_moons)
+        self.weeks = {}
+
+        for calendar_type in ["gregorian", "islamic", "hebrew", "chinese"]:
+            self.weeks[calendar_type] = self.weeks_data(
+                wks=self.wks, new_moons=self.new_moons, calendar_type=calendar_type
+            )
 
     #     def itersolar(self, start, end):
     #          # Assumption: cal=calendar.CandyBar(6) <-- 1st day of week is Sunday.
