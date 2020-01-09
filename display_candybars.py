@@ -99,7 +99,7 @@ def main(year=2020, start=None):
     islamic_weeks = weeks_data(wks, new_moons=new_moons, calendar_type="islamic")
     islamic_tab = cal.prweeks(islamic_weeks, new_moons)
 
-    cache_file = "chinese_lunar_" + str(year)
+    cache_file = "output/chinese_lunar_" + str(year)
     CACHE_FILE_EXISTS = False
     if Path(cache_file).exists():
         CACHE_FILE_EXISTS = True
@@ -167,7 +167,7 @@ def main(year=2020, start=None):
         chinese_data=chinese_tab,
     )
 
-    outfile = "cal_" + str(year) + ".tex"
+    outfile = "output/cal_" + str(year) + ".tex"
     with open(outfile, "w") as fp:
         fp.write(output)
 
