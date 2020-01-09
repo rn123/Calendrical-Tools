@@ -62,13 +62,13 @@ class CandyBar:
             key = (
                 str(pcc.standard_year(w[0][1])) + "_" + str(pcc.standard_month(w[0][1]))
             )
-            if key not in iso.keys():
+            if key not in iso:
                 iso[key] = 1
             else:
                 iso[key] += 1
         ## A dictionary was used to accumulate count. Now create sorted list of
         ## months with count of how many iso weeks (Mondays) start in that month.
-        for k in iso.keys():
+        for k in iso:
             pair = list(map(int, k.split("_")))
             iso_list.append([pair[0], pair[1], iso[k]])
             iso_list.sort()
@@ -322,7 +322,7 @@ class LaTeXCandyBar(CandyBar):
             else:
                 ts = "test"
             theweek[1].append(ts)
-            if "molad" in theweek[0].keys():
+            if "molad" in theweek[0]:
                 theweek[1].append(ts_molad)
         if len(first_of_month) == 1:
             indx = first_of_month[0]
