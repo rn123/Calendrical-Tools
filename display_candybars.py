@@ -61,40 +61,29 @@ def standard_day(d, calendar_type="gregorian"):
 
 def weeks_data(wks, new_moons=None, calendar_type="gregorian"):
     weeks = []
-    cache_file = "chinese_lunar_2020"
-    CACHE_FILE_EXISTS = False
-    if Path(cache_file).exists() and (calendar_type == "chinese"):
-        CACHE_FILE_EXISTS = True
-        with open(cache_file) as fp:
-            weeks = json.load(fp)
-    else:
-        for w in tqdm(wks):
-            iso_week_number = pcc.iso_week(pcc.iso_from_fixed(w[0][0]))
-            week_data = {}
-            week_data["iso"] = iso_week_number
-            week_data["raw"] = w
-            for d in w:
-                if d[0] in new_moons:
-                    new_moon = from_fixed_functions[calendar_type](d[0])
-                    week_data["new_moon"] = new_moon
-                    week_data["new_moon_fixed"] = d[0]
-            week = [week_data]
-            if calendar_type == "chinese":
-                week.append([chinese_day(d[0]) for d in w])
-            else:
-                week.append([standard_day(d[0], calendar_type) for d in w])
-            weeks.append(week)
-
-    if (CACHE_FILE_EXISTS is False) and (calendar_type == "chinese"):
-        with open(cache_file, "w") as fp:
-            json.dump(weeks, fp)
+    for w in tqdm(wks):
+        iso_week_number = pcc.iso_week(pcc.iso_from_fixed(w[0][0]))
+        week_data = {}
+        week_data["iso"] = iso_week_number
+        week_data["raw"] = w
+        for d in w:
+            if d[0] in new_moons:
+                new_moon = from_fixed_functions[calendar_type](d[0])
+                week_data["new_moon"] = new_moon
+                week_data["new_moon_fixed"] = d[0]
+        week = [week_data]
+        if calendar_type == "chinese":
+            week.append([chinese_day(d[0]) for d in w])
+        else:
+            week.append([standard_day(d[0], calendar_type) for d in w])
+        weeks.append(week)
 
     return weeks
 
+
 @click.command()
-@click.option('--start', default=1, help='ISO week number.')
-@click.option('--year', default=2020,
-              help='The calendar year.')
+@click.option("--start", default=1, help="ISO week number.")
+@click.option("--year", default=2020, help="The calendar year.")
 def main(year=2020, start=None):
     year = int(year)
     cal = candybar.LaTeXCandyBar()
@@ -110,8 +99,21 @@ def main(year=2020, start=None):
     islamic_weeks = weeks_data(wks, new_moons=new_moons, calendar_type="islamic")
     islamic_tab = cal.prweeks(islamic_weeks, new_moons)
 
-    chinese_weeks = weeks_data(wks, new_moons=new_moons, calendar_type="chinese")
+
+    cache_file = "chinese_lunar_" + str(year)
+    CACHE_FILE_EXISTS = False
+    if Path(cache_file).exists():
+        CACHE_FILE_EXISTS = True
+        with open(cache_file) as fp:
+            chinese_weeks = json.load(fp)
+    else:
+        chinese_weeks = weeks_data(wks, new_moons=new_moons, calendar_type="chinese")
+        
     chinese_tab = cal.prweeks(chinese_weeks, new_moons)
+
+    if (CACHE_FILE_EXISTS is False):
+        with open(cache_file, "w") as fp:
+            json.dump(chinese_weeks, fp)
 
     formatted_weeks = []
     for w in gregorian_weeks:
