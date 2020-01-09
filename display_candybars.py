@@ -134,7 +134,7 @@ def main(year=2020, start=None):
     lunar_template = Template(lunar_template_text)
     lunar_tab = lunar_template.render(weeks=formatted_weeks)
 
-    with open("calendar_template.tex") as fd:
+    with open("candybar/calendar_template.tex") as fd:
         template_text = fd.read()
     template = Template(template_text)
 
