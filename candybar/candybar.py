@@ -4,8 +4,24 @@
 import datetime
 import json
 from jinja2 import Template
+from tqdm import tqdm
 
 from . import pycalcal as pcc
+
+from_fixed_functions = {
+    "gregorian": pcc.gregorian_from_fixed,
+    "hebrew": pcc.hebrew_from_fixed,
+    "islamic": pcc.islamic_from_fixed,
+    "chinese": pcc.chinese_from_fixed,
+}
+
+
+def chinese_day(d):
+    return pcc.chinese_day(from_fixed_functions["chinese"](d))
+
+
+def standard_day(d, calendar_type="gregorian"):
+    return pcc.standard_day(from_fixed_functions[calendar_type](d))
 
 
 class CandyBar:
@@ -16,6 +32,7 @@ class CandyBar:
         self.wks = wks
         self.iso = iso
         self.new_moons = self.new_moons_in_year(year)
+        self.weeks = self.weeks_data(wks=self.wks, new_moons=self.new_moons)
 
     #     def itersolar(self, start, end):
     #          # Assumption: cal=calendar.CandyBar(6) <-- 1st day of week is Sunday.
@@ -174,7 +191,6 @@ class CandyBar:
     # observation that length of month alternates between 29 and 30 days). Use
     # astronomical approximation to get precise dates of new moons in the year.
 
-
     def many_moons(self, fixed_date, epoch=0):
         # Use part of formula for islamic_from_fixed:
         # year = quotient(30 * (date - ISLAMIC_EPOCH) + 10646, 10631)
@@ -184,7 +200,6 @@ class CandyBar:
         year = pcc.quotient(30 * (fixed_date - epoch) + 10646, 10631)
         no_moons = year * 12
         return no_moons
-
 
     def new_moons_in_year(self, year):
         fixed_date = pcc.fixed_from_gregorian([year, 1, 1])
@@ -197,6 +212,27 @@ class CandyBar:
             key = int(nnm)
             new_moons[key] = (n, nm, nnm)
         return new_moons
+
+    def weeks_data(self, wks=None, new_moons=None, calendar_type="gregorian"):
+        weeks = []
+        for w in tqdm(wks):
+            iso_week_number = pcc.iso_week(pcc.iso_from_fixed(w[0][0]))
+            week_data = {}
+            week_data["iso"] = iso_week_number
+            week_data["raw"] = w
+            for d in w:
+                if d[0] in new_moons:
+                    new_moon = from_fixed_functions[calendar_type](d[0])
+                    week_data["new_moon"] = new_moon
+                    week_data["new_moon_fixed"] = d[0]
+            week = [week_data]
+            if calendar_type == "chinese":
+                week.append([chinese_day(d[0]) for d in w])
+            else:
+                week.append([standard_day(d[0], calendar_type) for d in w])
+            weeks.append(week)
+
+        return weeks
 
     def candybar(self, year):
         days = [d for d in self.iteryeardays3(year)]
