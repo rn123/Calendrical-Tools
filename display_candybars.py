@@ -167,7 +167,8 @@ def main(year=2020, start=None):
         chinese_data=chinese_tab,
     )
 
-    with open("cal.tex", "w") as fp:
+    outfile = "cal_" + str(year) + ".tex"
+    with open(outfile, "w") as fp:
         fp.write(output)
 
 
