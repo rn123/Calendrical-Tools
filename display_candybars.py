@@ -24,7 +24,7 @@ def many_moons(fixed_date, epoch=0):
     # number of new moons since the epoch.
     # TODO: grok the cycle of leap year formula behind this approximation.
     year = pcc.quotient(30 * (fixed_date - epoch) + 10646, 10631)
-    no_moons = year*12
+    no_moons = year * 12
     return no_moons
 
 
@@ -42,25 +42,27 @@ def new_moons_in_year(year):
     return new_moons
 
 
-from_fixed_functions = {'gregorian': pcc.gregorian_from_fixed,
-                        'hebrew': pcc.hebrew_from_fixed,
-                        'islamic': pcc.islamic_from_fixed,
-                        'chinese': pcc.chinese_from_fixed}
+from_fixed_functions = {
+    "gregorian": pcc.gregorian_from_fixed,
+    "hebrew": pcc.hebrew_from_fixed,
+    "islamic": pcc.islamic_from_fixed,
+    "chinese": pcc.chinese_from_fixed,
+}
 
 
 def chinese_day(d):
-    return pcc.chinese_day(from_fixed_functions['chinese'](d))
+    return pcc.chinese_day(from_fixed_functions["chinese"](d))
 
 
-def standard_day(d, calendar_type='gregorian'):
+def standard_day(d, calendar_type="gregorian"):
     return pcc.standard_day(from_fixed_functions[calendar_type](d))
 
 
-def weeks_data(wks, calendar_type='gregorian'):
+def weeks_data(wks, calendar_type="gregorian"):
     weeks = []
-    cache_file = 'chinese_lunar_' + str(year)
+    cache_file = "chinese_lunar_" + str(year)
     CACHE_FILE_EXISTS = False
-    if Path(cache_file).exists() and (calendar_type == 'chinese'):
+    if Path(cache_file).exists() and (calendar_type == "chinese"):
         CACHE_FILE_EXISTS = True
         with open(cache_file) as fp:
             weeks = json.load(fp)
@@ -68,22 +70,22 @@ def weeks_data(wks, calendar_type='gregorian'):
         for w in tqdm(wks):
             iso_week_number = pcc.iso_week(pcc.iso_from_fixed(w[0][0]))
             week_data = {}
-            week_data['iso'] = iso_week_number
-            week_data['raw'] = w
+            week_data["iso"] = iso_week_number
+            week_data["raw"] = w
             for d in w:
                 if d[0] in new_moons.keys():
                     new_moon = from_fixed_functions[calendar_type](d[0])
-                    week_data['new_moon'] = new_moon
-                    week_data['new_moon_fixed'] = d[0]
+                    week_data["new_moon"] = new_moon
+                    week_data["new_moon_fixed"] = d[0]
             week = [week_data]
-            if calendar_type == 'chinese':
+            if calendar_type == "chinese":
                 week.append([chinese_day(d[0]) for d in w])
             else:
                 week.append([standard_day(d[0], calendar_type) for d in w])
             weeks.append(week)
 
-    if (CACHE_FILE_EXISTS is False) and (calendar_type == 'chinese'):
-        with open(cache_file, 'w') as fp:
+    if (CACHE_FILE_EXISTS is False) and (calendar_type == "chinese"):
+        with open(cache_file, "w") as fp:
             json.dump(weeks, fp)
 
     return weeks
@@ -94,63 +96,68 @@ year = 2020
 new_moons = new_moons_in_year(year)
 wks, iso = cal.isoweeks(year)
 
-gregorian_weeks = weeks_data(wks, calendar_type='gregorian')
+gregorian_weeks = weeks_data(wks, calendar_type="gregorian")
 gregorian_tab = cal.prweeks(gregorian_weeks, new_moons)
 
-hebrew_weeks = weeks_data(wks, calendar_type='hebrew')
+hebrew_weeks = weeks_data(wks, calendar_type="hebrew")
 hebrew_tab = cal.prweeks(hebrew_weeks, new_moons)
 
-islamic_weeks = weeks_data(wks, calendar_type='islamic')
+islamic_weeks = weeks_data(wks, calendar_type="islamic")
 islamic_tab = cal.prweeks(islamic_weeks, new_moons)
 
-chinese_weeks = weeks_data(wks, calendar_type='chinese')
+chinese_weeks = weeks_data(wks, calendar_type="chinese")
 chinese_tab = cal.prweeks(chinese_weeks, new_moons)
 
 formatted_weeks = []
 for w in gregorian_weeks:
-    output = ''
-    if 'new_moon' in w[0].keys():
-        i = w[0]['new_moon_fixed']
+    output = ""
+    if "new_moon" in w[0].keys():
+        i = w[0]["new_moon_fixed"]
         moments = pcc.clock_from_moment(new_moons[i][2])[0:2]
-        ts = ':'.join(str(t) for t in moments)
-        output += r'{}'.format(ts)
+        ts = ":".join(str(t) for t in moments)
+        output += r"{}".format(ts)
     else:
-        output += ('')
+        output += ""
     formatted_weeks.append(output)
 
-lunar_template_text = r'''\begin{tabular}{c}
+lunar_template_text = r"""\begin{tabular}{c}
 {% for w in weeks -%}
     {{ w }} \\
 {%- endfor %}
-\end{tabular}'''
+\end{tabular}"""
 lunar_template = Template(lunar_template_text)
 lunar_tab = lunar_template.render(weeks=formatted_weeks)
 
-with open('calendar_template.tex') as fd:
+with open("calendar_template.tex") as fd:
     template_text = fd.read()
 template = Template(template_text)
 
 # Hebrew calendar year
-hstart = pcc.standard_year(pcc.hebrew_from_fixed(
-    pcc.fixed_from_gregorian([year, 1, 1])))
-hend = pcc.standard_year(pcc.hebrew_from_fixed(
-    pcc.fixed_from_gregorian([year, 12, 1])))
+hstart = pcc.standard_year(
+    pcc.hebrew_from_fixed(pcc.fixed_from_gregorian([year, 1, 1]))
+)
+hend = pcc.standard_year(pcc.hebrew_from_fixed(pcc.fixed_from_gregorian([year, 12, 1])))
 
 # Islamic calendar year
-istart = pcc.standard_year(pcc.islamic_from_fixed(
-    pcc.fixed_from_gregorian([year, 1, 1])))
-iend = pcc.standard_year(pcc.islamic_from_fixed(
-    pcc.fixed_from_gregorian([year, 12, 1])))
+istart = pcc.standard_year(
+    pcc.islamic_from_fixed(pcc.fixed_from_gregorian([year, 1, 1]))
+)
+iend = pcc.standard_year(
+    pcc.islamic_from_fixed(pcc.fixed_from_gregorian([year, 12, 1]))
+)
 
-year_display = r'{}& Phases & {}/{}& {}/{}&{}'.format(
-    year, hstart, hend, istart, iend, year)
+year_display = r"{}& Phases & {}/{}& {}/{}&{}".format(
+    year, hstart, hend, istart, iend, year
+)
 
-output = template.render(year_display=year_display,
+output = template.render(
+    year_display=year_display,
     gregorian_data=gregorian_tab,
     lunar_data=lunar_tab,
     hebrew_data=hebrew_tab,
     islamic_data=islamic_tab,
-    chinese_data=chinese_tab)
+    chinese_data=chinese_tab,
+)
 
-with open('cal.tex', 'w') as fp:
+with open("cal.tex", "w") as fp:
     fp.write(output)
