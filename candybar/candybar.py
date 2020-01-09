@@ -41,13 +41,13 @@ class CandyBar:
             if date.month != month:
                 break
 
-    def isoweeks(self, g_year):
+    def isoweeks(self, year):
         """
         ISO weeks determined by nth Thursdays.
         """
         ## Use pycalcal to find first Thursday of the year. Returns an integer
         ## day count of days elapsed since 1/1/1 (rata die -- fixed day).
-        first_thursday = pcc.nth_kday(1, 4, [g_year, 1, 1])
+        first_thursday = pcc.nth_kday(1, 4, [year, 1, 1])
         ## Back up and enumerate days starting the week before.
         days = [first_thursday - 3 - 7 + j for j in range(0, 54 * 7)]
         days_dates = [(d, pcc.gregorian_from_fixed(d)) for d in days]
@@ -102,13 +102,13 @@ class CandyBar:
             else:
                 yield (date.day, date.weekday())
 
-    def iterHebrewYearDates(self, g_year):
+    def iterHebrewYearDates(self, year):
         """
         Return an iterator for one year. The iterator will yield Hebrew dates
         corresponding to the gregorian year and will always iterate
         through complete weeks, so it will yield dates outside the specified year.
         """
-        date = datetime.date(g_year, 1, 1)
+        date = datetime.date(year, 1, 1)
         # Go back to the beginning of the week
         days = (date.weekday() - self.firstweekday) % 7
         date -= datetime.timedelta(days=days)
@@ -118,16 +118,16 @@ class CandyBar:
                 pcc.fixed_from_gregorian([date.year, date.month, date.day])
             )
             date += oneday
-            if date.year != g_year and date.weekday() == self.firstweekday:
+            if date.year != year and date.weekday() == self.firstweekday:
                 break
 
-    def iteryeardays2_Hebrew(self, g_year, cal_type):
+    def iteryeardays2_Hebrew(self, year, cal_type):
         """
         Like iteryeardates(), but will yield (day number, weekday number)
         tuples. For days outside the specified month the day number is 0.
         """
-        for date in self.iteryeardates(g_year):
-            if date.year != g_year:
+        for date in self.iteryeardates(year):
+            if date.year != year:
                 fd = pcc.fixed_from_gregorian([date.year, date.month, date.day])
                 d = pcc.hebrew_from_fixed(fd)
                 day_value = pcc.standard_day(d)
