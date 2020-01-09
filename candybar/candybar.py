@@ -15,6 +15,7 @@ class CandyBar:
         wks, iso = self.isoweeks(year)
         self.wks = wks
         self.iso = iso
+        self.new_moons = self.new_moons_in_year(year)
 
     #     def itersolar(self, start, end):
     #          # Assumption: cal=calendar.CandyBar(6) <-- 1st day of week is Sunday.
@@ -167,6 +168,35 @@ class CandyBar:
                 yield (0, date.weekday())
             else:
                 yield (date.day, date.weekday())
+
+    # Brute force way to get a list of new moons occuring during the year. First
+    # approximate the number of new moons since the year 0 (using simple
+    # observation that length of month alternates between 29 and 30 days). Use
+    # astronomical approximation to get precise dates of new moons in the year.
+
+
+    def many_moons(self, fixed_date, epoch=0):
+        # Use part of formula for islamic_from_fixed:
+        # year = quotient(30 * (date - ISLAMIC_EPOCH) + 10646, 10631)
+        # but replace ISLAMIC_EPOCH with and epoch of 0 to approximate the
+        # number of new moons since the epoch.
+        # TODO: grok the cycle of leap year formula behind this approximation.
+        year = pcc.quotient(30 * (fixed_date - epoch) + 10646, 10631)
+        no_moons = year * 12
+        return no_moons
+
+
+    def new_moons_in_year(self, year):
+        fixed_date = pcc.fixed_from_gregorian([year, 1, 1])
+        no_moons = self.many_moons(fixed_date)
+        moon_rng = range(no_moons - 12, no_moons + 13)
+        new_moons_data = [(n, pcc.nth_new_moon(n)) for n in moon_rng]
+        new_moons = {}
+        for n, nnm in new_moons_data:
+            nm = pcc.gregorian_from_fixed(nnm)
+            key = int(nnm)
+            new_moons[key] = (n, nm, nnm)
+        return new_moons
 
     def candybar(self, year):
         days = [d for d in self.iteryeardays3(year)]
