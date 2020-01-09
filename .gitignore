@@ -3,3 +3,4 @@
 *.log
 *.dvi
 *.pdf
+candybar/__pycache__
