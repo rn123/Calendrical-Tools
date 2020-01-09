@@ -73,7 +73,7 @@ def weeks_data(wks, new_moons=None, calendar_type="gregorian"):
             week_data["iso"] = iso_week_number
             week_data["raw"] = w
             for d in w:
-                if d[0] in new_moons.keys():
+                if d[0] in new_moons:
                     new_moon = from_fixed_functions[calendar_type](d[0])
                     week_data["new_moon"] = new_moon
                     week_data["new_moon_fixed"] = d[0]
