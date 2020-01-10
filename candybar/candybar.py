@@ -272,9 +272,11 @@ class TextCandyBar(CandyBar):
     def formatweek(self, week):
         # formatted_week = " ".join(["{:2}".format(d[2]) for m, d in week])
         nm = ""
-        if 'new_moon' in week:
-            nm = week['new_moon'][2]
-        formatted_days = ["{:2}".format("nm" if d[2] == nm else d[2]) for m, d in week['raw']]
+        if "new_moon" in week:
+            nm = week["new_moon"][2]
+        formatted_days = [
+            "{:2}".format("nm" if d[2] == nm else d[2]) for m, d in week["raw"]
+        ]
         formatted_week = " ".join(formatted_days)
         # formatted_week = formatted_week.replace(" 0", "  ")
         return formatted_week
