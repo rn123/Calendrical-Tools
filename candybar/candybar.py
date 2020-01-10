@@ -270,13 +270,18 @@ class TextCandyBar(CandyBar):
         return s.center(width)
 
     def formatweek(self, week):
-        formatted_week = " ".join(["{:2}".format(d[2]) for m, d in week])
-        formatted_week = formatted_week.replace(" 0", "  ")
+        # formatted_week = " ".join(["{:2}".format(d[2]) for m, d in week])
+        nm = ""
+        if 'new_moon' in week:
+            nm = week['new_moon'][2]
+        formatted_days = ["{:2}".format("nm" if d[2] == nm else d[2]) for m, d in week['raw']]
+        formatted_week = " ".join(formatted_days)
+        # formatted_week = formatted_week.replace(" 0", "  ")
         return formatted_week
 
-    def prcandybar(self, year):
+    def prcandybar(self):
         for w in self.weeks["gregorian"]:
-            print("{:2}".format(w[0]["iso"]) + "\t" + self.formatweek(w[0]["raw"]))
+            print("{:2}".format(w[0]["iso"]) + "\t" + self.formatweek(w[0]))
 
     def prhebrewcandybar(self, year):
         days = [d for d in self.iteryeardays2_Hebrew(year)]
