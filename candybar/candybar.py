@@ -275,8 +275,8 @@ class TextCandyBar(CandyBar):
         return formatted_week
 
     def prcandybar(self, year):
-        for w in self.weeks['gregorian']:
-            print("{:2}".format(w[0]["iso"]) + "\t" + self.formatweek(w[0]['raw']))
+        for w in self.weeks["gregorian"]:
+            print("{:2}".format(w[0]["iso"]) + "\t" + self.formatweek(w[0]["raw"]))
 
     def prhebrewcandybar(self, year):
         days = [d for d in self.iteryeardays2_Hebrew(year)]
