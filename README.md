@@ -2,6 +2,8 @@
 
 Candybar is a Python library for computing different calendars and displaying then in a rectangular format.
 
+![candybar](output/cal_2020.png)
+
 ## Installation
 
 
