@@ -29,8 +29,8 @@ def standard_day(d, calendar_type="gregorian"):
 class CandyBar:
     firstweekday = 0
 
-    def __init__(self, year):
-        wks, iso = self.isoweeks(year)
+    def __init__(self, year=2020, weeks_before=0, weeks_after=0):
+        wks, iso = self.isoweeks(year, weeks_before=weeks_before, weeks_after=weeks_after)
         self._wks = wks
         self.iso = iso
         self.new_moons = self.new_moons_in_year(year)
@@ -84,7 +84,7 @@ class CandyBar:
             if date.month != month:
                 break
 
-    def isoweeks(self, year):
+    def isoweeks(self, year, weeks_before=1, weeks_after=0):
         """
         ISO weeks determined by nth Thursdays.
         """
@@ -92,7 +92,7 @@ class CandyBar:
         ## day count of days elapsed since 1/1/1 (rata die -- fixed day).
         first_thursday = pcc.nth_kday(1, 4, [year, 1, 1])
         ## Back up and enumerate days starting the week before.
-        days = [first_thursday - 3 - 7 + j for j in range(0, 54 * 7)]
+        days = [first_thursday - 3 - (7 * weeks_before) + j for j in range(0, (53 + weeks_before + weeks_after) * 7)]
         days_dates = [(d, pcc.gregorian_from_fixed(d)) for d in days]
         ## List of weeks, starting on Mondays
         weeks = [days_dates[i : i + 7] for i in range(0, len(days_dates), 7)]
