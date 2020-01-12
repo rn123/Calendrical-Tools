@@ -4,7 +4,7 @@ Calendrical Tools is a Python package for computing different calendars using th
 
 Candybar is a tool for computing calendars and displaying then in a rectangular format. The goal is to produce output similar to Appendix C of Reingold & Dershowitz.
 
-![candybar](output/cal_2020.png)
+![candybar](candybar_sample.png)
 
 ## Installation
 
