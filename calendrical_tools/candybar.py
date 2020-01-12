@@ -7,6 +7,7 @@ from pathlib import Path
 
 from jinja2 import Template
 from tqdm import tqdm
+import click
 
 from pycalcal import pycalcal as pcc
 
@@ -497,7 +498,13 @@ class LaTeXCandyBar(CandyBar):
         )
         return output
 
+@click.command()
+@click.option("--weeks-before", default=1, help="ISO week number.")
+@click.option("--weeks_after", default=0)
+@click.option("--year", default=2020, help="The calendar year.")
+def main(year, weeks_before, weeks_after):
+    cal = TextCandyBar(year, weeks_before=weeks_before, weeks_after=weeks_after)
+    cal.prcandybar()
 
 if __name__ == "__main__":
-    cal = TextCandyBar(2020, weeks_before=6, weeks_after=7)
-    cal.prcandybar()
+    main()
