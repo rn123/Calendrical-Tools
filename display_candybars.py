@@ -10,7 +10,7 @@ from tqdm import tqdm
 import click
 
 from pycalcal import pycalcal as pcc
-from candybar import candybar as candybar
+from calendrical_tools import candybar
 
 
 from_fixed_functions = {
