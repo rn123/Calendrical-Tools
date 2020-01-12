@@ -30,7 +30,10 @@ class CandyBar:
     firstweekday = 0
 
     def __init__(self, year=2020, weeks_before=0, weeks_after=0):
-        wks, iso = self.isoweeks(year, weeks_before=weeks_before, weeks_after=weeks_after)
+        self._wks_before = weeks_before
+        self._wks_after = weeks_after
+
+        wks, iso = self.isoweeks(year, weeks_before=self._wks_before, weeks_after=self._wks_after)
         self._wks = wks
         self.iso = iso
         self.new_moons = self.new_moons_in_year(year)
@@ -222,8 +225,9 @@ class CandyBar:
 
     def new_moons_in_year(self, year):
         fixed_date = pcc.fixed_from_gregorian([year, 1, 1])
+        fudge_factor = 3
         no_moons = self.many_moons(fixed_date)
-        moon_rng = range(no_moons - 12, no_moons + 13)
+        moon_rng = range(no_moons - (4 * self._wks_before + fudge_factor), no_moons + (4 * self._wks_after + fudge_factor))
         new_moons_data = [(n, pcc.nth_new_moon(n)) for n in moon_rng]
         new_moons = {}
         for n, nnm in new_moons_data:
