@@ -1,7 +1,7 @@
 README.md
 setup.py
-calendrical-tools/__init__.py
-calendrical-tools/candybar.py
+calendrical_tools/__init__.py
+calendrical_tools/candybar.py
 calendrical_tools.egg-info/PKG-INFO
 calendrical_tools.egg-info/SOURCES.txt
 calendrical_tools.egg-info/dependency_links.txt
