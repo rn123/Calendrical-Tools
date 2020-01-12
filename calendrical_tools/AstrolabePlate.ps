@@ -1,0 +1,100 @@
+%!
+300 332 translate 
+/epsilon {23.438446} bind def
+
+/in {72 mul} bind def %Convert to inches.
+/tan {dup sin exch cos div} bind def %Not built in.
+
+/RadiusCapricorn {2 in} bind def 
+/RadiusEquator {RadiusCapricorn 90 epsilon sub 2 div tan mul} def 
+/RadiusCancer {RadiusEquator 90 epsilon sub 2 div tan mul} def 
+
+1 setlinewidth
+RadiusCapricorn 0 moveto
+0 0 RadiusCapricorn 0 360 arc stroke
+
+RadiusEquator 0 moveto
+0 0 RadiusEquator 0 360 arc stroke
+
+RadiusCancer 0 moveto
+0 0 RadiusCancer 0 360 arc stroke
+
+
+/latitude {38.97} bind def %Latitude of Bowie, MD
+
+/Almucantar{ %stack: altitude => ----
+/a exch def
+/AlmucantarCenter {RadiusEquator 
+latitude cos mul 
+latitude sin a sin add div} def 
+/RadiusAlmucantar {RadiusEquator a cos mul 
+latitude sin a sin add div} def 
+/AlmucantarUpperIntersection {RadiusEquator 
+latitude a add 2 div tan div} def 
+0 AlmucantarUpperIntersection moveto
+0 AlmucantarCenter RadiusAlmucantar 90 450 arc 
+} def
+
+0.5 setlinewidth
+RadiusCapricorn 0 moveto
+0 0 RadiusCapricorn 0 360 arc clip
+2 2 60 {Almucantar} for stroke
+60 5 80 {Almucantar} for stroke
+
+/AzimuthCircle{ %stak: azimuth => ----
+/A exch def
+/AzimuthCenterY {RadiusEquator 
+90 latitude sub 2 div tan
+90 latitude add 2 div tan sub mul 2 div} def 
+/AzimuthCenterX {RadiusEquator 
+latitude cos div A tan mul} def
+/RadiusAzimuth {RadiusEquator latitude cos div A cos div} def
+AzimuthCenterX RadiusAzimuth
+add AzimuthCenterY moveto
+AzimuthCenterX AzimuthCenterY RadiusAzimuth 0 360 arc
+/AzimuthCenterXN {AzimuthCenterX neg} def
+AzimuthCenterXN RadiusAzimuth add AzimuthCenterY moveto
+AzimuthCenterXN AzimuthCenterY RadiusAzimuth 0 360 arc
+} def
+
+
+/RadiusHorizon {RadiusEquator latitude sin div} bind def
+/HorizonCenter {RadiusEquator latitude tan div} bind def
+/HorizonUpperCrossing {RadiusEquator latitude 2 div tan div} def
+
+/PlateGrid {
+gsave
+0.5 setlinewidth
+RadiusCapricorn 0 moveto
+0 0 RadiusCapricorn 0 360 arc clip
+2 2 60 {Almucantar} for stroke
+60 5 80 {Almucantar} for stroke
+0 HorizonUpperCrossing moveto
+0 HorizonCenter RadiusHorizon 90 450 arc clip
+10 10 80{AzimuthCircle} for stroke
+gsave
+80 Almucantar 1.0 setgray fill
+grestore
+1 setlinewidth
+0 AzimuthCircle stroke
+0 Almucantar stroke
+grestore
+} def
+
+
+PlateGrid
+
+1 setlinewidth
+RadiusCapricorn 0 moveto
+0 0 RadiusCapricorn 0 360 arc stroke
+
+RadiusEquator 0 moveto
+0 0 RadiusEquator 0 360 arc stroke
+
+RadiusCancer 0 moveto
+0 0 RadiusCancer 0 360 arc stroke
+
+0 RadiusCapricorn neg moveto 0 RadiusCapricorn lineto stroke
+RadiusCapricorn neg 0 moveto RadiusCapricorn 0 lineto stroke
+
+showpage
