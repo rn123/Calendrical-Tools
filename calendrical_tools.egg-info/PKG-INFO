@@ -1,0 +1,42 @@
+Metadata-Version: 2.1
+Name: calendrical-tools
+Version: 0.0.1
+Summary: Minimal package for calendar calculations using code from Reingold & Dershowitz.
+Home-page: https://github.com/rn123/Calendrial-Tools
+Author: Ray Nowell
+Author-email: ray.nowell@gmail.com
+License: UNKNOWN
+Description: # Calendrical Tools
+        
+        Calendrical Tools is a Python package for computing different calendars using the code from Reingold & Dershowitz, Calendrical Computations. 
+        
+        Candybar is a tool for computing calendars and displaying then in a rectangular format. The goal is to produce output similar to Appendix C of Reingold & Dershowitz.
+        
+        ![candybar](output/cal_2020.png)
+        
+        ## Installation
+        
+        ```
+        pip install git+https://github.com/rn123/Calendrical-Tools#egg=Calendrical-Tools
+        ```
+        
+        ## Usage
+        
+        ```python
+        from calendrical-tools import candybar
+        
+        cal = candybar.TextCandyBar(2020)
+        cal.prcandybar()
+        ```
+        
+        ## License
+        Includes a version of pycalcal
+        
+        [MIT](https://choosealicense.com/licenses/mit/)
+        
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
