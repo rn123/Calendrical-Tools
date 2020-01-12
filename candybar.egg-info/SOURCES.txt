@@ -1,8 +1,0 @@
-README.md
-setup.py
-candybar/__init__.py
-candybar/candybar.py
-candybar.egg-info/PKG-INFO
-candybar.egg-info/SOURCES.txt
-candybar.egg-info/dependency_links.txt
-candybar.egg-info/top_level.txt
