@@ -6,6 +6,11 @@ Candybar is a Python library for computing different calendars and displaying th
 
 ## Installation
 
+```
+pip install git+https://github.com/rn123/pycalcal#egg=pycalcal
+
+pip install git+https://github.com/rn123/candybar#egg=candybar
+```
 
 ## Usage
 
