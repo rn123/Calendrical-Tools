@@ -488,3 +488,7 @@ class LaTeXCandyBar(CandyBar):
             weeks=[self.formatweek(w, new_moons) for w in weeks]
         )
         return output
+
+if __name__ == "__main__":
+    cal = TextCandyBar(2020, weeks_before=6, weeks_after=7)
+    cal.prcandybar()
