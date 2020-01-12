@@ -33,7 +33,9 @@ class CandyBar:
         self._wks_before = weeks_before
         self._wks_after = weeks_after
 
-        wks, iso = self.isoweeks(year, weeks_before=self._wks_before, weeks_after=self._wks_after)
+        wks, iso = self.isoweeks(
+            year, weeks_before=self._wks_before, weeks_after=self._wks_after
+        )
         self._wks = wks
         self.iso = iso
         self.new_moons = self.new_moons_in_year(year)
@@ -95,7 +97,10 @@ class CandyBar:
         ## day count of days elapsed since 1/1/1 (rata die -- fixed day).
         first_thursday = pcc.nth_kday(1, 4, [year, 1, 1])
         ## Back up and enumerate days starting the week before.
-        days = [first_thursday - 3 - (7 * weeks_before) + j for j in range(0, (53 + weeks_before + weeks_after) * 7)]
+        days = [
+            first_thursday - 3 - (7 * weeks_before) + j
+            for j in range(0, (53 + weeks_before + weeks_after) * 7)
+        ]
         days_dates = [(d, pcc.gregorian_from_fixed(d)) for d in days]
         ## List of weeks, starting on Mondays
         weeks = [days_dates[i : i + 7] for i in range(0, len(days_dates), 7)]
@@ -227,7 +232,10 @@ class CandyBar:
         fixed_date = pcc.fixed_from_gregorian([year, 1, 1])
         fudge_factor = 3
         no_moons = self.many_moons(fixed_date)
-        moon_rng = range(no_moons - (4 * self._wks_before + fudge_factor), no_moons + (4 * self._wks_after + fudge_factor))
+        moon_rng = range(
+            no_moons - (4 * self._wks_before + fudge_factor),
+            no_moons + (4 * self._wks_after + fudge_factor),
+        )
         new_moons_data = [(n, pcc.nth_new_moon(n)) for n in moon_rng]
         new_moons = {}
         for n, nnm in new_moons_data:
@@ -488,6 +496,7 @@ class LaTeXCandyBar(CandyBar):
             weeks=[self.formatweek(w, new_moons) for w in weeks]
         )
         return output
+
 
 if __name__ == "__main__":
     cal = TextCandyBar(2020, weeks_before=6, weeks_after=7)
