@@ -22,9 +22,12 @@ from_fixed_functions = {
 
 template_text = r"""
 \documentclass[9pt, landscape]{article}
-\usepackage{calc, layouts, graphicx, wasysym, multirow, array}
+\usepackage{calc, layouts, graphicx, wasysym, multirow, array, fontspec}
 \usepackage[lmargin=40pt, tmargin=40pt, bmargin=0pt]{geometry}
 \pagestyle{empty}
+
+\newfontfamily\moonphase[Path = /Users/ray/Library/Fonts/]{moon_phases.ttf}
+
 \begin{document}
 
 \resizebox{!}{9cm}{

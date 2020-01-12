@@ -371,7 +371,7 @@ class LaTeXCandyBar(CandyBar):
         if day == 0:
             s = " "
         else:
-            if day == 1 or day == r"\newmoon":
+            if day == 1 or day == r"{\moonphase a}":
                 if pos == index and index != 6:
                     s = r"\multicolumn{{1}}{{|c}}{{{}}}".format(day)
                 elif pos == index and index == 6:
@@ -396,7 +396,7 @@ class LaTeXCandyBar(CandyBar):
             nm = week_details_dict["new_moon"][-1]
             for (i, dd) in enumerate(week_days_list):
                 if dd == nm:
-                    week_days_list[i] = r"\newmoon"
+                    week_days_list[i] = r"{\moonphase a}"
             if "new_moon_fixed" in week_details_dict:
                 i_new_moon = week_details_dict["new_moon_fixed"]
                 t_new_moon = pcc.clock_from_moment(new_moons[i_new_moon][2])
