@@ -3,7 +3,8 @@
 *.log
 *.dvi
 *.pdf
-candybar/__pycache__
+*.png
+calendrical_tools/__pycache__
 chinese_lunar_*
 build
 dist
