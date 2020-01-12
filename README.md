@@ -15,7 +15,7 @@ pip install git+https://github.com/rn123/Calendrical-Tools#egg=Calendrical-Tools
 ## Usage
 
 ```python
-from calendrical-tools import candybar
+from calendrical_tools import candybar
 
 cal = candybar.TextCandyBar(2020)
 cal.prcandybar()
