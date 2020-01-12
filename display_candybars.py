@@ -20,6 +20,31 @@ from_fixed_functions = {
     "chinese": pcc.chinese_from_fixed,
 }
 
+template_text = r"""
+\documentclass[9pt, landscape]{article}
+\usepackage{calc, layouts, graphicx, wasysym, multirow, array}
+\usepackage[lmargin=40pt, tmargin=40pt, bmargin=0pt]{geometry}
+\pagestyle{empty}
+\begin{document}
+
+\resizebox{!}{9cm}{
+    \begin{tabular}{|c|c|c|c|c|}
+        \hline
+        Gregorian & Lunar & Hebrew & Islamic & Chinese \\
+        {{ year_display -}}  \\
+        \hline
+        {{ gregorian_data }} &
+        {{ lunar_data }}     &
+        {{ hebrew_data }}    &
+        {{ islamic_data }}   &
+        {{ chinese_data }}   \\
+        \hline
+    \end{tabular}
+    }
+\end{document}"""
+
+template = Template(template_text)
+
 
 @click.command()
 @click.option("--start", default=1, help="ISO week number.")
@@ -48,10 +73,6 @@ def main(year=2020, start=None):
     \end{tabular}"""
     lunar_template = Template(lunar_template_text)
     lunar_tab = lunar_template.render(weeks=formatted_weeks)
-
-    with open("candybar/calendar_template.tex") as fd:
-        template_text = fd.read()
-    template = Template(template_text)
 
     # Hebrew calendar year
     hstart = pcc.standard_year(
