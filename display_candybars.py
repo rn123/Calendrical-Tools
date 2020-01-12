@@ -9,7 +9,7 @@ from jinja2 import Template
 from tqdm import tqdm
 import click
 
-from candybar import pycalcal as pcc
+from pycalcal import pycalcal as pcc
 from candybar import candybar as candybar
 
 
