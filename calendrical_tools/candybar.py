@@ -233,8 +233,8 @@ class CandyBar:
         fudge_factor = 3
         no_moons = self.many_moons(fixed_date)
         moon_rng = range(
-            no_moons - (4 * self._wks_before + fudge_factor),
-            no_moons + (4 * self._wks_after + fudge_factor),
+            no_moons - 12 - (4 * self._wks_before + fudge_factor),
+            no_moons + 13 + (4 * self._wks_after + fudge_factor),
         )
         new_moons_data = [(n, pcc.nth_new_moon(n)) for n in moon_rng]
         new_moons = {}
