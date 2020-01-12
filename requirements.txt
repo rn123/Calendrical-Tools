@@ -1,2 +1,3 @@
 tqdm
 mpmath
+git+https://github.com/rn123/pycalcal#egg=pycalcal
