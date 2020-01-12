@@ -8,7 +8,7 @@ from pathlib import Path
 from jinja2 import Template
 from tqdm import tqdm
 
-from . import pycalcal as pcc
+import pycalcal as pcc
 
 from_fixed_functions = {
     "gregorian": pcc.gregorian_from_fixed,
