@@ -1,3 +1,3 @@
 # Initial page for Calendrical Tools
 
-![astrolabe](/images/astrolabe_2017.svg)
+![idea card](/images/calendrical_tools_card.png)
