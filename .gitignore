@@ -4,6 +4,7 @@
 *.dvi
 *.pdf
 *.png
+.DS_Store
 calendrical_tools/__pycache__
 chinese_lunar_*
 build
