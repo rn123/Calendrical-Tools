@@ -33,4 +33,4 @@ The concept of the project is to develop tools on top of Spinielli's ```pycalcal
 - Meeus, Jean. Astronomical Algorithms. Willmann-Bell, 1998.
 - Kaler, James B. The Ever-Changing Sky: A Guide to the Celestial Sphere. Cambridge University Press, 2002.
 
-<img src="images/janus_personal_astrolabes.png" alt="In memory, fantastic work by James Morrison."/>
+<img src="images/janus_personal_astrolabes.png" alt="In memory, fantastic work by James Morrison." width="25%" align="right"/>
