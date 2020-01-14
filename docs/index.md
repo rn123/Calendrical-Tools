@@ -22,6 +22,19 @@ The concept of the project is to develop tools on top of Spinielli's ```pycalcal
 <img src="images/screenshot.png" alt="command line screenshot of candybar.py"/>
 <br/>
 
+## Drawing Astrolabes: The Plate Grid
+
+The plate grid of an astrolabe is the stereographic projection of the celestial sphere through the south celestial pole onto the plane of the equator. 
+
+The easy part of drawing the plate of an astrolabe is drawing the tropics and the equator:
+
+<img src="https://render.githubusercontent.com/render/math?math=R_{Equator} = R_{Capricorn} \tan(\frac{90 - \epsilon}{2})" width="47%" align="left">
+<img src="https://render.githubusercontent.com/render/math?math=R_{Cancer} = R_{Equator} \tan(\frac{90 - \epsilon}{2})" width="47%" align="left">
+
+<br/>
+These circles depend only on the obliquity of the ecliptic.
+
+
 ## Suggested Bibliography
 
 - Reingold, Edward M. Calendrical Calculations: The Ultimate Edition. 4 edition. Cambridge ; New York: Cambridge University Press, 2018.
