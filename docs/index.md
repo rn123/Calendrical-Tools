@@ -19,7 +19,7 @@ Likewise, the study of computing and drawing astrolabes inspired by James Morris
 The concept of the project is to develop tools on top of Spinielli's ```pycalcal``` (which itself is based on Reingold & Dershowitz's lisp implementaion, ```calendrica 3.0```) code that compute's candybar calendars that are accurate over the historical time period and in the many calendrical traditions documented in Reingold & Dershowitz. Extending the idea, for any historical date and location the project generates an accurate static astrolabe view of the sky.
 <br/>
 
-<img src="images/screenshot.png" alt="command line screenshot of candybar.py"/>
+<img src="images/screenshot.png" alt="command line screenshot of candybar.py" width="25%" align="right"/>
 <br/>
 
 ## Suggested Bibliography
