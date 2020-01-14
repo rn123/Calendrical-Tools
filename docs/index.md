@@ -22,6 +22,30 @@ The concept of the project is to develop tools on top of Spinielli's ```pycalcal
 <img src="images/screenshot.png" alt="command line screenshot of candybar.py"/>
 <br/>
 
+## Drawing Astrolabes: The Plate Grid
+
+The plate grid of an astrolabe is the stereographic projection of the celestial sphere through the south celestial pole onto the plane of the equator. 
+
+The easy part of drawing the plate of an astrolabe is drawing the tropics and the equator:
+
+<img src="https://render.githubusercontent.com/render/math?math=R_{Equator} = R_{Capricorn} \tan(\frac{90 - \epsilon}{2})" width="47%" align="left">
+<img src="https://render.githubusercontent.com/render/math?math=R_{Cancer} = R_{Equator} \tan(\frac{90 - \epsilon}{2})" width="47%" align="left">
+
+These circles depend only on the obliquity of the ecliptic.
+
+The circles of equal altitude (almucantars) are given by the following formulas:
+<img src="https://render.githubusercontent.com/render/math?math=y_{center} = R_{Equator}(\frac{\cos\phi}{\sin\phi %2B \sin a})" width="80%" align="center">
+
+<img src="https://render.githubusercontent.com/render/math?math=r_{a} = R_{Equator} (\frac{\cos a}{\sin\phi %2B \sin a})" width="80%" align="left">
+
+<img src="https://render.githubusercontent.com/render/math?math=r_{U} = R_{Equator} \cot(\frac{\phi %2B  a}{2})" width="80%" align="left">
+
+<img src="https://render.githubusercontent.com/render/math?math=r_{L} = -R_{Equator} \tan(\frac{\phi -  a}{2})" width="80%" align="left">
+
+
+
+
+
 ## Suggested Bibliography
 
 - Reingold, Edward M. Calendrical Calculations: The Ultimate Edition. 4 edition. Cambridge ; New York: Cambridge University Press, 2018.
@@ -31,6 +55,7 @@ The concept of the project is to develop tools on top of Spinielli's ```pycalcal
 - Cullen, Christopher. Heavenly Numbers: Astronomy and Authority in Early Imperial China. 1 edition. Oxford, United Kingdom ; New York, NY, United States of America: Oxford University Press, 2018.
 - Heilbron, J. L. The Sun in the Church: Cathedrals as Solar Observatories. Harvard University Press, 1999.
 - Evans, James. The History & Practice of Ancient Astronomy. Oxford University Press US, 1998.
+- Rhodes, Geminus of, James Evans, and J. Lennart Berggren. Geminos’s “Introduction to the Phenomena”: A Translation and Study of a Hellenistic Survey of Astronomy. Princeton University Press, 2006.
 - Ptolemy, and G. J. Toomer. Ptolemy’s Almagest. Springer-Verlag, 1984.
 - Meeus, Jean. Astronomical Algorithms. Willmann-Bell, 1998.
 - Kaler, James B. The Ever-Changing Sky: A Guide to the Celestial Sphere. Cambridge University Press, 2002.
