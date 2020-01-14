@@ -34,11 +34,11 @@ The easy part of drawing the plate of an astrolabe is drawing the tropics and th
 These circles depend only on the obliquity of the ecliptic.
 
 The circles of equal altitude (almucantars) are given by the following formulas:
-<img src="https://render.githubusercontent.com/render/math?math=y_{center} = R_{Equator}(\frac{\cos\phi}{\sin\phi + \sin a})" width="80%" align="center">
+<img src="https://render.githubusercontent.com/render/math?math=y_{center} = R_{Equator}(\frac{\cos\phi}{\sin\phi %2B \sin a})" width="80%" align="center">
 
-<img src="https://render.githubusercontent.com/render/math?math=r_{a} = R_{Equator} (\frac{\cos a}{\sin\phi + \sin a})" width="80%" align="left">
+<img src="https://render.githubusercontent.com/render/math?math=r_{a} = R_{Equator} (\frac{\cos a}{\sin\phi %2B \sin a})" width="80%" align="left">
 
-<img src="https://render.githubusercontent.com/render/math?math=r_{U} = R_{Equator} \cot(\frac{\phi +  a}{2})" width="80%" align="left">
+<img src="https://render.githubusercontent.com/render/math?math=r_{U} = R_{Equator} \cot(\frac{\phi %2B  a}{2})" width="80%" align="left">
 
 <img src="https://render.githubusercontent.com/render/math?math=r_{L} = -R_{Equator} \tan(\frac{\phi -  a}{2})" width="80%" align="left">
 
