@@ -28,8 +28,7 @@ The plate grid of an astrolabe is the stereographic projection of the celestial 
 
 The easy part of drawing the plate of an astrolabe is drawing the tropics and the equator:
 
-<img src="https://render.githubusercontent.com/render/math?math=R_{Equator} = R_{Capricorn} \tan(\frac{90 - \epsilon}{2})" width="47%" align="left">
-<img src="https://render.githubusercontent.com/render/math?math=R_{Cancer} = R_{Equator} \tan(\frac{90 - \epsilon}{2})" width="47%" align="left">
+![equation 1](images/plate_grid_equation1.png)
 
 These circles depend only on the obliquity of the ecliptic.
 
@@ -45,7 +44,7 @@ The circles of equal altitude (almucantars) are given by the following formulas:
 In particular, the radius and center for the horizon arc is obtained for an altitude of zero.
 
 The arcs of equal azimuth are given by:
-![equation 2](images/plate_grid_formula2.png)
+![equation 3](images/plate_grid_equation3.png)
 
 
 ## Suggested Bibliography
