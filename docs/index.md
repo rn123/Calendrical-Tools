@@ -23,7 +23,7 @@ The concept of the project is to develop tools on top of Spinielli's ```pycalcal
 <br/>
 
 ## Drawing Astrolabes: The Plate Grid
-
+<img src="images/astrolabe_generated_01152020.png" alt="First version of generated astrolabe image" width="25%" align="right"/>
 The plate grid of an astrolabe is the stereographic projection of the celestial sphere through the south celestial pole onto the plane of the equator. 
 
 The easy part of drawing the plate of an astrolabe is drawing the tropics and the equator:
