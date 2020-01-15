@@ -42,8 +42,10 @@ The circles of equal altitude (almucantars) are given by the following formulas:
 
 <img src="https://render.githubusercontent.com/render/math?math=r_{L} = -R_{Equator} \tan(\frac{\phi -  a}{2})" width="80%" align="left">
 
+In particular, the radius and center for the horizon arc is obtained for an altitude of zero.
 
-
+The arcs of equal azimuth are given by:
+![equation 2](images/plate_grid_formula2.png)
 
 
 ## Suggested Bibliography
