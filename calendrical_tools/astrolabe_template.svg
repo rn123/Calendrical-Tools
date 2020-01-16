@@ -170,13 +170,9 @@
 		          	a{{ ecliptic.r - ecliptic.width }},{{ ecliptic.r - ecliptic.width }} 0 1, 1 {{ 2 * ecliptic.r - 2 * ecliptic.width }},0
 		          	a{{ ecliptic.r - ecliptic.width }},{{ ecliptic.r - ecliptic.width }} 0 1, 1 {{ -2 * ecliptic.r + 2 * ecliptic.width }},0
 		          "/>
+
+		        <line id="eclipticDivision" x1="0" y1="0" x2="65.63970574410436" y2="0"/>
 		        
-		        <animateTransform
-				  attributeName="transform" type="rotate"
-				  attributeTyep="XML"
-				  from="{{ animation.from }}" to="{{ animation.to }}"
-				  begin="{{ animation.begin }}" dur="{{ animation.dur }}"
-				  fill="freeze"/>
 		    </g>
 		    <g id="stars" {{ inkscape.stars }}>
 		    	<title>Stars</title>
@@ -184,6 +180,12 @@
 		    <g id="planets" {{ inkscape.planets }}>
 		    	<title>Planets</title>
 		    </g>
+		    <animateTransform
+				attributeName="transform" type="rotate"
+				attributeTyep="XML"
+				from="{{ animation.from }}" to="{{ animation.to }}"
+				begin="{{ animation.begin }}" dur="{{ animation.dur }}"
+				fill="freeze"/>
 		</g>
 	</g>
 </svg>
