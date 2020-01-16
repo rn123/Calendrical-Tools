@@ -1,183 +1,183 @@
 <svg viewbox="0 0 250 250" height="250" width="250" xmlns="http://www.w3.org/2000/svg" 
 	xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="astrolabe" transform="translate(125,125)" {{ inkscape.astrolabe }}>
-    <title>Astrolabe Plate</title>
-    <defs>
+	<g id="astrolabe" transform="translate(125,125)" {{ inkscape.astrolabe }}>
+	    <title>Astrolabe Plate</title>
+	    <defs>
 
-		<style>
-			#example {
-			  display: block;
-			  margin: auto;
-			  border: grey;
-			  background-color: light grey;
-			}
-			#plate {
-			  clip-path:url(#Capricorn);
-			  clipPath: url(#Capricorn);
-			}
-			#tropics {
-			  fill: none;
-			  stroke: grey;
-			  stroke-width: 1;
-			}
-			#horizon {
-			  fill: none;
-			  stroke: navy;
-			  stroke-width: 1;
-			}
-			#almucantar {
-			  fill: none;
-			  stroke: navy;
-			  stroke-width: 0.5;
-			}
-			#almucantar-center {
-			  fill: white;
-			  fill-opacity: 0.95;
-			  stroke: navy;
-			  stroke-width: 0.5;
-			}
-			#azimuth {
-			  fill: none;
-			  stroke: navy;
-			  stroke-width: 0.5;
-			  clip-path:url(#Horizon);
-			  clipPath: url(#Horizon);
-			}
-			#azimuth-90 {
-			  fill: none;
-			  stroke: navy;
-			  stroke-width: 0.75;
-			  clip-path:url(#Horizon);
-			  clipPath: url(#Horizon);
-			}
-			#axis {
-			  fill: none;
-			  stroke: grey;
-			  stroke-width: 1;
-			}
-			#tick {
-			  stroke: grey;
-			  stroke-width: 0.5;
-			}
-			#tickLong {
-			  stroke: grey;
-			  stroke-width: 1;
-			}
-			#note {
-			  stroke: black;
-			  stroke-width: 1;
-			}
-			#ecliptic-pad {
-			  fill: gold;
-			  fill-opacity: 0.45;
-			  stroke: none;
-			  stroke-width: 0.5;
-			  stroke-opacity: 0.7;
-			}
-			#ecliptic {
-			  fill: gold;
-			  fill-opacity: 1;
-			  stroke: black;
-			  stroke-width: 0.5;
-			  stroke-opacity: 0.7;
-			  mask: url(#ecliptic_hole);
-			}
-			#eclipticDivision {
-			  stroke: black;
-			  stroke-width: 0.5;
-			  stroke-opacity: 0.7;
-			}
-			#limb {
-			  fill: none;
-			  stroke: grey;
-			  stroke-width: 1;
-			}
-			.masked {
-			  mask: url("#hole");
-			}
-		</style>
+			<style>
+				#example {
+				  display: block;
+				  margin: auto;
+				  border: grey;
+				  background-color: light grey;
+				}
+				#plate {
+				  clip-path:url(#Capricorn);
+				  clipPath: url(#Capricorn);
+				}
+				#tropics {
+				  fill: none;
+				  stroke: grey;
+				  stroke-width: 1;
+				}
+				#horizon {
+				  fill: none;
+				  stroke: navy;
+				  stroke-width: 1;
+				}
+				#almucantar {
+				  fill: none;
+				  stroke: navy;
+				  stroke-width: 0.5;
+				}
+				#almucantar-center {
+				  fill: white;
+				  fill-opacity: 0.95;
+				  stroke: navy;
+				  stroke-width: 0.5;
+				}
+				#azimuth {
+				  fill: none;
+				  stroke: navy;
+				  stroke-width: 0.5;
+				  clip-path:url(#Horizon);
+				  clipPath: url(#Horizon);
+				}
+				#azimuth-90 {
+				  fill: none;
+				  stroke: navy;
+				  stroke-width: 0.75;
+				  clip-path:url(#Horizon);
+				  clipPath: url(#Horizon);
+				}
+				#axis {
+				  fill: none;
+				  stroke: grey;
+				  stroke-width: 1;
+				}
+				#tick {
+				  stroke: grey;
+				  stroke-width: 0.5;
+				}
+				#tickLong {
+				  stroke: grey;
+				  stroke-width: 1;
+				}
+				#note {
+				  stroke: black;
+				  stroke-width: 1;
+				}
+				#ecliptic-pad {
+				  fill: gold;
+				  fill-opacity: 0.45;
+				  stroke: none;
+				  stroke-width: 0.5;
+				  stroke-opacity: 0.7;
+				}
+				#ecliptic {
+				  fill: gold;
+				  fill-opacity: 1;
+				  stroke: black;
+				  stroke-width: 0.5;
+				  stroke-opacity: 0.7;
+				  mask: url(#ecliptic_hole);
+				}
+				#eclipticDivision {
+				  stroke: black;
+				  stroke-width: 0.5;
+				  stroke-opacity: 0.7;
+				}
+				#limb {
+				  fill: none;
+				  stroke: grey;
+				  stroke-width: 1;
+				}
+				.masked {
+				  mask: url("#hole");
+				}
+			</style>
 
-		<clipPath id="Capricorn">
-		  <circle cx="0" cy="0" r="{{ RCapricorn }}"/>
-		</clipPath>
+			<clipPath id="Capricorn">
+			  <circle cx="0" cy="0" r="{{ RCapricorn }}"/>
+			</clipPath>
 
-		        
-		<clipPath id="Horizon">
-		  <circle id="horizon" cx="{{ horiz.cx}}" cy="{{ horiz.cy }}" r="{{ horiz.r }}"/>
-		</clipPath>
+			        
+			<clipPath id="Horizon">
+			  <circle id="horizon" cx="{{ horiz.cx}}" cy="{{ horiz.cy }}" r="{{ horiz.r }}"/>
+			</clipPath>
 
-		<mask id="ecliptic_hole">
-			<circle cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r }}" style="fill:white"/>
-			<circle cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r - 5 }}" style="fill:black"/>
-	    </mask>
-	</defs>
+			<mask id="ecliptic_hole">
+				<circle cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r }}" style="fill:white"/>
+				<circle cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r - ecliptic.width }}" style="fill:black"/>
+		    </mask>
+		</defs>
 
-	<g id="plate" transform="rotate(180)" {{ inkscape.plate }}>
-		<g id="tropics" {{ inkscape[tropics] }}>
-			<circle id="capricorn" cx="0" cy="0" r="{{ RCapricorn }}"/>
-			<circle id="equator" cx="0" cy="0" r="{{ REquator }}"/>
-			<circle id="cancer" cx="0" cy="0" r="{{ RCancer }}"/>
+		<g id="plate" transform="rotate(180)" {{ inkscape.plate }}>
+			<g id="tropics" {{ inkscape[tropics] }}>
+				<circle id="capricorn" cx="0" cy="0" r="{{ RCapricorn }}"/>
+				<circle id="equator" cx="0" cy="0" r="{{ REquator }}"/>
+				<circle id="cancer" cx="0" cy="0" r="{{ RCancer }}"/>
+			</g>
+
+			<g id="horizon" {{ inkscape.horizon }}>
+		        <title>Horizon</title>
+		        <circle id="horizon" cx="{{ horiz.cx}}" cy="{{ horiz.cy }}" r="{{ horiz.r }}"/>
+	      	</g>
+
+			<g id="almucantars" {{ inkscape.almucantars }}>
+				<title>Almucantar</title>
+				{% for coord in almucantor_coords %}
+					<circle id="almucantar" alt="{{ coord.alt }}" cx="{{ coord.cx }}" cy="{{ coord.cy }}" r="{{ coord.r }}"/>
+				{%- endfor %}
+			</g>	
+
+			<g id="azimuths" {{ inkscape.azimuths }}>
+				<title>Azimuth</title>
+				{% for coord in azimuth_coords %}
+					<circle id="azimuth" az="{{ coord.az }}" cx="{{ coord.cx }}" cy="{{ coord.cy }}" r="{{ coord.r }}"/>
+				{%- endfor %}			
+		    	<circle id="azimuth" az="0.0" cx="0.0" cy="-56.92577215022053" r="86.88564038476916"/>
+		    </g>
 		</g>
 
-		<g id="horizon" {{ inkscape.horizon }}>
-	        <title>Horizon</title>
-	        <circle id="horizon" cx="{{ horiz.cx}}" cy="{{ horiz.cy }}" r="{{ horiz.r }}"/>
-      	</g>
-
-		<g id="almucantars" {{ inkscape.almucantars }}>
-			<title>Almucantar</title>
-			{% for coord in almucantor_coords %}
-				<circle id="almucantar" alt="{{ coord.alt }}" cx="{{ coord.cx }}" cy="{{ coord.cy }}" r="{{ coord.r }}"/>
-			{%- endfor %}
-		</g>	
-
-		<g id="azimuths" {{ inkscape.azimuths }}>
-			<title>Azimuth</title>
-			{% for coord in azimuth_coords %}
-				<circle id="azimuth" az="{{ coord.az }}" cx="{{ coord.cx }}" cy="{{ coord.cy }}" r="{{ coord.r }}"/>
-			{%- endfor %}			
-	    	<circle id="azimuth" az="0.0" cx="0.0" cy="-56.92577215022053" r="86.88564038476916"/>
-	    </g>
-	</g>
-
-	<g id="limb" {{ inkscape.limb }}>
-		<title>Limb</title>
-		<g id="limb_boundaries" {{ inkscape.limb_boundaries }}>
-			<circle id="limb" cx="0" cy="0" r="{{ RCapricorn }}"/>
-			<circle id="limb" cx="0" cy="0" r="{{ RCapricorn + 5 }}"/>
-			<circle id="limb" cx="0" cy="0" r="{{ RCapricorn + 15 }}"/>
+		<g id="limb" {{ inkscape.limb }}>
+			<title>Limb</title>
+			<g id="limb_boundaries" {{ inkscape.limb_boundaries }}>
+				<circle id="limb" cx="0" cy="0" r="{{ ticks.inner_radius }}"/>
+				<circle id="limb" cx="0" cy="0" r="{{ ticks.center_radius }}"/>
+				<circle id="limb" cx="0" cy="0" r="{{ ticks.outer_radius }}"/>
+			</g>
+			<g id="ticks" {{ inkscape.ticks }}>
+				<g id="short_ticks" {{ inkscape.short_ticks }}>
+					<line id="tick" x1="0" y1="{{ ticks.inner_radius }}" x2="0" y2="{{ ticks.center_radius }}"/>
+					{% for angle in angles %}
+				    	<use id="tick" xlink:href="#tick" transform="rotate({{ angle }})"/>
+					{%- endfor %}
+				</g>
+				<g id="long_ticks" {{ inkscape.long_ticks }}>
+				    <line id="tickLong" x1="0" y1="{{ ticks.inner_radius }}" x2="0" y2="{{ ticks.outer_radius }}"/>
+					{% for angle in angles_15 %}
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate({{ angle }})"/>
+					{%- endfor %}
+				</g>
+		    </g>
 		</g>
-		<g id="ticks" {{ inkscape.ticks }}>
-			<g id="short_ticks" {{ inkscape.short_ticks }}>
-				<line id="tick" x1="0" y1="{{ RCapricorn }}" x2="0" y2="{{ RCapricorn + 5 }}"/>
-				{% for angle in angles %}
-			    	<use id="tick" xlink:href="#tick" transform="rotate({{ angle }})"/>
-				{%- endfor %}
-			</g>
-			<g id="long_ticks" {{ inkscape.long_ticks }}>
-			    <line id="tickLong" x1="0" y1="{{ RCapricorn }}" x2="0" y2="{{ RCapricorn + 15 }}"/>
-				{% for angle in angles_15 %}
-			    	<use id="tickLong" xlink:href="#tickLong" transform="rotate({{ angle }})"/>
-				{%- endfor %}
-			</g>
+
+		<g id="ecliptic" {{ inkscape.ecliptic }} transform="rotate(0)">
+	    	<title>Ecliptic</title>
+	        <circle  id="ecliptic" cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r }}"/>
+	        <path id="ecliptic" d="
+	        	M{{ ecliptic.cx - ecliptic.r + ecliptic.width}},{{ ecliptic.cy }} 
+	          	a{{ ecliptic.r - ecliptic.width }},{{ ecliptic.r - ecliptic.width }} 0 1, 1 {{ 2 * ecliptic.r - 2 * ecliptic.width }},0
+	          	a{{ ecliptic.r - ecliptic.width }},{{ ecliptic.r - ecliptic.width }} 0 1, 1 {{ -2 * ecliptic.r + 2 * ecliptic.width }},0
+	          "/>
+	        
+	        <animateTransform
+			  attributeName="transform" type="rotate"
+			  attributeTyep="XML"
+			  from="{{ animation.from }}" to="{{ animation.to }}"
+			  begin="{{ animation.begin }}" dur="{{ animation.dur }}"
+			  fill="freeze"/>
 	    </g>
 	</g>
-
-	<g id="ecliptic" {{ inkscape.ecliptic }} transform="rotate(0)">
-    	<title>Ecliptic</title>
-        <circle  id="ecliptic" cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r }}"/>
-        <path id="ecliptic" d="
-        	M{{ ecliptic.cx - ecliptic.r + 5}},{{ ecliptic.cy }} 
-          	a{{ ecliptic.r - 5 }},{{ ecliptic.r - 5 }} 0 1, 1 {{ 2 * ecliptic.r - 10 }},0
-          	a{{ ecliptic.r - 5 }},{{ ecliptic.r - 5 }} 0 1, 1 {{ -2 * ecliptic.r + 10 }},0
-          "/>
-        
-        <animateTransform
-		  attributeName="transform" type="rotate"
-		  attributeTyep="XML"
-		  from={{ animation.from }} to={{ animation.to }}
-		  begin={{ animation.begin }} dur={{ animation.dur }}
-		  fill="freeze"/>
-    </g>
-</g>
 </svg>
