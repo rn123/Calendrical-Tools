@@ -40,6 +40,11 @@ The arcs of equal azimuth are given by:
 ![equation 3](images/plate_grid_equation3.png)
 
 ![coding screenshot](images/screenshot_coding_astrolabe.png)
+
+## Drawing Astrolabes: Dividing the Ecliptic
+
+The stereographic projection of the ecliptic is a circle (as is the stereographic projection of a circle) that runs between the extremes of the tropics of cancer and capricorn. So the radius is the average of the radii and the center is half of the difference of the radii.
+
 ## Suggested Bibliography
 
 - Reingold, Edward M. Calendrical Calculations: The Ultimate Edition. 4 edition. Cambridge ; New York: Cambridge University Press, 2018.
