@@ -1,5 +1,6 @@
-<svg viewbox="0 0 250 250" height="250" width="250" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="astrolabe" transform="translate(125,125)" inkscape:label="astrolabe" inkscape:groupmode="layer">
+<svg viewbox="0 0 250 250" height="250" width="250" xmlns="http://www.w3.org/2000/svg" 
+	xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="astrolabe" transform="translate(125,125)" {{ inkscape[astrolabe] }}>
     <title>Astrolabe Plate</title>
     <defs>
 
@@ -104,31 +105,32 @@
 		  <circle id="horizon" cx="{{ horiz.cx}}" cy="{{ horiz.cy }}" r="{{ horiz.r }}"/>
 		</clipPath>
 
-		<clipPath id="ecliptic_hole">
-			<circle cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r - 30}}"/>
-	    </clipPath>
+		<mask id="ecliptic_hole">
+			<circle cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r }}" style="fill:white"/>
+			<circle cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r - 5 }}" style="fill:black"/>
+	    </mask>
 	</defs>
 
-	<g id="plate" transform="rotate(180)" inkscape:label="plate" inkscape:groupmode="layer">
-		<g id="tropics" inkscape:label="tropics" inkscape:groupmode="layer">
+	<g id="plate" transform="rotate(180)" {{ inkscape[plate] }}>
+		<g id="tropics" {{ inkscape[tropics] }}>
 			<circle id="capricorn" cx="0" cy="0" r="{{ RCapricorn }}"/>
 			<circle id="equator" cx="0" cy="0" r="{{ REquator }}"/>
 			<circle id="cancer" cx="0" cy="0" r="{{ RCancer }}"/>
 		</g>
 
-		<g id="horizon" inkscape:label="horizon" inkscape:groupmode="layer">
+		<g id="horizon" {{ inkscape[horizon] }}>
 	        <title>Horizon</title>
 	        <circle id="horizon" cx="{{ horiz.cx}}" cy="{{ horiz.cy }}" r="{{ horiz.r }}"/>
       	</g>
 
-		<g id="almucantars" inkscape:label="almucantars" inkscape:groupmode="layer">
+		<g id="almucantars" {{ inkscape[almucantars] }}>
 			<title>Almucantar</title>
 			{% for coord in almucantor_coords %}
 				<circle id="almucantar" alt="{{ coord.alt }}" cx="{{ coord.cx }}" cy="{{ coord.cy }}" r="{{ coord.r }}"/>
 			{%- endfor %}
 		</g>	
 
-		<g id="azimuths" inkscape:label="azimuths" inkscape:groupmode="layer">
+		<g id="azimuths" {{ inkscape[azimuths] }}>
 			<title>Azimuth</title>
 			{% for coord in azimuth_coords %}
 				<circle id="azimuth" az="{{ coord.az }}" cx="{{ coord.cx }}" cy="{{ coord.cy }}" r="{{ coord.r }}"/>
@@ -137,21 +139,21 @@
 	    </g>
 	</g>
 
-	<g id="limb" inkscape:label="limb" inkscape:groupmode="layer">
+	<g id="limb" {{ inkscape[limb] }}>
 		<title>Limb</title>
-		<g id="limb_boundaries" inkscape:label="limb boundaries" inkscape:groupmode="layer">
+		<g id="limb_boundaries" {{ inkscape[limb_boundaries] }}>
 			<circle id="limb" cx="0" cy="0" r="{{ RCapricorn }}"/>
 			<circle id="limb" cx="0" cy="0" r="{{ RCapricorn + 5 }}"/>
 			<circle id="limb" cx="0" cy="0" r="{{ RCapricorn + 15 }}"/>
 		</g>
-		<g id="ticks" inkscape:label="ticks" inkscape:groupmode="layer">
-			<g id="short_ticks" inkscape:label="short_ticks" inkscape:groupmode="layer">
+		<g id="ticks" {{ inkscape[ticks] }}>
+			<g id="short_ticks" {{ inkscape[short_ticks] }}>
 				<line id="tick" x1="0" y1="{{ RCapricorn }}" x2="0" y2="{{ RCapricorn + 5 }}"/>
 				{% for angle in angles %}
 			    	<use id="tick" xlink:href="#tick" transform="rotate({{ angle }})"/>
 				{%- endfor %}
 			</g>
-			<g id="long_ticks" inkscape:label="long_ticks" inkscape:groupmode="layer">
+			<g id="long_ticks" {{ inkscape[long_ticks] }}>
 			    <line id="tickLong" x1="0" y1="{{ RCapricorn }}" x2="0" y2="{{ RCapricorn + 15 }}"/>
 				{% for angle in angles_15 %}
 			    	<use id="tickLong" xlink:href="#tickLong" transform="rotate({{ angle }})"/>
@@ -160,11 +162,19 @@
 	    </g>
 	</g>
 
-	<!-- <g id="ecliptic" inkscape:label="ecliptic" inkscape:groupmode="layer" transform="rotate(180)"> -->
-      <!-- <title>Ecliptic</title> -->
-      <g id="ecliptic_boundaries" inkscape:label="ecliptic_boundaries" inkscape:groupmode="layer" >
-        <circle  id="ecliptic" cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r}}" clip-path="url(#ecliptic_hole)"/>
+	<g id="ecliptic" {{ inkscape[ecliptic] }} transform="rotate(180)">
+      <title>Ecliptic</title>
+      <g id="ecliptic_boundaries" {{ inkscape[ecliptic_boundaries] }} >
+        <circle  id="ecliptic" cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r - 5 }}" style="mask:url(#ecliptic_hole);"/>
+        <path style="stroke:black;" 
+		    d="
+		    M {{ ecliptic.cx }} {{ ecliptic.cy }}
+		    m -{{ ecliptic.r - 15 }}, 0
+		    a {{ ecliptic.r - 15 }},{{ ecliptic.r - 15 }} 0 1,1 ({{ ecliptic.r - 15 }} * 2),0
+		    a {{ ecliptic.r - 15 }},{{ ecliptic.r - 15 }} 0 1,1 -({{ ecliptic.r - 15 }} * 2),0
+		    "
+		/>
       </g>
-    <!-- </g> -->
+    </g>
 </g>
 </svg>
