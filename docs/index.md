@@ -1,6 +1,4 @@
-# Calendrical Tools 2020
-
-![idea card](images/calendrical_tools_card.png)
+![idea card](images/astrolabe_candybar_card.png)
 
 ## Concept
 
