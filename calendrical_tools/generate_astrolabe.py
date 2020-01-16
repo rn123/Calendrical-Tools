@@ -64,9 +64,8 @@ angles = list(range(0, 361, 1))
 RadiusEcliptic = (RadiusCapricorn + RadiusCancer) / 2.0
 yEclipticCenter = (RadiusCapricorn - RadiusCancer) / 2.0
 xEclipticCenter = 0.0
-print({"cx": xEclipticCenter, "cy": yEclipticCenter, "r": RadiusEcliptic})
+# print({"cx": xEclipticCenter, "cy": yEclipticCenter, "r": RadiusEcliptic})
 
-INKSCAPE_LAYERS = True
 identifiers = [
     "astrolabe",
     "plate",
@@ -82,13 +81,11 @@ identifiers = [
     "ecliptic",
     "ecliptic_boundaries",
 ]
-if INKSCAPE_LAYERS is True:
-    inkscape_attributes = {
-        identifier: 'inkscape:label="{}" inkscape:groupmode="layer"'.format(identifier)
-        for identifier in identifiers
-    }
-else:
-    inkscape_attributes = {identifier: "" for identifier in identifiers}
+
+inkscape_attributes = {
+    identifier:'inkscape:label="{}" inkscape:groupmode="layer"'.format(identifier)
+    for identifier in identifiers
+}
 
 with open("astrolabe_template.svg") as fp:
     template_text = fp.read()

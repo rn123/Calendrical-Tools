@@ -1,6 +1,6 @@
 <svg viewbox="0 0 250 250" height="250" width="250" xmlns="http://www.w3.org/2000/svg" 
 	xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="astrolabe" transform="translate(125,125)" {{ inkscape[astrolabe] }}>
+<g id="astrolabe" transform="translate(125,125)" {{ inkscape.astrolabe }}>
     <title>Astrolabe Plate</title>
     <defs>
 
@@ -80,6 +80,7 @@
 			  stroke: black;
 			  stroke-width: 0.5;
 			  stroke-opacity: 0.7;
+			  mask: url(#ecliptic_hole);
 			}
 			#eclipticDivision {
 			  stroke: black;
@@ -111,26 +112,26 @@
 	    </mask>
 	</defs>
 
-	<g id="plate" transform="rotate(180)" {{ inkscape[plate] }}>
+	<g id="plate" transform="rotate(180)" {{ inkscape.plate }}>
 		<g id="tropics" {{ inkscape[tropics] }}>
 			<circle id="capricorn" cx="0" cy="0" r="{{ RCapricorn }}"/>
 			<circle id="equator" cx="0" cy="0" r="{{ REquator }}"/>
 			<circle id="cancer" cx="0" cy="0" r="{{ RCancer }}"/>
 		</g>
 
-		<g id="horizon" {{ inkscape[horizon] }}>
+		<g id="horizon" {{ inkscape.horizon }}>
 	        <title>Horizon</title>
 	        <circle id="horizon" cx="{{ horiz.cx}}" cy="{{ horiz.cy }}" r="{{ horiz.r }}"/>
       	</g>
 
-		<g id="almucantars" {{ inkscape[almucantars] }}>
+		<g id="almucantars" {{ inkscape.almucantars }}>
 			<title>Almucantar</title>
 			{% for coord in almucantor_coords %}
 				<circle id="almucantar" alt="{{ coord.alt }}" cx="{{ coord.cx }}" cy="{{ coord.cy }}" r="{{ coord.r }}"/>
 			{%- endfor %}
 		</g>	
 
-		<g id="azimuths" {{ inkscape[azimuths] }}>
+		<g id="azimuths" {{ inkscape.azimuths }}>
 			<title>Azimuth</title>
 			{% for coord in azimuth_coords %}
 				<circle id="azimuth" az="{{ coord.az }}" cx="{{ coord.cx }}" cy="{{ coord.cy }}" r="{{ coord.r }}"/>
@@ -139,21 +140,21 @@
 	    </g>
 	</g>
 
-	<g id="limb" {{ inkscape[limb] }}>
+	<g id="limb" {{ inkscape.limb }}>
 		<title>Limb</title>
-		<g id="limb_boundaries" {{ inkscape[limb_boundaries] }}>
+		<g id="limb_boundaries" {{ inkscape.limb_boundaries }}>
 			<circle id="limb" cx="0" cy="0" r="{{ RCapricorn }}"/>
 			<circle id="limb" cx="0" cy="0" r="{{ RCapricorn + 5 }}"/>
 			<circle id="limb" cx="0" cy="0" r="{{ RCapricorn + 15 }}"/>
 		</g>
-		<g id="ticks" {{ inkscape[ticks] }}>
-			<g id="short_ticks" {{ inkscape[short_ticks] }}>
+		<g id="ticks" {{ inkscape.ticks }}>
+			<g id="short_ticks" {{ inkscape.short_ticks }}>
 				<line id="tick" x1="0" y1="{{ RCapricorn }}" x2="0" y2="{{ RCapricorn + 5 }}"/>
 				{% for angle in angles %}
 			    	<use id="tick" xlink:href="#tick" transform="rotate({{ angle }})"/>
 				{%- endfor %}
 			</g>
-			<g id="long_ticks" {{ inkscape[long_ticks] }}>
+			<g id="long_ticks" {{ inkscape.long_ticks }}>
 			    <line id="tickLong" x1="0" y1="{{ RCapricorn }}" x2="0" y2="{{ RCapricorn + 15 }}"/>
 				{% for angle in angles_15 %}
 			    	<use id="tickLong" xlink:href="#tickLong" transform="rotate({{ angle }})"/>
@@ -162,19 +163,21 @@
 	    </g>
 	</g>
 
-	<g id="ecliptic" {{ inkscape[ecliptic] }} transform="rotate(180)">
-      <title>Ecliptic</title>
-      <g id="ecliptic_boundaries" {{ inkscape[ecliptic_boundaries] }} >
-        <circle  id="ecliptic" cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r - 5 }}" style="mask:url(#ecliptic_hole);"/>
-        <path style="stroke:black;" 
-		    d="
-		    M {{ ecliptic.cx }} {{ ecliptic.cy }}
-		    m -{{ ecliptic.r - 15 }}, 0
-		    a {{ ecliptic.r - 15 }},{{ ecliptic.r - 15 }} 0 1,1 ({{ ecliptic.r - 15 }} * 2),0
-		    a {{ ecliptic.r - 15 }},{{ ecliptic.r - 15 }} 0 1,1 -({{ ecliptic.r - 15 }} * 2),0
-		    "
-		/>
-      </g>
+	<g id="ecliptic" {{ inkscape.ecliptic }} transform="rotate(0)">
+    	<title>Ecliptic</title>
+        <circle  id="ecliptic" cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r }}"/>
+        <path id="ecliptic" d="
+        	M{{ ecliptic.cx - ecliptic.r + 5}},{{ ecliptic.cy }} 
+          	a{{ ecliptic.r - 5 }},{{ ecliptic.r - 5 }} 0 1, 1 {{ 2 * ecliptic.r - 10 }},0
+          	a{{ ecliptic.r - 5 }},{{ ecliptic.r - 5 }} 0 1, 1 {{ -2 * ecliptic.r + 10 }},0
+          "/>
+        
+        <animateTransform
+		  attributeName="transform" type="rotate"
+		  attributeTyep="XML"
+		  from="0" to="1899"
+		  begin="0s" dur="30s"
+		  fill="freeze"/>
     </g>
 </g>
 </svg>
