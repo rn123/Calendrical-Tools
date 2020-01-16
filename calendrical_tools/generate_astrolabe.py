@@ -17,7 +17,6 @@ radians = math.radians((90 - epsilon) / 2)
 RadiusEquator = RadiusCapricorn * math.tan(radians)
 RadiusCancer = RadiusEquator * math.tan(radians)
 
-
 # Plate grid equation 2, circles of latitude (almucantars).
 almucantor_coords = []
 degrees = list(range(2, 62, 2)) + list(range(60, 85, 5))
@@ -75,7 +74,6 @@ RadiusEcliptic = (RadiusCapricorn + RadiusCancer) / 2.0
 yEclipticCenter = (RadiusCapricorn - RadiusCancer) / 2.0
 xEclipticCenter = 0.0
 
-
 # Use Inkscape extensions to svg to place different parts of astrolabe into their own layer.
 identifiers = [
     "astrolabe",
@@ -112,7 +110,12 @@ svg = template.render(
     almucantor_coords=almucantor_coords,
     azimuth_coords=azimuth_coords,
     ticks=ticks,
-    ecliptic={"cx": xEclipticCenter, "cy": yEclipticCenter, "r": RadiusEcliptic, "width": 5},
+    ecliptic={
+        "cx": xEclipticCenter,
+        "cy": yEclipticCenter,
+        "r": RadiusEcliptic,
+        "width": 5,
+    },
     inkscape=inkscape_attributes,
     animation=animation_parameters,
 )

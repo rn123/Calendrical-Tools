@@ -3,7 +3,6 @@
 	<g id="astrolabe" transform="translate(125,125)" {{ inkscape.astrolabe }}>
 	    <title>Astrolabe Plate</title>
 	    <defs>
-
 			<style>
 				#example {
 				  display: block;
@@ -101,7 +100,6 @@
 			  <circle cx="0" cy="0" r="{{ RCapricorn }}"/>
 			</clipPath>
 
-			        
 			<clipPath id="Horizon">
 			  <circle id="horizon" cx="{{ horiz.cx}}" cy="{{ horiz.cy }}" r="{{ horiz.r }}"/>
 			</clipPath>
