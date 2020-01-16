@@ -57,15 +57,26 @@ for azimuth in degrees:
     azimuth_coords.append(coord)
 
 # Parameters for layout of graduated limb.
-angles_15 = list(range(0, 375, 15))
-angles = list(range(0, 361, 1))
+short_tick_angles = list(range(0, 361, 1))
+long_tick_angles = list(range(0, 375, 15))
+
+short_tick = 5
+long_tick = 15
+ticks = {
+    "inner_radius": RadiusCapricorn,
+    "center_radius": RadiusCapricorn + short_tick,
+    "outer_radius": RadiusCapricorn + long_tick,
+    "short_tick_angles": short_tick_angles,
+    "long_tick_angles": long_tick_angles,
+}
 
 # Ecliptic
 RadiusEcliptic = (RadiusCapricorn + RadiusCancer) / 2.0
 yEclipticCenter = (RadiusCapricorn - RadiusCancer) / 2.0
 xEclipticCenter = 0.0
-# print({"cx": xEclipticCenter, "cy": yEclipticCenter, "r": RadiusEcliptic})
 
+
+# Use Inkscape extensions to svg to place different parts of astrolabe into their own layer.
 identifiers = [
     "astrolabe",
     "plate",
@@ -83,11 +94,11 @@ identifiers = [
 ]
 
 inkscape_attributes = {
-    identifier:'inkscape:label="{}" inkscape:groupmode="layer"'.format(identifier)
+    identifier: 'inkscape:label="{}" inkscape:groupmode="layer"'.format(identifier)
     for identifier in identifiers
 }
 
-animation_parameters = {"from":"0", "to":"1899", "begin":"0s", "dur":"30s"}
+animation_parameters = {"from": "0", "to": "233", "begin": "0s", "dur": "5s"}
 
 with open("astrolabe_template.svg") as fp:
     template_text = fp.read()
@@ -100,11 +111,10 @@ svg = template.render(
     horiz={"cx": xHorizon, "cy": yHorizon, "r": rHorizon},
     almucantor_coords=almucantor_coords,
     azimuth_coords=azimuth_coords,
-    angles=angles,
-    angles_15=angles_15,
-    ecliptic={"cx": xEclipticCenter, "cy": yEclipticCenter, "r": RadiusEcliptic},
+    ticks=ticks,
+    ecliptic={"cx": xEclipticCenter, "cy": yEclipticCenter, "r": RadiusEcliptic, "width": 5},
     inkscape=inkscape_attributes,
-    animation=animation_parameters
+    animation=animation_parameters,
 )
 
 with open("astrolabe_generated.svg", "w") as fp:
