@@ -87,6 +87,8 @@ inkscape_attributes = {
     for identifier in identifiers
 }
 
+animation_parameters = {"from":"0", "to":"1899", "begin":"0s", "dur":"30s"}
+
 with open("astrolabe_template.svg") as fp:
     template_text = fp.read()
 
@@ -102,6 +104,7 @@ svg = template.render(
     angles_15=angles_15,
     ecliptic={"cx": xEclipticCenter, "cy": yEclipticCenter, "r": RadiusEcliptic},
     inkscape=inkscape_attributes,
+    animation=animation_parameters
 )
 
 with open("astrolabe_generated.svg", "w") as fp:
