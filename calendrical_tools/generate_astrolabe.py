@@ -87,8 +87,11 @@ identifiers = [
     "ticks",
     "short_ticks",
     "long_ticks",
+    "rete",
     "ecliptic",
     "ecliptic_boundaries",
+    "stars",
+    "planets"
 ]
 
 inkscape_attributes = {

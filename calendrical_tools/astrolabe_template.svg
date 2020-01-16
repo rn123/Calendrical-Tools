@@ -161,21 +161,29 @@
 		    </g>
 		</g>
 
-		<g id="ecliptic" {{ inkscape.ecliptic }} transform="rotate(0)">
-	    	<title>Ecliptic</title>
-	        <circle  id="ecliptic" cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r }}"/>
-	        <path id="ecliptic" d="
-	        	M{{ ecliptic.cx - ecliptic.r + ecliptic.width}},{{ ecliptic.cy }} 
-	          	a{{ ecliptic.r - ecliptic.width }},{{ ecliptic.r - ecliptic.width }} 0 1, 1 {{ 2 * ecliptic.r - 2 * ecliptic.width }},0
-	          	a{{ ecliptic.r - ecliptic.width }},{{ ecliptic.r - ecliptic.width }} 0 1, 1 {{ -2 * ecliptic.r + 2 * ecliptic.width }},0
-	          "/>
-	        
-	        <animateTransform
-			  attributeName="transform" type="rotate"
-			  attributeTyep="XML"
-			  from="{{ animation.from }}" to="{{ animation.to }}"
-			  begin="{{ animation.begin }}" dur="{{ animation.dur }}"
-			  fill="freeze"/>
-	    </g>
+		<g id = "rete" {{ inkscape.rete }} transform="rotate(0)">
+			<g id="ecliptic" {{ inkscape.ecliptic }}>
+		    	<title>Ecliptic</title>
+		        <circle  id="ecliptic" cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r }}"/>
+		        <path id="ecliptic" d="
+		        	M{{ ecliptic.cx - ecliptic.r + ecliptic.width}},{{ ecliptic.cy }} 
+		          	a{{ ecliptic.r - ecliptic.width }},{{ ecliptic.r - ecliptic.width }} 0 1, 1 {{ 2 * ecliptic.r - 2 * ecliptic.width }},0
+		          	a{{ ecliptic.r - ecliptic.width }},{{ ecliptic.r - ecliptic.width }} 0 1, 1 {{ -2 * ecliptic.r + 2 * ecliptic.width }},0
+		          "/>
+		        
+		        <animateTransform
+				  attributeName="transform" type="rotate"
+				  attributeTyep="XML"
+				  from="{{ animation.from }}" to="{{ animation.to }}"
+				  begin="{{ animation.begin }}" dur="{{ animation.dur }}"
+				  fill="freeze"/>
+		    </g>
+		    <g id="stars" {{ inkscape.stars }}>
+		    	<title>Stars</title>
+		    </g>
+		    <g id="planets" {{ inkscape.planets }}>
+		    	<title>Planets</title>
+		    </g>
+		</g>
 	</g>
 </svg>
