@@ -10,28 +10,22 @@
 				  border: grey;
 				  background-color: light grey;
 				}
-				.w { width: 100% }
-				.mh6 { max-height: 6rem }
-				.px { padding-right: 1rem; padding-left: 1rem }
-				.vat { vertical-align: top }
-				.fffutura { font-family: Futura, sans-serif }
-				.lsxs { letter-spacing: 0.2em }
-				.tdn { text-decoration: none }
-				.ttu { text-transform: uppercase }
-				.bgcred { background-color: red }
-				.filllightblue { fill: #bcdeef }
+				<!-- https://codepen.io/chrisnager/pen/bChes -->
 				#plate {
 				  clip-path:url(#Capricorn);
 				  clipPath: url(#Capricorn);
 				}
 				#location {
 				  text-anchor: middle;
-				  font-size: 6;
+				  font-size: 6pt;
+				  fill: grey;
+				  fill-opacity: 0.99
 				}
 				#tropics {
 				  fill: none;
 				  stroke: grey;
 				  stroke-width: 1;
+				  stroke-opacity: 0.5
 				}
 				#horizon {
 				  fill: none;
@@ -67,6 +61,7 @@
 				  fill: none;
 				  stroke: grey;
 				  stroke-width: 1;
+				  stroke-opacity: 0.5;
 				}
 				#tick {
 				  stroke: grey;
@@ -125,9 +120,9 @@
 		</defs>
 
 		<g id="description" inkscape:label="description" inkscape:groupmode="layer">
-			<text id="location" x="0" y="80" class="w  fffutura  lsxs  ttu">
+			<text id="location" x="0" y="80">
 				Honolulu
-	    		<tspan x="0" dy="1.2em">21.3069</tspan>
+	    		<tspan x="0" dy="1.2em">21.3069 </tspan>
 	    	</text>
 	    </g>
 
@@ -151,40 +146,14 @@
 			<g id="almucantars" inkscape:label="almucantars" inkscape:groupmode="layer">
 				<title>Almucantar</title>
 				
-					<circle id="almucantar" alt="2" cx="0" cy="153.5494823796704" r="164.71460316282088"/>
-					<circle id="almucantar" alt="4" cx="0" cy="141.19200181920795" r="151.18171726037178"/>
-					<circle id="almucantar" alt="6" cx="0" cy="130.69913608209583" r="139.51967453755628"/>
-					<circle id="almucantar" alt="8" cx="0" cy="121.68879764153368" r="129.3456310687912"/>
+					<circle id="almucantar" alt="0" cx="0" cy="168.29725065257915" r="180.64477724913516"/>
 					<circle id="almucantar" alt="10" cx="0" cy="113.87661894980793" r="120.3744766130005"/>
-					<circle id="almucantar" alt="12" cx="0" cy="107.04661201682538" r="112.38949225488729"/>
-					<circle id="almucantar" alt="14" cx="0" cy="101.03180041275915" r="105.22298053302619"/>
-					<circle id="almucantar" alt="16" cx="0" cy="95.70108137937765" r="98.74312572896324"/>
-					<circle id="almucantar" alt="18" cx="0" cy="90.95009905801757" r="92.84486531537705"/>
 					<circle id="almucantar" alt="20" cx="0" cy="86.69476935821305" r="87.44341307779194"/>
-					<circle id="almucantar" alt="22" cx="0" cy="82.86659925934124" r="82.4695766929764"/>
-					<circle id="almucantar" alt="24" cx="0" cy="79.40924605954442" r="77.86631526927367"/>
-					<circle id="almucantar" alt="26" cx="0" cy="76.27594962416705" r="73.58616989221942"/>
-					<circle id="almucantar" alt="28" cx="0" cy="73.427589761239" r="69.58931929414527"/>
 					<circle id="almucantar" alt="30" cx="0" cy="70.83119815167136" r="65.84209006657689"/>
-					<circle id="almucantar" alt="32" cx="0" cy="68.45880546028036" r="62.31580203257533"/>
-					<circle id="almucantar" alt="34" cx="0" cy="66.28653878938138" r="58.98586393161248"/>
-					<circle id="almucantar" alt="36" cx="0" cy="64.29390832481216" r="55.83105825741697"/>
-					<circle id="almucantar" alt="38" cx="0" cy="62.46323852295869" r="52.8329705875852"/>
 					<circle id="almucantar" alt="40" cx="0" cy="60.7792108420675" r="49.9755303980145"/>
-					<circle id="almucantar" alt="42" cx="0" cy="59.228493362177566" r="47.244638695716695"/>
-					<circle id="almucantar" alt="44" cx="0" cy="57.7994386802053" r="44.62786384512073"/>
-					<circle id="almucantar" alt="46" cx="0" cy="56.48183589318714" r="42.11419138867458"/>
-					<circle id="almucantar" alt="48" cx="0" cy="55.26670575969755" r="39.693816938677756"/>
 					<circle id="almucantar" alt="50" cx="0" cy="54.146130579439195" r="37.35797366622141"/>
-					<circle id="almucantar" alt="52" cx="0" cy="53.113112179610035" r="35.09878776053254"/>
-					<circle id="almucantar" alt="54" cx="0" cy="52.1614528036292" r="32.909156637635846"/>
-					<circle id="almucantar" alt="56" cx="0" cy="51.28565477743771" r="30.78264575532554"/>
-					<circle id="almucantar" alt="58" cx="0" cy="50.48083566346922" r="28.713400724544105"/>
 					<circle id="almucantar" alt="60" cx="0" cy="49.74265626275531" r="26.696072055613307"/>
-					<circle id="almucantar" alt="60" cx="0" cy="49.74265626275531" r="26.696072055613307"/>
-					<circle id="almucantar" alt="65" cx="0" cy="48.164489633633345" r="21.848599847020818"/>
 					<circle id="almucantar" alt="70" cx="0" cy="46.930495532653374" r="17.228807283608614"/>
-					<circle id="almucantar" alt="75" cx="0" cy="46.004333428725644" r="12.780368072810495"/>
 					<circle id="almucantar" alt="80" cx="0" cy="45.36001580485654" r="8.454575676076276"/>
 
 				<circle id="azimuth-90" az="0.0" cx="-0.0" cy="-56.92577215022053" r="86.88564038476916"/>

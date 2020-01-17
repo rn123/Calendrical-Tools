@@ -10,28 +10,22 @@
 				  border: grey;
 				  background-color: light grey;
 				}
-				.w { width: 100% }
-				.mh6 { max-height: 6rem }
-				.px { padding-right: 1rem; padding-left: 1rem }
-				.vat { vertical-align: top }
-				.fffutura { font-family: Futura, sans-serif }
-				.lsxs { letter-spacing: 0.2em }
-				.tdn { text-decoration: none }
-				.ttu { text-transform: uppercase }
-				.bgcred { background-color: red }
-				.filllightblue { fill: #bcdeef }
+				<!-- https://codepen.io/chrisnager/pen/bChes -->
 				#plate {
 				  clip-path:url(#Capricorn);
 				  clipPath: url(#Capricorn);
 				}
 				#location {
 				  text-anchor: middle;
-				  font-size: 6;
+				  font-size: 6pt;
+				  fill: grey;
+				  fill-opacity: 0.99
 				}
 				#tropics {
 				  fill: none;
 				  stroke: grey;
 				  stroke-width: 1;
+				  stroke-opacity: 0.5
 				}
 				#horizon {
 				  fill: none;
@@ -67,6 +61,7 @@
 				  fill: none;
 				  stroke: grey;
 				  stroke-width: 1;
+				  stroke-opacity: 0.5;
 				}
 				#tick {
 				  stroke: grey;
@@ -125,9 +120,9 @@
 		</defs>
 
 		<g id="description" {{ inkscape.description }}>
-			<text id="location" x="0" y="{{ RCapricorn - 20 }}" class="w  fffutura  lsxs  ttu">
+			<text id="location" x="0" y="{{ RCapricorn - 20 }}">
 				{{ place_name }}
-	    		<tspan x="0" dy="1.2em">{{ latitude }}</tspan>
+	    		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
 	    	</text>
 	    </g>
 
