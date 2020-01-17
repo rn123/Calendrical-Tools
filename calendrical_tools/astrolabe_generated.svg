@@ -10,6 +10,16 @@
 				  border: grey;
 				  background-color: light grey;
 				}
+				.w { width: 100% }
+				.mh6 { max-height: 6rem }
+				.px { padding-right: 1rem; padding-left: 1rem }
+				.vat { vertical-align: top }
+				.fffutura { font-family: Futura, sans-serif }
+				.lsxs { letter-spacing: 0.2em }
+				.tdn { text-decoration: none }
+				.ttu { text-transform: uppercase }
+				.bgcred { background-color: red }
+				.filllightblue { fill: #bcdeef }
 				#plate {
 				  clip-path:url(#Capricorn);
 				  clipPath: url(#Capricorn);
@@ -115,7 +125,7 @@
 		</defs>
 
 		<g id="description" inkscape:label="description" inkscape:groupmode="layer">
-			<text id="location" x="0" y="80">
+			<text id="location" x="0" y="80" class="w  fffutura  lsxs  ttu">
 				Honolulu
 	    		<tspan x="0" dy="1.2em">21.3069</tspan>
 	    	</text>
