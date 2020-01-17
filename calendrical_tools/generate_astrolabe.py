@@ -21,9 +21,9 @@ RadiusEquator = RadiusCapricorn * math.tan(radians)
 RadiusCancer = RadiusEquator * math.tan(radians)
 
 # Plate grid equation 2, circles of latitude (almucantars).
-almucantor_coords = []
-degrees = list(range(2, 62, 2)) + list(range(60, 85, 5))
-for altitude in degrees:
+
+
+def generate_altitude(altitude):
     radiansAltitude = math.radians(altitude)
     almucantorCenter = RadiusEquator * (
         math.cos(radiansLatitude)
@@ -33,9 +33,16 @@ for altitude in degrees:
         math.cos(radiansAltitude)
         / (math.sin(radiansLatitude) + math.sin(radiansAltitude))
     )
-    almucantor_coords.append(
-        {"alt": altitude, "cx": 0, "cy": almucantorCenter, "r": almucantarRadius}
-    )
+    return {"alt": altitude, "cx": 0, "cy": almucantorCenter, "r": almucantarRadius}
+
+
+almucantor_coords = []
+# altitudes = list(range(2, 62, 2)) + list(range(60, 85, 5))
+altitudes = list(range(0, 90, 10))
+for altitude in altitudes:
+    almucantor_coords.append(generate_altitude(altitude))
+
+
 
 rHorizon = RadiusEquator / math.sin(radiansLatitude)
 yHorizon = RadiusEquator / math.tan(radiansLatitude)
