@@ -10,9 +10,23 @@
 				  border: grey;
 				  background-color: light grey;
 				}
+				.w { width: 100% }
+				.mh6 { max-height: 6rem }
+				.px { padding-right: 1rem; padding-left: 1rem }
+				.vat { vertical-align: top }
+				.fffutura { font-family: Futura, sans-serif }
+				.lsxs { letter-spacing: 0.2em }
+				.tdn { text-decoration: none }
+				.ttu { text-transform: uppercase }
+				.bgcred { background-color: red }
+				.filllightblue { fill: #bcdeef }
 				#plate {
 				  clip-path:url(#Capricorn);
 				  clipPath: url(#Capricorn);
+				}
+				#location {
+				  text-anchor: middle;
+				  font-size: 6;
 				}
 				#tropics {
 				  fill: none;
@@ -92,7 +106,7 @@
 				  stroke-width: 1;
 				}
 				.masked {
-				  mask: url("#hole");
+				  mask: url(#hole);
 				}
 			</style>
 
@@ -110,6 +124,13 @@
 		    </mask>
 		</defs>
 
+		<g id="description" {{ inkscape.description }}>
+			<text id="location" x="0" y="{{ RCapricorn - 20 }}" class="w  fffutura  lsxs  ttu">
+				{{ place_name }}
+	    		<tspan x="0" dy="1.2em">{{ latitude }}</tspan>
+	    	</text>
+	    </g>
+
 		<g id="plate" transform="rotate(180)" {{ inkscape.plate }}>
 			<g id="tropics" {{ inkscape[tropics] }}>
 				<circle id="capricorn" cx="0" cy="0" r="{{ RCapricorn }}"/>
@@ -122,11 +143,18 @@
 		        <circle id="horizon" cx="{{ horiz.cx}}" cy="{{ horiz.cy }}" r="{{ horiz.r }}"/>
 	      	</g>
 
+	      	<g id="axis" {{ inkscape.axis }}>
+	      		<line id="axis" x1="0" y1="{{ -RCapricorn }}" x2="0" y2="{{ RCapricorn }}"/>
+        		<line id="axis" x1="{{ -RCapricorn }}" y1="0" x2="{{ RCapricorn }}" y2="0"/>
+    		</g>
+
 			<g id="almucantars" {{ inkscape.almucantars }}>
 				<title>Almucantar</title>
 				{% for coord in almucantor_coords %}
 					<circle id="almucantar" alt="{{ coord.alt }}" cx="{{ coord.cx }}" cy="{{ coord.cy }}" r="{{ coord.r }}"/>
 				{%- endfor %}
+
+				<circle id="azimuth-90" az="0.0" cx="-0.0" cy="-56.92577215022053" r="86.88564038476916"/>
 			</g>	
 
 			<g id="azimuths" {{ inkscape.azimuths }}>
@@ -148,20 +176,20 @@
 			<g id="ticks" {{ inkscape.ticks }}>
 				<g id="short_ticks" {{ inkscape.short_ticks }}>
 					<line id="tick" x1="0" y1="{{ ticks.inner_radius }}" x2="0" y2="{{ ticks.center_radius }}"/>
-					{% for angle in angles %}
+					{% for angle in ticks.short_tick_angles %}
 				    	<use id="tick" xlink:href="#tick" transform="rotate({{ angle }})"/>
 					{%- endfor %}
 				</g>
 				<g id="long_ticks" {{ inkscape.long_ticks }}>
 				    <line id="tickLong" x1="0" y1="{{ ticks.inner_radius }}" x2="0" y2="{{ ticks.outer_radius }}"/>
-					{% for angle in angles_15 %}
+					{% for angle in ticks.long_tick_angles %}
 				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate({{ angle }})"/>
 					{%- endfor %}
 				</g>
 		    </g>
 		</g>
 
-		<g id = "rete" {{ inkscape.rete }} transform="rotate(0)">
+		<g id = "rete" {{ inkscape.rete }} transform="rotate(180)">
 			<g id="ecliptic" {{ inkscape.ecliptic }}>
 		    	<title>Ecliptic</title>
 		        <circle  id="ecliptic" cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r }}"/>
@@ -171,7 +199,7 @@
 		          	a{{ ecliptic.r - ecliptic.width }},{{ ecliptic.r - ecliptic.width }} 0 1, 1 {{ -2 * ecliptic.r + 2 * ecliptic.width }},0
 		          "/>
 
-		        <line id="eclipticDivision" x1="0" y1="0" x2="65.63970574410436" y2="0"/>
+		        <!-- <line id="eclipticDivision" x1="0" y1="0" x2="65.63970574410436" y2="0"/> -->
 		        
 		    </g>
 		    <g id="stars" {{ inkscape.stars }}>
