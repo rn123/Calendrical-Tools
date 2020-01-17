@@ -5,8 +5,11 @@ import math
 from jinja2 import Template
 
 epsilon = 23.438446
-latitude = 21.5767  # Waialua
 RadiusCapricorn = 100
+
+# Honolulu: 21.3069° N, 157.8583° W
+place_name = "Honolulu"
+latitude = 21.3069
 
 radiansLatitude = math.radians(latitude)
 
@@ -74,12 +77,19 @@ RadiusEcliptic = (RadiusCapricorn + RadiusCancer) / 2.0
 yEclipticCenter = (RadiusCapricorn - RadiusCancer) / 2.0
 xEclipticCenter = 0.0
 
+
+# In order to place parts of the figure in Inkscape layers, need the attributes below.
+# This will cause errors, of course, in other renderers unless the inkscape namespace
+# (xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape") is included.
+
 # Use Inkscape extensions to svg to place different parts of astrolabe into their own layer.
 identifiers = [
     "astrolabe",
     "plate",
+    "description",
     "tropics",
     "horizon",
+    "axis",
     "almucantars",
     "azimuths",
     "limb",
@@ -106,6 +116,8 @@ with open("astrolabe_template.svg") as fp:
 
 template = Template(template_text)
 svg = template.render(
+    place_name=place_name,
+    latitude=latitude,
     RCapricorn=RadiusCapricorn,
     REquator=RadiusEquator,
     RCancer=RadiusCancer,
