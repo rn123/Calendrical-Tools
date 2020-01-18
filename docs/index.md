@@ -4,7 +4,7 @@
 
 Organizing and visualizing the counts of days, moons, and years is fundemental. Over the centuries many devices have been invented for this fundemental purpose, resulting in the rich calendrical and astronomical traditions of world history. Calendrical-Tools builds calendars, diagrams, and timelines to help explore these traditions and their first principles as well as to produce useful devices for managing time from a historically accurate point of view.
 
-Inspired by David Seah's [Compact Calendar](https://davidseah.com/node/compact-calendar/) project that produces a one page time-management tool, ```candybar.py``` is code that computes "candybar calendars" for various calendrical traditions. The candybar view of time organizes day counts int ISO weeks and stacks the weeks up to fill in a calendar year. The idea of calling these candy bar calendars is introduced by David Seah: 
+Inspired by David Seah's [Compact Calendar](https://davidseah.com/node/compact-calendar/) project that produces a one page time-management tool, ```candybar.py``` is code that computes "candybar calendars" for various calendrical traditions. The candybar view of time organizes day counts into ISO weeks and stacks the weeks up to fill in a calendar year. The idea of calling these candy bar calendars is introduced by David Seah: 
 <img src="images/compact_calendar.png" alt="Compact Calendar" width="30%" align="right" style="padding:5px;"/>
 
 > The Compact Calendar presents days as a continuous candy bar of time. Because the weeks are presented as a stack of available time, it’s easy to block out days naturally as you think. There’s a lot of free space available on the right-side of the sheet for note taking.
