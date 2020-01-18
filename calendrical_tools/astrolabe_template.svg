@@ -10,7 +10,6 @@
 				  border: grey;
 				  background-color: light grey;
 				}
-				<!-- https://codepen.io/chrisnager/pen/bChes -->
 				#plate {
 				  clip-path:url(#Capricorn);
 				  clipPath: url(#Capricorn);
@@ -38,10 +37,10 @@
 				  stroke-width: 0.5;
 				}
 				#almucantar-center {
-				  fill: white;
-				  fill-opacity: 0.95;
 				  stroke: navy;
 				  stroke-width: 0.5;
+				  fill: white;
+				  fill-opacity: 80;
 				}
 				#azimuth {
 				  fill: none;
@@ -114,8 +113,12 @@
 			</clipPath>
 
 			<mask id="ecliptic_hole">
-				<circle cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r }}" style="fill:white"/>
-				<circle cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r - ecliptic.width }}" style="fill:black"/>
+				<circle cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r }}" style="fill:white;"/>
+				<circle cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r - ecliptic.width }}" style="fill:black;"/>
+		    </mask>
+
+		    <mask id="almucantar_hole">
+		    	<circle id="almucantar-center" az="{{ almucantar_center.alt }}" cx="{{ almucantar_center.cx }}" cy="{{ almucantar_center.cy }}" r="{{ almucantar_center.r }}" style="fill:yellow"/>
 		    </mask>
 		</defs>
 
@@ -127,7 +130,7 @@
 	    </g>
 
 		<g id="plate" transform="rotate(180)" {{ inkscape.plate }}>
-			<g id="tropics" {{ inkscape[tropics] }}>
+			<g id="tropics" {{ inkscape.tropics }}>
 				<circle id="capricorn" cx="0" cy="0" r="{{ RCapricorn }}"/>
 				<circle id="equator" cx="0" cy="0" r="{{ REquator }}"/>
 				<circle id="cancer" cx="0" cy="0" r="{{ RCancer }}"/>
@@ -138,27 +141,29 @@
 		        <circle id="horizon" cx="{{ horiz.cx}}" cy="{{ horiz.cy }}" r="{{ horiz.r }}"/>
 	      	</g>
 
-	      	<g id="axis" {{ inkscape.axis }}>
-	      		<line id="axis" x1="0" y1="{{ -RCapricorn }}" x2="0" y2="{{ RCapricorn }}"/>
-        		<line id="axis" x1="{{ -RCapricorn }}" y1="0" x2="{{ RCapricorn }}" y2="0"/>
-    		</g>
+			<g id="azimuths" {{ inkscape.azimuths }}>
+				<title>Azimuth</title>
+				{% for coord in azimuth_coords %}
+					<circle id="azimuth" az="{{ coord.az }}" cx="{{ coord.cx }}" cy="{{ coord.cy }}" r="{{ coord.r }}"/>
+				{%- endfor %}			
+		    </g>
 
 			<g id="almucantars" {{ inkscape.almucantars }}>
 				<title>Almucantar</title>
 				{% for coord in almucantor_coords %}
 					<circle id="almucantar" alt="{{ coord.alt }}" cx="{{ coord.cx }}" cy="{{ coord.cy }}" r="{{ coord.r }}"/>
 				{%- endfor %}
+				<circle id="almucantar-center" az="0.0" cx="-0.0" cy="{{ almucantar_center.cy + 0.02}}" r="{{ almucantar_center.r }}"/>
+			</g>
 
-				<circle id="azimuth-90" az="0.0" cx="-0.0" cy="-56.92577215022053" r="86.88564038476916"/>
-			</g>	
+			<g id="prime_vertical" {{ inkscape.prime_vertical }}>
+				<circle id="azimuth-90" cx="{{ prime_vertical.cx }}" cy="{{ prime_vertical.cy }}" r="{{ prime_vertical.r }}"/>
+			</g>
 
-			<g id="azimuths" {{ inkscape.azimuths }}>
-				<title>Azimuth</title>
-				{% for coord in azimuth_coords %}
-					<circle id="azimuth" az="{{ coord.az }}" cx="{{ coord.cx }}" cy="{{ coord.cy }}" r="{{ coord.r }}"/>
-				{%- endfor %}			
-		    	<circle id="azimuth" az="0.0" cx="0.0" cy="-56.92577215022053" r="86.88564038476916"/>
-		    </g>
+			<g id="axis" {{ inkscape.axis }}>
+	      		<line id="axis" x1="0" y1="{{ -RCapricorn }}" x2="0" y2="{{ RCapricorn }}"/>
+        		<line id="axis" x1="{{ -RCapricorn }}" y1="0" x2="{{ RCapricorn }}" y2="0"/>
+    		</g>
 		</g>
 
 		<g id="limb" {{ inkscape.limb }}>

@@ -23,7 +23,8 @@ RadiusCancer = RadiusEquator * math.tan(radians)
 # Plate grid equation 2, circles of latitude (almucantars).
 
 
-def generate_altitude(altitude):
+def generate_almucantar(altitude):
+    """Generate circles of constant altitude."""
     radiansAltitude = math.radians(altitude)
     almucantorCenter = RadiusEquator * (
         math.cos(radiansLatitude)
@@ -40,9 +41,9 @@ almucantor_coords = []
 # altitudes = list(range(2, 62, 2)) + list(range(60, 85, 5))
 altitudes = list(range(0, 90, 10))
 for altitude in altitudes:
-    almucantor_coords.append(generate_altitude(altitude))
+    almucantor_coords.append(generate_almucantar(altitude))
 
-
+almucantar_center = generate_almucantar(80)
 
 rHorizon = RadiusEquator / math.sin(radiansLatitude)
 yHorizon = RadiusEquator / math.tan(radiansLatitude)
@@ -64,6 +65,8 @@ for azimuth in degrees:
     azimuth_coords.append(coord)
     coord = {"az": azimuth, "cx": -xAzimuth, "cy": yCenter, "r": radiusAzimuth}
     azimuth_coords.append(coord)
+
+prime_vertical = {"cx": 0, "cy": yCenter, "r": yAzimuth}
 
 # Parameters for layout of graduated limb.
 short_tick_angles = list(range(0, 361, 1))
@@ -98,7 +101,9 @@ identifiers = [
     "horizon",
     "axis",
     "almucantars",
+    "almucantar_center",
     "azimuths",
+    "prime_vertical",
     "limb",
     "limb_boundaries",
     "ticks",
@@ -108,7 +113,7 @@ identifiers = [
     "ecliptic",
     "ecliptic_boundaries",
     "stars",
-    "planets"
+    "planets",
 ]
 
 inkscape_attributes = {
@@ -130,7 +135,9 @@ svg = template.render(
     RCancer=RadiusCancer,
     horiz={"cx": xHorizon, "cy": yHorizon, "r": rHorizon},
     almucantor_coords=almucantor_coords,
+    almucantar_center=almucantar_center,
     azimuth_coords=azimuth_coords,
+    prime_vertical=prime_vertical,
     ticks=ticks,
     ecliptic={
         "cx": xEclipticCenter,
