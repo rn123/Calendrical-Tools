@@ -55,9 +55,14 @@ def generate_tropic_arcs(obliquity, radius_capricorn):
 
 
 def generate_almucantar_arc(altitude, radius_equator, latitude):
-    """Generate circles of constant altitude."""
+    """Generate circles of constant altitude.
 
-    # Plate grid equation 2, circles of equal altitude (almucantars).
+    Plate grid equation 2, circles of equal altitude (almucantars).
+    y_{center} &= R_{Equator}(\frac{\cos\phi}{\sin\phi + \sin a}), & 
+    r_{a} &= R_{Equator} (\frac{\cos a}{\sin\phi + \sin a}) \\
+    r_{U} &= R_{Equator} \cot(\frac{\phi +  a}{2}), &
+    r_{L} &= -R_{Equator} \tan(\frac{\phi -  a}{2})
+    """
     radiansAltitude = math.radians(altitude)
     radiansLatitude = math.radians(latitude)
 
