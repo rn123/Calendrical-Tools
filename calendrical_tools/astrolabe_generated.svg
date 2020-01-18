@@ -113,8 +113,8 @@
 			</clipPath>
 
 			<mask id="ecliptic_hole">
-				<circle cx="0.0" cy="17.180147127947826" r="82.81985287205217" style="fill:white;"/>
-				<circle cx="0.0" cy="17.180147127947826" r="77.81985287205217" style="fill:black;"/>
+				<circle cx="0.0" cy="28.457145149136974" r="71.54285485086302" style="fill:white;"/>
+				<circle cx="0.0" cy="28.457145149136974" r="66.54285485086302" style="fill:black;"/>
 		    </mask>
 
 		    <mask id="almucantar_hole">
@@ -133,7 +133,7 @@
 			<g id="tropics" inkscape:label="tropics" inkscape:groupmode="layer">
 				<circle id="capricorn" cx="0" cy="0" r="100"/>
 				<circle id="equator" cx="0" cy="0" r="65.63970574410435"/>
-				<circle id="cancer" cx="0" cy="0" r="65.63970574410435"/>
+				<circle id="cancer" cx="0" cy="0" r="43.08570970172605"/>
 			</g>
 
 			<g id="horizon" inkscape:label="horizon" inkscape:groupmode="layer">
@@ -595,11 +595,11 @@
 		<g id = "rete" inkscape:label="rete" inkscape:groupmode="layer" transform="rotate(180)">
 			<g id="ecliptic" inkscape:label="ecliptic" inkscape:groupmode="layer">
 		    	<title>Ecliptic</title>
-		        <circle  id="ecliptic" cx="0.0" cy="17.180147127947826" r="82.81985287205217"/>
+		        <circle  id="ecliptic" cx="0.0" cy="28.457145149136974" r="71.54285485086302"/>
 		        <path id="ecliptic" d="
-		        	M-77.81985287205217,17.180147127947826 
-		          	a77.81985287205217,77.81985287205217 0 1, 1 155.63970574410433,0
-		          	a77.81985287205217,77.81985287205217 0 1, 1 -155.63970574410433,0
+		        	M-66.54285485086302,28.457145149136974 
+		          	a66.54285485086302,66.54285485086302 0 1, 1 133.08570970172605,0
+		          	a66.54285485086302,66.54285485086302 0 1, 1 -133.08570970172605,0
 		          "/>
 
 		        <!-- <line id="eclipticDivision" x1="0" y1="0" x2="65.63970574410436" y2="0"/> -->
