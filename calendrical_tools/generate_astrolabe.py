@@ -28,6 +28,16 @@ identifiers = [
     "planets",
 ]
 
+plate_parameters = {"Honolulu":{"latitude": 21.3069}}
+class Astrolabe:
+    """A proper traveling astrolabe would have a set of plates for each
+    clime, with maybe extra plates for special places."""
+
+    def __init__(obliquity=23.438446, radius_capricorn=100):
+        self.obliquity = obliquity
+        self.RadiusCapricorn = radius_capricorn
+
+
 
 def generate_tropic_arcs(obliquity, radius_capricorn):
     """ The size of an astrolabe is contolled by the radius of the
