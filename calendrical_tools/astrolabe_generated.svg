@@ -10,7 +10,6 @@
 				  border: grey;
 				  background-color: light grey;
 				}
-				<!-- https://codepen.io/chrisnager/pen/bChes -->
 				#plate {
 				  clip-path:url(#Capricorn);
 				  clipPath: url(#Capricorn);
@@ -38,10 +37,10 @@
 				  stroke-width: 0.5;
 				}
 				#almucantar-center {
-				  fill: white;
-				  fill-opacity: 0.95;
 				  stroke: navy;
 				  stroke-width: 0.5;
+				  fill: white;
+				  fill-opacity: 80;
 				}
 				#azimuth {
 				  fill: none;
@@ -114,8 +113,12 @@
 			</clipPath>
 
 			<mask id="ecliptic_hole">
-				<circle cx="0.0" cy="28.457145149136974" r="71.54285485086302" style="fill:white"/>
-				<circle cx="0.0" cy="28.457145149136974" r="66.54285485086302" style="fill:black"/>
+				<circle cx="0.0" cy="17.180147127947826" r="82.81985287205217" style="fill:white;"/>
+				<circle cx="0.0" cy="17.180147127947826" r="77.81985287205217" style="fill:black;"/>
+		    </mask>
+
+		    <mask id="almucantar_hole">
+		    	<circle id="almucantar-center" az="80" cx="0" cy="45.36001580485654" r="8.454575676076276" style="fill:yellow"/>
 		    </mask>
 		</defs>
 
@@ -127,37 +130,16 @@
 	    </g>
 
 		<g id="plate" transform="rotate(180)" inkscape:label="plate" inkscape:groupmode="layer">
-			<g id="tropics" >
+			<g id="tropics" inkscape:label="tropics" inkscape:groupmode="layer">
 				<circle id="capricorn" cx="0" cy="0" r="100"/>
 				<circle id="equator" cx="0" cy="0" r="65.63970574410435"/>
-				<circle id="cancer" cx="0" cy="0" r="43.08570970172605"/>
+				<circle id="cancer" cx="0" cy="0" r="65.63970574410435"/>
 			</g>
 
 			<g id="horizon" inkscape:label="horizon" inkscape:groupmode="layer">
 		        <title>Horizon</title>
 		        <circle id="horizon" cx="0.0" cy="168.29725065257912" r="180.64477724913516"/>
 	      	</g>
-
-	      	<g id="axis" inkscape:label="axis" inkscape:groupmode="layer">
-	      		<line id="axis" x1="0" y1="-100" x2="0" y2="100"/>
-        		<line id="axis" x1="-100" y1="0" x2="100" y2="0"/>
-    		</g>
-
-			<g id="almucantars" inkscape:label="almucantars" inkscape:groupmode="layer">
-				<title>Almucantar</title>
-				
-					<circle id="almucantar" alt="0" cx="0" cy="168.29725065257915" r="180.64477724913516"/>
-					<circle id="almucantar" alt="10" cx="0" cy="113.87661894980793" r="120.3744766130005"/>
-					<circle id="almucantar" alt="20" cx="0" cy="86.69476935821305" r="87.44341307779194"/>
-					<circle id="almucantar" alt="30" cx="0" cy="70.83119815167136" r="65.84209006657689"/>
-					<circle id="almucantar" alt="40" cx="0" cy="60.7792108420675" r="49.9755303980145"/>
-					<circle id="almucantar" alt="50" cx="0" cy="54.146130579439195" r="37.35797366622141"/>
-					<circle id="almucantar" alt="60" cx="0" cy="49.74265626275531" r="26.696072055613307"/>
-					<circle id="almucantar" alt="70" cx="0" cy="46.930495532653374" r="17.228807283608614"/>
-					<circle id="almucantar" alt="80" cx="0" cy="45.36001580485654" r="8.454575676076276"/>
-
-				<circle id="azimuth-90" az="0.0" cx="-0.0" cy="-56.92577215022053" r="86.88564038476916"/>
-			</g>	
 
 			<g id="azimuths" inkscape:label="azimuths" inkscape:groupmode="layer">
 				<title>Azimuth</title>
@@ -178,8 +160,31 @@
 					<circle id="azimuth" az="70" cx="-193.5749455995085" cy="-25.600958740953608" r="205.99815441523086"/>
 					<circle id="azimuth" az="80" cx="399.5731000147394" cy="-25.600958740953608" r="405.73715914865073"/>
 					<circle id="azimuth" az="80" cx="-399.5731000147394" cy="-25.600958740953608" r="405.73715914865073"/>			
-		    	<circle id="azimuth" az="0.0" cx="0.0" cy="-56.92577215022053" r="86.88564038476916"/>
 		    </g>
+
+			<g id="almucantars" inkscape:label="almucantars" inkscape:groupmode="layer">
+				<title>Almucantar</title>
+				
+					<circle id="almucantar" alt="0" cx="0" cy="168.29725065257915" r="180.64477724913516"/>
+					<circle id="almucantar" alt="10" cx="0" cy="113.87661894980793" r="120.3744766130005"/>
+					<circle id="almucantar" alt="20" cx="0" cy="86.69476935821305" r="87.44341307779194"/>
+					<circle id="almucantar" alt="30" cx="0" cy="70.83119815167136" r="65.84209006657689"/>
+					<circle id="almucantar" alt="40" cx="0" cy="60.7792108420675" r="49.9755303980145"/>
+					<circle id="almucantar" alt="50" cx="0" cy="54.146130579439195" r="37.35797366622141"/>
+					<circle id="almucantar" alt="60" cx="0" cy="49.74265626275531" r="26.696072055613307"/>
+					<circle id="almucantar" alt="70" cx="0" cy="46.930495532653374" r="17.228807283608614"/>
+					<circle id="almucantar" alt="80" cx="0" cy="45.36001580485654" r="8.454575676076276"/>
+				<circle id="almucantar-center" az="0.0" cx="-0.0" cy="45.38001580485654" r="8.454575676076276"/>
+			</g>
+
+			<g id="prime_vertical" inkscape:label="prime_vertical" inkscape:groupmode="layer">
+				<circle id="azimuth-90" cx="0" cy="-25.600958740953608" r="70.45551829792052"/>
+			</g>
+
+			<g id="axis" inkscape:label="axis" inkscape:groupmode="layer">
+	      		<line id="axis" x1="0" y1="-100" x2="0" y2="100"/>
+        		<line id="axis" x1="-100" y1="0" x2="100" y2="0"/>
+    		</g>
 		</g>
 
 		<g id="limb" inkscape:label="limb" inkscape:groupmode="layer">
@@ -590,11 +595,11 @@
 		<g id = "rete" inkscape:label="rete" inkscape:groupmode="layer" transform="rotate(180)">
 			<g id="ecliptic" inkscape:label="ecliptic" inkscape:groupmode="layer">
 		    	<title>Ecliptic</title>
-		        <circle  id="ecliptic" cx="0.0" cy="28.457145149136974" r="71.54285485086302"/>
+		        <circle  id="ecliptic" cx="0.0" cy="17.180147127947826" r="82.81985287205217"/>
 		        <path id="ecliptic" d="
-		        	M-66.54285485086302,28.457145149136974 
-		          	a66.54285485086302,66.54285485086302 0 1, 1 133.08570970172605,0
-		          	a66.54285485086302,66.54285485086302 0 1, 1 -133.08570970172605,0
+		        	M-77.81985287205217,17.180147127947826 
+		          	a77.81985287205217,77.81985287205217 0 1, 1 155.63970574410433,0
+		          	a77.81985287205217,77.81985287205217 0 1, 1 -155.63970574410433,0
 		          "/>
 
 		        <!-- <line id="eclipticDivision" x1="0" y1="0" x2="65.63970574410436" y2="0"/> -->
