@@ -49,7 +49,7 @@ def generate_tropic_arcs(obliquity, radius_capricorn):
 
     radians = math.radians((90 - obliquity) / 2)
     radius_equator = radius_capricorn * math.tan(radians)
-    radius_cancer = radius_capricorn * math.tan(radians)
+    radius_cancer = radius_equator * math.tan(radians)
 
     return radius_equator, radius_cancer
 
