@@ -4,7 +4,8 @@
 import math
 from jinja2 import Template
 
-# All of the parts of an astrolabe.
+# Flat list of all of the parts of an astrolabe. Once computed, these will be used in
+# a jinja template to generate an svg diagram.
 identifiers = [
     "astrolabe",
     "plate",
@@ -28,133 +29,191 @@ identifiers = [
     "planets",
 ]
 
-plate_parameters = {"Honolulu":{"latitude": 21.3069}}
+
 class Astrolabe:
     """A proper traveling astrolabe would have a set of plates for each
-    clime, with maybe extra plates for special places."""
+    clime, with maybe extra plates for special places.
 
-    def __init__(obliquity=23.438446, radius_capricorn=100):
+    Morrison:
+    > The earliest astrolabes, which were deeply influenced by Greek tradition,
+    included plates for the latitudes of the *climates.* The climates of the world 
+    were defined by Ptolemy to be the latitudes where the lenght of the longest 
+    day of the year varied by one-half hour. Ptolemy calculated the latitude
+    corresponding to a 15-minute difference in the length of the longest day
+    (using a value of 23 degrees 51 minutes 20 seconds for the obliquity of
+    the ecliptic) for 39 latitudes, which covered the Earth from the equator
+    to the North Pole. The ones called the classic *climata* were for the
+    half-hour differences in the longest day covering the then populated world."""
+
+    climata = {
+        "Meroe": 16.45,
+        "Soene": 23.85,
+        "Lower Egypt": 30.37,
+        "Rhodes": 36.00,
+        "Hellespont": 40.93,
+        "Mid-Pontus": 45.02,
+        "Mouth of Borysthinia": 48.53,
+    }
+
+    def __init__(
+        self, obliquity=23.438446, radius_capricorn=100, plate_parameters=None
+    ):
         self.obliquity = obliquity
+        self._obliquityRadians = math.radians((90 - self.obliquity) / 2)
         self.RadiusCapricorn = radius_capricorn
+        self.plate_parameters = self.climata
+        self.plate_altitudes = list(range(0, 90, 10))
+        self.plate_azimuths = list(range(10, 90, 10))
 
+        self.tropic_arcs()
+        self.plates(plate_parameters=plate_parameters)
 
+        # Parameters for layout of graduated limb.
+        self.short_tick_angles = list(range(0, 361, 1))
+        self.long_tick_angles = list(range(0, 375, 15))
 
-def generate_tropic_arcs(obliquity, radius_capricorn):
-    """ The size of an astrolabe is contolled by the radius of the
-    tropic of Capricorn. Recall that the tropics represent the
-    extreme positions of the sun on its path (the ecliptic) through 
-    the course of a year. Summer solstice occurs when the sun reaches
-    the tropic of Cancer and winter solstice when the sun reaches the
-    tropic of Capricorn. The stereographic projection, from the south
-    pole onto the plane of the equator, is visualized as lines from the
-    south pole tracing out new curves on the plane of the equator. The
-    projection sees the tropics as three concentric circles. From the 
-    view of the south pole, the tropic of Capricorn is the outer circle
-    and the tropic of Cancer is the inner circle.
+        self.short_tick = 5
+        self.long_tick = 15
+        self.ticks = {
+            "inner_radius": self.RadiusCapricorn,
+            "center_radius": self.RadiusCapricorn + self.short_tick,
+            "outer_radius": self.RadiusCapricorn + self.long_tick,
+            "short_tick_angles": self.short_tick_angles,
+            "long_tick_angles": self.long_tick_angles,
+        }
 
-    Plate grid equation 1, the tropics.
-    R_{Equator} = R_{Capricorn} \tan(\frac{90 - \epsilon}{2}),
-    R_{Cancer} = R_{Equator} \tan(\frac{90 - \epsilon}{2})
-    """
+        # Ecliptic
+        self.RadiusEcliptic = (self.RadiusCapricorn + self.RadiusCancer) / 2.0
+        self.yEclipticCenter = (self.RadiusCapricorn - self.RadiusCancer) / 2.0
+        self.xEclipticCenter = 0.0
 
-    radians = math.radians((90 - obliquity) / 2)
-    radius_equator = radius_capricorn * math.tan(radians)
-    radius_cancer = radius_equator * math.tan(radians)
+    def plates(self, plate_parameters=None):
+        if plate_parameters is not None:
+            self.plate_parameters.update(plate_parameters)
 
-    return radius_equator, radius_cancer
+        self.plates = {}
+        for location, latitude in self.plate_parameters.items():
+            if location not in self.plates:
+                self.plates[location] = {"location": location, "latitude": latitude}
+            # Note: if different locations with same name, will overwrite.
+            self.plate(location=location)
 
+    def plate(self, location=None):
+        """Compute parts for one plate"""
+        plate = self.plates[location]
+        plate_latitude = plate["latitude"]
 
-def generate_almucantar_arc(altitude, radius_equator, latitude):
-    """Generate circles of constant altitude.
+        almucantars = self.almucantar_arcs(altitudes=self.plate_altitudes, latitude=plate_latitude)
+        plate["almucantars"] = almucantars
 
-    Plate grid equation 2, circles of equal altitude (almucantars).
-    y_{center} &= R_{Equator}(\frac{\cos\phi}{\sin\phi + \sin a}), & 
-    r_{a} &= R_{Equator} (\frac{\cos a}{\sin\phi + \sin a}) \\
-    r_{U} &= R_{Equator} \cot(\frac{\phi +  a}{2}), &
-    r_{L} &= -R_{Equator} \tan(\frac{\phi -  a}{2})
-    """
-    radiansAltitude = math.radians(altitude)
-    radiansLatitude = math.radians(latitude)
+        almucantar_center = self.almucantar_arc(altitude=80, latitude=plate_latitude)
+        plate["almucantar_center"] = almucantar_center
 
-    almucantorCenter = radius_equator * (
-        math.cos(radiansLatitude)
-        / (math.sin(radiansLatitude) + math.sin(radiansAltitude))
-    )
-    almucantarRadius = radius_equator * (
-        math.cos(radiansAltitude)
-        / (math.sin(radiansLatitude) + math.sin(radiansAltitude))
-    )
-    return {"alt": altitude, "cx": 0, "cy": almucantorCenter, "r": almucantarRadius}
+        plate["horizon"] = self.horizon(latitude=plate_latitude)
 
+        prime_vertical = self.azimuth_arc(azimuth=90, latitude=plate_latitude, prime=True)
+        plate["prime_vertical"] = prime_vertical[0]  # TODO: clean this up
 
-def main():
-    # Obliquity of the ecliptic.
-    epsilon = 23.438446
-    RadiusCapricorn = 100
+        azimuth_arcs = self.azimuth_arcs(latitude=plate_latitude)
+        plate["azimuths"] = azimuth_arcs
 
-    # Honolulu: 21.3069° N, 157.8583° W, HST = GMT - 10
-    place_name = "Honolulu"
-    latitude = 21.3069
-    radiansLatitude = math.radians(latitude)
+    def horizon(self, latitude=None):
+        radiansLatitude = math.radians(latitude)
+        rHorizon = self.RadiusEquator / math.sin(radiansLatitude)
+        yHorizon = self.RadiusEquator / math.tan(radiansLatitude)
+        xHorizon = 0.0
+        return {"cx":xHorizon, "cy":yHorizon, "r":rHorizon}
 
-    RadiusEquator, RadiusCancer = generate_tropic_arcs(
-        obliquity=epsilon, radius_capricorn=RadiusCapricorn
-    )
+    def tropic_arcs(self):
+        """ The size of an astrolabe is contolled by the radius of the
+        tropic of Capricorn. Recall that the tropics represent the
+        extreme positions of the sun on its path (the ecliptic) through 
+        the course of a year. Summer solstice occurs when the sun reaches
+        the tropic of Cancer and winter solstice when the sun reaches the
+        tropic of Capricorn. The stereographic projection, from the south
+        pole onto the plane of the equator, is visualized as lines from the
+        south pole tracing out new curves on the plane of the equator. The
+        projection sees the tropics as three concentric circles. From the 
+        view of the south pole, the tropic of Capricorn is the outer circle
+        and the tropic of Cancer is the inner circle.
 
-    almucantor_coords = []
-    altitudes = list(range(0, 90, 10))
-    for altitude in altitudes:
-        almucantor_coords.append(
-            generate_almucantar_arc(
-                altitude=altitude, radius_equator=RadiusEquator, latitude=latitude
-            )
+        Plate grid equation 1, the tropics.
+        R_{Equator} = R_{Capricorn} \tan(\frac{90 - \epsilon}{2}),
+        R_{Cancer} = R_{Equator} \tan(\frac{90 - \epsilon}{2})
+        """
+
+        self.RadiusEquator = self.RadiusCapricorn * math.tan(self._obliquityRadians)
+        self.RadiusCancer = self.RadiusEquator * math.tan(self._obliquityRadians)
+
+    def almucantar_arc(self, altitude, latitude):
+        """Generate circle of constant altitude.
+
+        Plate grid equation 2, circles of equal altitude (almucantars).
+        y_{center} &= R_{Equator}(\frac{\cos\phi}{\sin\phi + \sin a}), & 
+        r_{a} &= R_{Equator} (\frac{\cos a}{\sin\phi + \sin a}) \\
+        r_{U} &= R_{Equator} \cot(\frac{\phi +  a}{2}), &
+        r_{L} &= -R_{Equator} \tan(\frac{\phi -  a}{2})
+        """
+        radiansAltitude = math.radians(altitude)
+        radiansLatitude = math.radians(latitude)
+
+        almucantorCenter = self.RadiusEquator * (
+            math.cos(radiansLatitude)
+            / (math.sin(radiansLatitude) + math.sin(radiansAltitude))
         )
+        almucantarRadius = self.RadiusEquator * (
+            math.cos(radiansAltitude)
+            / (math.sin(radiansLatitude) + math.sin(radiansAltitude))
+        )
+        return {"alt": altitude, "cx": 0, "cy": almucantorCenter, "r": almucantarRadius}
 
-    almucantar_center = generate_almucantar_arc(
-        altitude=80, radius_equator=RadiusEquator, latitude=latitude
-    )
+    def almucantar_arcs(self, altitudes=None, latitude=None):
+        almucantor_coords = []
 
-    rHorizon = RadiusEquator / math.sin(radiansLatitude)
-    yHorizon = RadiusEquator / math.tan(radiansLatitude)
-    xHorizon = 0.0
+        for altitude in altitudes:
+            almucantor_coords.append(
+                self.almucantar_arc(altitude=altitude, latitude=latitude)
+            )
+        return almucantor_coords
 
-    # Plate grid equation 3, circles of azimuth.
-    azimuth_coords = []
+    def azimuth_arc(self, azimuth=None, latitude=None, prime=False):
+        # Plate grid equation 3, circles of azimuth.
+        radiansMinus = math.radians((90 - latitude)/ 2.0)
+        radiansPlus = math.radians((90 + latitude)/ 2.0)
 
-    yZenith = RadiusEquator * math.tan(math.radians(90 - latitude) / 2.0)
-    yNadir = -RadiusEquator * math.tan(math.radians(90 + latitude) / 2.0)
-    yCenter = (yZenith + yNadir) / 2.0
-    yAzimuth = (yZenith - yNadir) / 2.0
-    degrees = list(range(10, 90, 10))
-    for azimuth in degrees:
+        yZenith = self.RadiusEquator * math.tan(radiansMinus )
+        yNadir = -self.RadiusEquator * math.tan(radiansPlus )
+        yCenter = (yZenith + yNadir) / 2.0
+        yAzimuth = (yZenith - yNadir) / 2.0
+
         radiansAzimuth = math.radians(azimuth)
         xAzimuth = yAzimuth * math.tan(radiansAzimuth)
         radiusAzimuth = yAzimuth / math.cos(radiansAzimuth)
-        coord = {"az": azimuth, "cx": xAzimuth, "cy": yCenter, "r": radiusAzimuth}
-        azimuth_coords.append(coord)
-        coord = {"az": azimuth, "cx": -xAzimuth, "cy": yCenter, "r": radiusAzimuth}
-        azimuth_coords.append(coord)
 
-    prime_vertical = {"cx": 0, "cy": yCenter, "r": yAzimuth}
+        if prime is True:
+            coord_left = {"az": 90, "cx": 0, "cy": yCenter, "r": yAzimuth}
+            coord_right = {"az": 90, "cx": 0, "cy": yCenter, "r": yAzimuth}
+        else:
+            coord_left = {"az": azimuth, "cx": xAzimuth, "cy": yCenter, "r": radiusAzimuth}
+            coord_right = {"az": azimuth, "cx": -xAzimuth, "cy": yCenter, "r": radiusAzimuth}
 
-    # Parameters for layout of graduated limb.
-    short_tick_angles = list(range(0, 361, 1))
-    long_tick_angles = list(range(0, 375, 15))
 
-    short_tick = 5
-    long_tick = 15
-    ticks = {
-        "inner_radius": RadiusCapricorn,
-        "center_radius": RadiusCapricorn + short_tick,
-        "outer_radius": RadiusCapricorn + long_tick,
-        "short_tick_angles": short_tick_angles,
-        "long_tick_angles": long_tick_angles,
-    }
+        return [coord_left, coord_right]
 
-    # Ecliptic
-    RadiusEcliptic = (RadiusCapricorn + RadiusCancer) / 2.0
-    yEclipticCenter = (RadiusCapricorn - RadiusCancer) / 2.0
-    xEclipticCenter = 0.0
+    def azimuth_arcs(self, latitude=None):
+
+        azimuth_coords = []
+        for azimuth in self.plate_azimuths:
+            coords = self.azimuth_arc(azimuth=azimuth, latitude=latitude)
+            azimuth_coords.extend(coords)
+        return azimuth_coords
+
+
+def main():
+
+    plate_parameters = {"Honolulu": 21.3069}
+    astrolabe = Astrolabe(plate_parameters=plate_parameters)
+    plate = astrolabe.plates["Mouth of Borysthinia"]
 
     # In order to place parts of the figure in Inkscape layers, need the attributes below.
     # This will cause errors, of course, in other renderers unless the inkscape namespace
@@ -172,22 +231,23 @@ def main():
         template_text = fp.read()
 
     template = Template(template_text)
+    print(plate['prime_vertical'])
     svg = template.render(
-        place_name=place_name,
-        latitude=latitude,
-        RCapricorn=RadiusCapricorn,
-        REquator=RadiusEquator,
-        RCancer=RadiusCancer,
-        horiz={"cx": xHorizon, "cy": yHorizon, "r": rHorizon},
-        almucantor_coords=almucantor_coords,
-        almucantar_center=almucantar_center,
-        azimuth_coords=azimuth_coords,
-        prime_vertical=prime_vertical,
-        ticks=ticks,
+        place_name=plate["location"],
+        latitude=plate["latitude"],
+        RCapricorn=astrolabe.RadiusCapricorn,
+        REquator=astrolabe.RadiusEquator,
+        RCancer=astrolabe.RadiusCancer,
+        horiz=plate["horizon"],
+        almucantor_coords=plate["almucantars"],
+        almucantar_center=plate["almucantar_center"],
+        azimuth_coords=plate["azimuths"],
+        prime_vertical=plate["prime_vertical"],
+        ticks=astrolabe.ticks,
         ecliptic={
-            "cx": xEclipticCenter,
-            "cy": yEclipticCenter,
-            "r": RadiusEcliptic,
+            "cx": astrolabe.xEclipticCenter,
+            "cy": astrolabe.yEclipticCenter,
+            "r": astrolabe.RadiusEcliptic,
             "width": 5,
         },
         inkscape=inkscape_attributes,
