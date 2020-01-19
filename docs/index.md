@@ -39,7 +39,7 @@ Morrison continues:
 
 > The straight lines drawn as diameters of the largest circle show direction. The vertical diameter goes north and south through your location, representing your **meridian.** South is at the top and east to the left. The horizontal diameter connects east and west and is the projection of the great circle perpendicular to the meridian. It is normally called the **right horizon**, the horizon at the equator. It is perhaps easiest to visualize the plate as lying flat on a table with the top pointing south. A star chart is held overhead. You look down on an astrolabe, like a compass.
 
-Morrison's book has details about the layout of many toos based on stereographic projections. In particular he does have a chapter on generating star finders. Continuing with the description:
+Morrison's book has details about the layout of many tools based on stereographic projections. In particular he does have a chapter on generating star finders. Continuing with the description:
 
 > The plate is used to find the positions of celestial objects in the sky as seen by an observer at a specific location. The interior of the plate is the stereographic projection of the tropics and the local horizontal coordinate system. The arcs on the plate represent positons in the sky. You can find anything in the sky if you know its angle above the horizon and the direction to look. The angle of something in the sky above its horizon is its **altitude** and its direction is its **azimuth.**
 
