@@ -68,7 +68,7 @@ The stereographic projection of the ecliptic is a circle (as is the stereographi
 ## The International Organization for Standardization (ISO) Calendar
 
 The Banker's Almanac and Register has been published calendars in the late 1800's are formatted with stacks of weeks similar to Seah's candybar calendars and the format used by Reingold & Dershowits. In fact, this format is well described in the chapter on the ISO Calendar. The (one) reference is for the ISO Standard [ISO 8601:2000(E)](http://www.pvv.org/~nsaa/8601v2000.pdf).
-<img src="images/bankers_almanac_1883.png" alt="Banker's calendar, 1883." width="40%" align="right"/>
+<img src="images/bankers_almanac_1883.png" alt="Banker's calendar, 1883." width="40%" align="right" style="padding:5px;"/>
 
 > A calendar week is identified within a calendar year by the calendar week number. This is its ordinal position within the year, applying the rule that the first calendar week of a year is the one that includes the first Thursday of that year and that the last calendar week of a calendar year is the week immediately preceding the first calendar week of the next calendar year.
 
