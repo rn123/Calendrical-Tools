@@ -342,7 +342,7 @@ class SvgCandyBar(CandyBar):
             </g>
         {% endfor %}
     </g></svg>
-    """ 
+    """
 
     bar = """
     <g>
@@ -360,46 +360,54 @@ class SvgCandyBar(CandyBar):
 
     def bar_data(self, cal_type="gregorian"):
         cal_data = []
-        iso_list = [w[0]['iso'] for w in self.weeks[cal_type]]
+        iso_list = [w[0]["iso"] for w in self.weeks[cal_type]]
         y_select = [2020]
         m_select = [1, 3]
-        m_select = list(range(1,13))
+        m_select = list(range(1, 13))
         w_select = iso_list
         w_select = [3, 4, 7, 8, 52]
         for w in self.weeks[cal_type]:
-            week = {"iso":w[0]['iso'], "week":[]}
-            for d, d_number in zip(w[0]['raw'], w[1]):
+            week = {"iso": w[0]["iso"], "week": []}
+            for d, d_number in zip(w[0]["raw"], w[1]):
                 y = d[1][0]
                 m = d[1][1]
-                iso_number = w[0]['iso']
-                if (m in m_select and y in y_select and iso_number in w_select):
-                    tag = 'cal_red'
+                iso_number = w[0]["iso"]
+                if m in m_select and y in y_select and iso_number in w_select:
+                    tag = "cal_red"
                 else:
-                    tag = 'cal_grey' 
-                day = {'day':d_number, 'tag':tag}
-                week['week'].append(day)
+                    tag = "cal_grey"
+                day = {"day": d_number, "tag": tag}
+                week["week"].append(day)
             cal_data.append(week)
-            
+
         return cal_data
 
     def prcandybar(self):
         bars = []
         bar_width = 200
 
-        iso_list = [w[0]['iso'] for w in self.weeks['gregorian']]
-        iso_data = [{'iso':iso, 'week':[{'day':iso, 'tag':'iso'}]} for iso in iso_list]
+        iso_list = [w[0]["iso"] for w in self.weeks["gregorian"]]
+        iso_data = [
+            {"iso": iso, "week": [{"day": iso, "tag": "iso"}]} for iso in iso_list
+        ]
 
-        for cal_type in ['gregorian', 'chinese']:
+        for cal_type in ["gregorian", "chinese"]:
             cal_data = self.bar_data(cal_type)
             template = Template(self.bar)
-            svg_bar = template.render(lines=cal_data, year=self.year, bar_width=bar_width)
-            bars.append({'width':bar_width, 'svg':svg_bar})
-            
-        template = Template(self.bar)
-        svg_bar = {"x":180, "width":20, "svg":template.render(lines=iso_data, year="", bar_width=20)}
+            svg_bar = template.render(
+                lines=cal_data, year=self.year, bar_width=bar_width
+            )
+            bars.append({"width": bar_width, "svg": svg_bar})
 
-        bars[0]['x'] = 10
-        bars[1]['x'] = 220
+        template = Template(self.bar)
+        svg_bar = {
+            "x": 180,
+            "width": 20,
+            "svg": template.render(lines=iso_data, year="", bar_width=20),
+        }
+
+        bars[0]["x"] = 10
+        bars[1]["x"] = 220
         all_bars = [bars[0], svg_bar, bars[1]]
 
         template = Template(self.boilerplate)
@@ -600,6 +608,7 @@ class LaTeXCandyBar(CandyBar):
         )
         return output
 
+
 @click.command()
 @click.option("--weeks-before", default=1, help="ISO week number.")
 @click.option("--weeks_after", default=0)
@@ -607,6 +616,7 @@ class LaTeXCandyBar(CandyBar):
 def main(year, weeks_before, weeks_after):
     cal = TextCandyBar(year, weeks_before=weeks_before, weeks_after=weeks_after)
     cal.prcandybar()
+
 
 if __name__ == "__main__":
     main()
