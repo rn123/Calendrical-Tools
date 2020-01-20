@@ -1,4 +1,4 @@
-![idea card](images/astrolabe_candybar_card.png)
+![idea card](images/card.svg)
 
 ## Concept
 
