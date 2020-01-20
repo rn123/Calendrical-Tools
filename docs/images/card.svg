@@ -19,6 +19,7 @@
             <tspan x="0" dy="1.2em">rical</tspan>
             <tspan x="0" dy="1.2em">Tools</tspan>
             <tspan x="0" dy="1.2em">2020</tspan>
+            <tspan x="0" dy="2.5em" style="font-size: 40;">恭喜發財</tspan>
         </text>
     </g>
     
@@ -675,7 +676,7 @@
             #cal_red {
                 font-family: Courier;  font-size: 15px;
                 font-weight: normal;
-                fill: red;
+                fill: gold;
                 text-anchor: end;
             }
         </style>
