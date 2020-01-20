@@ -1,4 +1,4 @@
-![idea card](images/card.svg)
+![idea card](images/card_lunar_new_year_rat.svg)
 
 ## Concept
 
