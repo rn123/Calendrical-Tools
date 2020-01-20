@@ -31,6 +31,7 @@ class CandyBar:
     firstweekday = 0
 
     def __init__(self, year=2020, weeks_before=0, weeks_after=0):
+        self.year = year
         self._wks_before = weeks_before
         self._wks_after = weeks_after
 
@@ -302,6 +303,107 @@ class TextCandyBar(CandyBar):
         weeks = [days[i : i + 7] for i in range(0, len(days), 7)]
         for w in weeks:
             print(self.formatweek(w))
+
+
+class SvgCandyBar(CandyBar):
+    boilerplate = """
+    <svg style="border:1px solid black;" viewbox="0 0 {{ width }} {{ height }}" 
+         width="{{ width }}" height="{{ height }}" xmlns="http://www.w3.org/2000/svg" 
+         xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" 
+         xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="candybar">
+        <title>SVG CandyBar</title>
+        <defs>
+            <style type="text/css">
+                #iso {
+                    font-family: Courier;  font-size: 15px;
+                    font-weight: normal;
+                    fill: lightgrey;
+                    text-anchor: end;
+                }
+                #cal_grey {
+                    font-family: Courier;  font-size: 15px;
+                    font-weight: normal;
+                    fill: grey;
+                    text-anchor: end;
+                }
+                #cal_red {
+                    font-family: Courier;  font-size: 15px;
+                    font-weight: normal;
+                    fill: red;
+                    text-anchor: end;
+                }
+            </style>
+        </defs>
+        
+        {% for bar in bars %}
+            <g transform="translate{{ bar.x, 20 }}">
+                {{ bar.svg }}
+            </g>
+        {% endfor %}
+    </g></svg>
+    """ 
+
+    bar = """
+    <g>
+        <title>Calendar</title>
+        <text x="{{ bar_width / 2.0 }}" y="0" text-anchor="middle">{{ year }}</text>
+        {% for line in lines %}
+            <text y="{{ loop.index * 1.1 }}em">
+            {% for word in line.week %}
+                <tspan id="{{ word.tag }}" x="{{ loop.index * 1.5 }}em">{{ word.day }}</tspan>
+            {% endfor %}
+            </text>
+        {% endfor %}
+    </g>
+    """
+
+    def bar_data(self, cal_type="gregorian"):
+        cal_data = []
+        iso_list = [w[0]['iso'] for w in self.weeks[cal_type]]
+        y_select = [2020]
+        m_select = [1, 3]
+        m_select = list(range(1,13))
+        w_select = iso_list
+        w_select = [3, 4, 7, 8, 52]
+        for w in self.weeks[cal_type]:
+            week = {"iso":w[0]['iso'], "week":[]}
+            for d, d_number in zip(w[0]['raw'], w[1]):
+                y = d[1][0]
+                m = d[1][1]
+                iso_number = w[0]['iso']
+                if (m in m_select and y in y_select and iso_number in w_select):
+                    tag = 'cal_red'
+                else:
+                    tag = 'cal_grey' 
+                day = {'day':d_number, 'tag':tag}
+                week['week'].append(day)
+            cal_data.append(week)
+            
+        return cal_data
+
+    def prcandybar(self):
+        bars = []
+        bar_width = 200
+
+        iso_list = [w[0]['iso'] for w in self.weeks['gregorian']]
+        iso_data = [{'iso':iso, 'week':[{'day':iso, 'tag':'iso'}]} for iso in iso_list]
+
+        for cal_type in ['gregorian', 'chinese']:
+            cal_data = self.bar_data(cal_type)
+            template = Template(self.bar)
+            svg_bar = template.render(lines=cal_data, year=self.year, bar_width=bar_width)
+            bars.append({'width':bar_width, 'svg':svg_bar})
+            
+        template = Template(self.bar)
+        svg_bar = {"x":180, "width":20, "svg":template.render(lines=iso_data, year="", bar_width=20)}
+
+        bars[0]['x'] = 10
+        bars[1]['x'] = 220
+        all_bars = [bars[0], svg_bar, bars[1]]
+
+        template = Template(self.boilerplate)
+        self.svg = template.render(bars=all_bars, width=400, height=750)
 
 
 class LaTeXCandyBar(CandyBar):
