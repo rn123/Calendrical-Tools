@@ -55,6 +55,9 @@ class Astrolabe:
         "Mouth of Borysthinia": 48.53,
     }
 
+    background_color = "#a3262a;"
+    stroke_color = "#f5ac27;"
+
     def __init__(
         self, obliquity=23.438446, radius_capricorn=100, plate_parameters=None
     ):
@@ -103,7 +106,9 @@ class Astrolabe:
         plate = self.plates[location]
         plate_latitude = plate["latitude"]
 
-        almucantars = self.almucantar_arcs(altitudes=self.plate_altitudes, latitude=plate_latitude)
+        almucantars = self.almucantar_arcs(
+            altitudes=self.plate_altitudes, latitude=plate_latitude
+        )
         plate["almucantars"] = almucantars
 
         almucantar_center = self.almucantar_arc(altitude=80, latitude=plate_latitude)
@@ -111,7 +116,9 @@ class Astrolabe:
 
         plate["horizon"] = self.horizon(latitude=plate_latitude)
 
-        prime_vertical = self.azimuth_arc(azimuth=90, latitude=plate_latitude, prime=True)
+        prime_vertical = self.azimuth_arc(
+            azimuth=90, latitude=plate_latitude, prime=True
+        )
         plate["prime_vertical"] = prime_vertical[0]  # TODO: clean this up
 
         azimuth_arcs = self.azimuth_arcs(latitude=plate_latitude)
@@ -122,7 +129,7 @@ class Astrolabe:
         rHorizon = self.RadiusEquator / math.sin(radiansLatitude)
         yHorizon = self.RadiusEquator / math.tan(radiansLatitude)
         xHorizon = 0.0
-        return {"cx":xHorizon, "cy":yHorizon, "r":rHorizon}
+        return {"cx": xHorizon, "cy": yHorizon, "r": rHorizon}
 
     def tropic_arcs(self):
         """ The size of an astrolabe is contolled by the radius of the
@@ -178,11 +185,11 @@ class Astrolabe:
 
     def azimuth_arc(self, azimuth=None, latitude=None, prime=False):
         # Plate grid equation 3, circles of azimuth.
-        radiansMinus = math.radians((90 - latitude)/ 2.0)
-        radiansPlus = math.radians((90 + latitude)/ 2.0)
+        radiansMinus = math.radians((90 - latitude) / 2.0)
+        radiansPlus = math.radians((90 + latitude) / 2.0)
 
-        yZenith = self.RadiusEquator * math.tan(radiansMinus )
-        yNadir = -self.RadiusEquator * math.tan(radiansPlus )
+        yZenith = self.RadiusEquator * math.tan(radiansMinus)
+        yNadir = -self.RadiusEquator * math.tan(radiansPlus)
         yCenter = (yZenith + yNadir) / 2.0
         yAzimuth = (yZenith - yNadir) / 2.0
 
@@ -194,9 +201,18 @@ class Astrolabe:
             coord_left = {"az": 90, "cx": 0, "cy": yCenter, "r": yAzimuth}
             coord_right = {"az": 90, "cx": 0, "cy": yCenter, "r": yAzimuth}
         else:
-            coord_left = {"az": azimuth, "cx": xAzimuth, "cy": yCenter, "r": radiusAzimuth}
-            coord_right = {"az": azimuth, "cx": -xAzimuth, "cy": yCenter, "r": radiusAzimuth}
-
+            coord_left = {
+                "az": azimuth,
+                "cx": xAzimuth,
+                "cy": yCenter,
+                "r": radiusAzimuth,
+            }
+            coord_right = {
+                "az": azimuth,
+                "cx": -xAzimuth,
+                "cy": yCenter,
+                "r": radiusAzimuth,
+            }
 
         return [coord_left, coord_right]
 
@@ -231,7 +247,6 @@ def main():
         template_text = fp.read()
 
     template = Template(template_text)
-    print(plate['prime_vertical'])
     svg = template.render(
         place_name=plate["location"],
         latitude=plate["latitude"],
@@ -250,23 +265,27 @@ def main():
             "r": astrolabe.RadiusEcliptic,
             "width": 5,
         },
+        stroke_color=astrolabe.stroke_color,
+        background_color=astrolabe.background_color,
         inkscape=inkscape_attributes,
         animation=animation_parameters,
-        moons = [(44.142706092611434, 214.41520455448494),
- (-64.29833725607341, 244.05007530120906),
- (19.338217263234128, 274.11533327404277),
- (17.224801417675735, 304.36003467896535),
- (-64.16194195841945, 334.4763799297398),
- (-25.561893428663097, 4.203505420431007)],
-        suns = [214.41713740391424,
- 244.05065884583018,
- 274.1147430450437,
- 304.35973321930214,
- 334.47736243435793,
- 4.204523538166541]
+        moons=[
+            (44.142706092611434, 214.41520455448494),
+            (-64.29833725607341, 244.05007530120906),
+            (19.338217263234128, 274.11533327404277),
+            (17.224801417675735, 304.36003467896535),
+            (-64.16194195841945, 334.4763799297398),
+            (-25.561893428663097, 4.203505420431007),
+        ],
+        suns=[
+            214.41713740391424,
+            244.05065884583018,
+            274.1147430450437,
+            304.35973321930214,
+            334.47736243435793,
+            4.204523538166541,
+        ],
     )
-
-
 
     with open("astrolabe_generated.svg", "w") as fp:
         fp.write(svg)

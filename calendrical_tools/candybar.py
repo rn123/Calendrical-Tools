@@ -321,25 +321,25 @@ class SvgCandyBar(CandyBar):
                 #iso {
                     font-family: Courier;  font-size: 15px;
                     font-weight: normal;
-                    fill: lightgrey;
+                    fill: {{ cal_color.iso }};
                     text-anchor: end;
                 }
-                #cal_grey {
+                #cal_dim {
                     font-family: Courier;  font-size: 15px;
                     font-weight: normal;
-                    fill: grey;
+                    fill: {{ cal_color.dim }};
                     text-anchor: end;
                 }
-                #cal_red {
+                #cal_highlight {
                     font-family: Courier;  font-size: 15px;
                     font-weight: normal;
-                    fill: red;
+                    fill: {{ cal_color.hightlight }};
                     text-anchor: end;
                 }
-                #cal_red_bold {
+                #cal_highlight_bold {
                     font-family: Courier;  font-size: 15px;
                     font-weight: bold;
-                    fill: #f5ac27;
+                    fill: {{ cal_color.highlight_bold }}
                     text-anchor: end;
                 }
             </style>
@@ -387,9 +387,9 @@ class SvgCandyBar(CandyBar):
                 if ((m == 1) and (dn in list(range(25, 32)))) or (
                     m == 2 and dn in list(range(1, 23))
                 ):
-                    tag = "cal_red"
+                    tag = "cal_highlight"
                 else:
-                    tag = "cal_grey"
+                    tag = "cal_dim"
                 day = {"day": d_number, "tag": tag}
                 week["week"].append(day)
             cal_data.append(week)
@@ -400,6 +400,13 @@ class SvgCandyBar(CandyBar):
         bars = []
         bar_width = 200
 
+        cal_color = {
+            "iso": "grey",
+            "dim": "grey",
+            "hightlight": "red",
+            "highlight_bold": "red",
+        }
+
         iso_list = [w[0]["iso"] for w in self.weeks["gregorian"]]
         iso_data = [
             {"iso": iso, "week": [{"day": iso, "tag": "iso"}]} for iso in iso_list
@@ -409,7 +416,7 @@ class SvgCandyBar(CandyBar):
             cal_data = self.bar_data(cal_type)
             template = Template(self.bar_template)
             svg_bar = template.render(
-                lines=cal_data, year=self.year, bar_width=bar_width
+                lines=cal_data, year=self.year, bar_width=bar_width, cal_color=cal_color
             )
             bars.append({"width": bar_width, "svg": svg_bar})
 
