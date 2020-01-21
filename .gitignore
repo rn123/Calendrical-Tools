@@ -6,6 +6,7 @@
 *.png
 .DS_Store
 calendrical_tools/__pycache__
+.ipynb_checkpoints
 chinese_lunar_*
 build
 dist
