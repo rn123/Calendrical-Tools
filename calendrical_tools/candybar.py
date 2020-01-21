@@ -368,6 +368,16 @@ class SvgCandyBar(CandyBar):
     </g>
     """
 
+    cal_color = {
+        "iso": "grey",
+        "dim": "grey",
+        "hightlight": "red",
+        "highlight_bold": "red",
+    }
+
+    def __init__(self):
+        super().__init__(year=2020, weeks_before=1, weeks_after=0)
+
     def bar_data(self, cal_type="gregorian"):
         cal_data = []
         iso_list = [w[0]["iso"] for w in self.weeks[cal_type]]
@@ -400,13 +410,6 @@ class SvgCandyBar(CandyBar):
         bars = []
         bar_width = 200
 
-        cal_color = {
-            "iso": "grey",
-            "dim": "grey",
-            "hightlight": "red",
-            "highlight_bold": "red",
-        }
-
         iso_list = [w[0]["iso"] for w in self.weeks["gregorian"]]
         iso_data = [
             {"iso": iso, "week": [{"day": iso, "tag": "iso"}]} for iso in iso_list
@@ -416,7 +419,7 @@ class SvgCandyBar(CandyBar):
             cal_data = self.bar_data(cal_type)
             template = Template(self.bar_template)
             svg_bar = template.render(
-                lines=cal_data, year=self.year, bar_width=bar_width, cal_color=self.cal_color
+                lines=cal_data, year=self.year, bar_width=bar_width
             )
             bars.append({"width": bar_width, "svg": svg_bar})
 
@@ -432,7 +435,9 @@ class SvgCandyBar(CandyBar):
         all_bars = [bars[0], svg_bar, bars[1]]
 
         template = Template(self.boilerplate)
-        self.svg = template.render(bars=all_bars, width=400, height=750)
+        self.svg = template.render(
+            bars=all_bars, width=400, height=750, cal_color=self.cal_color
+        )
 
 
 class LaTeXCandyBar(CandyBar):
