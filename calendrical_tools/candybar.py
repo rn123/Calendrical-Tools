@@ -413,7 +413,7 @@ class SvgCandyBar(CandyBar):
             )
             bars.append({"width": bar_width, "svg": svg_bar})
 
-        template = Template(self.bar)
+        template = Template(self.bar_template)
         svg_bar = {
             "x": 180,
             "width": 20,
