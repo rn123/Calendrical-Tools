@@ -416,7 +416,7 @@ class SvgCandyBar(CandyBar):
             cal_data = self.bar_data(cal_type)
             template = Template(self.bar_template)
             svg_bar = template.render(
-                lines=cal_data, year=self.year, bar_width=bar_width, cal_color=cal_color
+                lines=cal_data, year=self.year, bar_width=bar_width, cal_color=self.cal_color
             )
             bars.append({"width": bar_width, "svg": svg_bar})
 
