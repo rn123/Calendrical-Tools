@@ -30,7 +30,7 @@ def standard_day(d, calendar_type="gregorian"):
 class CandyBar:
     firstweekday = 0
 
-    def __init__(self, year=2020, weeks_before=0, weeks_after=0):
+    def __init__(self, year=2020, weeks_before=1, weeks_after=0):
         self.year = year
         self._wks_before = weeks_before
         self._wks_after = weeks_after
@@ -307,10 +307,13 @@ class TextCandyBar(CandyBar):
 
 class SvgCandyBar(CandyBar):
     boilerplate = """
-    <svg style="border:1px solid black;" viewbox="0 0 {{ width }} {{ height }}" 
-         width="{{ width }}" height="{{ height }}" xmlns="http://www.w3.org/2000/svg" 
-         xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" 
-         xmlns:xlink="http://www.w3.org/1999/xlink">
+    <svg style="border:1px solid black;" 
+        viewbox="0 0 {{ width }} {{ height }}" 
+        width="{{ width }}" height="{{ height }}" 
+        xmlns="http://www.w3.org/2000/svg" 
+        xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" 
+        xmlns:xlink="http://www.w3.org/1999/xlink">
+
     <g id="candybar">
         <title>SVG CandyBar</title>
         <defs>
@@ -333,6 +336,12 @@ class SvgCandyBar(CandyBar):
                     fill: red;
                     text-anchor: end;
                 }
+                #cal_red_bold {
+                    font-family: Courier;  font-size: 15px;
+                    font-weight: bold;
+                    fill: #f5ac27;
+                    text-anchor: end;
+                }
             </style>
         </defs>
         
@@ -341,10 +350,11 @@ class SvgCandyBar(CandyBar):
                 {{ bar.svg }}
             </g>
         {% endfor %}
-    </g></svg>
+    </g>
+    </svg>
     """
 
-    bar = """
+    bar_template = """
     <g>
         <title>Calendar</title>
         <text x="{{ bar_width / 2.0 }}" y="0" text-anchor="middle">{{ year }}</text>
@@ -362,17 +372,21 @@ class SvgCandyBar(CandyBar):
         cal_data = []
         iso_list = [w[0]["iso"] for w in self.weeks[cal_type]]
         y_select = [2020]
-        m_select = [1, 3]
-        m_select = list(range(1, 13))
-        w_select = iso_list
-        w_select = [3, 4, 7, 8, 52]
+        m_select = [1, 2]
+        #     m_select = list(range(1,13))
+        #     w_select = iso_list
+        w_select = [4, 5, 6, 7, 8]
+        d_number_select = list(range(25, 32)) + list(range(1, 22))
         for w in self.weeks[cal_type]:
             week = {"iso": w[0]["iso"], "week": []}
             for d, d_number in zip(w[0]["raw"], w[1]):
                 y = d[1][0]
                 m = d[1][1]
+                dn = d[1][2]
                 iso_number = w[0]["iso"]
-                if m in m_select and y in y_select and iso_number in w_select:
+                if ((m == 1) and (dn in list(range(25, 32)))) or (
+                    m == 2 and dn in list(range(1, 23))
+                ):
                     tag = "cal_red"
                 else:
                     tag = "cal_grey"
@@ -393,7 +407,7 @@ class SvgCandyBar(CandyBar):
 
         for cal_type in ["gregorian", "chinese"]:
             cal_data = self.bar_data(cal_type)
-            template = Template(self.bar)
+            template = Template(self.bar_template)
             svg_bar = template.render(
                 lines=cal_data, year=self.year, bar_width=bar_width
             )
