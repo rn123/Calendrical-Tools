@@ -213,7 +213,7 @@ def main():
 
     plate_parameters = {"Honolulu": 21.3069}
     astrolabe = Astrolabe(plate_parameters=plate_parameters)
-    plate = astrolabe.plates["Mouth of Borysthinia"]
+    plate = astrolabe.plates["Honolulu"]
 
     # In order to place parts of the figure in Inkscape layers, need the attributes below.
     # This will cause errors, of course, in other renderers unless the inkscape namespace
@@ -225,7 +225,7 @@ def main():
         for identifier in identifiers
     }
 
-    animation_parameters = {"from": "0", "to": "233", "begin": "0s", "dur": "5s"}
+    animation_parameters = {"from": "233", "to": "233", "begin": "0s", "dur": "5s"}
 
     with open("astrolabe_template.svg") as fp:
         template_text = fp.read()
@@ -252,7 +252,21 @@ def main():
         },
         inkscape=inkscape_attributes,
         animation=animation_parameters,
+        moons = [(44.142706092611434, 214.41520455448494),
+ (-64.29833725607341, 244.05007530120906),
+ (19.338217263234128, 274.11533327404277),
+ (17.224801417675735, 304.36003467896535),
+ (-64.16194195841945, 334.4763799297398),
+ (-25.561893428663097, 4.203505420431007)],
+        suns = [214.41713740391424,
+ 244.05065884583018,
+ 274.1147430450437,
+ 304.35973321930214,
+ 334.47736243435793,
+ 4.204523538166541]
     )
+
+
 
     with open("astrolabe_generated.svg", "w") as fp:
         fp.write(svg)
