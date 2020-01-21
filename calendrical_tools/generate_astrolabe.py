@@ -55,9 +55,6 @@ class Astrolabe:
         "Mouth of Borysthinia": 48.53,
     }
 
-    background_color = "#a3262a;"
-    stroke_color = "#f5ac27;"
-
     def __init__(
         self, obliquity=23.438446, radius_capricorn=100, plate_parameters=None
     ):
@@ -230,6 +227,9 @@ def main():
     plate_parameters = {"Honolulu": 21.3069}
     astrolabe = Astrolabe(plate_parameters=plate_parameters)
     plate = astrolabe.plates["Honolulu"]
+
+    background_color = "#a3262a;"
+    stroke_color = "#f5ac27;"
 
     # In order to place parts of the figure in Inkscape layers, need the attributes below.
     # This will cause errors, of course, in other renderers unless the inkscape namespace
