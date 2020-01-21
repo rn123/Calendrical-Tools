@@ -14,17 +14,14 @@
         <rect x="75px" y="75px" width="1130" height="490" style="stroke: #f5ac27; fill:#a3262a;"/>
     </g>
     
-    <g transform="translate(610, 138)">
-        <text x="0" y ="40" text-anchor="middle" style="font-size:60; fill:#f5ac27;fill-opacity:1.0;">Calend
-            <tspan x="0" dy="1.2em">rical</tspan>
-            <tspan x="0" dy="1.2em">Tools</tspan>
-            <tspan x="0" dy="1.2em">2020</tspan>
-            <tspan x="0" dy="2.5em" style="font-size: 40;">恭喜發財</tspan>
+    <g transform="translate(560, 138)">
+        <text x="65" y="40" writing-mode="tb" style="font-size:60; fill:#f5ac27;fill-opacity:1.0;">鼠年大吉
+            <tspan x="0" y="40" writing-mode="tb" style="font-size: 60;">恭喜發財</tspan>
         </text>
     </g>
     
     <g>
-        <text x="95" y="125" style="font-size:30; fill:#f5ac27;fill-opacity:1.0;">鼠年大吉</text>
+        <text x="95" y="125" style="font-size:30; fill:#f5ac27;fill-opacity:1.0;">Calendrical Tools 2020</text>
         <g transform="translate(1135, 475) scale(0.3)">
                 <g
        style="display:inline"
