@@ -375,8 +375,8 @@ class SvgCandyBar(CandyBar):
         "highlight_bold": "red",
     }
 
-    def __init__(self):
-        super().__init__(year=2020, weeks_before=1, weeks_after=0)
+    # def __init__(self):
+    #     super().__init__(year=2020, weeks_before=1, weeks_after=0)
 
     def bar_data(self, cal_type="gregorian"):
         cal_data = []
