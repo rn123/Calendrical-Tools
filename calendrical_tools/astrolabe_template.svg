@@ -40,6 +40,7 @@
 				  stroke: {{ stroke_color }}
 				  stroke-width: 0.5;
 				  fill: {{ background_color }}
+				  fill-opacity: 1;
 				}
 				#azimuth {
 				  fill: none;
