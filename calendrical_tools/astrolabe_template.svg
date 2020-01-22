@@ -18,7 +18,7 @@
 				  text-anchor: middle;
 				  font-size: 6pt;
 				  fill: {{ stroke_color }}
-				  fill-opacity: 0.99
+				  fill-opacity: 1
 				}
 				#tropics {
 				  fill: none;
@@ -93,6 +93,7 @@
 				  stroke: {{ stroke_color }}
 				  stroke-width: 0.5;
 				  stroke-opacity: 0.5;
+				  
 				}
 				#limb {
 				  fill: none;
