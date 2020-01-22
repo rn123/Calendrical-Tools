@@ -7,8 +7,8 @@
 				.new_year {
 				  display: block;
 				  margin: auto;
-				  border: #f5ac27;
-				  background-color: #c92c1f;
+				  stroke: {{ stroke_color }}
+				  background-color: {{ background_color }}
 				}
 				#plate {
 				  clip-path:url(#Capricorn);
@@ -17,57 +17,56 @@
 				#location {
 				  text-anchor: middle;
 				  font-size: 6pt;
-				  fill: #f5ac27;
+				  fill: {{ stroke_color }}
 				  fill-opacity: 0.99
 				}
 				#tropics {
 				  fill: none;
-				  stroke: #f5ac27;
+				  stroke: {{ stroke_color }}
 				  stroke-width: 1;
 				  stroke-opacity: 0.5
 				}
 				#horizon {
 				  fill: none;
-				  stroke: #f5ac27;
+				  stroke: {{ stroke_color }}
 				  stroke-width: 1;
 				}
 				#almucantar {
 				  fill: none;
-				  stroke: #f5ac27;
+				  stroke: {{ stroke_color }}
 				  stroke-width: 0.5;
 				}
 				#almucantar-center {
-				  stroke: #f5ac27;
+				  stroke: {{ stroke_color }}
 				  stroke-width: 0.5;
-				  fill: #a3262a;
-				  fill-opacity: 1;
+				  fill: {{ background_color }}
 				}
 				#azimuth {
 				  fill: none;
-				  stroke: #f5ac27;
+				  stroke: {{ stroke_color }}
 				  stroke-width: 0.5;
 				  clip-path:url(#Horizon);
 				  clipPath: url(#Horizon);
 				}
 				#azimuth-90 {
 				  fill: none;
-				  stroke: #f5ac27;
+				  stroke: {{ stroke_color }}
 				  stroke-width: 0.75;
 				  clip-path:url(#Horizon);
 				  clipPath: url(#Horizon);
 				}
 				#axis {
 				  fill: none;
-				  stroke: #f5ac27;
+				  stroke: {{ stroke_color }}
 				  stroke-width: 1;
 				  stroke-opacity: 0.5;
 				}
 				#tick {
-				  stroke: #f5ac27;
+				  stroke: {{ stroke_color }}
 				  stroke-width: 0.5;
 				}
 				#tickLong {
-				  stroke: #f5ac27;
+				  stroke: {{ stroke_color }}
 				  stroke-width: 1;
 				}
 				#note {
@@ -75,28 +74,28 @@
 				  stroke-width: 1;
 				}
 				#ecliptic-pad {
-				  fill: #f5ac27;
+				  fill: {{ stroke_color }}
 				  fill-opacity: 0.45;
 				  stroke: none;
 				  stroke-width: 0.5;
 				  stroke-opacity: 0.7;
 				}
 				#ecliptic {
-				  fill: #f5ac27;
+				  fill: {{ stroke_color }}
 				  fill-opacity: 1;
-				  stroke: #b98c43;
+				  stroke: {{ stroke_color }}
 				  stroke-width: 0.7;
 				  stroke-opacity: 0.7;
 				  mask: url(#ecliptic_hole);
 				}
 				#eclipticDivision {
-				  stroke: #f5ac27;
+				  stroke: {{ stroke_color }}
 				  stroke-width: 0.5;
 				  stroke-opacity: 0.5;
 				}
 				#limb {
 				  fill: none;
-				  stroke: #f5ac27;
+				  stroke: {{ stroke_color }}
 				  stroke-opacity: 0.5;
 				  stroke-width: 1;
 				}
@@ -119,7 +118,7 @@
 		    </mask>
 
 		    <mask id="almucantar_hole">
-		    	<circle id="almucantar-center" az="{{ almucantar_center.alt }}" cx="{{ almucantar_center.cx }}" cy="{{ almucantar_center.cy }}" r="{{ almucantar_center.r }}" style="fill:yellow"/>
+		    	<circle id="almucantar-center" az="{{ almucantar_center.alt }}" cx="{{ almucantar_center.cx }}" cy="{{ almucantar_center.cy }}" r="{{ almucantar_center.r }}" style="fill:white"/>
 		    </mask>
 		</defs>
 
@@ -160,7 +159,7 @@
     		</g>
 
     		<g id="description" {{ inkscape.description }} transform="rotate(180)">
-			<rect x="-10" y="{{ RCapricorn - 20 -7}}" width="20" height="19"  style="stroke: none; fill: #a3262a;"/>
+			<rect x="-10" y="{{ RCapricorn - 20 -7}}" width="20" height="19"  style="stroke: none; fill: {{ background_color }}"/>
 			<text id="location" x="0" y="{{ RCapricorn - 20 }}">
 				{{ place_name }}
 	    		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
