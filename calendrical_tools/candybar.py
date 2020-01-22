@@ -371,7 +371,7 @@ class SvgCandyBar(CandyBar):
     cal_color = {
         "iso": "grey",
         "dim": "grey",
-        "hightlight": "red",
+        "highlight": "red",
         "highlight_bold": "red",
     }
 
