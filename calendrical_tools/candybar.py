@@ -342,6 +342,9 @@ class SvgCandyBar(CandyBar):
                     fill: {{ cal_color.highlight_bold }}
                     text-anchor: end;
                 }
+                #cal_background {
+                    fill: {{ cal_color.background }}
+                }
             </style>
         </defs>
         
@@ -357,7 +360,7 @@ class SvgCandyBar(CandyBar):
     bar_template = """
     <g>
         <title>Calendar</title>
-        <text x="{{ bar_width / 2.0 }}" y="0" text-anchor="middle">{{ year }}</text>
+        <text x="{{ bar_width / 2.0 }}" y="0" text-anchor="middle">{{ bar_heading }}</text>
         {% for line in lines %}
             <text y="{{ loop.index * 1.1 }}em">
             {% for word in line.week %}
@@ -368,15 +371,18 @@ class SvgCandyBar(CandyBar):
     </g>
     """
 
-    cal_color = {
-        "iso": "grey",
+    # colors to help debug layouts
+    cal_color = { 
+        "iso": "lightgrey",
         "dim": "grey",
-        "highlight": "red",
+        "highlight": "green",
         "highlight_bold": "red",
+        "background": "yellow"
     }
 
-    # def __init__(self):
-    #     super().__init__(year=2020, weeks_before=1, weeks_after=0)
+    def __init__(self):
+        super().__init__(year=2020, weeks_before=1, weeks_after=0)
+        self.bar_headingn = year
 
     def bar_data(self, cal_type="gregorian"):
         cal_data = []
