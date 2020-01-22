@@ -333,7 +333,7 @@ class SvgCandyBar(CandyBar):
                 #cal_highlight {
                     font-family: Courier;  font-size: 15px;
                     font-weight: normal;
-                    fill: {{ cal_color.hightlight }};
+                    fill: {{ cal_color.highlight }};
                     text-anchor: end;
                 }
                 #cal_highlight_bold {
