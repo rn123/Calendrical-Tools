@@ -94,8 +94,19 @@ The Banker's Almanac and Register published calendars in the late 1800s formatte
 - Heilbron, J. L. The Sun in the Church: Cathedrals as Solar Observatories. Harvard University Press, 1999.
 - Evans, James. The History & Practice of Ancient Astronomy. Oxford University Press US, 1998.
 - Rhodes, Geminus of, James Evans, and J. Lennart Berggren. Geminos’s “Introduction to the Phenomena”: A Translation and Study of a Hellenistic Survey of Astronomy. Princeton University Press, 2006.
+- Sidoli, Nathan, and J L Berggren. “The Arabic Version of Ptolemy’s Planisphere or Flattening the Surface of the Sphere: Text, Translation, Commentary,” n.d., 103.
 - Ptolemy, and G. J. Toomer. Ptolemy’s Almagest. Springer-Verlag, 1984.
 - Meeus, Jean. Astronomical Algorithms. Willmann-Bell, 1998.
 - Kaler, James B. The Ever-Changing Sky: A Guide to the Celestial Sphere. Cambridge University Press, 2002.
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-156772806-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-156772806-1');
+</script>
 
 
