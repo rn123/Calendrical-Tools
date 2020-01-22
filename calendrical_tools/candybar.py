@@ -381,8 +381,8 @@ class SvgCandyBar(CandyBar):
     }
 
     def __init__(self):
-        super().__init__(year=2020, weeks_before=1, weeks_after=0)
-        self.bar_headingn = year
+        super().__init__()
+        self.bar_heading = self.year
 
     def bar_data(self, cal_type="gregorian"):
         cal_data = []
