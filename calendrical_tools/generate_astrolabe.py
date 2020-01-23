@@ -265,8 +265,8 @@ def main():
             "r": astrolabe.RadiusEcliptic,
             "width": 5,
         },
-        stroke_color=astrolabe.stroke_color,
-        background_color=astrolabe.background_color,
+        stroke_color=stroke_color,
+        background_color=background_color,
         inkscape=inkscape_attributes,
         animation=animation_parameters,
         moons=[
