@@ -319,25 +319,29 @@ class SvgCandyBar(CandyBar):
         <defs>
             <style type="text/css">
                 #iso {
-                    font-family: Courier;  font-size: 15px;
+                    font-family: Courier, Arial, Helvetica, sans-serifArial, Helvetica, sans-serif;  
+                    font-size: 15px;
                     font-weight: normal;
                     fill: {{ cal_color.iso }};
                     text-anchor: end;
                 }
                 #cal_dim {
-                    font-family: Courier;  font-size: 15px;
+                    font-family: Courier, Arial, Helvetica, sans-serif;  
+                    font-size: 15px;
                     font-weight: normal;
                     fill: {{ cal_color.dim }};
                     text-anchor: end;
                 }
                 #cal_highlight {
-                    font-family: Courier;  font-size: 15px;
+                    font-family: Courier, Arial, Helvetica, sans-serif;  
+                    font-size: 15px;
                     font-weight: normal;
                     fill: {{ cal_color.highlight }};
                     text-anchor: end;
                 }
                 #cal_highlight_bold {
-                    font-family: Courier;  font-size: 15px;
+                    font-family: Courier, Arial, Helvetica, sans-serif;  
+                    font-size: 15px;
                     font-weight: bold;
                     fill: {{ cal_color.highlight_bold }}
                     text-anchor: end;
