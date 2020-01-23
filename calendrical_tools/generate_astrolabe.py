@@ -249,8 +249,8 @@ def main():
             "r": astrolabe.RadiusEcliptic,
             "width": 5,
         }
-    outer_radius = ecliptic["r"] + ecliptic["width"]
-    inner_radius = ecliptic["r"]
+    outer_radius = ecliptic["r"]
+    inner_radius = ecliptic["r"] - ecliptic["width"]
 
     top_middle_outer =    {"x":(ecliptic["cx"]), "y":(ecliptic["cy"] + outer_radius)}
     bottom_middle_outer = {"x":(ecliptic["cx"]), "y":(ecliptic["cy"] - outer_radius)}
