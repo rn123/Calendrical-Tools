@@ -18,7 +18,7 @@
 				  text-anchor: middle;
 				  font-size: 6pt;
 				  fill: #f5ac27;
-				  fill-opacity: 0.99
+				  fill-opacity: 1
 				}
 				#tropics {
 				  fill: none;
@@ -84,10 +84,9 @@
 				#ecliptic {
 				  fill: #f5ac27;
 				  fill-opacity: 1;
-				  stroke: #b98c43;
+				  stroke: #f5ac27;
 				  stroke-width: 0.7;
 				  stroke-opacity: 0.7;
-				  mask: url(#ecliptic_hole);
 				}
 				#eclipticDivision {
 				  stroke: #f5ac27;
@@ -100,9 +99,6 @@
 				  stroke-opacity: 0.5;
 				  stroke-width: 1;
 				}
-				.masked {
-				  mask: url(#hole);
-				}
 			</style>
 
 			<clipPath id="Capricorn">
@@ -113,13 +109,8 @@
 			  <circle id="horizon" cx="0.0" cy="168.29725065257912" r="180.64477724913516"/>
 			</clipPath>
 
-			<mask id="ecliptic_hole">
-				<circle cx="0.0" cy="28.457145149136974" r="71.54285485086302" style="fill:white;"/>
-				<circle cx="0.0" cy="28.457145149136974" r="66.54285485086302" style="fill:black;"/>
-		    </mask>
-
 		    <mask id="almucantar_hole">
-		    	<circle id="almucantar-center" az="80" cx="0" cy="45.36001580485654" r="8.454575676076276" style="fill:yellow"/>
+		    	<circle id="almucantar-center" az="80" cx="0" cy="45.36001580485654" r="8.454575676076276" style="fill:white"/>
 		    </mask>
 		</defs>
 
@@ -181,14 +172,13 @@
     		</g>
 
     		<g id="description" inkscape:label="description" inkscape:groupmode="layer" transform="rotate(180)">
-			<rect x="-10" y="73" width="20" height="19"  style="stroke: none; fill: #a3262a;"/>
-			<text id="location" x="0" y="80">
-				Honolulu
-	    		<tspan x="0" dy="1.2em">21.3069 </tspan>
-	    	</text>
+				<rect x="-10" y="73" width="20" height="19"  style="stroke: none; fill: #a3262a;"/>
+				<text id="location" x="0" y="80">
+					Honolulu
+		    		<tspan x="0" dy="1.2em">21.3069 </tspan>
+		    	</text>
+		    </g>
 	    </g>
-
-		</g>
 
 		<g id="limb" inkscape:label="limb" inkscape:groupmode="layer">
 			<title>Limb</title>
@@ -598,23 +588,26 @@
 		<g id = "rete" inkscape:label="rete" inkscape:groupmode="layer" transform="rotate(180)">
 			<g id="ecliptic" inkscape:label="ecliptic" inkscape:groupmode="layer">
 		    	<title>Ecliptic</title>
-		        <circle  id="ecliptic" cx="0.0" cy="28.457145149136974" r="71.54285485086302"/>
-		        <path id="ecliptic" d="
-		        	M-66.54285485086302,28.457145149136974 
-		          	a66.54285485086302,66.54285485086302 0 1, 1 133.08570970172605,0
-		          	a66.54285485086302,66.54285485086302 0 1, 1 -133.08570970172605,0
-		          "/>
+				<path id="ecliptic" fill-rule="evenodd" d="
+					M0.0 100.0
+					A71.54285485086302 71.54285485086302 0 0 1 0.0 -43.085709701726046
+					A71.54285485086302 71.54285485086302 0 0 1 0.0 100.0z
+					M0.0 95.0
+					A66.54285485086302 66.54285485086302 0 0 1 0.0 -38.085709701726046
+					A66.54285485086302 66.54285485086302 0 0 1 0.0 95.0z"/>
+  			</g>
 
 		        <!-- <line id="eclipticDivision" x1="0" y1="0" x2="65.63970574410436" y2="0"/> -->
 		        
-		    </g>
-		    <g id="stars" inkscape:label="stars" inkscape:groupmode="layer">
+		 	<g id="stars" inkscape:label="stars" inkscape:groupmode="layer">
 		    	<title>Stars</title>
 		    </g>
+
 		    <g id="planets" inkscape:label="planets" inkscape:groupmode="layer">
 		    	<title>Planets</title>
 		    	<circle id="moon" cx="44.142706092611434" cy="214.41520455448494" r="10" style="fill:white;"/>
 		    </g>
+
 		    <animateTransform
 				attributeName="transform" type="rotate"
 				attributeTyep="XML"
@@ -623,5 +616,4 @@
 				fill="freeze"/>
 		</g>
 	</g>
-
 </svg>
