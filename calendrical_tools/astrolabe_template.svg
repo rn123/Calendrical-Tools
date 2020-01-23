@@ -102,11 +102,19 @@
 			</style>
 
 			<clipPath id="Capricorn">
-			  <circle cx="0" cy="0" r="{{ RCapricorn }}"/>
-			</clipPath>
+				<path d="
+						M0 {{ RCapricorn }}
+						A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ -RCapricorn }}
+						A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ RCapricorn }}z"
+					/>		
+			</clipPath>			
 
 			<clipPath id="Horizon">
-			  <circle id="horizon" cx="{{ horiz.cx}}" cy="{{ horiz.cy }}" r="{{ horiz.r }}"/>
+				<path d="
+						M{{ horiz.cx }} {{ horiz.cy + horiz.r }} 
+						A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy - horiz.r }}
+						A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy + horiz.r }}z
+					"/>
 			</clipPath>
 
 		    <mask id="almucantar_hole">
