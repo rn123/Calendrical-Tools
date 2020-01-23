@@ -118,7 +118,7 @@
 			</clipPath>
 
 		    <mask id="almucantar_hole">
-		    	<circle id="almucantar-center" az="{{ almucantar_center.alt }}" cx="{{ almucantar_center.cx }}" cy="{{ almucantar_center.cy }}" r="{{ almucantar_center.r }}" style="fill:white"/>
+		    	<circle id="almucantar-center" az="{{ almucantar_center.alt }}" cx="{{ almucantar_center.cx }}" cy="{{ almucantar_center.cy }}" r="{{ almucantar_center.r }}" style="fill:none"/>
 		    </mask>
 		</defs>
 
