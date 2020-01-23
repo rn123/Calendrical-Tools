@@ -87,7 +87,6 @@
 				  stroke: {{ stroke_color }}
 				  stroke-width: 0.7;
 				  stroke-opacity: 0.7;
-				  mask: url(#ecliptic_hole);
 				}
 				#eclipticDivision {
 				  stroke: {{ stroke_color }}
@@ -100,9 +99,6 @@
 				  stroke-opacity: 0.5;
 				  stroke-width: 1;
 				}
-				.masked {
-				  mask: url(#hole);
-				}
 			</style>
 
 			<clipPath id="Capricorn">
@@ -112,11 +108,6 @@
 			<clipPath id="Horizon">
 			  <circle id="horizon" cx="{{ horiz.cx}}" cy="{{ horiz.cy }}" r="{{ horiz.r }}"/>
 			</clipPath>
-
-			<mask id="ecliptic_hole">
-				<circle cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r }}" style="fill:white;"/>
-				<circle cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r - ecliptic.width }}" style="fill:black;"/>
-		    </mask>
 
 		    <mask id="almucantar_hole">
 		    	<circle id="almucantar-center" az="{{ almucantar_center.alt }}" cx="{{ almucantar_center.cx }}" cy="{{ almucantar_center.cy }}" r="{{ almucantar_center.r }}" style="fill:white"/>
@@ -160,14 +151,13 @@
     		</g>
 
     		<g id="description" {{ inkscape.description }} transform="rotate(180)">
-			<rect x="-10" y="{{ RCapricorn - 20 -7}}" width="20" height="19"  style="stroke: none; fill: {{ background_color }}"/>
-			<text id="location" x="0" y="{{ RCapricorn - 20 }}">
-				{{ place_name }}
-	    		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
-	    	</text>
+				<rect x="-10" y="{{ RCapricorn - 20 -7}}" width="20" height="19"  style="stroke: none; fill: {{ background_color }}"/>
+				<text id="location" x="0" y="{{ RCapricorn - 20 }}">
+					{{ place_name }}
+		    		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
+		    	</text>
+		    </g>
 	    </g>
-
-		</g>
 
 		<g id="limb" {{ inkscape.limb }}>
 			<title>Limb</title>
@@ -195,23 +185,26 @@
 		<g id = "rete" {{ inkscape.rete }} transform="rotate(180)">
 			<g id="ecliptic" {{ inkscape.ecliptic }}>
 		    	<title>Ecliptic</title>
-		        <circle  id="ecliptic" cx="{{ ecliptic.cx }}" cy="{{ ecliptic.cy }}" r="{{ ecliptic.r }}"/>
-		        <path id="ecliptic" d="
-		        	M{{ ecliptic.cx - ecliptic.r + ecliptic.width}},{{ ecliptic.cy }} 
-		          	a{{ ecliptic.r - ecliptic.width }},{{ ecliptic.r - ecliptic.width }} 0 1, 1 {{ 2 * ecliptic.r - 2 * ecliptic.width }},0
-		          	a{{ ecliptic.r - ecliptic.width }},{{ ecliptic.r - ecliptic.width }} 0 1, 1 {{ -2 * ecliptic.r + 2 * ecliptic.width }},0
-		          "/>
+				<path id="ecliptic" fill-rule="evenodd" d="
+					M{{ top_middle_outer.x }} {{ top_middle_outer.y }}
+					A{{ outer_radius }} {{ outer_radius }} 0 0 1 {{ bottom_middle_outer.x }} {{ bottom_middle_outer.y }}
+					A{{ outer_radius }} {{ outer_radius }} 0 0 1 {{ top_middle_outer.x }} {{ top_middle_outer.y }}z
+					M{{ top_middle_inner.x }} {{ top_middle_inner.y }}
+					A{{ inner_radius }} {{ inner_radius }} 0 0 1 {{ bottom_middle_inner.x }} {{ bottom_middle_inner.y }}
+					A{{ inner_radius }} {{ inner_radius }} 0 0 1 {{top_middle_inner.x }} {{ top_middle_inner.y }}z"/>
+  			</g>
 
 		        <!-- <line id="eclipticDivision" x1="0" y1="0" x2="65.63970574410436" y2="0"/> -->
 		        
-		    </g>
-		    <g id="stars" {{ inkscape.stars }}>
+		 	<g id="stars" {{ inkscape.stars }}>
 		    	<title>Stars</title>
 		    </g>
+
 		    <g id="planets" {{ inkscape.planets }}>
 		    	<title>Planets</title>
 		    	<circle id="moon" cx="44.142706092611434" cy="214.41520455448494" r="10" style="fill:white;"/>
 		    </g>
+
 		    <animateTransform
 				attributeName="transform" type="rotate"
 				attributeTyep="XML"
@@ -220,5 +213,4 @@
 				fill="freeze"/>
 		</g>
 	</g>
-
 </svg>

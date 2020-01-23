@@ -243,6 +243,21 @@ def main():
 
     animation_parameters = {"from": "233", "to": "233", "begin": "0s", "dur": "5s"}
 
+    ecliptic = {
+            "cx": astrolabe.xEclipticCenter,
+            "cy": astrolabe.yEclipticCenter,
+            "r": astrolabe.RadiusEcliptic,
+            "width": 5,
+        }
+    outer_radius = ecliptic["r"] + ecliptic["width"]
+    inner_radius = ecliptic["r"]
+
+    top_middle_outer =    {"x":(ecliptic["cx"]), "y":(ecliptic["cy"] + outer_radius)}
+    bottom_middle_outer = {"x":(ecliptic["cx"]), "y":(ecliptic["cy"] - outer_radius)}
+
+    top_middle_inner =    {"x":(ecliptic["cx"]), "y":(ecliptic["cy"] + inner_radius)}
+    bottom_middle_inner = {"x":(ecliptic["cx"]), "y":(ecliptic["cy"] - inner_radius)}
+
     with open("astrolabe_template.svg") as fp:
         template_text = fp.read()
 
@@ -259,12 +274,13 @@ def main():
         azimuth_coords=plate["azimuths"],
         prime_vertical=plate["prime_vertical"],
         ticks=astrolabe.ticks,
-        ecliptic={
-            "cx": astrolabe.xEclipticCenter,
-            "cy": astrolabe.yEclipticCenter,
-            "r": astrolabe.RadiusEcliptic,
-            "width": 5,
-        },
+        ecliptic=ecliptic,
+        top_middle_outer=top_middle_outer,
+        bottom_middle_outer=bottom_middle_outer,
+        outer_radius=outer_radius,
+        inner_radius=inner_radius,
+        top_middle_inner=top_middle_inner,
+        bottom_middle_inner=bottom_middle_inner,
         stroke_color=stroke_color,
         background_color=background_color,
         inkscape=inkscape_attributes,
