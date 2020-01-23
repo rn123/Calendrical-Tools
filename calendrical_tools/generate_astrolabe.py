@@ -56,7 +56,7 @@ class Astrolabe:
     }
 
     def __init__(
-        self, obliquity=23.438446, radius_capricorn=100, plate_parameters=None
+        self, obliquity=23.4443291, radius_capricorn=100, plate_parameters=None
     ):
         self.obliquity = obliquity
         self._obliquityRadians = math.radians((90 - self.obliquity) / 2)
