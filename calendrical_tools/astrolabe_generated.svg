@@ -118,7 +118,7 @@
 			</clipPath>
 
 		    <mask id="almucantar_hole">
-		    	<circle id="almucantar-center" az="80" cx="0" cy="45.36001580485654" r="8.454575676076276" style="fill:white"/>
+		    	<circle id="almucantar-center" az="80" cx="0" cy="45.36001580485654" r="8.454575676076276" style="fill:none"/>
 		    </mask>
 		</defs>
 
