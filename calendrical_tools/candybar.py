@@ -4,6 +4,7 @@
 import datetime
 import json
 from pathlib import Path
+from collections import namedtuple
 
 from jinja2 import Template
 from tqdm import tqdm
@@ -231,6 +232,8 @@ class CandyBar:
         return no_moons
 
     def new_moons_in_year(self, year):
+
+        new_moon_tuple = namedtuple("moon_since_1_1", "moon_gregorian_date", "moon_fixed_day", "moon_sidereal_longitude")
         fixed_date = pcc.fixed_from_gregorian([year, 1, 1])
         fudge_factor = 3
         no_moons = self.many_moons(fixed_date)
@@ -243,7 +246,12 @@ class CandyBar:
         for n, nnm in new_moons_data:
             nm = pcc.gregorian_from_fixed(nnm)
             key = int(nnm)
-            new_moons[key] = (n, nm, nnm)
+            new_moons[key] = new_moon_tuple(
+                moon_since_1_1 = n,
+                moon_gregorian_date = nm, 
+                moon_fixed_day = nnm,
+                moon_sidereal_longitude = pcc.sidereal_lunar_longitude(nnm)
+            )
         return new_moons
 
     def weeks_data(self, wks=None, new_moons=None, calendar_type="gregorian"):
