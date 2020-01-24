@@ -8,14 +8,10 @@
 				  clip-path:url(#Capricorn);
 				  clipPath: url(#Capricorn);
 				}
-				#location {
-				  stroke: {{ stroke_color }}
+				#description {
+				  fill: {{ stroke_color }}
 				  text-anchor: middle;
 				  font-size: 6pt;
-				}
-				#description {
-				  fill: none;
-				  stroke: red; 
 				}
 				#horizon {
 				  fill: none;
@@ -162,12 +158,10 @@
     		</g>
 
     		<g {{ inkscape.description }} transform="rotate(180)">
-	    		<g id="description" >
-					<text id="location" x="0" y="{{ RCapricorn - 20 }}">
-						{{ place_name }}
-			    		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
-			    	</text>
-			    </g>
+				<text id="description" x="0" y="{{ RCapricorn - 20 }}">
+					{{ place_name }}
+		    		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
+		    	</text>
 			</g>
 	    </g>
 
