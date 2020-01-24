@@ -233,7 +233,10 @@ class CandyBar:
 
     def new_moons_in_year(self, year):
 
-        new_moon_tuple = namedtuple("moon_since_1_1", "moon_gregorian_date", "moon_fixed_day", "moon_sidereal_longitude")
+        new_moon_tuple = namedtuple(
+            "new_moon_tuple",
+            "moon_since_1_1, moon_gregorian_date, moon_fixed_day, moon_sidereal_longitude",
+        )
         fixed_date = pcc.fixed_from_gregorian([year, 1, 1])
         fudge_factor = 3
         no_moons = self.many_moons(fixed_date)
@@ -247,10 +250,10 @@ class CandyBar:
             nm = pcc.gregorian_from_fixed(nnm)
             key = int(nnm)
             new_moons[key] = new_moon_tuple(
-                moon_since_1_1 = n,
-                moon_gregorian_date = nm, 
-                moon_fixed_day = nnm,
-                moon_sidereal_longitude = pcc.sidereal_lunar_longitude(nnm)
+                moon_since_1_1=n,
+                moon_gregorian_date=nm,
+                moon_fixed_day=nnm,
+                moon_sidereal_longitude=pcc.sidereal_lunar_longitude(nnm),
             )
         return new_moons
 
@@ -384,12 +387,12 @@ class SvgCandyBar(CandyBar):
     """
 
     # colors to help debug layouts
-    cal_color = { 
+    cal_color = {
         "iso": "lightgrey",
         "dim": "grey",
         "highlight": "green",
         "highlight_bold": "red",
-        "background": "yellow"
+        "background": "yellow",
     }
 
     def __init__(self):
