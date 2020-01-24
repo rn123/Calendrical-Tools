@@ -9,11 +9,12 @@
 				  clipPath: url(#Capricorn);
 				}
 				#location {
+				  stroke: {{ stroke_color }}
 				  text-anchor: middle;
 				  font-size: 6pt;
 				}
 				#description {
-				  fill: none;
+				  fill: {{ background_color }}
 				  stroke: none; 
 				}
 				#horizon {
@@ -32,9 +33,9 @@
 				  stroke: {{ stroke_color }}
 				  stroke-width: 0.5;
 				}
-				#almucantarCenter {
+				<!-- #azimuths {
 				  mask: url(#almucantarHole);
-				}
+				} -->
 				#azimuth {
 				  fill: none;
 				  stroke: {{ stroke_color }}
@@ -145,8 +146,8 @@
         		<line id="axis" x1="{{ -RCapricorn }}" y1="0" x2="{{ RCapricorn }}" y2="0"/>
     		</g>
 
-    		<g id="description" {{ inkscape.description }} transform="rotate(180)">
-				<rect id="description" x="-10" y="{{ RCapricorn - 20 -7}}" width="20" height="19"/>
+    		<g {{ inkscape.description }} transform="rotate(180)">
+    			<rect id="description" x="-10" y="{{ RCapricorn - 20 -7}}" width="20" height="19"/>
 				<text id="location" x="0" y="{{ RCapricorn - 20 }}">
 					{{ place_name }}
 		    		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
