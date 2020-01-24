@@ -14,8 +14,8 @@
 				  font-size: 6pt;
 				}
 				#description {
-				  fill: {{ background_color }}
-				  stroke: none; 
+				  fill: none;
+				  stroke: red; 
 				}
 				#horizon {
 				  fill: none;
@@ -27,21 +27,22 @@
 				  stroke: {{ stroke_color }}
 				  stroke-width: 1;
 				  stroke-opacity: 0.5;
+				  clip-path: url(#almucantarHole);
 				}
 				#almucantar {
 				  fill: none;
 				  stroke: {{ stroke_color }}
 				  stroke-width: 0.5;
 				}
-				<!-- #azimuths {
-				  mask: url(#almucantarHole);
-				} -->
 				#azimuth {
 				  fill: none;
 				  stroke: {{ stroke_color }}
 				  stroke-width: 0.5;
 				  clip-path:url(#Horizon);
 				  clipPath: url(#Horizon);
+				}
+				#azimuths{
+				  clip-path: url(#almucantarHole);
 				}
 				#primeVertical {
 				  fill: none;
@@ -55,6 +56,7 @@
 				  stroke: {{ stroke_color }}
 				  stroke-width: 1;
 				  stroke-opacity: 0.5;
+				  clip-path: url(#descriptionHole);
 				}
 				#tick {
 				  stroke: {{ stroke_color }}
@@ -100,13 +102,28 @@
 					"/>
 			</clipPath>
 
-		    <mask id="almucantarHole">
-		    	<path fill="black;" d="
-						M{{ almucantar_center.cx }} {{ almucantar_center.cy + almucantar_center.r }} 
-						A{{ almucantar_center.r }} {{ almucantar_center.r }} 0 1 0 {{ almucantar_center.cx }} {{ almucantar_center.cy - almucantar_center.r }}
-						A{{ almucantar_center.r }} {{ almucantar_center.r }} 0 1 0 {{ almucantar_center.cx }} {{ almucantar_center.cy + almucantar_center.r }}z
-					"/>
-		    </mask>
+		    <clipPath id="almucantarHole">
+				<path fill-rule="evenodd"  d="
+					M{{ 0 }} {{ RCapricorn }} 
+					A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 {{ 0 }} {{ -RCapricorn }}
+					A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 {{ 0 }} {{ RCapricorn }}z
+					M{{ almucantar_center.cx }} {{ almucantar_center.cy + almucantar_center.r}} 
+					A{{ almucantar_center.r }} {{ almucantar_center.r }} 0 1 0 {{ almucantar_center.cx }} {{ almucantar_center.cy - almucantar_center.r }}
+					A{{ almucantar_center.r }} {{ almucantar_center.r }} 0 1 0 {{ almucantar_center.cx }} {{ almucantar_center.cy + almucantar_center.r }}z
+				"/>
+		    </clipPath>
+
+		    <clipPath id="descriptionHole" >
+		    	<!-- <rect id="description" x="-10" y="{{ RCapricorn - 20 -7}}" width="20" height="19"/> -->
+		    	<path id="test" fill-rule="evenodd" transform="rotate(180)" d="
+		    		M{{ 0 }} {{ RCapricorn }} 
+					A{{ RCapricorn }} {{ RCapricorn }} 0 1 0 {{ 0 }} {{ -RCapricorn }}
+					A{{ RCapricorn }} {{ RCapricorn }} 0 1 0 {{ 0 }} {{ RCapricorn }}z
+		    		M-10,{{ RCapricorn - 20 - 7 }} 10,{{ RCapricorn - 20 - 7 }} 10,{{ RCapricorn - 20 - 7 + 19 }} -10,{{ RCapricorn -20 -7 + 19 }} -10,{{ RCapricorn - 20 - 7 }} 0,{{ RCapricorn }}
+
+		    	"/>
+		    </clipPath>
+
 		</defs>
 
 		<g id="plate" transform="rotate(180)" {{ inkscape.plate }}>
@@ -121,20 +138,18 @@
 		        <circle cx="{{ horiz.cx}}" cy="{{ horiz.cy }}" r="{{ horiz.r }}"/>
 	      	</g>
 
-	      	<g id="almucantarCenter">
-				<g id="azimuths" {{ inkscape.azimuths }}>
-					<title>Azimuth</title>
-					{% for coord in azimuth_coords %}
-						<circle id="azimuth" az="{{ coord.az }}" cx="{{ coord.cx }}" cy="{{ coord.cy }}" r="{{ coord.r }}"/>
-					{%- endfor %}			
-			    </g>
+			<g id="azimuths" {{ inkscape.azimuths }}>
+				<title>Azimuth</title>
+				{% for coord in azimuth_coords %}
+					<circle id="azimuth" az="{{ coord.az }}" cx="{{ coord.cx }}" cy="{{ coord.cy }}" r="{{ coord.r }}"/>
+				{%- endfor %}			
+		    </g>
 
-				<g id="almucantars" {{ inkscape.almucantars }}>
-					<title>Almucantar</title>
-					{% for coord in almucantor_coords %}
-						<circle id="almucantar" alt="{{ coord.alt }}" cx="{{ coord.cx }}" cy="{{ coord.cy }}" r="{{ coord.r }}"/>
-					{%- endfor %}
-				</g>
+			<g id="almucantars" {{ inkscape.almucantars }}>
+				<title>Almucantar</title>
+				{% for coord in almucantor_coords %}
+					<circle id="almucantar" alt="{{ coord.alt }}" cx="{{ coord.cx }}" cy="{{ coord.cy }}" r="{{ coord.r }}"/>
+				{%- endfor %}
 			</g>
 
 			<g id="primeVertical" {{ inkscape.prime_vertical }}>
@@ -147,12 +162,13 @@
     		</g>
 
     		<g {{ inkscape.description }} transform="rotate(180)">
-    			<rect id="description" x="-10" y="{{ RCapricorn - 20 -7}}" width="20" height="19"/>
-				<text id="location" x="0" y="{{ RCapricorn - 20 }}">
-					{{ place_name }}
-		    		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
-		    	</text>
-		    </g>
+	    		<g id="description" >
+					<text id="location" x="0" y="{{ RCapricorn - 20 }}">
+						{{ place_name }}
+			    		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
+			    	</text>
+			    </g>
+			</g>
 	    </g>
 
 		<g id="limb" {{ inkscape.limb }}>
