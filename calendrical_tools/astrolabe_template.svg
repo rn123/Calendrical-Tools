@@ -33,9 +33,7 @@
 				  stroke-width: 0.5;
 				}
 				#almucantarCenter {
-				  stroke: {{ stroke_color }}
-				  stroke-width: 0.5;
-				  clip-path: url(#almucantarHole);
+				  mask: url(#almucantarHole);
 				}
 				#azimuth {
 				  fill: none;
@@ -101,13 +99,13 @@
 					"/>
 			</clipPath>
 
-		    <clipPath id="almucantarHole">
-		    	<path d="
+		    <mask id="almucantarHole">
+		    	<path fill="black;" d="
 						M{{ almucantar_center.cx }} {{ almucantar_center.cy + almucantar_center.r }} 
-						A{{ almucantar_center.r }} {{ almucantar_center.r }} 0 0 1 {{ almucantar_center.cx }} {{ almucantar_center.cy - almucantar_center.r }}
-						A{{ almucantar_center.r }} {{ almucantar_center.r }} 0 0 1 {{ almucantar_center.cx }} {{ almucantar_center.cy + almucantar_center.r }}z
+						A{{ almucantar_center.r }} {{ almucantar_center.r }} 0 1 0 {{ almucantar_center.cx }} {{ almucantar_center.cy - almucantar_center.r }}
+						A{{ almucantar_center.r }} {{ almucantar_center.r }} 0 1 0 {{ almucantar_center.cx }} {{ almucantar_center.cy + almucantar_center.r }}z
 					"/>
-		    </clipPath>
+		    </mask>
 		</defs>
 
 		<g id="plate" transform="rotate(180)" {{ inkscape.plate }}>
@@ -122,7 +120,7 @@
 		        <circle cx="{{ horiz.cx}}" cy="{{ horiz.cy }}" r="{{ horiz.r }}"/>
 	      	</g>
 
-	      	<g>
+	      	<g id="almucantarCenter">
 				<g id="azimuths" {{ inkscape.azimuths }}>
 					<title>Azimuth</title>
 					{% for coord in azimuth_coords %}
@@ -136,7 +134,6 @@
 						<circle id="almucantar" alt="{{ coord.alt }}" cx="{{ coord.cx }}" cy="{{ coord.cy }}" r="{{ coord.r }}"/>
 					{%- endfor %}
 				</g>
-				<circle id="almucantarCenter" az="0.0" cx="0.0" cy="{{ almucantar_center.cy}}" r="{{ almucantar_center.r }}"/>
 			</g>
 
 			<g id="primeVertical" {{ inkscape.prime_vertical }}>
