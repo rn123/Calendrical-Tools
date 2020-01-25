@@ -59,7 +59,8 @@ class Astrolabe:
         self, obliquity=23.4443291, radius_capricorn=100, plate_parameters=None
     ):
         self.obliquity = obliquity
-        self._obliquityRadians = math.radians((90 - self.obliquity) / 2)
+        self._obliquityRadians = math.radians(obliquity)
+        self._obliquityRadiansArgument = math.radians((90 - self.obliquity) / 2)
         self.RadiusCapricorn = radius_capricorn
         self.plate_parameters = self.climata
         self.plate_altitudes = list(range(0, 90, 10))
@@ -146,8 +147,8 @@ class Astrolabe:
         R_{Cancer} = R_{Equator} \tan(\frac{90 - \epsilon}{2})
         """
 
-        self.RadiusEquator = self.RadiusCapricorn * math.tan(self._obliquityRadians)
-        self.RadiusCancer = self.RadiusEquator * math.tan(self._obliquityRadians)
+        self.RadiusEquator = self.RadiusCapricorn * math.tan(self._obliquityRadiansArgument)
+        self.RadiusCancer = self.RadiusEquator * math.tan(self._obliquityRadiansArgument)
 
     def almucantar_arc(self, altitude, latitude):
         """Generate circle of constant altitude.
@@ -258,6 +259,8 @@ def main():
     top_middle_inner =    {"x":(ecliptic["cx"]), "y":(ecliptic["cy"] + inner_radius)}
     bottom_middle_inner = {"x":(ecliptic["cx"]), "y":(ecliptic["cy"] - inner_radius)}
 
+
+
     with open("astrolabe_template.svg") as fp:
         template_text = fp.read()
 
@@ -281,6 +284,7 @@ def main():
         inner_radius=inner_radius,
         top_middle_inner=top_middle_inner,
         bottom_middle_inner=bottom_middle_inner,
+        ecliptic_center=astrolabe.RadiusEquator * math.tan(astrolabe._obliquityRadiansArgument),
         stroke_color=stroke_color,
         background_color=background_color,
         inkscape=inkscape_attributes,
