@@ -68,6 +68,8 @@
 				  stroke: {{ stroke_color }}
 				  stroke-width: 0.7;
 				  stroke-opacity: 0.7;
+				  clip-path: url(#eclipticHole
+				  );
 				}
 				#eclipticDivision {
 				  stroke: {{ stroke_color }}
@@ -120,6 +122,23 @@
 		    	"/>
 		    </clipPath>
 
+		    <clipPath id="eclipticBoundary">
+		    	<path fill-rule="evenodd" d="
+					M{{ top_middle_outer.x }} {{ top_middle_outer.y }}
+					A{{ outer_radius }} {{ outer_radius }} 0 1 0 {{ bottom_middle_outer.x }} {{ bottom_middle_outer.y }}
+					A{{ outer_radius }} {{ outer_radius }} 0 1 0 {{ top_middle_outer.x }} {{ top_middle_outer.y }}z"/>
+		    </clipPath>
+
+		    <clipPath id="eclipticHole">
+		    	<path fill-rule="evenodd" d="
+					M{{ top_middle_outer.x }} {{ top_middle_outer.y }}
+					A{{ outer_radius }} {{ outer_radius }} 0 0 1 {{ bottom_middle_outer.x }} {{ bottom_middle_outer.y }}
+					A{{ outer_radius }} {{ outer_radius }} 0 0 1 {{ top_middle_outer.x }} {{ top_middle_outer.y }}z
+					M{{ top_middle_inner.x }} {{ top_middle_inner.y }}
+					A{{ inner_radius }} {{ inner_radius }} 0 1 0 {{ bottom_middle_inner.x }} {{ bottom_middle_inner.y }}
+					A{{ inner_radius }} {{ inner_radius }} 0 1 0 {{top_middle_inner.x }} {{ top_middle_inner.y }}z"/>
+		    </clipPath>
+
 		</defs>
 
 		<g id="plate" transform="rotate(180)" {{ inkscape.plate }}>
@@ -163,6 +182,11 @@
 		    		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
 		    	</text>
 			</g>
+
+			 <g>
+  				<line id="eclipticPole" x1="-5" y1="{{ ecliptic_center }}" x2="5" y2="{{ ecliptic_center }}" style="stroke: grey;"/>
+				<line id="eclipticPole" x1="0" y1="{{ ecliptic_center -5 }}" x2="0" y2="{{ ecliptic_center + 5 }}" style="stroke: grey;"/>
+  			</g>
 	    </g>
 
 		<g id="limb" {{ inkscape.limb }}>
@@ -198,6 +222,8 @@
 					M{{ top_middle_inner.x }} {{ top_middle_inner.y }}
 					A{{ inner_radius }} {{ inner_radius }} 0 0 1 {{ bottom_middle_inner.x }} {{ bottom_middle_inner.y }}
 					A{{ inner_radius }} {{ inner_radius }} 0 0 1 {{top_middle_inner.x }} {{ top_middle_inner.y }}z"/>
+
+				<line  x1="0" y1="300" x2="0" y2="-300" style="stroke: black;"/>
   			</g>
 
 		        <!-- <line id="eclipticDivision" x1="0" y1="0" x2="65.63970574410436" y2="0"/> -->
