@@ -1,0 +1,166 @@
+
+<svg viewbox="0 0 200 200" 
+     width="450" height="450" 
+     xmlns="http://www.w3.org/2000/svg" 
+     xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" 
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+    <style type="text/css">
+        #diagramLabel {
+          fill: black;
+          text-anchor: end;
+          font-size: 4pt;
+          stroke: none;
+        }
+        #crossHair{
+          stroke: black;
+          stroke-width: 1.2;
+          stroke-opacity: 0.8;          
+        }
+        #tropicCircles {
+          fill: none;
+          stroke: black;
+          stroke-width: 1;
+          stroke-opacity: 0.3;
+        }
+        #eclipticCircle {
+          fill: none;
+          stroke: gold;
+          stroke-width: 2;
+          stroke-opacity: 1;
+        }
+        #axisFigure {
+          stroke: black;
+          stroke-width: 1;
+          stroke-opacity: 0.5;
+        }
+        #division {
+          stroke: black;
+          stroke-width: 1;
+          stroke-opacity: 0.5;
+        }
+        #divisionBold {
+          stroke: red;
+          stroke-width: 1;
+          stroke-opacity: 1;
+        }
+        #eclipticPole, #eclipticCenter {
+          stroke: black;
+          stroke-width: 1;
+          stroke-opacity: 0.5;
+        }
+        #constructionLine, #constructionLine4 {
+          stroke-dasharray: 2 2;
+          stroke: black;
+          stroke-width: 1;
+          stroke-opacity: 0.5
+        }
+    </style>
+    <clipPath id="equatorialHole" >
+        <path  d="
+            M0 65.63236000956694 
+            A65.63236000956694 65.63236000956694 0 1 0 0 -65.63236000956694
+            A65.63236000956694 65.63236000956694 0 1 0 0 65.63236000956694z "/>
+    </clipPath>
+    
+    <clipPath id="hole" >
+        <path id="test" fill-rule="evenodd" transform="rotate(180)" d="
+            M-2 100 
+            A100 100 0 1 0 0 -100
+            A100 100 0 1 0 0 100z
+            M-5,24.614408331209837 5,24.614408331209837 5,14.614408331209837 -5,14.614408331209837 -5,24.614408331209837 0,100
+
+        "/>
+    </clipPath>
+</defs>
+
+<g id="diagram" transform="translate(100, 100), rotate(180)">
+    <title>Ecliptic Division</title>
+    <g >
+        <circle id="tropicCircles" cx="0" cy="0" r="100"/>
+        <circle id="tropicCircles" cx="0" cy="0" r="65.63236000956694" />
+        <circle id="tropicCircles" cx="0" cy="0" r="43.07606680425401"/>
+        <text id="diagramLabel" transform="rotate(180)" style="text-anchor: start;"
+              x="2" y="71.63236000956694">Equator</text>
+    </g>
+    
+    <g id="axisFigure">
+        <line x1="0" y1="-100" x2="0" y2="100"/>
+        <line x1="-100" y1="0" x2="100" y2="0"/>
+    </g>
+    
+    <path id="eclipticCircle" d="
+        M0 100.0
+        A71.53803340212701 71.53803340212701 0 0 1 0.0 -43.07606680425402
+        A71.53803340212701 71.53803340212701 0 0 1 0.0 100.0z"/>
+    
+    <g id="eclipticCenter">
+        <line id="crossHair" x1="-5" y1="43.07606680425401" x2="5" y2="43.07606680425401"/>
+        <line id="crossHair" x1="0" y1="38.07606680425401" x2="0" y2="48.07606680425401"/>
+        <text id="diagramLabel"
+              x="-2" y="-45.07606680425401" 
+              transform="rotate(180)">Ecliptic Center</text>
+    </g>
+
+    <g id="eclipticPole">
+        <line id="crossHair" x1="-5" y1="19.614408331209837" x2="5" y2="19.614408331209837"/>
+        <line id="crossHair" x1="0" y1="14.614408331209837" x2="0" y2="24.614408331209837"/>
+        <text id="diagramLabel" 
+              x="-2" y="-21.614408331209837" 
+              transform="rotate(180)">Ecliptic Pole</text>
+    </g>
+     
+    <g>
+        <title>Divide Equator</title>
+        <line id="division" x1="0" y1="61.63236000956694" x2="0" y2="65.63236000956694"/>
+        
+            <use xlink:href="#division" transform="rotate(0)"/>
+            <use xlink:href="#division" transform="rotate(10)"/>
+            <use xlink:href="#division" transform="rotate(20)"/>
+            <use xlink:href="#division" transform="rotate(30)"/>
+            <use xlink:href="#division" transform="rotate(40)"/>
+            <use xlink:href="#division" transform="rotate(50)"/>
+            <use xlink:href="#division" transform="rotate(60)"/>
+            <use xlink:href="#division" transform="rotate(70)"/>
+            <use xlink:href="#division" transform="rotate(80)"/>
+            <use xlink:href="#division" transform="rotate(90)"/>
+            <use xlink:href="#division" transform="rotate(100)"/>
+            <use xlink:href="#division" transform="rotate(110)"/>
+            <use xlink:href="#division" transform="rotate(120)"/>
+            <use xlink:href="#division" transform="rotate(130)"/>
+            <use xlink:href="#division" transform="rotate(140)"/>
+            <use xlink:href="#division" transform="rotate(150)"/>
+            <use xlink:href="#division" transform="rotate(160)"/>
+            <use xlink:href="#division" transform="rotate(170)"/>
+            <use xlink:href="#division" transform="rotate(180)"/>
+            <use xlink:href="#division" transform="rotate(190)"/>
+            <use xlink:href="#division" transform="rotate(200)"/>
+            <use xlink:href="#division" transform="rotate(210)"/>
+            <use xlink:href="#division" transform="rotate(220)"/>
+            <use xlink:href="#division" transform="rotate(230)"/>
+            <use xlink:href="#division" transform="rotate(240)"/>
+            <use xlink:href="#division" transform="rotate(250)"/>
+            <use xlink:href="#division" transform="rotate(260)"/>
+            <use xlink:href="#division" transform="rotate(270)"/>
+            <use xlink:href="#division" transform="rotate(280)"/>
+            <use xlink:href="#division" transform="rotate(290)"/>
+            <use xlink:href="#division" transform="rotate(300)"/>
+            <use xlink:href="#division" transform="rotate(310)"/>
+            <use xlink:href="#division" transform="rotate(320)"/>
+            <use xlink:href="#division" transform="rotate(330)"/>
+            <use xlink:href="#division" transform="rotate(340)"/>
+            <use xlink:href="#division" transform="rotate(350)"/>
+            <use xlink:href="#division" transform="rotate(360)"/>
+    </g>
+    
+    <g>
+        <line id="constructionLine" x1="0" y1="19.614408331209837" style="clip-path: url(#equatorialHole)"
+              x2="80.89097414981983" 
+              y2="58.793284489754285"/>
+              
+        <line id="constructionLine4" x1="0" y1="0" 
+              x2="67.45464439715604" 
+              y2="52.28550899393713" />
+    </g>
+</g>
+</svg>
