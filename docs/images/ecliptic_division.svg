@@ -1,6 +1,6 @@
 
 <svg viewbox="0 0 200 200" 
-     width="450" height="450" 
+     width="200" height="200" 
      xmlns="http://www.w3.org/2000/svg" 
      xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" 
      xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -74,7 +74,7 @@
     </clipPath>
 </defs>
 
-<g id="diagram" transform="translate(100, 100), rotate(180)">
+<g id="diagram" transform="translate(100, 100), rotate(180)" style="stroke:black; stroke-width: 1;">
     <title>Ecliptic Division</title>
     <g >
         <circle id="tropicCircles" cx="0" cy="0" r="100"/>
