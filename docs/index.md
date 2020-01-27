@@ -61,7 +61,8 @@ The arcs of equal azimuth are given by:
 ![coding screenshot](images/screenshot_coding_astrolabe.png)
 
 ## Drawing Astrolabes: Dividing the Ecliptic
-<img src="images/ecliptic_division.svg" alt="Morrison Figure 6-7. Elicptic Division" width="60%" style="padding:5px;" align="right"/>
+
+![equation 3](images/ecliptic_division.svg)
 
 Stereographic projections of circles are circles.  The ecliptic is a circle that runs between the extremes of the tropics of Cancer and Capricorn. The projection of the ecliptic has a radius that is the average of the tropic radii. Its center is half their difference.
 <img src="images/astrolabe_generated_01182020.svg" alt="version with correct prime vertical" style="padding:5px;"/>
