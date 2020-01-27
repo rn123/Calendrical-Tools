@@ -1,58 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<svg
-   xmlns:dc="http://purl.org/dc/elements/1.1/"
-   xmlns:cc="http://creativecommons.org/ns#"
-   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-   xmlns:svg="http://www.w3.org/2000/svg"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
-   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   inkscape:version="1.0beta2 (2b71d25, 2019-12-03)"
-   sodipodi:docname="ecliptic_division.svg"
-   id="svg57760"
-   version="1.1"
-   height="205"
-   width="205"
-   viewbox="0 0 200 200">
-  <metadata
-     id="metadata57764">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <sodipodi:namedview
-     inkscape:current-layer="svg57760"
-     inkscape:window-maximized="1"
-     inkscape:window-y="23"
-     inkscape:window-x="0"
-     inkscape:cy="112.2957"
-     inkscape:cx="91.428377"
-     inkscape:zoom="3.6377171"
-     showgrid="false"
-     id="namedview57762"
-     inkscape:window-height="855"
-     inkscape:window-width="1440"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0"
-     guidetolerance="10"
-     gridtolerance="10"
-     objecttolerance="10"
-     borderopacity="1"
-     inkscape:document-rotation="0"
-     bordercolor="#666666"
-     pagecolor="#ffffff" />
-  <defs
-     id="defs57645">
-    <style
-       id="style57638"
-       type="text/css">
+
+<svg viewbox="0 0 200 200" 
+     xmlns="http://www.w3.org/2000/svg" 
+     xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" 
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+    <style type="text/css">
         #diagramLabel {
           fill: black;
           text-anchor: end;
@@ -103,423 +55,116 @@
           stroke-opacity: 0.5
         }
     </style>
-    <clipPath
-       id="equatorialHole">
-      <path
-         inkscape:connector-curvature="0"
-         id="path57640"
-         d="M 0,65.63236 A 65.63236,65.63236 0 1 0 0,-65.63236 65.63236,65.63236 0 1 0 0,65.63236 Z" />
+    <clipPath id="equatorialHole" >
+        <path  d="
+            M0 65.63236000956694 
+            A65.63236000956694 65.63236000956694 0 1 0 0 -65.63236000956694
+            A65.63236000956694 65.63236000956694 0 1 0 0 65.63236000956694z "/>
     </clipPath>
-  </defs>
-  <g
-     transform="rotate(180,51.25,51.25)"
-     style="stroke:#000000;stroke-width:1"
-     id="diagram">
-    <title
-       id="title57647">Ecliptic Division</title>
-    <g
-       id="g57655">
-      <circle
-         r="100"
-         cy="0"
-         cx="0"
-         id="tropicCircles" />
-      <circle
-         r="65.632362"
-         cy="0"
-         cx="0"
-         id="circle57650" />
-      <circle
-         r="43.076065"
-         cy="0"
-         cx="0"
-         id="circle57652" />
-      <text
-         y="71.632362"
-         x="2"
-         style="text-anchor:start"
-         transform="scale(-1)"
-         id="diagramLabel">Equator</text>
+    
+    <clipPath id="eclipticHole" >
+        <path d="
+            M0 100.0
+            A71.53803340212701 71.53803340212701 0 0 1 0.0 -43.07606680425402
+            A71.53803340212701 71.53803340212701 0 0 1 0.0 100.0z"/>
+    </clipPath>
+    
+    <clipPath id="hole" >
+        <path id="test" fill-rule="evenodd" d="
+            M-2 100 
+            A100 100 0 1 0 0 -100
+            A100 100 0 1 0 0 100z
+            M-5,24.614408331209837 5,24.614408331209837 5,14.614408331209837 -5,14.614408331209837 -5,24.614408331209837 0,100
+
+        "/>
+    </clipPath>
+</defs>
+
+<g id="diagram" style="stroke:black; stroke-width: 1;" transform="translate(100,100), scale(1, -1)">
+    <title>Ecliptic Division</title>
+    <g >
+        <circle id="tropicCircles" cx="0" cy="0" r="100"/>
+        <circle id="tropicCircles" cx="0" cy="0" r="65.63236000956694" />
+        <circle id="tropicCircles" cx="0" cy="0" r="43.07606680425401"/>
+        <text id="diagramLabel" style="text-anchor: start;" transform="scale(1,-1)"
+              x="2" y="71.63236000956694">Equator</text>
     </g>
-    <g
-       id="axisFigure">
-      <line
-         id="line57657"
-         y2="100"
-         x2="0"
-         y1="-100"
-         x1="0" />
-      <line
-         id="line57659"
-         y2="0"
-         x2="100"
-         y1="0"
-         x1="-100" />
+    
+    <g id="axisFigure">
+        <line x1="0" y1="-100" x2="0" y2="100"/>
+        <line x1="-100" y1="0" x2="100" y2="0"/>
     </g>
-    <path
-       inkscape:connector-curvature="0"
-       d="M 0,100 A 71.538033,71.538033 0 0 1 0,-43.076067 71.538033,71.538033 0 0 1 0,100 Z"
-       id="eclipticCircle" />
-    <g
-       id="eclipticCenter">
-      <line
-         y2="43.076065"
-         x2="5"
-         y1="43.076065"
-         x1="-5"
-         id="crossHair" />
-      <line
-         y2="48.076065"
-         x2="0"
-         y1="38.076065"
-         x1="0"
-         id="line57664" />
-      <text
-         transform="scale(-1)"
-         y="-45.076065"
-         x="-2"
-         id="text57666">Ecliptic Center</text>
+    
+    <path id="eclipticCircle" d="
+        M0 100.0
+        A71.53803340212701 71.53803340212701 0 0 1 0.0 -43.07606680425402
+        A71.53803340212701 71.53803340212701 0 0 1 0.0 100.0z"/>
+    
+    <g id="eclipticCenter">
+        <line id="crossHair" x1="-5" y1="43.07606680425401" x2="5" y2="43.07606680425401"/>
+        <line id="crossHair" x1="0" y1="38.07606680425401" x2="0" y2="48.07606680425401"/>
+        <text id="diagramLabel" transform="scale(1,-1)"
+              x="-2" y="-45.07606680425401">Ecliptic Center</text>
     </g>
-    <g
-       id="eclipticPole">
-      <line
-         y2="19.614408"
-         x2="5"
-         y1="19.614408"
-         x1="-5"
-         id="line57669" />
-      <line
-         y2="24.614408"
-         x2="0"
-         y1="14.614408"
-         x1="0"
-         id="line57671" />
-      <text
-         transform="scale(-1)"
-         y="-21.614408"
-         x="-2"
-         id="text57673">Ecliptic Pole</text>
+
+    <g id="eclipticPole">
+        <line id="crossHair" x1="-5" y1="19.614408331209837" x2="5" y2="19.614408331209837"/>
+        <line id="crossHair" x1="0" y1="14.614408331209837" x2="0" y2="24.614408331209837"/>
+        <text id="diagramLabel" transform="scale(1,-1)"
+              x="-2" y="-21.614408331209837">Ecliptic Pole</text>
     </g>
-    <g
-       id="g57753">
-      <title
-         id="title57676">Divide Equator</title>
-      <line
-         y2="65.632362"
-         x2="0"
-         y1="61.632359"
-         x1="0"
-         id="division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57679"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57681"
-         transform="rotate(10)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57683"
-         transform="rotate(20)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57685"
-         transform="rotate(30)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57687"
-         transform="rotate(40)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57689"
-         transform="rotate(50)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57691"
-         transform="rotate(60)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57693"
-         transform="rotate(70)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57695"
-         transform="rotate(80)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57697"
-         transform="rotate(90)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57699"
-         transform="rotate(100)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57701"
-         transform="rotate(110)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57703"
-         transform="rotate(120)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57705"
-         transform="rotate(130)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57707"
-         transform="rotate(140)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57709"
-         transform="rotate(150)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57711"
-         transform="rotate(160)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57713"
-         transform="rotate(170)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57715"
-         transform="scale(-1)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57717"
-         transform="rotate(-170)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57719"
-         transform="rotate(-160)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57721"
-         transform="rotate(-150)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57723"
-         transform="rotate(-140)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57725"
-         transform="rotate(-130)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57727"
-         transform="rotate(-120)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57729"
-         transform="rotate(-110)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57731"
-         transform="rotate(-100)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57733"
-         transform="rotate(-90)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57735"
-         transform="rotate(-80)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57737"
-         transform="rotate(-70)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57739"
-         transform="rotate(-60)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57741"
-         transform="rotate(-50)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57743"
-         transform="rotate(-40)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57745"
-         transform="rotate(-30)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57747"
-         transform="rotate(-20)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57749"
-         transform="rotate(-10)"
-         xlink:href="#division" />
-      <use
-         height="100%"
-         width="100%"
-         y="0"
-         x="0"
-         id="use57751"
-         xlink:href="#division" />
+     
+    <g>
+        <title>Divide Equator</title>
+        <line id="division" x1="0" y1="61.63236000956694" x2="0" y2="65.63236000956694"/>
+        
+            <use xlink:href="#division" transform="rotate(0)"/>
+            <use xlink:href="#division" transform="rotate(10)"/>
+            <use xlink:href="#division" transform="rotate(20)"/>
+            <use xlink:href="#division" transform="rotate(30)"/>
+            <use xlink:href="#division" transform="rotate(40)"/>
+            <use xlink:href="#division" transform="rotate(50)"/>
+            <use xlink:href="#division" transform="rotate(60)"/>
+            <use xlink:href="#division" transform="rotate(70)"/>
+            <use xlink:href="#division" transform="rotate(80)"/>
+            <use xlink:href="#division" transform="rotate(90)"/>
+            <use xlink:href="#division" transform="rotate(100)"/>
+            <use xlink:href="#division" transform="rotate(110)"/>
+            <use xlink:href="#division" transform="rotate(120)"/>
+            <use xlink:href="#division" transform="rotate(130)"/>
+            <use xlink:href="#division" transform="rotate(140)"/>
+            <use xlink:href="#division" transform="rotate(150)"/>
+            <use xlink:href="#division" transform="rotate(160)"/>
+            <use xlink:href="#division" transform="rotate(170)"/>
+            <use xlink:href="#division" transform="rotate(180)"/>
+            <use xlink:href="#division" transform="rotate(190)"/>
+            <use xlink:href="#division" transform="rotate(200)"/>
+            <use xlink:href="#division" transform="rotate(210)"/>
+            <use xlink:href="#division" transform="rotate(220)"/>
+            <use xlink:href="#division" transform="rotate(230)"/>
+            <use xlink:href="#division" transform="rotate(240)"/>
+            <use xlink:href="#division" transform="rotate(250)"/>
+            <use xlink:href="#division" transform="rotate(260)"/>
+            <use xlink:href="#division" transform="rotate(270)"/>
+            <use xlink:href="#division" transform="rotate(280)"/>
+            <use xlink:href="#division" transform="rotate(290)"/>
+            <use xlink:href="#division" transform="rotate(300)"/>
+            <use xlink:href="#division" transform="rotate(310)"/>
+            <use xlink:href="#division" transform="rotate(320)"/>
+            <use xlink:href="#division" transform="rotate(330)"/>
+            <use xlink:href="#division" transform="rotate(340)"/>
+            <use xlink:href="#division" transform="rotate(350)"/>
+            <use xlink:href="#division" transform="rotate(360)"/>
     </g>
-    <g
-       id="g57757">
-      <line
-         clip-path="url(#equatorialHole)"
-         y2="58.793285"
-         x2="80.890976"
-         y1="19.614408"
-         x1="0"
-         id="constructionLine" />
-      <line
-         y2="52.285507"
-         x2="67.454643"
-         y1="0"
-         x1="0"
-         id="constructionLine4" />
+    
+    <g>
+        <line id="constructionLine" x1="0" y1="19.614408331209837" style="clip-path: url(#eclipticHole)"
+              x2="80.89097414981983" 
+              y2="58.793284489754285"/>
+              
+        <line id="constructionLine4" x1="0" y1="0" 
+              x2="67.45464439715604" 
+              y2="52.28550899393713" />
     </g>
-  </g>
+</g>
 </svg>
