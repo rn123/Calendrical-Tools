@@ -81,7 +81,7 @@
     </clipPath>
 </defs>
 
-<g id="diagram" style="stroke:black; stroke-width: 1;" transform="translate(105, 105), scale(1, -1)">
+<g id="diagram" style="stroke:black; stroke-width: 1;" transform="translate(102, 102), scale(1, -1)">
     <title>Ecliptic Division</title>
     <g >
         <circle id="tropicCircles" cx="0" cy="0" r="100"/>
