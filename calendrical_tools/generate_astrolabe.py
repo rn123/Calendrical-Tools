@@ -93,6 +93,9 @@ class Astrolabe:
         self.ecliptic_pole = self.RadiusEquator * math.tan(
             self._obliquityRadiansArgument / 2.0
         )
+        self.ecliptic_center = self.RadiusEquator * math.tan(
+            self._obliquityRadiansArgument
+        )
 
         self.ecliptic = {
             "cx": self.xEclipticCenter,
