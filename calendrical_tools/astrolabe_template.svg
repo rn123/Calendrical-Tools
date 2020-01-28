@@ -9,30 +9,30 @@
 				  clipPath: url(#Capricorn);
 				}
 				#description {
-				  fill: {{ stroke_color }}
+				  fill: {{ background_color }}
 				  text-anchor: middle;
 				  font-size: 6pt;
 				}
 				#horizon {
 				  fill: none;
-				  stroke: {{ stroke_color }}
+				  stroke: {{ background_color }}
 				  stroke-width: 1;
 				}
 				#tropics {
 				  fill: none;
-				  stroke: {{ stroke_color }}
+				  stroke: {{ background_color }}
 				  stroke-width: 1;
 				  stroke-opacity: 0.5;
 				  clip-path: url(#almucantarHole);
 				}
 				#almucantar {
 				  fill: none;
-				  stroke: {{ stroke_color }}
+				  stroke: {{ graph_color }}
 				  stroke-width: 0.5;
 				}
 				#azimuth {
 				  fill: none;
-				  stroke: {{ stroke_color }}
+				  stroke: {{ graph_color }}
 				  stroke-width: 0.5;
 				  clip-path:url(#Horizon);
 				  clipPath: url(#Horizon);
@@ -42,24 +42,24 @@
 				}
 				#primeVertical {
 				  fill: none;
-				  stroke: {{ stroke_color }}
+				  stroke: {{ graph_color }}
 				  stroke-width: 0.75;
 				  clip-path:url(#Horizon);
 				  clipPath: url(#Horizon);
 				}
 				#axis {
 				  fill: none;
-				  stroke: {{ stroke_color }}
+				  stroke: {{ background_color }}
 				  stroke-width: 1;
 				  stroke-opacity: 0.5;
 				  clip-path: url(#descriptionHole);
 				}
 				#tick {
-				  stroke: {{ stroke_color }}
+				  stroke: {{ background_color }}
 				  stroke-width: 0.5;
 				}
 				#tickLong {
-				  stroke: {{ stroke_color }}
+				  stroke: {{ background_color }}
 				  stroke-width: 1;
 				}
 				#ecliptic {
@@ -78,7 +78,7 @@
 				}
 				#limb {
 				  fill: none;
-				  stroke: {{ stroke_color }}
+				  stroke: {{ background_color }}
 				  stroke-opacity: 0.5;
 				  stroke-width: 1;
 				}

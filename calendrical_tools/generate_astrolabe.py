@@ -306,6 +306,9 @@ def main():
 
     background_color = "#a3262a;"
     stroke_color = "#f5ac27;"
+    background_color = "grey;"
+    stroke_color = "#f5ac27;"
+    graph_color = "navy;"
 
     # In order to place parts of the figure in Inkscape layers, need the attributes below.
     # This will cause errors, of course, in other renderers unless the inkscape namespace
@@ -366,6 +369,7 @@ def main():
         * math.tan(astrolabe._obliquityRadiansArgument),
         stroke_color=stroke_color,
         background_color=background_color,
+        graph_color=graph_color,
         inkscape=inkscape_attributes,
         animation=animation_parameters,
         moons=[
