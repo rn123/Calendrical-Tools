@@ -1,6 +1,6 @@
 
-<svg viewbox="0 0 200 200" 
-     width="200" height="200"
+<svg viewbox="0 0 210 210" 
+     width="600" height="600"
      xmlns="http://www.w3.org/2000/svg" 
      xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" 
      xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -160,12 +160,12 @@
     
     <g>
         <line id="constructionLine" x1="0" y1="19.614408331209837" style="clip-path: url(#eclipticHole)"
-              x2="80.89097414981983" 
-              y2="58.793284489754285"/>
+              x2="91.2271054002043" 
+              y2="60.57310997445066"/>
               
         <line id="constructionLine4" x1="0" y1="0" 
-              x2="67.45464439715604" 
-              y2="52.28550899393713" />
+              x2="68.15128988820615" 
+              y2="50.21264267052716" />
     </g>
 </g>
 </svg>
