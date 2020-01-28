@@ -72,7 +72,7 @@
 				  );
 				}
 				#eclipticDivision {
-				  stroke: {{ stroke_color }}
+				  stroke: black;
 				  stroke-width: 0.5;
 				  stroke-opacity: 0.5;
 				}
@@ -182,11 +182,6 @@
 		    		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
 		    	</text>
 			</g>
-
-			 <g>
-  				<line id="eclipticPole" x1="-5" y1="{{ ecliptic_center }}" x2="5" y2="{{ ecliptic_center }}" style="stroke: grey;"/>
-				<line id="eclipticPole" x1="0" y1="{{ ecliptic_center -5 }}" x2="0" y2="{{ ecliptic_center + 5 }}" style="stroke: grey;"/>
-  			</g>
 	    </g>
 
 		<g id="limb" {{ inkscape.limb }}>
@@ -224,6 +219,18 @@
 					A{{ inner_radius }} {{ inner_radius }} 0 0 1 {{top_middle_inner.x }} {{ top_middle_inner.y }}z"/>
 
 				<line  x1="0" y1="300" x2="0" y2="-300" style="stroke: black;"/>
+				    <g>
+				        <title>Divide Ecliptic</title>
+				        
+				        {% for division in ecliptic_divisions %}
+				            <line id="eclipticDivision" x1="0" y1="0" x2="{{ division.x2 }}" y2="{{ division.y2 }}"/>
+				        {%- endfor %}
+				    </g>
+  			</g>
+
+  			<g>
+  				<line id="eclipticPole" x1="-5" y1="{{ ecliptic_center }}" x2="5" y2="{{ ecliptic_center }}" style="stroke: grey;"/>
+				<line id="eclipticPole" x1="0" y1="{{ ecliptic_center -5 }}" x2="0" y2="{{ ecliptic_center + 5 }}" style="stroke: grey;"/>
   			</g>
 
 		        <!-- <line id="eclipticDivision" x1="0" y1="0" x2="65.63970574410436" y2="0"/> -->

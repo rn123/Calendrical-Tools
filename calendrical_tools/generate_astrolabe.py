@@ -4,6 +4,8 @@
 import math
 from jinja2 import Template
 
+from svgpathtools import Path, Arc, Line, svg2paths
+
 # Flat list of all of the parts of an astrolabe. Once computed, these will be used in
 # a jinja template to generate an svg diagram.
 identifiers = [
@@ -88,6 +90,36 @@ class Astrolabe:
         self.yEclipticCenter = (self.RadiusCapricorn - self.RadiusCancer) / 2.0
         self.xEclipticCenter = 0.0
 
+        self.ecliptic_pole = self.RadiusEquator * math.tan(
+            self._obliquityRadiansArgument / 2.0
+        )
+
+        self.ecliptic = {
+            "cx": self.xEclipticCenter,
+            "cy": self.yEclipticCenter,
+            "r": self.RadiusEcliptic,
+            "width": 5,
+        }
+
+        self.ecliptic_path = Path(
+            Arc(
+                start=complex(0, self.ecliptic["cy"] + self.ecliptic["r"]),
+                radius=(complex(self.ecliptic["r"], self.ecliptic["r"])),
+                rotation=0.0,
+                large_arc=True,
+                sweep=False,
+                end=complex(0, self.ecliptic["cy"] - self.ecliptic["r"]),
+            ),
+            Arc(
+                start=complex(0, self.ecliptic["cy"] - self.ecliptic["r"]),
+                radius=(complex(self.ecliptic["r"], self.ecliptic["r"])),
+                rotation=0.0,
+                large_arc=True,
+                sweep=False,
+                end=complex(0, self.ecliptic["cy"] + self.ecliptic["r"]),
+            ),
+        )
+
     def plates(self, plate_parameters=None):
         if plate_parameters is not None:
             self.plate_parameters.update(plate_parameters)
@@ -147,8 +179,12 @@ class Astrolabe:
         R_{Cancer} = R_{Equator} \tan(\frac{90 - \epsilon}{2})
         """
 
-        self.RadiusEquator = self.RadiusCapricorn * math.tan(self._obliquityRadiansArgument)
-        self.RadiusCancer = self.RadiusEquator * math.tan(self._obliquityRadiansArgument)
+        self.RadiusEquator = self.RadiusCapricorn * math.tan(
+            self._obliquityRadiansArgument
+        )
+        self.RadiusCancer = self.RadiusEquator * math.tan(
+            self._obliquityRadiansArgument
+        )
 
     def almucantar_arc(self, altitude, latitude):
         """Generate circle of constant altitude.
@@ -222,6 +258,45 @@ class Astrolabe:
             azimuth_coords.extend(coords)
         return azimuth_coords
 
+    def ecliptic_division(self, constructionAngle=None):
+
+        x0 = self.RadiusEquator * math.cos(math.radians(constructionAngle))
+        y0 = self.RadiusEquator * math.sin(math.radians(constructionAngle))
+
+        theta2 = math.atan2((y0 - self.ecliptic_pole), x0)
+        x2 = self.RadiusCapricorn * math.cos(theta2)
+        y2 = self.ecliptic_pole + self.RadiusCapricorn * math.sin(theta2)
+
+        constructionLine = Line(complex(0, 0), complex(x2, y2))
+
+        intersections = []
+        for (T1, seg1, t1), (T2, seg2, t2) in self.ecliptic_path.intersect(
+            constructionLine
+        ):
+            p = self.ecliptic_path.point(T1)
+            intersections.append(p)
+
+        intersections = [i for i in intersections if i is not None]
+        intersections = list(set([(p.real, p.imag) for p in intersections]))
+
+        match_list = []
+        while len(intersections) > 0:
+            p = intersections.pop()
+            l = [p]
+            for m, q in enumerate(intersections):
+                if math.isclose(p[0], q[0], abs_tol=0.01) and math.isclose(
+                    p[1], q[1], abs_tol=0.01
+                ):
+                    l.append(q)
+                    intersections.pop(m)
+            match_list.append(l)
+
+        match_list = [
+            {"angle": constructionAngle, "x2": m[0][0], "y2": m[0][1]}
+            for m in match_list
+        ]
+        return match_list[0]
+
 
 def main():
 
@@ -245,21 +320,23 @@ def main():
     animation_parameters = {"from": "233", "to": "233", "begin": "0s", "dur": "5s"}
 
     ecliptic = {
-            "cx": astrolabe.xEclipticCenter,
-            "cy": astrolabe.yEclipticCenter,
-            "r": astrolabe.RadiusEcliptic,
-            "width": 5,
-        }
+        "cx": astrolabe.xEclipticCenter,
+        "cy": astrolabe.yEclipticCenter,
+        "r": astrolabe.RadiusEcliptic,
+        "width": 5,
+    }
     outer_radius = ecliptic["r"]
     inner_radius = ecliptic["r"] - ecliptic["width"]
 
-    top_middle_outer =    {"x":(ecliptic["cx"]), "y":(ecliptic["cy"] + outer_radius)}
-    bottom_middle_outer = {"x":(ecliptic["cx"]), "y":(ecliptic["cy"] - outer_radius)}
+    top_middle_outer = {"x": (ecliptic["cx"]), "y": (ecliptic["cy"] + outer_radius)}
+    bottom_middle_outer = {"x": (ecliptic["cx"]), "y": (ecliptic["cy"] - outer_radius)}
 
-    top_middle_inner =    {"x":(ecliptic["cx"]), "y":(ecliptic["cy"] + inner_radius)}
-    bottom_middle_inner = {"x":(ecliptic["cx"]), "y":(ecliptic["cy"] - inner_radius)}
+    top_middle_inner = {"x": (ecliptic["cx"]), "y": (ecliptic["cy"] + inner_radius)}
+    bottom_middle_inner = {"x": (ecliptic["cx"]), "y": (ecliptic["cy"] - inner_radius)}
 
-
+    ecliptic_divisions = []
+    for angle in list(range(0, 361, 30)):
+        ecliptic_divisions.append(astrolabe.ecliptic_division(angle))
 
     with open("astrolabe_template.svg") as fp:
         template_text = fp.read()
@@ -278,13 +355,15 @@ def main():
         prime_vertical=plate["prime_vertical"],
         ticks=astrolabe.ticks,
         ecliptic=ecliptic,
+        ecliptic_divisions=ecliptic_divisions,
         top_middle_outer=top_middle_outer,
         bottom_middle_outer=bottom_middle_outer,
         outer_radius=outer_radius,
         inner_radius=inner_radius,
         top_middle_inner=top_middle_inner,
         bottom_middle_inner=bottom_middle_inner,
-        ecliptic_center=astrolabe.RadiusEquator * math.tan(astrolabe._obliquityRadiansArgument),
+        ecliptic_center=astrolabe.RadiusEquator
+        * math.tan(astrolabe._obliquityRadiansArgument),
         stroke_color=stroke_color,
         background_color=background_color,
         inkscape=inkscape_attributes,
