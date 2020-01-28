@@ -72,9 +72,9 @@
 				  );
 				}
 				#eclipticDivision {
-				  stroke: black;
-				  stroke-width: 0.5;
-				  stroke-opacity: 0.5;
+				  stroke: {{ stroke_color }}
+				  stroke-width: 2;
+				  stroke-opacity: 0.2;
 				}
 				#limb {
 				  fill: none;
