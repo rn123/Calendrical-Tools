@@ -123,7 +123,7 @@
 		    </clipPath>
 
 		    <clipPath id="eclipticBoundary">
-		    	<path fill-rule="evenodd" d="
+		    	<path id="eclipticArc" fill-rule="evenodd" d="
 					M{{ top_middle_outer.x }} {{ top_middle_outer.y }}
 					A{{ outer_radius }} {{ outer_radius }} 0 1 0 {{ bottom_middle_outer.x }} {{ bottom_middle_outer.y }}
 					A{{ outer_radius }} {{ outer_radius }} 0 1 0 {{ top_middle_outer.x }} {{ top_middle_outer.y }}z"/>
@@ -138,6 +138,13 @@
 					A{{ inner_radius }} {{ inner_radius }} 0 1 0 {{ bottom_middle_inner.x }} {{ bottom_middle_inner.y }}
 					A{{ inner_radius }} {{ inner_radius }} 0 1 0 {{top_middle_inner.x }} {{ top_middle_inner.y }}z"/>
 		    </clipPath>
+
+		{% for arc in seasonal_arcs %}
+			<path id="{{ arc.tag }}" d="
+				M{{ arc.start_x }} {{ arc.start_y }}
+				A{{ arc.r }} {{ arc.r }} 0 0 1 {{ arc.end_x }} {{ arc.end_y }}
+				A{{ arc.r }} {{ arc.r }} 0 0 1 {{ arc.start_x }} {{ arc.start_y }}"/>
+		{%- endfor %}
 
 		</defs>
 
@@ -219,13 +226,17 @@
 					A{{ inner_radius }} {{ inner_radius }} 0 0 1 {{top_middle_inner.x }} {{ top_middle_inner.y }}z"/>
 
 				<!-- <line  x1="0" y1="300" x2="0" y2="-300" style="stroke: black;"/> -->
-				    <g>
-				        <title>Divide Ecliptic</title>
-				        
-				        {% for division in ecliptic_divisions %}
-				            <line id="eclipticDivision" x1="0" y1="0" x2="{{ division.x2 }}" y2="{{ division.y2 }}"/>
-				        {%- endfor %}
-				    </g>
+			    <g>
+			        <title>Divide Ecliptic</title>
+			        
+			        {% for division in ecliptic_divisions %}
+			            <line id="eclipticDivision" x1="0" y1="0" x2="{{ division.x2 }}" y2="{{ division.y2 }}"/>
+			        {%- endfor %}
+			    </g>
+			    
+			    {% for arc in seasonal_arcs %}
+					<text><textPath xlink:href="#{{ arc.tag }}" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1.9ex">{{ arc.name }}</tspan></textPath></text>
+				{%- endfor %}
   			</g>
 
   			<g>

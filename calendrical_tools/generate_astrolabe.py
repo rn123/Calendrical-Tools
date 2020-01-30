@@ -344,6 +344,72 @@ def main():
     for angle in list(range(0, 361, 30)):
         ecliptic_divisions.append(astrolabe.ecliptic_division(angle))
 
+    seasonal_arcs = []
+    month_names = [
+        "jan",
+        "feb",
+        "mar",
+        "apr",
+        "may",
+        "june",
+        "july",
+        "aug",
+        "sept",
+        "oct",
+        "nov",
+        "dec",
+    ]
+    seasonal_names = [
+        "pisces",
+        "aquarius",
+        "capricorn",
+        "sagittarius",
+        "scorpio",
+        "libra",
+        "virgo",
+        "leo",
+        "cancer",
+        "gemini",
+        "taurus",
+        "aries"
+    ]
+    seasonal_names = [    
+        "雨水",
+        "大寒",
+        "冬至",
+        "小雪",
+        "霜降",
+        "秋分",
+        "处暑",
+        "大暑",
+        "夏至",
+        "小满",
+        "谷雨",
+        "春分",
+    ]
+
+    # for name, angle in zip(seasonal_names, ecliptic_divisions):
+    #     start_x = ecliptic["cx"] + (ecliptic["r"]  - 3.5) * math.cos(math.radians(angle))
+    #     start_y = ecliptic["cy"] + (ecliptic["r"] - 3.5) * math.sin(math.radians(angle))
+    #     end_x = ecliptic["cx"] + (ecliptic["r"] - 3.5) * math.cos(math.radians(angle + 30))
+    #     end_y = ecliptic["cy"] + (ecliptic["r"] - 3.5) * math.sin(math.radians(angle + 30))
+    angle = 0
+    for n, division in enumerate(ecliptic_divisions[0: 12]):
+        tag = "season" + str(angle)
+        angle += 30
+        next_division = ecliptic_divisions[(n + 1) % 12]
+        seasonal_arcs.append(
+            {
+                "tag": tag,
+                "name": seasonal_names[n],
+                "r": ecliptic["r"],
+                "start_x": division["x2"],
+                "start_y": division["y2"],
+                "end_x": next_division["x2"],
+                "end_y": next_division["y2"],
+            }
+        )
+
     with open("astrolabe_template.svg") as fp:
         template_text = fp.read()
 
@@ -370,6 +436,7 @@ def main():
         bottom_middle_inner=bottom_middle_inner,
         ecliptic_center=astrolabe.RadiusEquator
         * math.tan(astrolabe._obliquityRadiansArgument),
+        seasonal_arcs=seasonal_arcs,
         stroke_color=stroke_color,
         background_color=background_color,
         graph_color=graph_color,
