@@ -70,7 +70,7 @@ Stereographic projections of circles are circles.  The ecliptic is a circle that
 2. Divide the equator into equal segments of longitude: 12 divisions of 30 for the entry into each zodiac sign: more divisions depending on the resolution desired.
 3. Draw a line from each equator division to the ecliptic pole. The corresponding longitude point on the ecliptic is where this line intersects the ecliptic circle.
 4. A tic mark on the ecliptic is drawn toward the center of the instrument.
-<img src="images/astrolabe_generated_01272020.svg" alt="version with correct prime vertical" style="padding:5px;"/>
+<img src="images/astrolabe_generated_01292020.svg" alt="version with correct prime vertical" style="padding:5px;"/>
 
 ## The International Organization for Standardization (ISO) Calendar
 
