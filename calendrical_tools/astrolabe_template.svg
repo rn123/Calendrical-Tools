@@ -235,14 +235,14 @@
 			    </g>
 			    
 			    {% for arc in seasonal_arcs %}
-					<text><textPath xlink:href="#{{ arc.tag }}" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1.9ex">{{ arc.name }}</tspan></textPath></text>
+					<text><textPath xlink:href="#{{ arc.tag }}" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1ex">{{ arc.name }}</tspan></textPath></text>
 				{%- endfor %}
   			</g>
 
-  			<g>
+  			<!-- <g>
   				<line id="eclipticPole" x1="-5" y1="{{ ecliptic_center }}" x2="5" y2="{{ ecliptic_center }}" style="stroke: grey;"/>
 				<line id="eclipticPole" x1="0" y1="{{ ecliptic_center -5 }}" x2="0" y2="{{ ecliptic_center + 5 }}" style="stroke: grey;"/>
-  			</g>
+  			</g> -->
 
 		        <!-- <line id="eclipticDivision" x1="0" y1="0" x2="65.63970574410436" y2="0"/> -->
 		        
