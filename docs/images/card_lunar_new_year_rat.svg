@@ -218,7 +218,7 @@
 		    </clipPath>
 
 		    <clipPath id="eclipticBoundary">
-		    	<path fill-rule="evenodd" d="
+		    	<path id="eclipticArc" fill-rule="evenodd" d="
 					M0.0 100.0
 					A71.53803340212701 71.53803340212701 0 1 0 0.0 -43.07606680425402
 					A71.53803340212701 71.53803340212701 0 1 0 0.0 100.0z"/>
@@ -233,6 +233,56 @@
 					A66.53803340212701 66.53803340212701 0 1 0 0.0 -38.07606680425402
 					A66.53803340212701 66.53803340212701 0 1 0 0.0 95.0z"/>
 		    </clipPath>
+
+		
+			<path id="season0" d="
+				M62.7416338553867 -5.906297894248713
+				A71.53803340212701 71.53803340212701 0 0 1 71.49294375045773 31.00149744779938
+				A71.53803340212701 71.53803340212701 0 0 1 62.7416338553867 -5.906297894248713"/>
+			<path id="season30" d="
+				M71.49294375045773 31.00149744779938
+				A71.53803340212701 71.53803340212701 0 0 1 53.26386249574163 76.2181303370027
+				A71.53803340212701 71.53803340212701 0 0 1 71.49294375045773 31.00149744779938"/>
+			<path id="season60" d="
+				M53.26386249574163 76.2181303370027
+				A71.53803340212701 71.53803340212701 0 0 1 0.0 100.0
+				A71.53803340212701 71.53803340212701 0 0 1 53.26386249574163 76.2181303370027"/>
+			<path id="season90" d="
+				M0.0 100.0
+				A71.53803340212701 71.53803340212701 0 0 1 -53.26386249574159 76.21813033700275
+				A71.53803340212701 71.53803340212701 0 0 1 0.0 100.0"/>
+			<path id="season120" d="
+				M-53.26386249574159 76.21813033700275
+				A71.53803340212701 71.53803340212701 0 0 1 -71.49294375045771 31.001497447799622
+				A71.53803340212701 71.53803340212701 0 0 1 -53.26386249574159 76.21813033700275"/>
+			<path id="season150" d="
+				M-71.49294375045771 31.001497447799622
+				A71.53803340212701 71.53803340212701 0 0 1 -62.74163385538673 -5.906297894248663
+				A71.53803340212701 71.53803340212701 0 0 1 -71.49294375045771 31.001497447799622"/>
+			<path id="season180" d="
+				M-62.74163385538673 -5.906297894248663
+				A71.53803340212701 71.53803340212701 0 0 1 -43.36825574182792 -28.431658853096902
+				A71.53803340212701 71.53803340212701 0 0 1 -62.74163385538673 -5.906297894248663"/>
+			<path id="season210" d="
+				M-43.36825574182792 -28.431658853096902
+				A71.53803340212701 71.53803340212701 0 0 1 -21.67249393934792 -39.71422594389901
+				A71.53803340212701 71.53803340212701 0 0 1 -43.36825574182792 -28.431658853096902"/>
+			<path id="season240" d="
+				M-21.67249393934792 -39.71422594389901
+				A71.53803340212701 71.53803340212701 0 0 1 0.0 -43.07606680425402
+				A71.53803340212701 71.53803340212701 0 0 1 -21.67249393934792 -39.71422594389901"/>
+			<path id="season270" d="
+				M0.0 -43.07606680425402
+				A71.53803340212701 71.53803340212701 0 0 1 21.672493939347852 -39.71422594389904
+				A71.53803340212701 71.53803340212701 0 0 1 0.0 -43.07606680425402"/>
+			<path id="season300" d="
+				M21.672493939347852 -39.71422594389904
+				A71.53803340212701 71.53803340212701 0 0 1 43.3682557418279 -28.43165885309693
+				A71.53803340212701 71.53803340212701 0 0 1 21.672493939347852 -39.71422594389904"/>
+			<path id="season330" d="
+				M43.3682557418279 -28.43165885309693
+				A71.53803340212701 71.53803340212701 0 0 1 62.7416338553867 -5.906297894248713
+				A71.53803340212701 71.53803340212701 0 0 1 43.3682557418279 -28.43165885309693"/>
 
 		</defs>
 
@@ -717,30 +767,44 @@
 					A66.53803340212701 66.53803340212701 0 0 1 0.0 95.0z"/>
 
 				<!-- <line  x1="0" y1="300" x2="0" y2="-300" style="stroke: black;"/> -->
-				    <g>
-				        <title>Divide Ecliptic</title>
-				        
-				        
-				            <line id="eclipticDivision" x1="0" y1="0" x2="62.74163385538669" y2="-5.906297894248727"/>
-				            <line id="eclipticDivision" x1="0" y1="0" x2="71.49294375045773" y2="31.00149744779947"/>
-				            <line id="eclipticDivision" x1="0" y1="0" x2="53.26386249574163" y2="76.2181303370027"/>
-				            <line id="eclipticDivision" x1="0" y1="0" x2="0.0" y2="100.0"/>
-				            <line id="eclipticDivision" x1="0" y1="0" x2="-53.26386249574158" y2="76.21813033700276"/>
-				            <line id="eclipticDivision" x1="0" y1="0" x2="-71.49294375045773" y2="31.00149744779948"/>
-				            <line id="eclipticDivision" x1="0" y1="0" x2="-62.74163385538669" y2="-5.906297894248734"/>
-				            <line id="eclipticDivision" x1="0" y1="0" x2="-43.36825574182794" y2="-28.431658853096888"/>
-				            <line id="eclipticDivision" x1="0" y1="0" x2="-21.67249393934795" y2="-39.714225943898995"/>
-				            <line id="eclipticDivision" x1="0" y1="0" x2="-1.3141323543481693e-14" y2="-43.076066804254026"/>
-				            <line id="eclipticDivision" x1="0" y1="0" x2="21.672493939347852" y2="-39.71422594389904"/>
-				            <line id="eclipticDivision" x1="0" y1="0" x2="43.36825574182787" y2="-28.431658853096945"/>
-				            <line id="eclipticDivision" x1="0" y1="0" x2="62.74163385538669" y2="-5.906297894248727"/>
-				    </g>
+			    <g>
+			        <title>Divide Ecliptic</title>
+			        
+			        
+			            <line id="eclipticDivision" x1="0" y1="0" x2="62.7416338553867" y2="-5.906297894248713"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="71.49294375045773" y2="31.00149744779938"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="53.26386249574163" y2="76.2181303370027"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="0.0" y2="100.0"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="-53.26386249574159" y2="76.21813033700275"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="-71.49294375045771" y2="31.001497447799622"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="-62.74163385538673" y2="-5.906297894248663"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="-43.36825574182792" y2="-28.431658853096902"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="-21.67249393934792" y2="-39.71422594389901"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="0.0" y2="-43.07606680425402"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="21.672493939347852" y2="-39.71422594389904"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="43.3682557418279" y2="-28.43165885309693"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="62.74163385538669" y2="-5.906297894248734"/>
+			    </g>
+			    
+			    
+					<text><textPath xlink:href="#season0" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1ex">雨水</tspan></textPath></text>
+					<text><textPath xlink:href="#season30" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1ex">大寒</tspan></textPath></text>
+					<text><textPath xlink:href="#season60" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1ex">冬至</tspan></textPath></text>
+					<text><textPath xlink:href="#season90" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1ex">小雪</tspan></textPath></text>
+					<text><textPath xlink:href="#season120" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1ex">霜降</tspan></textPath></text>
+					<text><textPath xlink:href="#season150" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1ex">秋分</tspan></textPath></text>
+					<text><textPath xlink:href="#season180" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1ex">处暑</tspan></textPath></text>
+					<text><textPath xlink:href="#season210" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1ex">大暑</tspan></textPath></text>
+					<text><textPath xlink:href="#season240" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1ex">夏至</tspan></textPath></text>
+					<text><textPath xlink:href="#season270" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1ex">小满</tspan></textPath></text>
+					<text><textPath xlink:href="#season300" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1ex">谷雨</tspan></textPath></text>
+					<text><textPath xlink:href="#season330" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1ex">春分</tspan></textPath></text>
   			</g>
 
-  			<g>
+  			<!-- <g>
   				<line id="eclipticPole" x1="-5" y1="43.07606680425401" x2="5" y2="43.07606680425401" style="stroke: grey;"/>
 				<line id="eclipticPole" x1="0" y1="38.07606680425401" x2="0" y2="48.07606680425401" style="stroke: grey;"/>
-  			</g>
+  			</g> -->
 
 		        <!-- <line id="eclipticDivision" x1="0" y1="0" x2="65.63970574410436" y2="0"/> -->
 		        
