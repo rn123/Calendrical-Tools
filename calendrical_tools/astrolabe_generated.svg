@@ -1,85 +1,67 @@
-<svg viewbox="0 0 250 250" height="250" width="250" xmlns="http://www.w3.org/2000/svg" 
-	xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg id="top" viewbox="0 0 250 250" height="250" width="250" xmlns="http://www.w3.org/2000/svg" 
+	xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink"
+	onload="init(evt)">
 	<g id="astrolabe" transform="translate(125,125)" inkscape:label="astrolabe" inkscape:groupmode="layer">
 	    <title>Astrolabe Plate</title>
 	    <defs>
 			<style type="text/css">
-				.new_year {
-				  display: block;
-				  margin: auto;
-				  stroke: #f5ac27;
-				  background-color: #a3262a;
-				}
 				#plate {
 				  clip-path:url(#Capricorn);
 				  clipPath: url(#Capricorn);
 				}
-				#location {
+				#description {
+				  fill: grey;
 				  text-anchor: middle;
 				  font-size: 6pt;
-				  fill: #f5ac27;
-				  fill-opacity: 1
-				}
-				#tropics {
-				  fill: none;
-				  stroke: #f5ac27;
-				  stroke-width: 1;
-				  stroke-opacity: 0.5
 				}
 				#horizon {
 				  fill: none;
-				  stroke: #f5ac27;
+				  stroke: grey;
 				  stroke-width: 1;
+				}
+				#tropics {
+				  fill: none;
+				  stroke: grey;
+				  stroke-width: 1;
+				  stroke-opacity: 0.5;
+				  clip-path: url(#almucantarHole);
 				}
 				#almucantar {
 				  fill: none;
-				  stroke: #f5ac27;
+				  stroke: navy;
 				  stroke-width: 0.5;
-				}
-				#almucantar-center {
-				  stroke: #f5ac27;
-				  stroke-width: 0.5;
-				  fill: #a3262a;
-				  fill-opacity: 1;
 				}
 				#azimuth {
 				  fill: none;
-				  stroke: #f5ac27;
+				  stroke: navy;
 				  stroke-width: 0.5;
 				  clip-path:url(#Horizon);
 				  clipPath: url(#Horizon);
 				}
-				#azimuth-90 {
+				#azimuths{
+				  clip-path: url(#almucantarHole);
+				}
+				#primeVertical {
 				  fill: none;
-				  stroke: #f5ac27;
+				  stroke: navy;
 				  stroke-width: 0.75;
 				  clip-path:url(#Horizon);
 				  clipPath: url(#Horizon);
 				}
 				#axis {
 				  fill: none;
-				  stroke: #f5ac27;
+				  stroke: grey;
 				  stroke-width: 1;
 				  stroke-opacity: 0.5;
+				  clip-path: url(#descriptionHole);
 				}
 				#tick {
-				  stroke: #f5ac27;
+				  stroke: grey;
 				  stroke-width: 0.5;
 				}
 				#tickLong {
-				  stroke: #f5ac27;
+				  stroke: grey;
 				  stroke-width: 1;
-				}
-				#note {
-				  stroke: black;
-				  stroke-width: 1;
-				}
-				#ecliptic-pad {
-				  fill: #f5ac27;
-				  fill-opacity: 0.45;
-				  stroke: none;
-				  stroke-width: 0.5;
-				  stroke-opacity: 0.7;
 				}
 				#ecliptic {
 				  fill: #f5ac27;
@@ -87,15 +69,16 @@
 				  stroke: #f5ac27;
 				  stroke-width: 0.7;
 				  stroke-opacity: 0.7;
+				  clip-path: url(#eclipticHole);
 				}
 				#eclipticDivision {
-				  stroke: #f5ac27;
+				  stroke: black;
 				  stroke-width: 0.5;
-				  stroke-opacity: 0.5;
+				  stroke-opacity: 0.2;
 				}
 				#limb {
 				  fill: none;
-				  stroke: #f5ac27;
+				  stroke: grey;
 				  stroke-opacity: 0.5;
 				  stroke-width: 1;
 				}
@@ -111,67 +94,152 @@
 
 			<clipPath id="Horizon">
 				<path d="
-						M0.0 348.94202790171425 
-						A180.64477724913516 180.64477724913516 0 0 1 0.0 -12.347526596556037
-						A180.64477724913516 180.64477724913516 0 0 1 0.0 348.94202790171425z
+						M0.0 348.90297782559264 
+						A180.62456130568754 180.62456130568754 0 0 1 0.0 -12.346144785782457
+						A180.62456130568754 180.62456130568754 0 0 1 0.0 348.90297782559264z
 					"/>
 			</clipPath>
 
-		    <mask id="almucantar_hole">
-		    	<circle id="almucantar-center" az="80" cx="0" cy="45.36001580485654" r="8.454575676076276" style="fill:none"/>
-		    </mask>
+		    <clipPath id="almucantarHole">
+				<path fill-rule="evenodd"  d="
+					M0 100 
+					A100 100 0 0 1 0 -100
+					A100 100 0 0 1 0 100z
+					M0 53.80856909404402 
+					A8.453629525147674 8.453629525147674 0 1 0 0 36.901310043748666
+					A8.453629525147674 8.453629525147674 0 1 0 0 53.80856909404402z
+				"/>
+		    </clipPath>
+
+		    <clipPath id="descriptionHole" >
+		    	<!-- <rect id="description" x="-10" y="73" width="20" height="19"/> -->
+		    	<path id="test" fill-rule="evenodd" transform="rotate(180)" d="
+		    		M0 100 
+					A100 100 0 1 0 0 -100
+					A100 100 0 1 0 0 100z
+		    		M-10,73 10,73 10,92 -10,92 -10,73 0,100
+
+		    	"/>
+		    </clipPath>
+
+		    <clipPath id="eclipticBoundary">
+		    	<path id="eclipticArc" fill-rule="evenodd" d="
+					M0.0 100.0
+					A71.53803340212701 71.53803340212701 0 1 0 0.0 -43.07606680425402
+					A71.53803340212701 71.53803340212701 0 1 0 0.0 100.0z"/>
+		    </clipPath>
+
+		    <clipPath id="eclipticHole">
+		    	<path fill-rule="evenodd" d="
+					M0.0 100.0
+					A71.53803340212701 71.53803340212701 0 0 1 0.0 -43.07606680425402
+					A71.53803340212701 71.53803340212701 0 0 1 0.0 100.0z
+					M0.0 95.0
+					A66.53803340212701 66.53803340212701 0 1 0 0.0 -38.07606680425402
+					A66.53803340212701 66.53803340212701 0 1 0 0.0 95.0z"/>
+		    </clipPath>
+
+		
+			<path id="season0" d="
+				M62.7416338553867 -5.906297894248713
+				A71.53803340212701 71.53803340212701 0 0 1 71.49294375045773 31.00149744779938
+				A71.53803340212701 71.53803340212701 0 0 1 62.7416338553867 -5.906297894248713"/>
+			<path id="season30" d="
+				M71.49294375045773 31.00149744779938
+				A71.53803340212701 71.53803340212701 0 0 1 53.26386249574163 76.2181303370027
+				A71.53803340212701 71.53803340212701 0 0 1 71.49294375045773 31.00149744779938"/>
+			<path id="season60" d="
+				M53.26386249574163 76.2181303370027
+				A71.53803340212701 71.53803340212701 0 0 1 0.0 100.0
+				A71.53803340212701 71.53803340212701 0 0 1 53.26386249574163 76.2181303370027"/>
+			<path id="season90" d="
+				M0.0 100.0
+				A71.53803340212701 71.53803340212701 0 0 1 -53.26386249574159 76.21813033700275
+				A71.53803340212701 71.53803340212701 0 0 1 0.0 100.0"/>
+			<path id="season120" d="
+				M-53.26386249574159 76.21813033700275
+				A71.53803340212701 71.53803340212701 0 0 1 -71.49294375045771 31.001497447799622
+				A71.53803340212701 71.53803340212701 0 0 1 -53.26386249574159 76.21813033700275"/>
+			<path id="season150" d="
+				M-71.49294375045771 31.001497447799622
+				A71.53803340212701 71.53803340212701 0 0 1 -62.74163385538673 -5.906297894248663
+				A71.53803340212701 71.53803340212701 0 0 1 -71.49294375045771 31.001497447799622"/>
+			<path id="season180" d="
+				M-62.74163385538673 -5.906297894248663
+				A71.53803340212701 71.53803340212701 0 0 1 -43.36825574182792 -28.431658853096902
+				A71.53803340212701 71.53803340212701 0 0 1 -62.74163385538673 -5.906297894248663"/>
+			<path id="season210" d="
+				M-43.36825574182792 -28.431658853096902
+				A71.53803340212701 71.53803340212701 0 0 1 -21.67249393934792 -39.71422594389901
+				A71.53803340212701 71.53803340212701 0 0 1 -43.36825574182792 -28.431658853096902"/>
+			<path id="season240" d="
+				M-21.67249393934792 -39.71422594389901
+				A71.53803340212701 71.53803340212701 0 0 1 0.0 -43.07606680425402
+				A71.53803340212701 71.53803340212701 0 0 1 -21.67249393934792 -39.71422594389901"/>
+			<path id="season270" d="
+				M0.0 -43.07606680425402
+				A71.53803340212701 71.53803340212701 0 0 1 21.672493939347852 -39.71422594389904
+				A71.53803340212701 71.53803340212701 0 0 1 0.0 -43.07606680425402"/>
+			<path id="season300" d="
+				M21.672493939347852 -39.71422594389904
+				A71.53803340212701 71.53803340212701 0 0 1 43.3682557418279 -28.43165885309693
+				A71.53803340212701 71.53803340212701 0 0 1 21.672493939347852 -39.71422594389904"/>
+			<path id="season330" d="
+				M43.3682557418279 -28.43165885309693
+				A71.53803340212701 71.53803340212701 0 0 1 62.7416338553867 -5.906297894248713
+				A71.53803340212701 71.53803340212701 0 0 1 43.3682557418279 -28.43165885309693"/>
+
 		</defs>
 
 		<g id="plate" transform="rotate(180)" inkscape:label="plate" inkscape:groupmode="layer">
 			<g id="tropics" inkscape:label="tropics" inkscape:groupmode="layer">
-				<circle id="capricorn" cx="0" cy="0" r="100"/>
-				<circle id="equator" cx="0" cy="0" r="65.63970574410435"/>
-				<circle id="cancer" cx="0" cy="0" r="43.08570970172605"/>
+				<circle cx="0" cy="0" r="100"/>
+				<circle cx="0" cy="0" r="65.63236000956694"/>
+				<circle cx="0" cy="0" r="43.07606680425401"/>
 			</g>
 
 			<g id="horizon" inkscape:label="horizon" inkscape:groupmode="layer">
 		        <title>Horizon</title>
-		        <circle id="horizon" cx="0.0" cy="168.29725065257912" r="180.64477724913516"/>
+		        <circle cx="0.0" cy="168.27841651990508" r="180.62456130568754"/>
 	      	</g>
 
 			<g id="azimuths" inkscape:label="azimuths" inkscape:groupmode="layer">
 				<title>Azimuth</title>
 				
-					<circle id="azimuth" az="10" cx="12.423208815722333" cy="-25.600958740953608" r="71.54240823391154"/>
-					<circle id="azimuth" az="10" cx="-12.423208815722333" cy="-25.600958740953608" r="71.54240823391154"/>
-					<circle id="azimuth" az="20" cx="25.643711500240837" cy="-25.600958740953608" r="74.97719652091692"/>
-					<circle id="azimuth" az="20" cx="-25.643711500240837" cy="-25.600958740953608" r="74.97719652091692"/>
-					<circle id="azimuth" az="30" cx="40.67751245519901" cy="-25.600958740953608" r="81.35502491039803"/>
-					<circle id="azimuth" az="30" cx="-40.67751245519901" cy="-25.600958740953608" r="81.35502491039803"/>
-					<circle id="azimuth" az="40" cx="59.1191994181892" cy="-25.600958740953608" r="91.97314715978916"/>
-					<circle id="azimuth" az="40" cx="-59.1191994181892" cy="-25.600958740953608" r="91.97314715978916"/>
-					<circle id="azimuth" az="50" cx="83.96561704963386" cy="-25.600958740953608" r="109.6093285498747"/>
-					<circle id="azimuth" az="50" cx="-83.96561704963386" cy="-25.600958740953608" r="109.6093285498747"/>
-					<circle id="azimuth" az="60" cx="122.03253736559701" cy="-25.600958740953608" r="140.911036595841"/>
-					<circle id="azimuth" az="60" cx="-122.03253736559701" cy="-25.600958740953608" r="140.911036595841"/>
-					<circle id="azimuth" az="70" cx="193.5749455995085" cy="-25.600958740953608" r="205.99815441523086"/>
-					<circle id="azimuth" az="70" cx="-193.5749455995085" cy="-25.600958740953608" r="205.99815441523086"/>
-					<circle id="azimuth" az="80" cx="399.5731000147394" cy="-25.600958740953608" r="405.73715914865073"/>
-					<circle id="azimuth" az="80" cx="-399.5731000147394" cy="-25.600958740953608" r="405.73715914865073"/>			
+					<circle id="azimuth" az="10" cx="12.421818535357293" cy="-25.59809373958466" r="71.53440192838207"/>
+					<circle id="azimuth" az="10" cx="-12.421818535357293" cy="-25.59809373958466" r="71.53440192838207"/>
+					<circle id="azimuth" az="20" cx="25.640841714413813" cy="-25.59809373958466" r="74.96880582848834"/>
+					<circle id="azimuth" az="20" cx="-25.640841714413813" cy="-25.59809373958466" r="74.96880582848834"/>
+					<circle id="azimuth" az="30" cx="40.67296023783681" cy="-25.59809373958466" r="81.34592047567364"/>
+					<circle id="azimuth" az="30" cx="-40.67296023783681" cy="-25.59809373958466" r="81.34592047567364"/>
+					<circle id="azimuth" az="40" cx="59.11258339302476" cy="-25.59809373958466" r="91.96285445180173"/>
+					<circle id="azimuth" az="40" cx="-59.11258339302476" cy="-25.59809373958466" r="91.96285445180173"/>
+					<circle id="azimuth" az="50" cx="83.95622046373934" cy="-25.59809373958466" r="109.59706217815317"/>
+					<circle id="azimuth" az="50" cx="-83.95622046373934" cy="-25.59809373958466" r="109.59706217815317"/>
+					<circle id="azimuth" az="60" cx="122.01888071351043" cy="-25.59809373958466" r="140.89526725232417"/>
+					<circle id="azimuth" az="60" cx="-122.01888071351043" cy="-25.59809373958466" r="140.89526725232417"/>
+					<circle id="azimuth" az="70" cx="193.55328264189245" cy="-25.59809373958466" r="205.97510117724977"/>
+					<circle id="azimuth" az="70" cx="-193.55328264189245" cy="-25.59809373958466" r="205.97510117724977"/>
+					<circle id="azimuth" az="80" cx="399.5283838191422" cy="-25.59809373958466" r="405.69175313365906"/>
+					<circle id="azimuth" az="80" cx="-399.5283838191422" cy="-25.59809373958466" r="405.69175313365906"/>			
 		    </g>
 
 			<g id="almucantars" inkscape:label="almucantars" inkscape:groupmode="layer">
 				<title>Almucantar</title>
 				
-					<circle id="almucantar" alt="0" cx="0" cy="168.29725065257915" r="180.64477724913516"/>
-					<circle id="almucantar" alt="10" cx="0" cy="113.87661894980793" r="120.3744766130005"/>
-					<circle id="almucantar" alt="20" cx="0" cy="86.69476935821305" r="87.44341307779194"/>
-					<circle id="almucantar" alt="30" cx="0" cy="70.83119815167136" r="65.84209006657689"/>
-					<circle id="almucantar" alt="40" cx="0" cy="60.7792108420675" r="49.9755303980145"/>
-					<circle id="almucantar" alt="50" cx="0" cy="54.146130579439195" r="37.35797366622141"/>
-					<circle id="almucantar" alt="60" cx="0" cy="49.74265626275531" r="26.696072055613307"/>
-					<circle id="almucantar" alt="70" cx="0" cy="46.930495532653374" r="17.228807283608614"/>
-					<circle id="almucantar" alt="80" cx="0" cy="45.36001580485654" r="8.454575676076276"/>
-				<circle id="almucantar-center" az="0.0" cx="-0.0" cy="45.38001580485654" r="8.454575676076276"/>
+					<circle id="almucantar" alt="0" cx="0" cy="168.2784165199051" r="180.62456130568754"/>
+					<circle id="almucantar" alt="10" cx="0" cy="113.86387502593837" r="120.36100551436813"/>
+					<circle id="almucantar" alt="20" cx="0" cy="86.68506735308874" r="87.43362729200523"/>
+					<circle id="almucantar" alt="30" cx="0" cy="70.82327143760874" r="65.83472168322515"/>
+					<circle id="almucantar" alt="40" cx="0" cy="60.772409045149345" r="49.969937640163"/>
+					<circle id="almucantar" alt="50" cx="0" cy="54.140071090034795" r="37.353792938195646"/>
+					<circle id="almucantar" alt="60" cx="0" cy="49.7370895658308" r="26.693084500195607"/>
+					<circle id="almucantar" alt="70" cx="0" cy="46.92524354442485" r="17.226879209080142"/>
+					<circle id="almucantar" alt="80" cx="0" cy="45.35493956889634" r="8.453629525147674"/>
 			</g>
 
-			<g id="prime_vertical" inkscape:label="prime_vertical" inkscape:groupmode="layer">
-				<circle id="azimuth-90" cx="0" cy="-25.600958740953608" r="70.45551829792052"/>
+			<g id="primeVertical" inkscape:label="prime_vertical" inkscape:groupmode="layer">
+				<circle id="primeVertical" cx="0" cy="-25.59809373958466" r="70.4476336261621"/>
 			</g>
 
 			<g id="axis" inkscape:label="axis" inkscape:groupmode="layer">
@@ -179,17 +247,19 @@
         		<line id="axis" x1="-100" y1="0" x2="100" y2="0"/>
     		</g>
 
-    		<g id="description" inkscape:label="description" inkscape:groupmode="layer" transform="rotate(180)">
-				<rect x="-10" y="73" width="20" height="19"  style="stroke: none; fill: #a3262a;"/>
-				<text id="location" x="0" y="80">
+    		<g inkscape:label="description" inkscape:groupmode="layer" transform="rotate(180)">
+				<text id="description" x="0" y="80">
 					Honolulu
 		    		<tspan x="0" dy="1.2em">21.3069 </tspan>
 		    	</text>
-		    </g>
+			</g>
 	    </g>
 
 		<g id="limb" inkscape:label="limb" inkscape:groupmode="layer">
 			<title>Limb</title>
+
+			<text id="output" x="0" y="110" style="font-size:4pt; fill:black; stroke:none;" text-anchor="middle"></text>
+
 			<g id="limb_boundaries" inkscape:label="limb_boundaries" inkscape:groupmode="layer">
 				<circle id="limb" cx="0" cy="0" r="100"/>
 				<circle id="limb" cx="0" cy="0" r="105"/>
@@ -598,11 +668,50 @@
 		    	<title>Ecliptic</title>
 				<path id="ecliptic" fill-rule="evenodd" d="
 					M0.0 100.0
-					A71.54285485086302 71.54285485086302 0 0 1 0.0 -43.085709701726046
-					A71.54285485086302 71.54285485086302 0 0 1 0.0 100.0z
+					A71.53803340212701 71.53803340212701 0 0 1 0.0 -43.07606680425402
+					A71.53803340212701 71.53803340212701 0 0 1 0.0 100.0z
 					M0.0 95.0
-					A66.54285485086302 66.54285485086302 0 0 1 0.0 -38.085709701726046
-					A66.54285485086302 66.54285485086302 0 0 1 0.0 95.0z"/>
+					A66.53803340212701 66.53803340212701 0 0 1 0.0 -38.07606680425402
+					A66.53803340212701 66.53803340212701 0 0 1 0.0 95.0z"/>
+
+				<!-- <line  x1="0" y1="300" x2="0" y2="-300" style="stroke: black;"/> -->
+			    <g>
+			        <title>Divide Ecliptic</title>
+			        
+			        
+			            <line id="eclipticDivision" x1="0" y1="0" x2="62.7416338553867" y2="-5.906297894248713"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="71.49294375045773" y2="31.00149744779938"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="53.26386249574163" y2="76.2181303370027"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="0.0" y2="100.0"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="-53.26386249574159" y2="76.21813033700275"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="-71.49294375045771" y2="31.001497447799622"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="-62.74163385538673" y2="-5.906297894248663"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="-43.36825574182792" y2="-28.431658853096902"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="-21.67249393934792" y2="-39.71422594389901"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="0.0" y2="-43.07606680425402"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="21.672493939347852" y2="-39.71422594389904"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="43.3682557418279" y2="-28.43165885309693"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="62.74163385538669" y2="-5.906297894248734"/>
+			    </g>
+			    
+			    
+					<text><textPath xlink:href="#season0" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1em">pisces</tspan></textPath></text>
+					<text><textPath xlink:href="#season30" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1em">aquarius</tspan></textPath></text>
+					<text><textPath xlink:href="#season60" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1em">capricorn</tspan></textPath></text>
+					<text><textPath xlink:href="#season90" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1em">sagittarius</tspan></textPath></text>
+					<text><textPath xlink:href="#season120" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1em">scorpio</tspan></textPath></text>
+					<text><textPath xlink:href="#season150" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1em">libra</tspan></textPath></text>
+					<text><textPath xlink:href="#season180" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1em">virgo</tspan></textPath></text>
+					<text><textPath xlink:href="#season210" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1em">leo</tspan></textPath></text>
+					<text><textPath xlink:href="#season240" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1em">cancer</tspan></textPath></text>
+					<text><textPath xlink:href="#season270" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1em">gemini</tspan></textPath></text>
+					<text><textPath xlink:href="#season300" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1em">taurus</tspan></textPath></text>
+					<text><textPath xlink:href="#season330" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1em">aries</tspan></textPath></text>
+  			</g>
+
+  			<g>
+  				<line id="eclipticPole" x1="-5" y1="43.07606680425401" x2="5" y2="43.07606680425401" style="stroke: grey;"/>
+				<line id="eclipticPole" x1="0" y1="38.07606680425401" x2="0" y2="48.07606680425401" style="stroke: grey;"/>
   			</g>
 
 		        <!-- <line id="eclipticDivision" x1="0" y1="0" x2="65.63970574410436" y2="0"/> -->
@@ -611,17 +720,80 @@
 		    	<title>Stars</title>
 		    </g>
 
-		    <g id="planets" inkscape:label="planets" inkscape:groupmode="layer">
+		    <g id="planets" inkscape:label="planets" inkscape:groupmode="layer" transform="translate(0.0, 28.461966597872994)">
 		    	<title>Planets</title>
-		    	<circle id="moon" cx="44.142706092611434" cy="214.41520455448494" r="10" style="fill:white;"/>
+		    	<line id="moonLine" x1="0" y1="0" x2="0" y2="100" style="stroke:black;"/>
+		    	<circle id="moon" cx="78.3193942774644" cy="60.97340898963562" r="3" style="fill:white; stroke:black;" />
 		    </g>
-
-		    <animateTransform
-				attributeName="transform" type="rotate"
-				attributeTyep="XML"
-				from="233" to="233"
-				begin="0s" dur="5s"
-				fill="freeze"/>
 		</g>
+		
 	</g>
+	<script type="application/ecmascript">
+    // <![CDATA[
+    var txt = document.getElementById("output");
+    var r = document.getElementById("moonLine");
+    
+    function init(evt) {
+        var obj;
+        obj = document.getElementById("top");
+        obj.addEventListener("click", clickButton, false);
+        obj.addEventListener("mousedown", startDrag, false);
+        obj.addEventListener("mousemove", doDrag, false);
+    }
+    
+    function angle(cx, cy, ex, ey) {
+      var dy = ey - cy;
+      var dx = ex - cx;
+      var theta = Math.atan2(dy, dx); // range (-PI, PI]
+      theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
+      //if (theta < 0) theta = 360 + theta; // range [0, 360)
+      return theta;
+    }
+    
+    function clickButton(evt) {
+        var msg = r.getAttribute("x2") + ", " +
+        r.getAttribute("y2") + ", " +
+        r.style.getPropertyValue("stroke") + " " +
+        r.style.getPropertyValue("fill") + " " +
+        angle(0, 0, r.getAttribute("x2"), r.getAttribute("y2"));
+        r.setAttribute("height", "30");
+        printMsg(msg); 
+    }
+    
+    function startDrag(evt) {
+        <!-- var sliderId = evt.target.parentNode.getAttribute("id"); -->
+        var svg = document.getElementById('top');
+        var pt = svg.createSVGPoint();
+        
+        pt.x = evt.clientX; 
+        pt.y = evt.clientY;
+        
+        var ec = document.getElementById('axis');
+        
+        var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
+        
+        printMsg(pt.x + " " + pt.y + " | " + svgP.x + " " + svgP.y + " | " + angle(0, 0, svgP.x, svgP.y));
+    }
+    
+    function doDrag(evt) {
+        var ec = document.getElementById('axis'); 
+        var rete = document.getElementById('rete');
+        var svg = document.getElementById('top');
+
+        var pt = svg.createSVGPoint(); 
+        pt.x = evt.clientX; 
+        pt.y = evt.clientY;
+        
+        var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
+        var rotAngle = angle(0, 0, svgP.x, svgP.y)
+        
+        printMsg(pt.x + " " + pt.y + " | " + svgP.x + " " + svgP.y + " | " + rotAngle);
+        rete.setAttribute("transform", "rotate(" + rotAngle + ")");
+    }
+    
+    function printMsg (msg){
+        txt.textContent=msg;    
+    }
+    // ]]>
+</script>
 </svg>
