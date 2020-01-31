@@ -1,4 +1,4 @@
-<svg id="top" viewbox="0 0 250 250" height="250" width="250" xmlns="http://www.w3.org/2000/svg" 
+<svg id="diagram" viewbox="0 0 250 250" height="250" width="250" xmlns="http://www.w3.org/2000/svg" 
 	xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink"
 	onload="init(evt)">
 	<g id="astrolabe" transform="translate(125,125)" {{ inkscape.astrolabe }}>
@@ -38,7 +38,7 @@
 				  clip-path:url(#Horizon);
 				  clipPath: url(#Horizon);
 				}
-				#azimuths{
+				#azimuthsGroup {
 				  clip-path: url(#almucantarHole);
 				}
 				#primeVertical {
@@ -48,7 +48,7 @@
 				  clip-path:url(#Horizon);
 				  clipPath: url(#Horizon);
 				}
-				#axis {
+				#axisGroup {
 				  fill: none;
 				  stroke: {{ background_color }}
 				  stroke-width: 1;
@@ -63,7 +63,7 @@
 				  stroke: {{ background_color }}
 				  stroke-width: 1;
 				}
-				#ecliptic {
+				#eclipticDiagram {
 				  fill: {{ stroke_color }}
 				  fill-opacity: 1;
 				  stroke: {{ stroke_color }}
@@ -85,7 +85,7 @@
 			</style>
 
 			<clipPath id="Capricorn">
-				<path d="
+				<path id="capricornPath" d="
 						M0 {{ RCapricorn }}
 						A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ -RCapricorn }}
 						A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ RCapricorn }}z"
@@ -93,7 +93,7 @@
 			</clipPath>			
 
 			<clipPath id="Horizon">
-				<path d="
+				<path id="horizonPath" d="
 						M{{ horiz.cx }} {{ horiz.cy + horiz.r }} 
 						A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy - horiz.r }}
 						A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy + horiz.r }}z
@@ -101,7 +101,7 @@
 			</clipPath>
 
 		    <clipPath id="almucantarHole">
-				<path fill-rule="evenodd"  d="
+				<path id="almucantarHolePath" fill-rule="evenodd"  d="
 					M{{ 0 }} {{ RCapricorn }} 
 					A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 {{ 0 }} {{ -RCapricorn }}
 					A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 {{ 0 }} {{ RCapricorn }}z
@@ -130,7 +130,7 @@
 		    </clipPath>
 
 		    <clipPath id="eclipticHole">
-		    	<path fill-rule="evenodd" d="
+		    	<path id="eclipticHolePath" fill-rule="evenodd" d="
 					M{{ top_middle_outer.x }} {{ top_middle_outer.y }}
 					A{{ outer_radius }} {{ outer_radius }} 0 0 1 {{ bottom_middle_outer.x }} {{ bottom_middle_outer.y }}
 					A{{ outer_radius }} {{ outer_radius }} 0 0 1 {{ top_middle_outer.x }} {{ top_middle_outer.y }}z
@@ -155,35 +155,35 @@
 				<circle cx="0" cy="0" r="{{ RCancer }}"/>
 			</g>
 
-			<g id="horizon" {{ inkscape.horizon }}>
+			<g id="horizonGroup" {{ inkscape.horizon }}>
 		        <title>Horizon</title>
-		        <circle cx="{{ horiz.cx}}" cy="{{ horiz.cy }}" r="{{ horiz.r }}"/>
+		        <circle id="horizon" cx="{{ horiz.cx}}" cy="{{ horiz.cy }}" r="{{ horiz.r }}"/>
 	      	</g>
 
-			<g id="azimuths" {{ inkscape.azimuths }}>
+			<g id="azimuthsGroup" {{ inkscape.azimuths }}>
 				<title>Azimuth</title>
 				{% for coord in azimuth_coords %}
 					<circle id="azimuth" az="{{ coord.az }}" cx="{{ coord.cx }}" cy="{{ coord.cy }}" r="{{ coord.r }}"/>
 				{%- endfor %}			
 		    </g>
 
-			<g id="almucantars" {{ inkscape.almucantars }}>
+			<g id="almucantarsGroup" {{ inkscape.almucantars }}>
 				<title>Almucantar</title>
 				{% for coord in almucantor_coords %}
 					<circle id="almucantar" alt="{{ coord.alt }}" cx="{{ coord.cx }}" cy="{{ coord.cy }}" r="{{ coord.r }}"/>
 				{%- endfor %}
 			</g>
 
-			<g id="primeVertical" {{ inkscape.prime_vertical }}>
+			<g id="primeVerticalGroup" {{ inkscape.prime_vertical }}>
 				<circle id="primeVertical" cx="{{ prime_vertical.cx }}" cy="{{ prime_vertical.cy }}" r="{{ prime_vertical.r }}"/>
 			</g>
 
-			<g id="axis" {{ inkscape.axis }}>
+			<g id="axisGroup" {{ inkscape.axis }}>
 	      		<line id="axis" x1="0" y1="{{ -RCapricorn }}" x2="0" y2="{{ RCapricorn }}"/>
         		<line id="axis" x1="{{ -RCapricorn }}" y1="0" x2="{{ RCapricorn }}" y2="0"/>
     		</g>
 
-    		<g {{ inkscape.description }} transform="rotate(180)">
+    		<g id="descriptionGroup" {{ inkscape.description }} transform="rotate(180)">
 				<text id="description" x="0" y="{{ RCapricorn - 20 }}">
 					{{ place_name }}
 		    		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
@@ -218,9 +218,9 @@
 		</g>
 
 		<g id = "rete" {{ inkscape.rete }} transform="rotate(180)">
-			<g id="ecliptic" {{ inkscape.ecliptic }}>
+			<g id="eclipticDiagram" {{ inkscape.ecliptic }}>
 		    	<title>Ecliptic</title>
-				<path id="ecliptic" fill-rule="evenodd" d="
+				<path id="eclipticPath" fill-rule="evenodd" d="
 					M{{ top_middle_outer.x }} {{ top_middle_outer.y }}
 					A{{ outer_radius }} {{ outer_radius }} 0 0 1 {{ bottom_middle_outer.x }} {{ bottom_middle_outer.y }}
 					A{{ outer_radius }} {{ outer_radius }} 0 0 1 {{ top_middle_outer.x }} {{ top_middle_outer.y }}z
@@ -229,7 +229,7 @@
 					A{{ inner_radius }} {{ inner_radius }} 0 0 1 {{top_middle_inner.x }} {{ top_middle_inner.y }}z"/>
 
 				<!-- <line  x1="0" y1="300" x2="0" y2="-300" style="stroke: black;"/> -->
-			    <g>
+			    <g id="eclipticDivisions">
 			        <title>Divide Ecliptic</title>
 			        
 			        {% for division in ecliptic_divisions %}
@@ -265,13 +265,23 @@
     // <![CDATA[
     var txt = document.getElementById("output");
     var r = document.getElementById("moonLine");
+
+    active = false;
     
     function init(evt) {
         var obj;
-        obj = document.getElementById("top");
+        obj = document.getElementById("diagram");
+        console.log(obj);
+        
         obj.addEventListener("click", clickButton, false);
+
         obj.addEventListener("mousedown", startDrag, false);
         obj.addEventListener("mousemove", doDrag, false);
+        obj.addEventListener("mouseup", endDrag, false);
+
+        obj.addEventListener("touchstart", startDrag, false);
+        obj.addEventListener("touchmove", doDrag, false);
+        obj.addEventListener("touchend", endDrag, false);
     }
     
     function angle(cx, cy, ex, ey) {
@@ -294,34 +304,44 @@
     }
     
     function startDrag(evt) {
-        <!-- var sliderId = evt.target.parentNode.getAttribute("id"); -->
-        var svg = document.getElementById('top');
+        <!-- console.log(evt.target.parentNode.getAttribute("id")); -->
+        var svg = document.getElementById('diagram');
         var pt = svg.createSVGPoint();
         
         pt.x = evt.clientX; 
         pt.y = evt.clientY;
         
-        var ec = document.getElementById('axis');
+        var ec = document.getElementById('axisGroup');
         
         var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
         
         printMsg(pt.x + " " + pt.y + " | " + svgP.x + " " + svgP.y + " | " + angle(0, 0, svgP.x, svgP.y));
+
+        active = true;
     }
     
     function doDrag(evt) {
-        var ec = document.getElementById('axis'); 
-        var rete = document.getElementById('rete');
-        var svg = document.getElementById('top');
 
-        var pt = svg.createSVGPoint(); 
-        pt.x = evt.clientX; 
-        pt.y = evt.clientY;
-        
-        var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
-        var rotAngle = angle(0, 0, svgP.x, svgP.y)
-        
-        printMsg(pt.x + " " + pt.y + " | " + svgP.x + " " + svgP.y + " | " + rotAngle);
-        rete.setAttribute("transform", "rotate(" + rotAngle + ")");
+		if (active){
+			var ec = document.getElementById('axisGroup'); 
+	        var rete = document.getElementById('rete');
+	        var svg = document.getElementById('diagram');
+
+	        var pt = svg.createSVGPoint(); 
+	        pt.x = evt.clientX; 
+	        pt.y = evt.clientY;
+	        
+	        var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
+	        var rotAngle = angle(0, 0, svgP.x, svgP.y)
+	        
+	        printMsg(pt.x + " " + pt.y + " | " + svgP.x + " " + svgP.y + " | " + rotAngle);
+	        rete.setAttribute("transform", "rotate(" + rotAngle + ")");
+		}
+    }
+
+    function endDrag(evt){
+    	console.log(evt);
+    	active = false;
     }
     
     function printMsg (msg){
