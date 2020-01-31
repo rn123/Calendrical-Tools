@@ -70,7 +70,7 @@ Stereographic projections of circles are circles.  The ecliptic is a circle that
 2. Divide the equator into equal segments of longitude: 12 divisions of 30 for the entry into each zodiac sign: more divisions depending on the resolution desired.
 3. Draw a line from each equator division to the ecliptic pole. The corresponding longitude point on the ecliptic is where this line intersects the ecliptic circle.
 4. A tic mark on the ecliptic is drawn toward the center of the instrument.
-<img src="images/astrolabe_generated_01292020.svg" alt="version with correct prime vertical" style="padding:5px;"/>
+<img src="images/astrolabe_generated_01312020.svg" alt="version with correct prime vertical" style="padding:5px;"/>
 
 ## The International Organization for Standardization (ISO) Calendar
 
@@ -101,6 +101,7 @@ The Banker's Almanac and Register published calendars in the late 1800s formatte
 - Heilbron, J. L. The Sun in the Church: Cathedrals as Solar Observatories. Harvard University Press, 1999.
 - Evans, James. The History & Practice of Ancient Astronomy. Oxford University Press US, 1998.
 - Rhodes, Geminus of, James Evans, and J. Lennart Berggren. Geminos’s “Introduction to the Phenomena”: A Translation and Study of a Hellenistic Survey of Astronomy. Princeton University Press, 2006.
+- Ptolemy, Claudius. The Almagest: Introduction to the Mathematics of the Heavens. Green Lion Press, 2014.
 - Sidoli, Nathan, and J L Berggren. “The Arabic Version of Ptolemy’s Planisphere or Flattening the Surface of the Sphere: Text, Translation, Commentary,” n.d., 103.
 - Ptolemy, and G. J. Toomer. Ptolemy’s Almagest. Springer-Verlag, 1984.
 - Meeus, Jean. Astronomical Algorithms. Willmann-Bell, 1998.
