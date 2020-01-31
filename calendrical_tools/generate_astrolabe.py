@@ -323,7 +323,7 @@ def main():
         for identifier in identifiers
     }
 
-    animation_parameters = {"from": "233", "to": "233", "begin": "0s", "dur": "5s"}
+    animation_parameters = {"from": "0", "to": "175", "begin": "0s", "dur": "3s"}
 
     ecliptic = {
         "cx": astrolabe.xEclipticCenter,
@@ -373,20 +373,20 @@ def main():
         "taurus",
         "aries"
     ]
-    seasonal_names = [    
-        "雨水",
-        "大寒",
-        "冬至",
-        "小雪",
-        "霜降",
-        "秋分",
-        "处暑",
-        "大暑",
-        "夏至",
-        "小满",
-        "谷雨",
-        "春分",
-    ]
+    # seasonal_names = [    
+    #     "雨水",
+    #     "大寒",
+    #     "冬至",
+    #     "小雪",
+    #     "霜降",
+    #     "秋分",
+    #     "处暑",
+    #     "大暑",
+    #     "夏至",
+    #     "小满",
+    #     "谷雨",
+    #     "春分",
+    # ]
 
     # for name, angle in zip(seasonal_names, ecliptic_divisions):
     #     start_x = ecliptic["cx"] + (ecliptic["r"]  - 3.5) * math.cos(math.radians(angle))

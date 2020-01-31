@@ -1,5 +1,6 @@
-<svg viewbox="0 0 250 250" height="250" width="250" xmlns="http://www.w3.org/2000/svg" 
-	xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg id="top" viewbox="0 0 250 250" height="250" width="250" xmlns="http://www.w3.org/2000/svg" 
+	xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink"
+	onload="init(evt)">
 	<g id="astrolabe" transform="translate(125,125)" {{ inkscape.astrolabe }}>
 	    <title>Astrolabe Plate</title>
 	    <defs>
@@ -68,8 +69,7 @@
 				  stroke: {{ stroke_color }}
 				  stroke-width: 0.7;
 				  stroke-opacity: 0.7;
-				  clip-path: url(#eclipticHole
-				  );
+				  clip-path: url(#eclipticHole);
 				}
 				#eclipticDivision {
 				  stroke: black;
@@ -193,6 +193,9 @@
 
 		<g id="limb" {{ inkscape.limb }}>
 			<title>Limb</title>
+
+			<text id="output" x="0" y="110" style="font-size:4pt; fill:black; stroke:none;" text-anchor="middle"></text>
+
 			<g id="limb_boundaries" {{ inkscape.limb_boundaries }}>
 				<circle id="limb" cx="0" cy="0" r="{{ ticks.inner_radius }}"/>
 				<circle id="limb" cx="0" cy="0" r="{{ ticks.center_radius }}"/>
@@ -235,14 +238,14 @@
 			    </g>
 			    
 			    {% for arc in seasonal_arcs %}
-					<text><textPath xlink:href="#{{ arc.tag }}" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1ex">{{ arc.name }}</tspan></textPath></text>
+					<text><textPath xlink:href="#{{ arc.tag }}" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1em">{{ arc.name }}</tspan></textPath></text>
 				{%- endfor %}
   			</g>
 
-  			<!-- <g>
+  			<g>
   				<line id="eclipticPole" x1="-5" y1="{{ ecliptic_center }}" x2="5" y2="{{ ecliptic_center }}" style="stroke: grey;"/>
 				<line id="eclipticPole" x1="0" y1="{{ ecliptic_center -5 }}" x2="0" y2="{{ ecliptic_center + 5 }}" style="stroke: grey;"/>
-  			</g> -->
+  			</g>
 
 		        <!-- <line id="eclipticDivision" x1="0" y1="0" x2="65.63970574410436" y2="0"/> -->
 		        
@@ -250,17 +253,80 @@
 		    	<title>Stars</title>
 		    </g>
 
-		    <g id="planets" {{ inkscape.planets }}>
+		    <g id="planets" {{ inkscape.planets }} transform="translate({{ ecliptic.cx }}, {{ ecliptic.cy }})">
 		    	<title>Planets</title>
-		    	<circle id="moon" cx="44.142706092611434" cy="214.41520455448494" r="10" style="fill:white;"/>
+		    	<line id="moonLine" x1="0" y1="0" x2="0" y2="100" style="stroke:black;"/>
+		    	<circle id="moon" cx="78.3193942774644" cy="60.97340898963562" r="3" style="fill:white; stroke:black;" />
 		    </g>
-
-		    <animateTransform
-				attributeName="transform" type="rotate"
-				attributeTyep="XML"
-				from="{{ animation.from }}" to="{{ animation.to }}"
-				begin="{{ animation.begin }}" dur="{{ animation.dur }}"
-				fill="freeze"/>
 		</g>
+		
 	</g>
+	<script type="application/ecmascript">
+    // <![CDATA[
+    var txt = document.getElementById("output");
+    var r = document.getElementById("moonLine");
+    
+    function init(evt) {
+        var obj;
+        obj = document.getElementById("top");
+        obj.addEventListener("click", clickButton, false);
+        obj.addEventListener("mousedown", startDrag, false);
+        obj.addEventListener("mousemove", doDrag, false);
+    }
+    
+    function angle(cx, cy, ex, ey) {
+      var dy = ey - cy;
+      var dx = ex - cx;
+      var theta = Math.atan2(dy, dx); // range (-PI, PI]
+      theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
+      //if (theta < 0) theta = 360 + theta; // range [0, 360)
+      return theta;
+    }
+    
+    function clickButton(evt) {
+        var msg = r.getAttribute("x2") + ", " +
+        r.getAttribute("y2") + ", " +
+        r.style.getPropertyValue("stroke") + " " +
+        r.style.getPropertyValue("fill") + " " +
+        angle(0, 0, r.getAttribute("x2"), r.getAttribute("y2"));
+        r.setAttribute("height", "30");
+        printMsg(msg); 
+    }
+    
+    function startDrag(evt) {
+        <!-- var sliderId = evt.target.parentNode.getAttribute("id"); -->
+        var svg = document.getElementById('top');
+        var pt = svg.createSVGPoint();
+        
+        pt.x = evt.clientX; 
+        pt.y = evt.clientY;
+        
+        var ec = document.getElementById('axis');
+        
+        var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
+        
+        printMsg(pt.x + " " + pt.y + " | " + svgP.x + " " + svgP.y + " | " + angle(0, 0, svgP.x, svgP.y));
+    }
+    
+    function doDrag(evt) {
+        var ec = document.getElementById('axis'); 
+        var rete = document.getElementById('rete');
+        var svg = document.getElementById('top');
+
+        var pt = svg.createSVGPoint(); 
+        pt.x = evt.clientX; 
+        pt.y = evt.clientY;
+        
+        var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
+        var rotAngle = angle(0, 0, svgP.x, svgP.y)
+        
+        printMsg(pt.x + " " + pt.y + " | " + svgP.x + " " + svgP.y + " | " + rotAngle);
+        rete.setAttribute("transform", "rotate(" + rotAngle + ")");
+    }
+    
+    function printMsg (msg){
+        txt.textContent=msg;    
+    }
+    // ]]>
+</script>
 </svg>
