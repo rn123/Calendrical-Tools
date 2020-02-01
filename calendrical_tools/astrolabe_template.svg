@@ -246,8 +246,6 @@
   				<line id="eclipticPole" x1="-5" y1="{{ ecliptic_center }}" x2="5" y2="{{ ecliptic_center }}" style="stroke: grey;"/>
 				<line id="eclipticPole" x1="0" y1="{{ ecliptic_center -5 }}" x2="0" y2="{{ ecliptic_center + 5 }}" style="stroke: grey;"/>
   			</g>
-
-		        <!-- <line id="eclipticDivision" x1="0" y1="0" x2="65.63970574410436" y2="0"/> -->
 		        
 		 	<g id="stars" {{ inkscape.stars }}>
 		    	<title>Stars</title>
@@ -265,15 +263,16 @@
     // <![CDATA[
     var txt = document.getElementById("output");
     var r = document.getElementById("moonLine");
+    var totalAngle = 0;
+    var startAngle = 0;
 
     active = false;
     
     function init(evt) {
         var obj;
         obj = document.getElementById("diagram");
-        console.log(obj);
-        
-        obj.addEventListener("click", clickButton, false);
+
+        obj.addEventListener("dblclick", dblclickButton, false);
 
         obj.addEventListener("mousedown", startDrag, false);
         obj.addEventListener("mousemove", doDrag, false);
@@ -293,14 +292,20 @@
       return theta;
     }
     
-    function clickButton(evt) {
-        var msg = r.getAttribute("x2") + ", " +
-        r.getAttribute("y2") + ", " +
-        r.style.getPropertyValue("stroke") + " " +
-        r.style.getPropertyValue("fill") + " " +
-        angle(0, 0, r.getAttribute("x2"), r.getAttribute("y2"));
-        r.setAttribute("height", "30");
-        printMsg(msg); 
+    function dblclickButton(evt) {
+       	var svg = document.getElementById('diagram');
+       	var rete = document.getElementById('rete');
+        var pt = svg.createSVGPoint();
+        
+        pt.x = evt.clientX; 
+        pt.y = evt.clientY; 
+
+        var ec = document.getElementById('axisGroup');
+        var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
+
+        var rotAngle = angle(0, 0, svgP.x, svgP.y) + 90;
+        rete.setAttribute("transform", "rotate(" + rotAngle + ")");
+        totalAngle = rotAngle;
     }
     
     function startDrag(evt) {
@@ -310,18 +315,18 @@
         
         pt.x = evt.clientX; 
         pt.y = evt.clientY;
+        console.log("start", pt.x, pt.y, evt.offsetX, evt.offsetY);
         
         var ec = document.getElementById('axisGroup');
-        
         var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
-        
+        startAngle = angle(0, 0, svgP.x, svgP.y);
+
         printMsg(pt.x + " " + pt.y + " | " + svgP.x + " " + svgP.y + " | " + angle(0, 0, svgP.x, svgP.y));
 
         active = true;
     }
     
     function doDrag(evt) {
-
 		if (active){
 			var ec = document.getElementById('axisGroup'); 
 	        var rete = document.getElementById('rete');
@@ -330,23 +335,34 @@
 	        var pt = svg.createSVGPoint(); 
 	        pt.x = evt.clientX; 
 	        pt.y = evt.clientY;
+	        <!-- console.log("drag", pt.x, pt.y, evt.offsetX, evt.offsetY) -->
 	        
 	        var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
-	        var rotAngle = angle(0, 0, svgP.x, svgP.y)
+	        var rotAngle = angle(0, 0, svgP.x, svgP.y);
+
+	        delta = (rotAngle - startAngle) / 100.0;
+	        console.log(delta);
+	        totalAngle = totalAngle + delta;
 	        
 	        printMsg(pt.x + " " + pt.y + " | " + svgP.x + " " + svgP.y + " | " + rotAngle);
-	        rete.setAttribute("transform", "rotate(" + rotAngle + ")");
+	        rete.setAttribute("transform", "rotate(" + totalAngle + ")");
 		}
     }
 
     function endDrag(evt){
-    	console.log(evt);
     	active = false;
+        var svg = document.getElementById('diagram');
+        var pt = svg.createSVGPoint();
+        
+        pt.x = evt.clientX; 
+        pt.y = evt.clientY;
+    	console.log("end", pt.x, pt.y, evt.offsetX, evt.offsetY);
+
     }
     
     function printMsg (msg){
         txt.textContent=msg;    
     }
     // ]]>
-</script>
+	</script>
 </svg>
