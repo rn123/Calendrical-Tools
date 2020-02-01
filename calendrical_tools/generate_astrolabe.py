@@ -263,14 +263,39 @@ class Astrolabe:
 
     def ecliptic_division(self, constructionAngle=None):
 
+        # The procedure for dividing the ecliptic is (Figure 6-7 with the following steps numbered):
+        # 1. Locate the ecliptic pole on the meridian at $R_{eq} \tan(\epsilon / 2)$ from the center.
+        # 2. Divide the equator into equal segments of longitude: 12 divisions of 30 for the entry 
+        #    into each zodiac sign: more divisions depending on the resolution desired.
+        # 3. Draw a line from each equator division to the ecliptic pole. The corresponding longitude 
+        #    point on the ecliptic is where this line intersects the ecliptic circle.
+        # 4. A tic mark on the ecliptic is drawn toward the center of the instrument.
+
+        # Endpoint of line on the Equator, through origin with slope give by angle.
         x0 = self.RadiusEquator * math.cos(math.radians(constructionAngle))
         y0 = self.RadiusEquator * math.sin(math.radians(constructionAngle))
 
+        # Endpoint of a line from the ecliptic pole to mark on equator makes 
+        # an angle theta2.
         theta2 = math.atan2((y0 - self.ecliptic_pole), x0)
-        x2 = self.RadiusCapricorn * math.cos(theta2)
-        y2 = self.ecliptic_pole + self.RadiusCapricorn * math.sin(theta2)
-
-        constructionLine = Line(complex(0, 0), complex(x2, y2))
+        if x0 > 0.0:
+            slope = (y0 - self.ecliptic_pole) / x0
+            # Draw line through equator division and ecliptic pole.
+            # Since the ecliptic is inside the tropic of capricorn circle, overshoot
+            # by picking x2 = rcap 
+            x2 = self.RadiusCapricorn 
+            y2 = slope * x2 + self.ecliptic_pole
+            constructionLine = Line(complex(0, self.ecliptic_pole), complex(x2, y2))
+        elif x0 < 0.0:
+            slope = (y0 - self.ecliptic_pole) / x0
+            # Draw line through equator division and ecliptic pole.
+            # Since the ecliptic is inside the tropic of capricorn circle, overshoot
+            # by picking x2 = rcap 
+            x2 = -self.RadiusCapricorn 
+            y2 = slope * x2 + self.ecliptic_pole
+            constructionLine = Line(complex(0, self.ecliptic_pole), complex(x2, y2))
+        else:
+            constructionLine = Line(complex(0, self.ecliptic_pole), complex(0, self.RadiusCapricorn))
 
         intersections = []
         for (T1, seg1, t1), (T2, seg2, t2) in self.ecliptic_path.intersect(
