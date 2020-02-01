@@ -1,7 +1,7 @@
 <svg id="diagram" viewbox="0 0 250 250" height="250" width="250" xmlns="http://www.w3.org/2000/svg" 
 	xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink"
 	onload="init(evt)">
-	<g id="astrolabe" transform="translate(125,125)" {{ inkscape.astrolabe }}>
+	<g id="astrolabe" transform="translate(125,125) scale(1, -1)" {{ inkscape.astrolabe }}>
 	    <title>Astrolabe Plate</title>
 	    <defs>
 			<style type="text/css">
@@ -73,7 +73,7 @@
 				}
 				#eclipticDivision {
 				  stroke: black;
-				  stroke-width: 0.5;
+				  stroke-width: 1;
 				  stroke-opacity: 0.2;
 				}
 				#limb {
@@ -113,11 +113,11 @@
 
 		    <clipPath id="descriptionHole" >
 		    	<!-- <rect id="description" x="-10" y="{{ RCapricorn - 20 -7}}" width="20" height="19"/> -->
-		    	<path id="test" fill-rule="evenodd" transform="rotate(180)" d="
+		    	<path id="test" fill-rule="evenodd" d="
 		    		M{{ 0 }} {{ RCapricorn }} 
-					A{{ RCapricorn }} {{ RCapricorn }} 0 1 0 {{ 0 }} {{ -RCapricorn }}
-					A{{ RCapricorn }} {{ RCapricorn }} 0 1 0 {{ 0 }} {{ RCapricorn }}z
-		    		M-10,{{ RCapricorn - 20 - 7 }} 10,{{ RCapricorn - 20 - 7 }} 10,{{ RCapricorn - 20 - 7 + 19 }} -10,{{ RCapricorn -20 -7 + 19 }} -10,{{ RCapricorn - 20 - 7 }} 0,{{ RCapricorn }}
+					A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 {{ 0 }} {{ -RCapricorn }}
+					A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 {{ 0 }} {{ RCapricorn }}z
+		    		M-10,{{ -RCapricorn + 26 }} 10,{{ -RCapricorn + 26 }} 10,{{ -RCapricorn + 26 - 19 }} -10,{{ -RCapricorn + 26 - 19 }} -10,{{ -RCapricorn + 26 }} 0,{{ -RCapricorn }}
 
 		    	"/>
 		    </clipPath>
@@ -142,13 +142,17 @@
 		{% for arc in seasonal_arcs %}
 			<path id="{{ arc.tag }}" d="
 				M{{ arc.start_x }} {{ arc.start_y }}
-				A{{ arc.r }} {{ arc.r }} 0 0 1 {{ arc.end_x }} {{ arc.end_y }}
-				A{{ arc.r }} {{ arc.r }} 0 0 1 {{ arc.start_x }} {{ arc.start_y }}"/>
+				A{{ arc.r }} {{ arc.r }} 0 0 1 {{ arc.end_x }} {{ arc.end_y }}"/>
+				<!-- A{{ arc.r }} {{ arc.r }} 0 0 1 {{ arc.start_x }} {{ arc.start_y }}"/> -->
+		{%- endfor %}
+
+		{% for arc in seasonal_arcs %}
+			<path transform="scale(1, -1)" id="season330" d="{{ arc.reversed }}"/>
 		{%- endfor %}
 
 		</defs>
 
-		<g id="plate" transform="rotate(180)" {{ inkscape.plate }}>
+		<g id="plate" {{ inkscape.plate }}>
 			<g id="tropics" {{ inkscape.tropics }}>
 				<circle cx="0" cy="0" r="{{ RCapricorn }}"/>
 				<circle cx="0" cy="0" r="{{ REquator }}"/>
@@ -178,13 +182,15 @@
 				<circle id="primeVertical" cx="{{ prime_vertical.cx }}" cy="{{ prime_vertical.cy }}" r="{{ prime_vertical.r }}"/>
 			</g>
 
+			<!-- <use xlink:href="#test" style="fill:green;"/> -->
+
 			<g id="axisGroup" {{ inkscape.axis }}>
 	      		<line id="axis" x1="0" y1="{{ -RCapricorn }}" x2="0" y2="{{ RCapricorn }}"/>
         		<line id="axis" x1="{{ -RCapricorn }}" y1="0" x2="{{ RCapricorn }}" y2="0"/>
     		</g>
 
-    		<g id="descriptionGroup" {{ inkscape.description }} transform="rotate(180)">
-				<text id="description" x="0" y="{{ RCapricorn - 20 }}">
+    		<g id="descriptionGroup" {{ inkscape.description }} transform="scale(1, -1)">
+				<text id="description" x="0" y="{{ RCapricorn - 19 }}">
 					{{ place_name }}
 		    		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
 		    	</text>
@@ -193,8 +199,6 @@
 
 		<g id="limb" {{ inkscape.limb }}>
 			<title>Limb</title>
-
-			<text id="output" x="0" y="110" style="font-size:4pt; fill:black; stroke:none;" text-anchor="middle"></text>
 
 			<g id="limb_boundaries" {{ inkscape.limb_boundaries }}>
 				<circle id="limb" cx="0" cy="0" r="{{ ticks.inner_radius }}"/>
@@ -217,7 +221,7 @@
 		    </g>
 		</g>
 
-		<g id = "rete" {{ inkscape.rete }} transform="rotate(180)">
+		<g id = "rete" {{ inkscape.rete }} >
 			<g id="eclipticDiagram" {{ inkscape.ecliptic }}>
 		    	<title>Ecliptic</title>
 				<path id="eclipticPath" fill-rule="evenodd" d="
@@ -238,7 +242,7 @@
 			    </g>
 			    
 			    {% for arc in seasonal_arcs %}
-					<text><textPath xlink:href="#{{ arc.tag }}" style="fill:black;font-size:3pt;" startOffset="5em"><tspan dy="1em">{{ arc.name }}</tspan></textPath></text>
+					<text transform="scale(-1, 1)"><textPath xlink:href="#{{ arc.tag }}" style="stroke:none; fill:black;font-size:3pt;" startOffset="5em"><tspan dy="0.9em">{{ arc.name }}</tspan></textPath></text>
 				{%- endfor %}
   			</g>
 
@@ -259,6 +263,7 @@
 		</g>
 		
 	</g>
+	<text id="output" x="120" y="230" style="font-size:4pt; fill:black; stroke:none;" text-anchor="middle"></text>
 	<script type="application/ecmascript">
     // <![CDATA[
     var txt = document.getElementById("output");
@@ -303,7 +308,7 @@
         var ec = document.getElementById('axisGroup');
         var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
 
-        var rotAngle = angle(0, 0, svgP.x, svgP.y) + 90;
+        var rotAngle = angle(0, 0, svgP.x, svgP.y) - 90;
         rete.setAttribute("transform", "rotate(" + rotAngle + ")");
         totalAngle = rotAngle;
     }

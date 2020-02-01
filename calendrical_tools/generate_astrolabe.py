@@ -384,6 +384,20 @@ def main():
         "nov",
         "dec",
     ]
+    seasonal_names = [  
+     "1",
+     "2",
+     "3",
+     "4",
+     "5",
+     "6",
+     "7",
+     "8",
+     "9",
+     "10",
+     "11",
+     "12"
+    ]
     seasonal_names = [
         "pisces",
         "aquarius",
@@ -423,6 +437,14 @@ def main():
         tag = "season" + str(angle)
         angle += 30
         next_division = ecliptic_divisions[(n + 1) % 12]
+        sarc = Path(Arc(
+                start=complex(division["x2"], division["y2"]),
+                radius=complex(ecliptic["r"], ecliptic["r"]),
+                rotation=0.0,
+                large_arc=True,
+                sweep=False,
+                end=complex(next_division["x2"], next_division["y2"]),
+            ))
         seasonal_arcs.append(
             {
                 "tag": tag,
@@ -432,6 +454,7 @@ def main():
                 "start_y": division["y2"],
                 "end_x": next_division["x2"],
                 "end_y": next_division["y2"],
+                "reversed": sarc.reversed().d()
             }
         )
 
