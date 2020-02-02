@@ -82,8 +82,13 @@
 				}
 				#eclipticDivisionFine {
 				  stroke: {{ stroke_color }};
-				  stroke-width: 0.4;
+				  stroke-width: 0.6;
 				  stroke-opacity: 0.6;
+				}
+				#eclipticDivisionExtraFine {
+				  stroke: {{ stroke_color }};
+				  stroke-width: 0.4;
+				  stroke-opacity: 0.4;
 				}
 				#limb {
 				  fill: none;
@@ -226,12 +231,12 @@
 		</g>
 
 		<g id = "rete" {{ inkscape.rete }} >
-			<g transform="translate({{ ecliptic.cx }} , {{ ecliptic.cy }})">
+			<g id="reteBackground" transform="translate({{ ecliptic.cx }} , {{ ecliptic.cy }})">
 				<circle cx="0" cy="0" r="{{ ecliptic.r }}" style="fill:{{ stroke_color }}; fill-opacity:0.05; stroke:{{ stroke_color }};"/>
 				<line id="ariesFirstPoint" x1="{{ aries_first_point.x2 }}" y1="{{ -ecliptic.cy }}" x2="{{ -RCapricorn }}" y2="{{ -ecliptic.cy }}"/>
 
 				{% for arc in seasonal_arcs %}
-					<text transform="translate({{ -ecliptic.cx }} , {{ -ecliptic.cy }}), scale(-1, 1)"><textPath xlink:href="#{{ arc.tag }}" style="stroke:none; fill:black; fill-opacity:0.6; font-size:4pt;" startOffset="4em"><tspan dy="2em">{{ arc.name }}</tspan></textPath></text>
+					<text transform="translate({{ -ecliptic.cx }} , {{ -ecliptic.cy }}), scale(-1, 1)"><textPath xlink:href="#{{ arc.tag }}" style="stroke:none; fill:black; fill-opacity:0.6; font-size:4pt;" startOffset="0em"><tspan dy="2em">{{ arc.name }}</tspan></textPath></text>
 				{%- endfor %}
 			</g>
 
@@ -255,17 +260,36 @@
 			        {% for division in ecliptic_divisions_fine %}
 			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="{{ division.x2 }}" y2="{{ division.y2 }}"/>
 			        {%- endfor %}
+
+			        {% for division in ecliptic_divisions_efine %}
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="{{ division.x2 }}" y2="{{ division.y2 }}"/>
+			        {%- endfor %}
 			    </g>
 			    
   			</g>
 
   			<g>
-  				<line id="eclipticPole" x1="-5" y1="{{ ecliptic_center }}" x2="5" y2="{{ ecliptic_center }}" style="stroke: grey;"/>
-				<line id="eclipticPole" x1="0" y1="{{ ecliptic_center -5 }}" x2="0" y2="{{ ecliptic_center + 5 }}" style="stroke: grey;"/>
+  				<line id="eclipticPole" x1="-5" y1="{{ ecliptic_pole }}" x2="5" y2="{{ ecliptic_pole }}" style="stroke: grey;"/>
+				<line id="eclipticPole" x1="0" y1="{{ ecliptic_pole -5 }}" x2="0" y2="{{ ecliptic_pole + 5 }}" style="stroke: grey;"/>
+  			</g>
+
+			<g>
+  				<line id="eclipticCenter" x1="-50" y1="{{ ecliptic.cy }}" x2="50" y2="{{ ecliptic.cy }}" style="stroke: grey; stroke-width:0.5;"/>
+				<line id="eclipticCenter" x1="0" y1="{{ ecliptic.cy - 50 }}" x2="0" y2="{{ ecliptic.cy + 50}}" style="stroke: grey; stroke-width:0.5;"/>
   			</g>
 		        
-		 	<g id="stars" {{ inkscape.stars }}>
+		 	<g id="stars" {{ inkscape.stars }} transform="rotate({{ 180 }})">
 		    	<title>Stars</title>
+		    	<g>
+		    		{% for star in stars %}
+		    			<circle id="{{ star.name }}" cx="{{ star.cx }}" cy="{{ star.cy }}" r="1.5" style="fill:{{ stroke_color }};"/>
+		    			<line id="{{ star.name }}" x1="{{ star.cx - 2.5 }}" y1="{{ star.cy }}" x2="{{ star.cx + 2.5 }}" y2="{{ star.cy }}" style="stroke: {{ stroke_color }}; stroke-width:1;"/>
+						<line id="{{ star.name }}" x1="{{ star.cx }}" y1="{{ star.cy - 2.5 }}" x2="{{ star.cx }}" y2="{{ star.cy + 2.5 }}" style="stroke: {{ stroke_color }}; stroke-width:1;"/>
+						<g transform="translate({{ star.cx }}, {{ star.cy }})">
+							<text x="0" y="0" transform="scale(1, -1), rotate(180)" style="font-size:2pt; fill:black; fill-opacity:0.5;"><tspan dy="1.5em">{{ star.name }}</tspan></text>
+						</g>
+		    		{%- endfor %}
+		    	</g>
 		    </g>
 
 		    <g id="planets" {{ inkscape.planets }} transform="translate({{ ecliptic.cx }}, {{ ecliptic.cy }})">
@@ -317,10 +341,11 @@
         pt.x = evt.clientX; 
         pt.y = evt.clientY; 
 
-        var ec = document.getElementById('axisGroup');
+        var ec = document.getElementById('astrolabe');
         var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
+        console.log(ec, svgP);
 
-        var rotAngle = angle(0, 0, svgP.x, svgP.y) + 180;
+        var rotAngle = angle(0, 0, Math.floor(svgP.x), Math.floor(svgP.y)) + 180;
         rete.setAttribute("transform", "rotate(" + rotAngle + ")");
         totalAngle = rotAngle;
     }
@@ -338,7 +363,12 @@
         var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
         startAngle = angle(0, 0, svgP.x, svgP.y);
 
-        printMsg(pt.x + " " + pt.y + " | " + svgP.x + " " + svgP.y + " | " + angle(0, 0, svgP.x, svgP.y));
+        var eclipticCoords = document.getElementById('stars');
+        var svgPEcliptic = pt.matrixTransform(eclipticCoords.getScreenCTM().inverse());
+        eclipticAngle = angle(0, 0, svgPEcliptic.x, svgPEcliptic.y);
+
+		<!-- printMsg(pt.x + " " + pt.y + " | " + svgPEcliptic.x + " " + svgPEcliptic.y + " | " + eclipticAngle); -->
+        <!-- printMsg(pt.x + " " + pt.y + " | " + svgP.x + " " + svgP.y + " | " + angle(0, 0, svgP.x, svgP.y)); -->
 
         active = true;
     }
@@ -361,7 +391,7 @@
 	        console.log(delta);
 	        totalAngle = totalAngle + delta;
 	        
-	        printMsg(pt.x + " " + pt.y + " | " + svgP.x + " " + svgP.y + " | " + rotAngle);
+	        <!-- printMsg(pt.x + " " + pt.y + " | " + svgP.x + " " + svgP.y + " | " + rotAngle); -->
 	        rete.setAttribute("transform", "rotate(" + totalAngle + ")");
 		}
     }
@@ -373,7 +403,13 @@
         
         pt.x = evt.clientX; 
         pt.y = evt.clientY;
-    	console.log("end", pt.x, pt.y, evt.offsetX, evt.offsetY);
+    	<!-- console.log("end", pt.x, pt.y, evt.offsetX, evt.offsetY); -->
+
+    	var eclipticCoords = document.getElementById('stars');
+        var svgPEcliptic = pt.matrixTransform(eclipticCoords.getScreenCTM().inverse());
+        eclipticAngle = angle(0, 0, svgPEcliptic.x, svgPEcliptic.y);
+
+		<!-- printMsg(pt.x + " " + pt.y + " | " + svgPEcliptic.x + " " + svgPEcliptic.y + " | " + eclipticAngle); -->
 
     }
     

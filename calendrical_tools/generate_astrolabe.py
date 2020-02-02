@@ -265,9 +265,9 @@ class Astrolabe:
 
         # The procedure for dividing the ecliptic is (Figure 6-7 with the following steps numbered):
         # 1. Locate the ecliptic pole on the meridian at $R_{eq} \tan(\epsilon / 2)$ from the center.
-        # 2. Divide the equator into equal segments of longitude: 12 divisions of 30 for the entry 
+        # 2. Divide the equator into equal segments of longitude: 12 divisions of 30 for the entry
         #    into each zodiac sign: more divisions depending on the resolution desired.
-        # 3. Draw a line from each equator division to the ecliptic pole. The corresponding longitude 
+        # 3. Draw a line from each equator division to the ecliptic pole. The corresponding longitude
         #    point on the ecliptic is where this line intersects the ecliptic circle.
         # 4. A tic mark on the ecliptic is drawn toward the center of the instrument.
 
@@ -275,27 +275,29 @@ class Astrolabe:
         x0 = self.RadiusEquator * math.cos(math.radians(constructionAngle))
         y0 = self.RadiusEquator * math.sin(math.radians(constructionAngle))
 
-        # Endpoint of a line from the ecliptic pole to mark on equator makes 
+        # Endpoint of a line from the ecliptic pole to mark on equator makes
         # an angle theta2.
         theta2 = math.atan2((y0 - self.ecliptic_pole), x0)
         if x0 > 0.0:
             slope = (y0 - self.ecliptic_pole) / x0
             # Draw line through equator division and ecliptic pole.
             # Since the ecliptic is inside the tropic of capricorn circle, overshoot
-            # by picking x2 = rcap 
-            x2 = self.RadiusCapricorn 
+            # by picking x2 = rcap
+            x2 = self.RadiusCapricorn
             y2 = slope * x2 + self.ecliptic_pole
             constructionLine = Line(complex(0, self.ecliptic_pole), complex(x2, y2))
         elif x0 < 0.0:
             slope = (y0 - self.ecliptic_pole) / x0
             # Draw line through equator division and ecliptic pole.
             # Since the ecliptic is inside the tropic of capricorn circle, overshoot
-            # by picking x2 = rcap 
-            x2 = -self.RadiusCapricorn 
+            # by picking x2 = rcap
+            x2 = -self.RadiusCapricorn
             y2 = slope * x2 + self.ecliptic_pole
             constructionLine = Line(complex(0, self.ecliptic_pole), complex(x2, y2))
         else:
-            constructionLine = Line(complex(0, self.ecliptic_pole), complex(0, self.RadiusCapricorn))
+            constructionLine = Line(
+                complex(0, self.ecliptic_pole), complex(0, self.RadiusCapricorn)
+            )
 
         intersections = []
         for (T1, seg1, t1), (T2, seg2, t2) in self.ecliptic_path.intersect(
@@ -356,6 +358,9 @@ def main():
         "r": astrolabe.RadiusEcliptic,
         "width": 5,
     }
+    # ecliptic_center = astrolabe.RadiusEquator * math.tan(
+    #     astrolabe._obliquityRadiansArgument
+    # )
     outer_radius = ecliptic["r"]
     inner_radius = outer_radius - ecliptic["width"]
 
@@ -366,15 +371,21 @@ def main():
     bottom_middle_inner = {"x": (ecliptic["cx"]), "y": (ecliptic["cy"] - inner_radius)}
 
     aries_first_point = astrolabe.ecliptic_division(180)
-    print(aries_first_point)
+    aries_first_point_angle = math.degrees(
+        math.atan2(aries_first_point["y2"], aries_first_point["x2"])
+    )
 
     ecliptic_divisions = []
     for angle in list(range(0, 361, 30)):
         ecliptic_divisions.append(astrolabe.ecliptic_division(angle))
 
     ecliptic_divisions_fine = []
-    for angle in list(range(0, 361, 5)):
+    for angle in list(range(0, 361, 10)):
         ecliptic_divisions_fine.append(astrolabe.ecliptic_division(angle))
+
+    ecliptic_divisions_efine = []
+    for angle in list(range(0, 361, 2)):
+        ecliptic_divisions_efine.append(astrolabe.ecliptic_division(angle))
 
     seasonal_arcs = []
     month_names = [
@@ -391,20 +402,7 @@ def main():
         "nov",
         "dec",
     ]
-    seasonal_names = [  
-     "1",
-     "2",
-     "3",
-     "4",
-     "5",
-     "6",
-     "7",
-     "8",
-     "9",
-     "10",
-     "11",
-     "12"
-    ]
+    seasonal_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
     seasonal_names = [
         "pisces",
         "aquarius",
@@ -417,9 +415,9 @@ def main():
         "cancer",
         "gemini",
         "taurus",
-        "aries"
+        "aries",
     ]
-    # seasonal_names = [    
+    # seasonal_names = [
     #     "雨水",
     #     "大寒",
     #     "冬至",
@@ -434,20 +432,21 @@ def main():
     #     "春分",
     # ]
 
-    
     angle = 0
-    for n, division in enumerate(ecliptic_divisions[0: 12]):
+    for n, division in enumerate(ecliptic_divisions[0:12]):
         tag = "season" + str(angle)
         angle += 30
         next_division = ecliptic_divisions[(n + 1) % 12]
-        sarc = Path(Arc(
+        sarc = Path(
+            Arc(
                 start=complex(division["x2"], division["y2"]),
                 radius=complex(ecliptic["r"], ecliptic["r"]),
                 rotation=0.0,
                 large_arc=True,
                 sweep=False,
                 end=complex(next_division["x2"], next_division["y2"]),
-            ))
+            )
+        )
         seasonal_arcs.append(
             {
                 "tag": tag,
@@ -457,9 +456,33 @@ def main():
                 "start_y": division["y2"],
                 "end_x": next_division["x2"],
                 "end_y": next_division["y2"],
-                "reversed": sarc.reversed().d()
+                "reversed": sarc.reversed().d(),
             }
         )
+
+    stars = [
+        {"name":"aldebaran",  "r": 0.7467, "theta": 68.98},
+        {"name":"altair",     "r": 0.8561, "theta": 297.69542},
+        {"name":"arcturus",   "r": 0.7109, "theta": 213.91500},
+        {"name":"capella",    "r": 0.4040, "theta": 79.17208},
+        {"name":"sirius",     "r": 1.3099, "theta": 101.28708},
+        {"name":"procyon",    "r": 0.9127, "theta":114.82542},
+        {"name":"deneb",      "r": 0.4114, "theta": 310.35750},
+        {"name":"castor",     "r": 0.5556, "theta": 113.64958},
+        {"name":"regulus",    "r": 0.8103, "theta": 152.09250},
+        {"name":"vega",       "r": 0.4793, "theta": 279.23417},
+        {"name":"betelgeuse", "r": 0.8784, "theta": 88.79292},
+        {"name":"rigel",      "r": 1.1463, "theta": 78.63417},
+        {"name":"bellatrix",  "r": 0.8949, "theta": 81.28250},
+        {"name":"antares",    "r": 1.5870, "theta": 247.35167},
+        {"name":"spica",      "r": 1.2096, "theta": 201.29792}
+    ]
+
+    for star in stars:
+        star["cx"] = astrolabe.RadiusEquator * star["r"] * math.cos(math.radians(star["theta"]))
+        star["cy"] = astrolabe.RadiusEquator * star["r"] * math.sin(math.radians(star["theta"]))
+
+    print(astrolabe.obliquity)
 
     with open("astrolabe_template.svg") as fp:
         template_text = fp.read()
@@ -480,16 +503,19 @@ def main():
         ecliptic=ecliptic,
         ecliptic_divisions=ecliptic_divisions,
         ecliptic_divisions_fine=ecliptic_divisions_fine,
+        ecliptic_divisions_efine=ecliptic_divisions_efine,
         aries_first_point=aries_first_point,
+        aries_first_point_angle=astrolabe.obliquity,
         top_middle_outer=top_middle_outer,
         bottom_middle_outer=bottom_middle_outer,
         outer_radius=outer_radius,
         inner_radius=inner_radius,
         top_middle_inner=top_middle_inner,
         bottom_middle_inner=bottom_middle_inner,
-        ecliptic_center=astrolabe.RadiusEquator
-        * math.tan(astrolabe._obliquityRadiansArgument),
+        # ecliptic_center=ecliptic_center,
+        ecliptic_pole=astrolabe.ecliptic_pole,
         seasonal_arcs=seasonal_arcs,
+        stars=stars,
         stroke_color=stroke_color,
         background_color=background_color,
         graph_color=graph_color,
