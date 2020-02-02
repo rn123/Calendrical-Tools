@@ -357,7 +357,7 @@ def main():
         "width": 5,
     }
     outer_radius = ecliptic["r"]
-    inner_radius = ecliptic["r"] - ecliptic["width"]
+    inner_radius = outer_radius - ecliptic["width"]
 
     top_middle_outer = {"x": (ecliptic["cx"]), "y": (ecliptic["cy"] + outer_radius)}
     bottom_middle_outer = {"x": (ecliptic["cx"]), "y": (ecliptic["cy"] - outer_radius)}
@@ -365,9 +365,16 @@ def main():
     top_middle_inner = {"x": (ecliptic["cx"]), "y": (ecliptic["cy"] + inner_radius)}
     bottom_middle_inner = {"x": (ecliptic["cx"]), "y": (ecliptic["cy"] - inner_radius)}
 
+    aries_first_point = astrolabe.ecliptic_division(180)
+    print(aries_first_point)
+
     ecliptic_divisions = []
     for angle in list(range(0, 361, 30)):
         ecliptic_divisions.append(astrolabe.ecliptic_division(angle))
+
+    ecliptic_divisions_fine = []
+    for angle in list(range(0, 361, 5)):
+        ecliptic_divisions_fine.append(astrolabe.ecliptic_division(angle))
 
     seasonal_arcs = []
     month_names = [
@@ -427,11 +434,7 @@ def main():
     #     "春分",
     # ]
 
-    # for name, angle in zip(seasonal_names, ecliptic_divisions):
-    #     start_x = ecliptic["cx"] + (ecliptic["r"]  - 3.5) * math.cos(math.radians(angle))
-    #     start_y = ecliptic["cy"] + (ecliptic["r"] - 3.5) * math.sin(math.radians(angle))
-    #     end_x = ecliptic["cx"] + (ecliptic["r"] - 3.5) * math.cos(math.radians(angle + 30))
-    #     end_y = ecliptic["cy"] + (ecliptic["r"] - 3.5) * math.sin(math.radians(angle + 30))
+    
     angle = 0
     for n, division in enumerate(ecliptic_divisions[0: 12]):
         tag = "season" + str(angle)
@@ -476,6 +479,8 @@ def main():
         ticks=astrolabe.ticks,
         ecliptic=ecliptic,
         ecliptic_divisions=ecliptic_divisions,
+        ecliptic_divisions_fine=ecliptic_divisions_fine,
+        aries_first_point=aries_first_point,
         top_middle_outer=top_middle_outer,
         bottom_middle_outer=bottom_middle_outer,
         outer_radius=outer_radius,

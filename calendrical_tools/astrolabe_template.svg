@@ -18,6 +18,7 @@
 				  fill: none;
 				  stroke: {{ background_color }}
 				  stroke-width: 1;
+				  stroke-opacity: 0.8;
 				}
 				#tropics {
 				  fill: none;
@@ -30,11 +31,13 @@
 				  fill: none;
 				  stroke: {{ graph_color }}
 				  stroke-width: 0.5;
+				  stroke-opacity: 0.5;
 				}
 				#azimuth {
 				  fill: none;
 				  stroke: {{ graph_color }}
 				  stroke-width: 0.5;
+				  stroke-opacity: 0.5;
 				  clip-path:url(#Horizon);
 				  clipPath: url(#Horizon);
 				}
@@ -45,6 +48,7 @@
 				  fill: none;
 				  stroke: {{ graph_color }}
 				  stroke-width: 0.75;
+				  stroke-opacity: 0.8;
 				  clip-path:url(#Horizon);
 				  clipPath: url(#Horizon);
 				}
@@ -71,10 +75,15 @@
 				  stroke-opacity: 0.7;
 				  clip-path: url(#eclipticHole);
 				}
-				#eclipticDivision {
-				  stroke: black;
+				#eclipticDivision, #ariesFirstPoint {
+				  stroke: {{ stroke_color }};
 				  stroke-width: 1;
-				  stroke-opacity: 0.2;
+				  stroke-opacity: 1;
+				}
+				#eclipticDivisionFine {
+				  stroke: {{ stroke_color }};
+				  stroke-width: 0.4;
+				  stroke-opacity: 0.6;
 				}
 				#limb {
 				  fill: none;
@@ -143,11 +152,6 @@
 			<path id="{{ arc.tag }}" d="
 				M{{ arc.start_x }} {{ arc.start_y }}
 				A{{ arc.r }} {{ arc.r }} 0 0 1 {{ arc.end_x }} {{ arc.end_y }}"/>
-				<!-- A{{ arc.r }} {{ arc.r }} 0 0 1 {{ arc.start_x }} {{ arc.start_y }}"/> -->
-		{%- endfor %}
-
-		{% for arc in seasonal_arcs %}
-			<path transform="scale(1, -1)" id="season330" d="{{ arc.reversed }}"/>
 		{%- endfor %}
 
 		</defs>
@@ -222,28 +226,37 @@
 		</g>
 
 		<g id = "rete" {{ inkscape.rete }} >
+			<g transform="translate({{ ecliptic.cx }} , {{ ecliptic.cy }})">
+				<circle cx="0" cy="0" r="{{ ecliptic.r }}" style="fill:{{ stroke_color }}; fill-opacity:0.05; stroke:{{ stroke_color }};"/>
+				<line id="ariesFirstPoint" x1="{{ aries_first_point.x2 }}" y1="{{ -ecliptic.cy }}" x2="{{ -RCapricorn }}" y2="{{ -ecliptic.cy }}"/>
+
+				{% for arc in seasonal_arcs %}
+					<text transform="translate({{ -ecliptic.cx }} , {{ -ecliptic.cy }}), scale(-1, 1)"><textPath xlink:href="#{{ arc.tag }}" style="stroke:none; fill:black; fill-opacity:0.6; font-size:4pt;" startOffset="4em"><tspan dy="2em">{{ arc.name }}</tspan></textPath></text>
+				{%- endfor %}
+			</g>
+
 			<g id="eclipticDiagram" {{ inkscape.ecliptic }}>
 		    	<title>Ecliptic</title>
-				<path id="eclipticPath" fill-rule="evenodd" d="
+				<!-- <path id="eclipticPath" fill-rule="evenodd" d="
 					M{{ top_middle_outer.x }} {{ top_middle_outer.y }}
 					A{{ outer_radius }} {{ outer_radius }} 0 0 1 {{ bottom_middle_outer.x }} {{ bottom_middle_outer.y }}
 					A{{ outer_radius }} {{ outer_radius }} 0 0 1 {{ top_middle_outer.x }} {{ top_middle_outer.y }}z
 					M{{ top_middle_inner.x }} {{ top_middle_inner.y }}
 					A{{ inner_radius }} {{ inner_radius }} 0 0 1 {{ bottom_middle_inner.x }} {{ bottom_middle_inner.y }}
-					A{{ inner_radius }} {{ inner_radius }} 0 0 1 {{top_middle_inner.x }} {{ top_middle_inner.y }}z"/>
+					A{{ inner_radius }} {{ inner_radius }} 0 0 1 {{top_middle_inner.x }} {{ top_middle_inner.y }}z"/> -->
 
-				<!-- <line  x1="0" y1="300" x2="0" y2="-300" style="stroke: black;"/> -->
 			    <g id="eclipticDivisions">
 			        <title>Divide Ecliptic</title>
 			        
 			        {% for division in ecliptic_divisions %}
 			            <line id="eclipticDivision" x1="0" y1="0" x2="{{ division.x2 }}" y2="{{ division.y2 }}"/>
 			        {%- endfor %}
+
+			        {% for division in ecliptic_divisions_fine %}
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="{{ division.x2 }}" y2="{{ division.y2 }}"/>
+			        {%- endfor %}
 			    </g>
 			    
-			    {% for arc in seasonal_arcs %}
-					<text transform="scale(-1, 1)"><textPath xlink:href="#{{ arc.tag }}" style="stroke:none; fill:black;font-size:3pt;" startOffset="5em"><tspan dy="0.9em">{{ arc.name }}</tspan></textPath></text>
-				{%- endfor %}
   			</g>
 
   			<g>
@@ -257,7 +270,6 @@
 
 		    <g id="planets" {{ inkscape.planets }} transform="translate({{ ecliptic.cx }}, {{ ecliptic.cy }})">
 		    	<title>Planets</title>
-		    	<line id="moonLine" x1="0" y1="0" x2="0" y2="100" style="stroke:black;"/>
 		    	<circle id="moon" cx="78.3193942774644" cy="60.97340898963562" r="3" style="fill:white; stroke:black;" />
 		    </g>
 		</g>
@@ -308,7 +320,7 @@
         var ec = document.getElementById('axisGroup');
         var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
 
-        var rotAngle = angle(0, 0, svgP.x, svgP.y) - 90;
+        var rotAngle = angle(0, 0, svgP.x, svgP.y) + 180;
         rete.setAttribute("transform", "rotate(" + rotAngle + ")");
         totalAngle = rotAngle;
     }
