@@ -98,6 +98,11 @@
 				}
 			</style>
 
+			<symbol viewBox="0 0 20 20" id="star" style="overflow: visible">
+		        <title>star</title>
+		        <polygon points="48.37 61.63 3.43 55 48.37 48.37 55 3.43 61.63 48.37 106.57 55 61.63 61.63 55 106.57 48.37 61.63"/>
+		    </symbol>
+
 			<clipPath id="Capricorn">
 				<path id="capricornPath" d="
 						M0 {{ RCapricorn }}
@@ -268,26 +273,27 @@
 			    
   			</g>
 
-  			<g>
+  			<!-- <g>
   				<line id="eclipticPole" x1="-5" y1="{{ ecliptic_pole }}" x2="5" y2="{{ ecliptic_pole }}" style="stroke: grey;"/>
 				<line id="eclipticPole" x1="0" y1="{{ ecliptic_pole -5 }}" x2="0" y2="{{ ecliptic_pole + 5 }}" style="stroke: grey;"/>
-  			</g>
+  			</g> -->
 
-			<g>
+			<!-- <g>
   				<line id="eclipticCenter" x1="-50" y1="{{ ecliptic.cy }}" x2="50" y2="{{ ecliptic.cy }}" style="stroke: grey; stroke-width:0.5;"/>
 				<line id="eclipticCenter" x1="0" y1="{{ ecliptic.cy - 50 }}" x2="0" y2="{{ ecliptic.cy + 50}}" style="stroke: grey; stroke-width:0.5;"/>
-  			</g>
+  			</g> -->
 		        
 		 	<g id="stars" {{ inkscape.stars }} transform="rotate({{ 180 }})">
 		    	<title>Stars</title>
 		    	<g>
 		    		{% for star in stars %}
-		    			<circle id="{{ star.name }}" cx="{{ star.cx }}" cy="{{ star.cy }}" r="1.5" style="fill:{{ stroke_color }};"/>
-		    			<line id="{{ star.name }}" x1="{{ star.cx - 2.5 }}" y1="{{ star.cy }}" x2="{{ star.cx + 2.5 }}" y2="{{ star.cy }}" style="stroke: {{ stroke_color }}; stroke-width:1;"/>
-						<line id="{{ star.name }}" x1="{{ star.cx }}" y1="{{ star.cy - 2.5 }}" x2="{{ star.cx }}" y2="{{ star.cy + 2.5 }}" style="stroke: {{ stroke_color }}; stroke-width:1;"/>
-						<g transform="translate({{ star.cx }}, {{ star.cy }})">
+		    		<g id="{{ star.name }}">
+		    			<title>{{ star.name }}</title>
+		    			<use x="{{ star.cx }}" y="{{ star.cy }}" width="1.5" height="1.5"  xlink:href="#star" style="fill:{{ stroke_color }};"/>
+						<!-- <g transform="translate({{ star.cx }}, {{ star.cy }})">
 							<text x="0" y="0" transform="scale(1, -1), rotate(180)" style="font-size:2pt; fill:black; fill-opacity:0.5;"><tspan dy="1.5em">{{ star.name }}</tspan></text>
-						</g>
+						</g> -->
+					</g>
 		    		{%- endfor %}
 		    	</g>
 		    </g>
@@ -295,6 +301,8 @@
 		    <g id="planets" {{ inkscape.planets }} transform="translate({{ ecliptic.cx }}, {{ ecliptic.cy }})">
 		    	<title>Planets</title>
 		    	<circle id="moon" cx="78.3193942774644" cy="60.97340898963562" r="3" style="fill:white; stroke:black;" />
+		    	<circle id="sun"  cx="-42.2168611201463"  cy="77.60260956071288
+		    		" r="2" style="fill:yellow;"/>
 		    </g>
 		</g>
 		
