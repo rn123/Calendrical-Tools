@@ -375,7 +375,7 @@
         var svgPEcliptic = pt.matrixTransform(eclipticCoords.getScreenCTM().inverse());
         eclipticAngle = angle(0, 0, svgPEcliptic.x, svgPEcliptic.y);
 
-		<!-- printMsg(pt.x + " " + pt.y + " | " + svgPEcliptic.x + " " + svgPEcliptic.y + " | " + eclipticAngle); -->
+		printMsg(pt.x + " " + pt.y + " | " + svgPEcliptic.x + " " + svgPEcliptic.y + " | " + eclipticAngle);
         <!-- printMsg(pt.x + " " + pt.y + " | " + svgP.x + " " + svgP.y + " | " + angle(0, 0, svgP.x, svgP.y)); -->
 
         active = true;
@@ -399,7 +399,7 @@
 	        console.log(delta);
 	        totalAngle = totalAngle + delta;
 	        
-	        <!-- printMsg(pt.x + " " + pt.y + " | " + svgP.x + " " + svgP.y + " | " + rotAngle); -->
+	        printMsg(pt.x + " " + pt.y + " | " + svgP.x + " " + svgP.y + " | " + rotAngle);
 	        rete.setAttribute("transform", "rotate(" + totalAngle + ")");
 		}
     }
@@ -417,7 +417,7 @@
         var svgPEcliptic = pt.matrixTransform(eclipticCoords.getScreenCTM().inverse());
         eclipticAngle = angle(0, 0, svgPEcliptic.x, svgPEcliptic.y);
 
-		<!-- printMsg(pt.x + " " + pt.y + " | " + svgPEcliptic.x + " " + svgPEcliptic.y + " | " + eclipticAngle); -->
+		printMsg(pt.x + " " + pt.y + " | " + svgPEcliptic.x + " " + svgPEcliptic.y + " | " + eclipticAngle);
 
     }
     
