@@ -235,7 +235,7 @@
 		    </g>
 		</g>
 
-		<g id = "rete" {{ inkscape.rete }} >
+		<g id = "rete" {{ inkscape.rete }} transform="rotate(270)">
 			<g id="reteBackground" transform="translate({{ ecliptic.cx }} , {{ ecliptic.cy }})">
 				<circle cx="0" cy="0" r="{{ ecliptic.r }}" style="fill:{{ stroke_color }}; fill-opacity:0.05; stroke:{{ stroke_color }};"/>
 				<line id="ariesFirstPoint" x1="{{ aries_first_point.x2 }}" y1="{{ -ecliptic.cy }}" x2="{{ -RCapricorn }}" y2="{{ -ecliptic.cy }}"/>
@@ -312,7 +312,7 @@
     // <![CDATA[
     var txt = document.getElementById("output");
     var r = document.getElementById("moonLine");
-    var totalAngle = 0;
+    var totalAngle = 270;
     var startAngle = 0;
 
     active = false;
