@@ -21,16 +21,51 @@ trace_close = go.Scatter(x=list(df.index),
 	                     name="Close",
 	                     line=dict(color="#ebfe00"))
 
+trace_high = go.Scatter(x=list(df.index),
+	                    y=list(df.high),
+	                    name="High",
+	                    line=dict(color="#00ebfe"))
 app = dash.Dash(__name__)
 
 app.layout = html.Div([
-	html.H2("Stock App"),
-	html.Img(src="/assets/astrolabe_generated.svg")
-], className="banner")
+	html.Div([
+		html.H2("Stock App"),
+		html.Img(src="/assets/astrolabe_generated.svg")
+	], className="banner"),
 
-# app.css.append({
-# 	"external_url": "http://"
-# })
+	html.Div([
+		html.Div([
+			html.H3("Column 1"),
+			dcc.Graph(
+				id="graph_close",
+				figure={
+					"data":[trace_close],
+					"layout":{
+						"title":"Close Graph"
+						}
+					}
+				)
+		], className="six columns"),
+
+		html.Div([
+			html.H3("Column 2"),
+			dcc.Graph(
+				id="graph_high",
+				figure={
+					"data":[trace_high],
+					"layout":{
+						"title":"High Graph"
+						}
+					}
+				)
+		], className="six columns")
+	], className="row")
+])
+
+
+app.css.append_css({
+	"external_url": "https://codepen.io/chriddyp/pen/bWLwgP.css"
+})
 
 if __name__ == "__main__":
 	app.run_server(debug=True)
