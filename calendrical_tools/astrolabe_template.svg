@@ -5,6 +5,16 @@
 	    <title>Astrolabe Plate</title>
 	    <defs>
 			<style type="text/css">
+				@font-face {
+        			font-family: Fell;
+        			src: local(IM FELL Double Pica PRO);
+        		}
+				#astrolabe {
+				  font-family: Fell; 
+				  font-weight: normal; 
+				  font-style: normal;
+				  font-variant: small-caps;
+				}
 				#plate {
 				  clip-path:url(#Capricorn);
 				  clipPath: url(#Capricorn);
@@ -13,6 +23,10 @@
 				  fill: {{ background_color }}
 				  text-anchor: middle;
 				  font-size: 6pt;
+				  font-family: Fell; 
+				  font-weight: normal; 
+				  font-style: normal;
+				  font-variant: small-caps;
 				}
 				#horizon {
 				  fill: none;
@@ -95,6 +109,12 @@
 				  stroke: {{ background_color }}
 				  stroke-opacity: 0.5;
 				  stroke-width: 1;
+				}
+				#seasonalArc {
+					stroke:none; 
+					fill:black; 
+					fill-opacity:0.6; 
+					font-size:4pt;"
 				}
 			</style>
 
@@ -204,7 +224,7 @@
     		</g>
 
     		<g id="descriptionGroup" {{ inkscape.description }} transform="scale(1, -1)">
-				<text id="description" x="0" y="{{ RCapricorn - 19 }}">
+				<text id="description" x="0" y="{{ RCapricorn - 19 }}" >
 					{{ place_name }}
 		    		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
 		    	</text>
@@ -239,10 +259,11 @@
 			<g id="reteBackground" transform="translate({{ ecliptic.cx }} , {{ ecliptic.cy }})">
 				<circle cx="0" cy="0" r="{{ ecliptic.r }}" style="fill:{{ stroke_color }}; fill-opacity:0.05; stroke:{{ stroke_color }};"/>
 				<line id="ariesFirstPoint" x1="{{ aries_first_point.x2 }}" y1="{{ -ecliptic.cy }}" x2="{{ -RCapricorn }}" y2="{{ -ecliptic.cy }}"/>
-
+				<g id="seasonalArcs" {{ inkscape.rete }}>
 				{% for arc in seasonal_arcs %}
-					<text transform="translate({{ -ecliptic.cx }} , {{ -ecliptic.cy }}), scale(-1, 1)"><textPath xlink:href="#{{ arc.tag }}" style="stroke:none; fill:black; fill-opacity:0.6; font-size:4pt;" startOffset="0em"><tspan dy="2em">{{ arc.name }}</tspan></textPath></text>
+					<text id="seasonalArc" transform="translate({{ -ecliptic.cx }} , {{ -ecliptic.cy }}), scale(-1, 1)"><textPath xlink:href="#{{ arc.tag }}" startOffset="0em"><tspan dy="2em">{{ arc.name }}</tspan></textPath></text>
 				{%- endfor %}
+				</g>
 			</g>
 
 			<g id="eclipticDiagram" {{ inkscape.ecliptic }}>
@@ -301,8 +322,7 @@
 		    <g id="planets" {{ inkscape.planets }} transform="translate({{ ecliptic.cx }}, {{ ecliptic.cy }})">
 		    	<title>Planets</title>
 		    	<circle id="moon" cx="78.3193942774644" cy="60.97340898963562" r="3" style="fill:white; stroke:black;" />
-		    	<circle id="sun"  cx="-42.2168611201463"  cy="77.60260956071288
-		    		" r="2" style="fill:yellow;"/>
+		    	<circle id="sun"  cx="-42.2168611201463"  cy="77.60260956071288" r="2" style="fill:yellow;"/>
 		    </g>
 		</g>
 		

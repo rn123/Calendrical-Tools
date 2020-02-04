@@ -330,9 +330,9 @@ class Astrolabe:
 
 def main():
 
-    plate_parameters = {"Honolulu": 21.3069}
+    plate_parameters = {"Hawaiian Islands": 21.3069}
     astrolabe = Astrolabe(plate_parameters=plate_parameters)
-    plate = astrolabe.plates["Honolulu"]
+    plate = astrolabe.plates["Hawaiian Islands"]
 
     background_color = "#a3262a;"
     stroke_color = "#f5ac27;"
