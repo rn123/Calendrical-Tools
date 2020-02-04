@@ -6,13 +6,12 @@
 	    <defs>
 			<style type="text/css">
 				@font-face {
-        			font-family: Fell;
-        			src: local(IM FELL Double Pica PRO);
+        			font-family: 'IM Fell Great Primer SC', serif;
+        			src: https://fonts.googleapis.com/css?family=IM+Fell+Great+Primer+SC;
+        			<!-- src: local(IM FELL Double Pica PRO); -->
         		}
 				#astrolabe {
-				  font-family: Fell; 
-				  font-weight: normal; 
-				  font-style: normal;
+				  font-family: 'IM Fell Great Primer SC', serif; 
 				  font-variant: small-caps;
 				}
 				#plate {
@@ -23,9 +22,7 @@
 				  fill: {{ background_color }}
 				  text-anchor: middle;
 				  font-size: 6pt;
-				  font-family: Fell; 
-				  font-weight: normal; 
-				  font-style: normal;
+				  font-family: 'IM Fell Great Primer SC', serif; 
 				  font-variant: small-caps;
 				}
 				#horizon {
@@ -114,6 +111,8 @@
 					stroke:none; 
 					fill:black; 
 					fill-opacity:0.6; 
+					font-family: 'IM Fell Great Primer SC', serif; 
+				  	font-variant: small-caps;
 					font-size:4pt;"
 				}
 			</style>
@@ -261,7 +260,7 @@
 				<line id="ariesFirstPoint" x1="{{ aries_first_point.x2 }}" y1="{{ -ecliptic.cy }}" x2="{{ -RCapricorn }}" y2="{{ -ecliptic.cy }}"/>
 				<g id="seasonalArcs" {{ inkscape.rete }}>
 				{% for arc in seasonal_arcs %}
-					<text id="seasonalArc" transform="translate({{ -ecliptic.cx }} , {{ -ecliptic.cy }}), scale(-1, 1)"><textPath xlink:href="#{{ arc.tag }}" startOffset="0em"><tspan dy="2em">{{ arc.name }}</tspan></textPath></text>
+					<text id="seasonalArc" text-anchor="end" transform="translate({{ -ecliptic.cx }} , {{ -ecliptic.cy }}), scale(-1, 1)"><textPath xlink:href="#{{ arc.tag }}" startOffset="90%"><tspan dy="2em" >{{ arc.name }}</tspan></textPath></text>
 				{%- endfor %}
 				</g>
 			</g>
