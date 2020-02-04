@@ -21,39 +21,16 @@ trace_close = go.Scatter(x=list(df.index),
 	                     name="Close",
 	                     line=dict(color="#ebfe00"))
 
-data = [trace_close]
-
-layout = dict(title=inputStock,
-			  showlegend=False)
-
-fig = dict(data=data, layout=layout)
-
-app = dash.Dash()
+app = dash.Dash(__name__)
 
 app.layout = html.Div([
-	html.Div(html.H1(children="Hello World!")),
-	html.Label("DASH GRAPH"),
-	html.Div(
-		dcc.Input(
-			id="stock-input",
-			placeholder="Enter a stock to be charted",
-			type="text",
-			value=''
-		),
-	),
-	html.Div(
-		dcc.Dropdown(
-			options=[
-				{'label': 'Candlestick', 'value': 'Candlestick'},
-				{'label': 'Line', 'value': 'Line'}
-			]
-		)
-	),
-	html.Div(
-		dcc.Graph(id="Stock Chart",
-			      figure=fig)
-	)
+	html.H2("Stock App"),
+	html.Img(src="/assets/astrolabe_generated.svg")
 ])
+
+# app.css.append({
+# 	"external_url": "http://"
+# })
 
 if __name__ == "__main__":
 	app.run_server(debug=True)
