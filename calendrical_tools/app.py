@@ -26,7 +26,7 @@ app = dash.Dash(__name__)
 app.layout = html.Div([
 	html.H2("Stock App"),
 	html.Img(src="/assets/astrolabe_generated.svg")
-])
+], className="banner")
 
 # app.css.append({
 # 	"external_url": "http://"
