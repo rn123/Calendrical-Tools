@@ -110,7 +110,7 @@
 				#seasonalArc {
 					stroke:none; 
 					fill:black; 
-					fill-opacity:0.6; 
+					fill-opacity:0.8; 
 					font-family: 'IM Fell Great Primer SC', serif; 
 				  	font-variant: small-caps;
 					font-size:4pt;"
@@ -260,7 +260,11 @@
 				<line id="ariesFirstPoint" x1="{{ aries_first_point.x2 }}" y1="{{ -ecliptic.cy }}" x2="{{ -RCapricorn }}" y2="{{ -ecliptic.cy }}"/>
 				<g id="seasonalArcs" {{ inkscape.rete }}>
 				{% for arc in seasonal_arcs %}
-					<text id="seasonalArc" text-anchor="end" transform="translate({{ -ecliptic.cx }} , {{ -ecliptic.cy }}), scale(-1, 1)"><textPath xlink:href="#{{ arc.tag }}" startOffset="90%"><tspan dy="2em" >{{ arc.name }}</tspan></textPath></text>
+					<text id="seasonalArc" text-anchor="end" transform="translate({{ -ecliptic.cx }} , {{ -ecliptic.cy }}), scale(-1, 1)">
+						<textPath xlink:href="#{{ arc.tag }}" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >{{ arc.name }}</tspan>
+						</textPath>
+					</text>
 				{%- endfor %}
 				</g>
 			</g>
