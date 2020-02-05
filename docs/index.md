@@ -17,6 +17,8 @@ Close study of Reingold & Dershowitz (mainly from the 3rd edition, although my c
 Likewise, the study of computing and drawing astrolabes inspired by James Morrison, has been a passion. In the 90's I bought his laminated cardboard astrolabes (and later his book) that have fed a passion for decades. By the way, if working versions of ancient astrolabes is your thing, you should also take a look at [Kala's pocket sundial](https://www.pocket-sundial.com/products/kala-sundial).
 
 The concept of the project is to develop tools on top of Spinielli's pycalcal. Pycalcal is a python version of Reingold & Dershowitz's lisp implementation (calendrica 3.0) software.  Based on Reingold & Dershowitz, the Calendrical-Tools can compute candybar calendars that are accurate over the historical period and in the many calendrical traditions. The visualizations of the sky borrowed from the geometric construction of astrolabes adds to the tabular forms of calendars.
+
+The [beautiful reconstructions of historical mathematical tables](https://locomat.loria.fr/locomat/reconstructed.html) has been a major influence on producing quality latex output. There is also a wide variety of old tables (and calendars) that would be interesting to reproduce.
 <br/>
 
 <img src="images/screenshot.png" alt="command line screenshot of candybar.py"/>
