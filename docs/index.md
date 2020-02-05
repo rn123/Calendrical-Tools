@@ -99,7 +99,7 @@ The Banker's Almanac and Register published calendars in the late 1800s formatte
 - [Morrison, James E.](https://web.archive.org/web/20051210070051/http://www.astrolabes.org/personal.htm) The Astrolabe. Softcover. Janus, 2007.
 - Cullen, Christopher. Heavenly Numbers: Astronomy and Authority in Early Imperial China. 1 edition. Oxford, United Kingdom ; New York, NY, United States of America: Oxford University Press, 2018.
 - Heilbron, J. L. The Sun in the Church: Cathedrals as Solar Observatories. Harvard University Press, 1999.
-- Schwerdtfeger, Berndt E. “Spherical Design with Metapost,” n.d., 16.
+- [Schwerdtfeger, Berndt E.](http://berndt-schwerdtfeger.de/wp-content/uploads/pdf/sphere.pdf) “Spherical Design with Metapost,” n.d., 16.
 - Evans, James. The History & Practice of Ancient Astronomy. Oxford University Press US, 1998.
 - Rhodes, Geminus of, James Evans, and J. Lennart Berggren. Geminos’s “Introduction to the Phenomena”: A Translation and Study of a Hellenistic Survey of Astronomy. Princeton University Press, 2006.
 - Ptolemy, Claudius. The Almagest: Introduction to the Mathematics of the Heavens. Green Lion Press, 2014.
