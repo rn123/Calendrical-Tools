@@ -1,7 +1,37 @@
-<svg id="diagram" viewbox="0 0 250 250" height="250" width="250" xmlns="http://www.w3.org/2000/svg" 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title> astrolabe </title>
+	<style type="text/css">
+		html, body {
+			height: 100%;
+		}
+		.wrapper {
+			position: relative;
+			height: 10em;
+			width: 10em;
+			resize: both;
+			overflow: hidden;
+			border: thin solid;
+		}
+		svg {
+			display: block;
+			position: absolute;
+			height: 90%;
+			width: 90%;
+			top: 5%;
+			left: 5%;
+			background-color: black;
+		}
+	</style>
+</head>
+<body>
+<div class="wrapper">
+<svg id="diagram" viewbox="-125 -125 250 250" xmlns="http://www.w3.org/2000/svg" 
 	xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink"
 	onload="init(evt)">
-	<g id="astrolabe" transform="translate(125,125) scale(1, -1)" {{ inkscape.astrolabe }}>
+	<g id="astrolabe" transform="scale(1, -1)" {{ inkscape.astrolabe }}>
 	    <title>Astrolabe Plate</title>
 	    <defs>
 			<style type="text/css">
@@ -450,3 +480,6 @@
     // ]]>
 	</script>
 </svg>
+</div>
+</body>
+</html>
