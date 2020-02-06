@@ -139,8 +139,8 @@
 				}
 				#seasonalArc {
 					stroke:none; 
-					fill:black; 
-					fill-opacity:0.8; 
+					fill:white; 
+					fill-opacity:1; 
 					font-family: 'IM Fell Great Primer SC', serif; 
 				  	font-variant: small-caps;
 					font-size:4pt;"
@@ -360,7 +360,7 @@
 		</g>
 		
 	</g>
-	<text id="output" x="120" y="230" style="display:none; font-size:4pt; fill:black; stroke:none;" text-anchor="middle"></text>
+	<text id="output" x="120" y="230" style=" font-size:4pt; fill:black; stroke:none;" text-anchor="middle"></text>
 	<script type="application/ecmascript">
     // <![CDATA[
     var txt = document.getElementById("output");

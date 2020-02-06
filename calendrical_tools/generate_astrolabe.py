@@ -340,6 +340,9 @@ def main():
     stroke_color = "#f5ac27;"
     graph_color = "navy;"
 
+    background_color = "white;"
+    graph_color = "white;"
+
     # In order to place parts of the figure in Inkscape layers, need the attributes below.
     # This will cause errors, of course, in other renderers unless the inkscape namespace
     # (xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape") is included.
@@ -539,7 +542,7 @@ def main():
         ],
     )
 
-    with open("astrolabe_generated.svg", "w") as fp:
+    with open("astrolabe_generated.html", "w") as fp:
         fp.write(svg)
 
 
