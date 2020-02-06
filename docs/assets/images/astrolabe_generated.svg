@@ -19,7 +19,7 @@
 				  clipPath: url(#Capricorn);
 				}
 				#description {
-				  fill: grey;
+				  fill: white;
 				  text-anchor: middle;
 				  font-size: 6pt;
 				  font-family: 'IM Fell Great Primer SC', serif; 
@@ -27,26 +27,26 @@
 				}
 				#horizon {
 				  fill: none;
-				  stroke: grey;
+				  stroke: white;
 				  stroke-width: 1;
 				  stroke-opacity: 0.8;
 				}
 				#tropics {
 				  fill: none;
-				  stroke: grey;
+				  stroke: white;
 				  stroke-width: 1;
 				  stroke-opacity: 0.5;
 				  clip-path: url(#almucantarHole);
 				}
 				#almucantar {
 				  fill: none;
-				  stroke: navy;
+				  stroke: white;
 				  stroke-width: 0.5;
 				  stroke-opacity: 0.5;
 				}
 				#azimuth {
 				  fill: none;
-				  stroke: navy;
+				  stroke: white;
 				  stroke-width: 0.5;
 				  stroke-opacity: 0.5;
 				  clip-path:url(#Horizon);
@@ -57,7 +57,7 @@
 				}
 				#primeVertical {
 				  fill: none;
-				  stroke: navy;
+				  stroke: white;
 				  stroke-width: 0.75;
 				  stroke-opacity: 0.8;
 				  clip-path:url(#Horizon);
@@ -65,17 +65,17 @@
 				}
 				#axisGroup {
 				  fill: none;
-				  stroke: grey;
+				  stroke: white;
 				  stroke-width: 1;
 				  stroke-opacity: 0.5;
 				  clip-path: url(#descriptionHole);
 				}
 				#tick {
-				  stroke: grey;
+				  stroke: white;
 				  stroke-width: 0.5;
 				}
 				#tickLong {
-				  stroke: grey;
+				  stroke: white;
 				  stroke-width: 1;
 				}
 				#eclipticDiagram {
@@ -103,14 +103,14 @@
 				}
 				#limb {
 				  fill: none;
-				  stroke: grey;
+				  stroke: white;
 				  stroke-opacity: 0.5;
 				  stroke-width: 1;
 				}
 				#seasonalArc {
 					stroke:none; 
-					fill:black; 
-					fill-opacity:0.6; 
+					fill:white; 
+					fill-opacity:1; 
 					font-family: 'IM Fell Great Primer SC', serif; 
 				  	font-variant: small-caps;
 					font-size:4pt;"
@@ -695,18 +695,66 @@
 				<line id="ariesFirstPoint" x1="-65.63236000956694" y1="-28.461966597872994" x2="-100" y2="-28.461966597872994"/>
 				<g id="seasonalArcs" inkscape:label="rete" inkscape:groupmode="layer">
 				
-					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)"><textPath xlink:href="#season0" startOffset="90%"><tspan dy="2em" >pisces</tspan></textPath></text>
-					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)"><textPath xlink:href="#season30" startOffset="90%"><tspan dy="2em" >aquarius</tspan></textPath></text>
-					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)"><textPath xlink:href="#season60" startOffset="90%"><tspan dy="2em" >capricorn</tspan></textPath></text>
-					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)"><textPath xlink:href="#season90" startOffset="90%"><tspan dy="2em" >sagittarius</tspan></textPath></text>
-					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)"><textPath xlink:href="#season120" startOffset="90%"><tspan dy="2em" >scorpio</tspan></textPath></text>
-					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)"><textPath xlink:href="#season150" startOffset="90%"><tspan dy="2em" >libra</tspan></textPath></text>
-					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)"><textPath xlink:href="#season180" startOffset="90%"><tspan dy="2em" >virgo</tspan></textPath></text>
-					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)"><textPath xlink:href="#season210" startOffset="90%"><tspan dy="2em" >leo</tspan></textPath></text>
-					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)"><textPath xlink:href="#season240" startOffset="90%"><tspan dy="2em" >cancer</tspan></textPath></text>
-					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)"><textPath xlink:href="#season270" startOffset="90%"><tspan dy="2em" >gemini</tspan></textPath></text>
-					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)"><textPath xlink:href="#season300" startOffset="90%"><tspan dy="2em" >taurus</tspan></textPath></text>
-					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)"><textPath xlink:href="#season330" startOffset="90%"><tspan dy="2em" >aries</tspan></textPath></text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season0" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >pisces</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season30" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >aquarius</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season60" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >capricorn</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season90" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >sagittarius</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season120" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >scorpio</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season150" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >libra</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season180" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >virgo</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season210" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >leo</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season240" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >cancer</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season270" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >gemini</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season300" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >taurus</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season330" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >aries</tspan>
+						</textPath>
+					</text>
 				</g>
 			</g>
 

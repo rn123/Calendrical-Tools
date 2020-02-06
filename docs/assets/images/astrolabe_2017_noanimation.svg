@@ -1,0 +1,592 @@
+<?xml version="1.0"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg viewbox="0 0 250 250"  height="250" width="250" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g transform="translate(125,125)" inkscape:label="astrolabe" inkscape:groupmode="layer">
+    <title>Astrolabe Plate</title>
+    <defs>  
+      <style>
+      #example {
+        display: block;
+        margin: auto;
+        border: grey;
+        background-color: light grey;
+      }
+      #plate {
+        clip-path:url(#Capricorn);
+        clipPath: url(#Capricorn);
+      }
+      #tropics {
+        fill: none;
+        stroke: grey;
+        stroke-width: 1;
+      }
+      #horizon {
+        fill: none;
+        stroke: navy;
+        stroke-width: 1;
+      }
+      #almucantar {
+        fill: none;
+        stroke: navy;
+        stroke-width: 0.5;
+      }
+      #almucantar-center {
+        fill: white;
+        fill-opacity: 0.95;
+        stroke: navy;
+        stroke-width: 0.5;
+      }
+      #azimuth {
+        fill: none;
+        stroke: navy;
+        stroke-width: 0.5;
+        clip-path:url(#Horizon);
+        clipPath: url(#Horizon);
+      }
+      #azimuth-90 {
+        fill: none;
+        stroke: navy;
+        stroke-width: 0.75;
+        clip-path:url(#Horizon);
+        clipPath: url(#Horizon);
+      }
+      #axis {
+        fill: none;
+        stroke: grey;
+        stroke-width: 1;
+      }
+      #tick {
+        stroke: grey;
+        stroke-width: 0.5;
+      }
+      #tickLong {
+        stroke: grey;
+        stroke-width: 1;
+      }
+      #note {
+        stroke: black;
+        stroke-width: 1;
+      }
+      #ecliptic-pad {
+        fill: gold;
+        fill-opacity: 0.45;
+        stroke: none;
+        stroke-width: 0.5;
+        stroke-opacity: 0.7;
+      }
+      #ecliptic {
+        fill: gold;
+        fill-opacity: 1;
+        stroke: black;
+        stroke-width: 0.5;
+        stroke-opacity: 0.7;
+      }
+      #eclipticDivision {
+        stroke: black;
+        stroke-width: 0.5;
+        stroke-opacity: 0.7;
+      }
+      #limb {
+        fill: none;
+        stroke: grey;
+        stroke-width: 1;
+      }
+      .masked {
+        mask: url("#hole");
+      }
+      </style>
+
+              
+      <clipPath id="Capricorn">
+        <circle cx="0" cy="0" r="100"/>
+      </clipPath>
+
+              
+      <clipPath id="Horizon">
+        <circle id="horizon" cx="0" cy="75.68752794082069" r="100.18569187246808"/>
+      </clipPath>
+
+              
+      <mask id="hole">
+        <circle cx="0" cy="0" r="100" fill="white"/>
+        <circle cx="0" cy="28.457145149136963" r="66.54285485086304" fill="black"/>
+        <circle cx="-75.8059781129612" cy="39.775252360237594" r="2" fill="white"/>
+        <circle cx="-39.65819995972575" cy="-58.99163241903657" r="2" fill="white"/>
+        <circle cx="39.68523478128278" cy="7.588334213029235" r="2" fill="white"/>
+        <circle cx="131.83842126597054" cy="-26.324000434832485" r="2" fill="white"/>
+        <circle cx="82.83419572004175" cy="-38.32537919281208" r="2" fill="white"/>
+        <circle cx="-31.34776093195306" cy="26.631609023568746" r="2" fill="white"/>
+        <circle cx="50.89327158292994" cy="-22.28938482784721" r="2" fill="white"/>
+        <circle cx="37.92329404292679" cy="-71.60423986627136" r="2" fill="white"/>
+        <circle cx="-47.3091856169634" cy="7.683394859066367" r="2" fill="white"/>
+        <circle cx="87.82489925263617" cy="1.8476305851931316" r="2" fill="white"/>
+        <circle cx="113.1885523497852" cy="22.74761762646695" r="2" fill="white"/>
+        <circle cx="88.45912740670013" cy="13.560377306298355" r="2" fill="white"/>
+        <circle cx="-148.92037906989154" cy="-62.16424408273503" r="2" fill="white"/>
+        <circle cx="69.69473598890855" cy="26.7793785113998" r="2" fill="white"/>
+        <circle cx="-44.177856991845566" cy="-113.3468607104089" r="2" fill="white"/>
+      </mask>
+    </defs>
+
+    <g id="plate" transform="rotate(180)" inkscape:label="plate" inkscape:groupmode="layer">
+
+      <g id="azimuths" inkscape:label="azimuths" inkscape:groupmode="layer">
+        <title>Azimuth</title>
+        <circle id="azimuth" az="0.0" cx="0.0" cy="-56.92577215022053" r="86.88564038476916"/>
+        <circle id="azimuth" az="0.0" cx="-0.0" cy="-56.92577215022053" r="86.88564038476916"/>
+        <circle id="azimuth" az="10.0" cx="15.320282635967818" cy="-56.92577215022053" r="88.22599143742941"/>
+        <circle id="azimuth" az="10.0" cx="-15.320282635967818" cy="-56.92577215022053" r="88.22599143742941"/>
+        <circle id="azimuth" az="20.0" cx="31.62378688521344" cy="-56.92577215022053" r="92.4617672448068"/>
+        <circle id="azimuth" az="20.0" cx="-31.62378688521344" cy="-56.92577215022053" r="92.4617672448068"/>
+        <circle id="azimuth" az="29.999999999999996" cx="50.16344786485949" cy="-56.92577215022053" r="100.32689572971898"/>
+        <circle id="azimuth" az="29.999999999999996" cx="-50.16344786485949" cy="-56.92577215022053" r="100.32689572971898"/>
+        <circle id="azimuth" az="40.0" cx="72.90570880146159" cy="-56.92577215022053" r="113.42114829658067"/>
+        <circle id="azimuth" az="40.0" cx="-72.90570880146159" cy="-56.92577215022053" r="113.42114829658067"/>
+        <circle id="azimuth" az="50.0" cx="103.54627407339723" cy="-56.92577215022053" r="135.17006095861066"/>
+        <circle id="azimuth" az="50.0" cx="-103.54627407339723" cy="-56.92577215022053" r="135.17006095861066"/>
+        <circle id="azimuth" az="59.99999999999999" cx="150.49034359457843" cy="-56.92577215022053" r="173.7712807695383"/>
+        <circle id="azimuth" az="59.99999999999999" cx="-150.49034359457843" cy="-56.92577215022053" r="173.7712807695383"/>
+        <circle id="azimuth" az="70.0" cx="238.71633503200783" cy="-56.92577215022053" r="254.03661766797563"/>
+        <circle id="azimuth" az="70.0" cx="-238.71633503200783" cy="-56.92577215022053" r="254.03661766797563"/>
+        <circle id="azimuth" az="80.0" cx="492.7529526999833" cy="-56.92577215022053" r="500.3544612568409"/>
+        <circle id="azimuth" az="80.0" cx="-492.7529526999833" cy="-56.92577215022053" r="500.3544612568409"/>
+      </g>
+
+      <g id="azimuth_zenith" inkscape:label="azimuth_zenith" inkscape:groupmode="layer">
+        <circle id="azimuth-90" az="0.0" cx="-0.0" cy="-56.92577215022053" r="86.88564038476916"/>
+      </g>
+
+      <g id="almucantars" inkscape:label="almucantars" inkscape:groupmode="layer">
+        <title>Almucantar</title>
+        <circle id="almucantar" cx="0" cy="59.83020712784386" r="77.99259062313784"/>
+        <circle id="almucantar" cx="0" cy="49.728197820851854" r="61.85430304771834"/>
+        <circle id="almucantar" cx="0" cy="42.927482289135156" r="49.20932754122206"/>
+        <circle id="almucantar" cx="0" cy="38.20509133004095" r="38.73973001233637"/>
+        <circle id="almucantar" cx="0" cy="34.891725069542375" r="29.687342262818632"/>
+        <circle id="almucantar" cx="0" cy="32.59847317034907" r="21.574892703003098"/>
+        <circle id="almucantar" cx="0" cy="31.092749075385303" r="14.076419064200723"/>
+        <circle id="almucantar-center" cx="0" cy="31.092749075385303" r="6.950181305795031"/>
+      </g>
+
+      <g id="tropics" inkscape:label="tropics" inkscape:groupmode="layer">
+        <circle id="capricorn" cx="0" cy="0" r="100"/>
+        <circle id="equator" cx="0" cy="0" r="65.63970574410436"/>
+        <circle id="cancer" cx="0" cy="0" r="43.08570970172607"/>
+      </g>
+
+      <g id="horizon" inkscape:label="horizon" inkscape:groupmode="layer">
+        <title>Horizon</title>
+        <circle id="horizon" cx="0" cy="75.68752794082069" r="100.18569187246808"/>
+      </g>
+
+      <g id="axes" inkscape:label="axes" inkscape:groupmode="layer">
+        <line id="axis" x1="0" y1="-100" x2="0" y2="100"/>
+        <line id="axis" x1="-100" y1="0" x2="100" y2="0"/>
+      </g>
+    </g>
+
+    <!-- <text id="note" x="0" y="0">test</text> -->
+    <g id="limb" inkscape:label="limb" inkscape:groupmode="layer">
+      <title>Limb</title>
+      <g id="limb_boundaries" inkscape:label="limb boundaries" inkscape:groupmode="layer">
+        <circle id="limb" cx="0" cy="0" r="100"/>
+        <circle id="limb" cx="0" cy="0" r="105"/>
+        <circle id="limb" cx="0" cy="0" r="115"/>
+      </g>
+      <g id="ticks" inkscape:label="ticks" inkscape:groupmode="layer">
+        <g id="long_ticks" inkscape:label="ticks" inkscape:groupmode="layer">
+          <line id="tickLong" x1="0" y1="100" x2="0" y2="115"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(0)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(15)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(30)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(45)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(60)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(75)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(90)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(105)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(120)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(135)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(150)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(165)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(180)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(195)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(210)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(225)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(240)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(255)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(270)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(285)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(300)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(315)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(330)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(345)"/>
+          <use id="tickLong" xlink:href="#tickLong" transform="rotate(360)"/>
+        </g>        
+        <g id="short_ticks" inkscape:label="ticks" inkscape:groupmode="layer">
+          <line id="tick" x1="0" y1="100" x2="0" y2="105"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(1)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(2)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(3)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(4)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(5)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(6)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(7)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(8)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(9)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(10)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(11)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(12)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(13)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(14)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(16)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(17)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(18)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(19)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(20)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(21)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(22)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(23)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(24)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(25)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(26)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(27)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(28)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(29)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(31)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(32)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(33)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(34)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(35)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(36)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(37)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(38)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(39)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(40)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(41)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(42)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(43)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(44)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(46)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(47)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(48)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(49)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(50)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(51)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(52)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(53)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(54)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(55)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(56)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(57)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(58)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(59)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(61)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(62)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(63)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(64)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(65)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(66)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(67)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(68)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(69)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(70)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(71)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(72)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(73)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(74)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(76)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(77)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(78)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(79)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(80)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(81)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(82)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(83)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(84)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(85)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(86)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(87)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(88)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(89)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(91)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(92)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(93)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(94)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(95)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(96)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(97)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(98)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(99)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(100)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(101)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(102)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(103)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(104)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(106)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(107)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(108)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(109)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(110)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(111)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(112)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(113)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(114)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(115)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(116)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(117)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(118)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(119)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(121)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(122)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(123)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(124)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(125)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(126)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(127)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(128)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(129)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(130)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(131)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(132)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(133)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(134)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(136)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(137)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(138)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(139)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(140)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(141)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(142)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(143)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(144)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(145)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(146)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(147)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(148)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(149)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(151)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(152)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(153)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(154)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(155)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(156)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(157)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(158)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(159)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(160)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(161)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(162)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(163)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(164)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(166)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(167)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(168)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(169)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(170)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(171)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(172)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(173)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(174)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(175)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(176)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(177)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(178)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(179)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(181)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(182)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(183)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(184)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(185)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(186)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(187)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(188)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(189)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(190)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(191)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(192)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(193)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(194)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(196)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(197)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(198)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(199)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(200)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(201)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(202)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(203)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(204)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(205)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(206)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(207)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(208)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(209)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(211)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(212)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(213)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(214)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(215)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(216)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(217)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(218)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(219)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(220)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(221)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(222)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(223)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(224)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(226)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(227)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(228)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(229)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(230)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(231)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(232)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(233)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(234)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(235)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(236)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(237)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(238)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(239)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(241)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(242)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(243)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(244)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(245)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(246)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(247)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(248)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(249)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(250)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(251)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(252)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(253)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(254)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(256)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(257)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(258)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(259)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(260)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(261)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(262)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(263)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(264)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(265)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(266)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(267)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(268)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(269)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(271)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(272)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(273)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(274)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(275)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(276)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(277)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(278)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(279)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(280)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(281)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(282)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(283)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(284)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(286)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(287)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(288)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(289)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(290)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(291)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(292)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(293)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(294)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(295)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(296)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(297)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(298)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(299)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(301)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(302)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(303)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(304)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(305)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(306)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(307)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(308)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(309)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(310)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(311)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(312)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(313)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(314)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(316)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(317)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(318)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(319)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(320)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(321)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(322)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(323)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(324)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(325)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(326)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(327)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(328)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(329)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(331)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(332)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(333)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(334)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(335)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(336)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(337)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(338)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(339)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(340)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(341)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(342)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(343)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(344)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(346)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(347)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(348)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(349)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(350)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(351)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(352)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(353)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(354)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(355)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(356)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(357)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(358)"/>
+          <use id="tick" xlink:href="#tick" transform="rotate(359)"/>
+        </g>
+      </g>
+    </g>
+
+    <!-- <use id="test" xlink:href="#plate" transform="translate(-100,-100) scale(0.2)"/> -->
+    <g id="ecliptic" inkscape:label="ecliptic" inkscape:groupmode="layer" transform="rotate(180)">
+      <title>Ecliptic</title>
+      <g id="ecliptic_boundaries" inkscape:label="ecliptic_boundaries" inkscape:groupmode="layer">
+        <circle  id="ecliptic" cx="0" cy="28.457145149136963" r="71.54285485086304"/>
+        <circle  id="ecliptic" cx="0" cy="28.457145149136963" r="66.54285485086304"/>
+      </g>
+      <g id="ecliptic_divisions" inkscape:label="ecliptic_divisions" inkscape:groupmode="layer">
+        <line id="eclipticDivision" x1="0" y1="0" x2="65.63970574410436" y2="0"/>
+        <line id="eclipticDivision" x1="0" y1="0" x2="70.95788547717024" y2="37.58723654081812"/>
+        <line id="eclipticDivision" x1="0" y1="0" x2="50.066393927457185" y2="79.56229439373202"/>
+        <line id="eclipticDivision" x1="0" y1="0" x2="6.673912321951756e-15" y2="100"/>
+        <line id="eclipticDivision" x1="0" y1="0" x2="-50.066393927457156" y2="79.56229439373205"/>
+        <line id="eclipticDivision" x1="0" y1="0" x2="-70.95788547717024" y2="37.58723654081812"/>
+        <line id="eclipticDivision" x1="0" y1="0" x2="-65.6397057441044" y2="0"/>
+        <line id="eclipticDivision" x1="0" y1="0" x2="-47.41556017011869" y2="-25.116586604078723"/>
+        <line id="eclipticDivision" x1="0" y1="0" x2="-24.410935029823065" y2="-38.79228853755972"/>
+        <line id="eclipticDivision" x1="0" y1="0" x2="-8.626507466351576e-15" y2="-43.08570970172607"/>
+        <line id="eclipticDivision" x1="0" y1="0" x2="24.410935029823047" y2="-38.79228853755972"/>
+        <line id="eclipticDivision" x1="0" y1="0" x2="47.41556017011866" y2="-25.11658660407874"/>
+        <line id="eclipticDivision" x1="0" y1="0" x2="65.63970574410428" y2="0"/>
+      </g>
+    </g>
+  </g>
+</svg>
