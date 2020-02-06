@@ -4,6 +4,28 @@
     <meta charset="utf-8">
     <title>{{ page.title }}</title>
     <link href="{{ "/assets/css/style.css" | absolute_url }}" rel="stylesheet">
+    <style type="text/css">
+      html, body {
+        height: 100%;
+      }
+      .wrapper {
+        position: relative;
+        height: 10em;
+        width: 10em;
+        resize: both;
+        overflow: hidden;
+        border: none;
+      }
+      svg {
+        display: block;
+        position: absolute;
+        height: 90%;
+        width: 90%;
+        top: 5%;
+        left: 5%;
+        background-color: none;
+      }
+    </style>
   </head>
   <script type="text/javascript" src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
   <body>
@@ -11,17 +33,19 @@
     {% include navigation.html %}
     <h1 class="header">Calendrical Tools</h1>
     <p class="header">Calendrical tools for reckoning time.</p>
-    <div class="container" height="0" width="50%" padding-top="50%" position="relative">
-      <iframe src="{{ "/assets/images/astrolabe_generated.svg" | relative_url }}" position="absolute" top="0" left="0" width="100%" height="100%"></iframe>
-    </div>  
+    <div class="wrapper">
+      {% include astrolabe_generated.svg %}
+    </div>
     <ul>
-      <li><a class="buttons github" href="https://github.com/rn123/Calendrical-Tools">View On GitHub</a></li>
+    <li><a class="buttons github" href="https://github.com/rn123/Calendrical-Tools">View On GitHub</a></li>
     </ul>
-    
+
     <p class="header">This project is maintained by <a class="header name" href="https://github.com/rn123/">rn123</a></p>
   </header>
+
   <section>
     {{ content }}
   </section>
+
   </body>
 </html>
