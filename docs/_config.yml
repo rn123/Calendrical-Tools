@@ -22,7 +22,7 @@ title: Calendrical-Tools
 email: ray.nowell@gmail.com
 description: >- # this means to ignore newlines until "baseurl:"
   Calendrical tools for reckoning time.
-baseurl: "/timeReckoning" # the subpath of your site, e.g. /blog
+baseurl: "/Calendrical-Tools" # the subpath of your site, e.g. /blog
 url: "https://rn123.github.io/" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: 2gapsoliton
 github_username:  rn123
