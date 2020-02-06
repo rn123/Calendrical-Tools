@@ -2,6 +2,7 @@
 layout: post
 title:  "Drawing Astrolabes: Dividing the Ecliptic"
 author: Ray
+mathjax: true
 ---
 
 <img src="{{ "/assets/images/ecliptic_division.svg" | relative_url }}" alt="Ecliptic Division Diagram" width="60%" align="right" style="padding:5px;"/>
