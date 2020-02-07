@@ -1,17 +1,19 @@
 docs_list_title: Calendrical Tools Documentation
-docs:
+toc:
 
-- title: Introduction
-  url: concept.html
-
-- title: Drawing the Plate Grid
-  url: plate_grid.html
-
-- title: Dividing the Ecliptic
-  url: ecliptic_division.html
-
-- title: ISO Calender
-  url: ISO_calendar.html
-
-- title: Suggested Bibliography
-  url: bib.html
+- title: Overview
+  subfolderitems:
+    - page: Project Concept
+      url: overview/concept.html
+    - page: Suggested Bibliography
+      url: overview/bib.html
+- title: Calendars
+  subfolderitems:
+    - page: ISO Calendars
+      url: calendars/ISO_calendar.html
+- title: Astrolabes
+  subfolderitems:
+    - page: Drawing the Plate Grid
+      url: astrolabes/plate_grid.html
+    - page: Dividing the Ecliptic
+      url: astrolabes/ecliptic_division.html
