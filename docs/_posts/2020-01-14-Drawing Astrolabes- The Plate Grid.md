@@ -2,6 +2,7 @@
 layout: post
 title:  "Drawing Astrolabes: The Plate Grid"
 author: Ray
+mathjax: true
 ---
 
 <img src="{{ "/assets/images/astrolabe_generated_01152020.png" | relative_url }}" alt="First version of generated astrolabe image" width="25%" align="right" style="padding:5px;"/>
@@ -13,7 +14,7 @@ Continuing, here is Morrisons basic description:
 
 > The larger circles centered on the plate represent the Earth's tropics. The largest circle, which defines the outside of the plate, is the Tropic of Capricorn, which is the farthest south the sun ever reaches. The middle circle is the equator and the smaller circle is the sun's northern limit, the Tropic of Cancer. The circles defining the tropic are the same for all latitudes.
 
-<img src="{{ "/assets/images/sun_in_the_church.jpg" | relative_url }}" alt="The Sun in the Church" width="25%" align="left" style="padding:5px;"/>
+<img src="{{ "/assets/images/sun_in_the_church.jpg" | relative_url }}" alt="The Sun in the Church" width="25%" align="left" style="padding:10px;"/>
 Not mentioned is the dependency of the plate on the obliquity of the ecliptic -- the angle that the plane of the Sun's path makes with the Earth's equator. Modern astronomy starts with the identification of the time dependence of the obliquity of the ecliptic. Drawing historically accurate diagrams needs to take into account this time dependency. The story of this discovery and how the obliquity was measured five hundred years ago appears in Heilbron's book, "The Sun in the Church." 
 
 Morrison continues:
@@ -26,17 +27,33 @@ Morrison's book has details about the layout of many tools based on stereographi
 
 The easy part of drawing the plate of an astrolabe is drawing the tropics and the equator:
 
-<img src="{{ "/assets/images/plate_grid_equation1.png" | relative_url }}" alt="equation 1" width="25%" align="left" style="padding:5px;"/>
+$$
+\begin{align}
+R_{Equator} &= R_{Capricorn} \tan(\frac{90 - \epsilon}{2}) \\
+R_{Cancer}  &= R_{Equator} \tan(\frac{90 - \epsilon}{2})
+\end{align}
+$$
 
 These circles depend only on the obliquity of the ecliptic.
 
 The circles of equal altitude (almucantars) are given by the following formulas:
 
-<img src="{{ "/assets/images/plate_grid_equation2.png" | relative_url }}" alt="equation 2" width="25%" align="left" style="padding:5px;"/>
+plate grid equation 2, circles of equal altitude (almucantars).
+$$
+\begin{align}
+ y_{center} &= R_{Equator}(\frac{\cos\phi}{\sin\phi + \sin a}), & r_{a} &= R_{Equator} (\frac{\cos a}{\sin\phi + \sin a}) \\
+ r_{U} &= R_{Equator} \cot(\frac{\phi +  a}{2}),  & r_{L} &= -R_{Equator} \tan(\frac{\phi -  a}{2})
+\end{align}
+$$
 
 In particular, the radius and center for the horizon arc is obtained for an altitude of zero.
 
 The arcs of equal azimuth are given by:
-<img src="{{ "/assets/images/plate_grid_equation3.png" | relative_url }}" alt="equation 3" width="25%" align="left" style="padding:5px;"/>
+$$
+\begin{align}
+y_N &= -R_{Equator} \tan(\frac{90+\phi}{2}) & y_{Az} &= R_{Equator} / \cos\phi \\
+x_A &= y_{Az} \tan A & r_A &= y_{Az} / \cos A
+\end{align}
+$$
 
 <img src="{{ "/assets/images/screenshot_coding_astrolabe.png" | relative_url }}" alt="coding screenshot" width="100%" style="padding:5px;"/>
