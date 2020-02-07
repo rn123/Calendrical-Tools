@@ -1,9 +1,11 @@
 ---
 layout: default
-title: Concept
+title: Calendrical Tools
+sidebar: toc
 ---
 <h2>{{ site.data.CalendricalToolsDocumentation.docs_list_title }}</h2>
-{% for item in site.data.CalendricalToolsDocumentation.toc %}
+
+{% for item in site.data.CalendricalToolsDocumentation[page.sidebar] %}
     <h3>{{ item.title }}</h3>
       <ul>
         {% for entry in item.subfolderitems %}
