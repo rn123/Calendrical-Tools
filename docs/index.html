@@ -2,5 +2,9 @@
 layout: default
 title: Concept
 ---
-<h1> Project Concept </h1>
-{% include concept.md %}
+<h2>{{ site.data.CalendricalToolsDocumentation.docs_list_title }}</h2>
+<ul>
+   {% for item in site.data.CalendricalToolsDocumentation.docs %}
+      <li><a href="{{ item.url }}">{{ item.title }}</a></li>
+   {% endfor %}
+</ul>
