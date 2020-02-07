@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title> astrolabe </title>
+	<style type="text/css">
+		html, body {
+			height: 100%;
+		}
+		.wrapper {
+			position: relative;
+			height: 10em;
+			width: 10em;
+			resize: both;
+			overflow: hidden;
+			border: thin solid;
+		}
+		svg {
+			display: block;
+			position: absolute;
+			height: 90%;
+			width: 90%;
+			top: 5%;
+			left: 5%;
+			background-color: black;
+		}
+	</style>
+</head>
+<body>
+	<div class="wrapper">
+		<svg id="diagram" viewbox="-125 -125 250 250" xmlns="http://www.w3.org/2000/svg" 
+	xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns:xlink="http://www.w3.org/1999/xlink"
+	onload="init(evt)">
+	<g id="astrolabe" transform="scale(1, -1)" inkscape:label="astrolabe" inkscape:groupmode="layer">
+	    <title>Astrolabe Plate</title>
+	    <defs>
+			<style type="text/css">
+				@font-face {
+        			font-family: 'IM Fell Great Primer SC', serif;
+        			src: https://fonts.googleapis.com/css?family=IM+Fell+Great+Primer+SC;
+        			<!-- src: local(IM FELL Double Pica PRO); -->
+        		}
+				#astrolabe {
+				  font-family: 'IM Fell Great Primer SC', serif; 
+				  font-variant: small-caps;
+				}
+				#plate {
+				  clip-path:url(#Capricorn);
+				  clipPath: url(#Capricorn);
+				}
+				#description {
+				  fill: white;
+				  text-anchor: middle;
+				  font-size: 6pt;
+				  font-family: 'IM Fell Great Primer SC', serif; 
+				  font-variant: small-caps;
+				}
+				#horizon {
+				  fill: none;
+				  stroke: white;
+				  stroke-width: 1;
+				  stroke-opacity: 0.8;
+				}
+				#tropics {
+				  fill: none;
+				  stroke: white;
+				  stroke-width: 1;
+				  stroke-opacity: 0.5;
+				  clip-path: url(#almucantarHole);
+				}
+				#almucantar {
+				  fill: none;
+				  stroke: white;
+				  stroke-width: 0.5;
+				  stroke-opacity: 0.5;
+				}
+				#azimuth {
+				  fill: none;
+				  stroke: white;
+				  stroke-width: 0.5;
+				  stroke-opacity: 0.5;
+				  clip-path:url(#Horizon);
+				  clipPath: url(#Horizon);
+				}
+				#azimuthsGroup {
+				  clip-path: url(#almucantarHole);
+				}
+				#primeVertical {
+				  fill: none;
+				  stroke: white;
+				  stroke-width: 0.75;
+				  stroke-opacity: 0.8;
+				  clip-path:url(#Horizon);
+				  clipPath: url(#Horizon);
+				}
+				#axisGroup {
+				  fill: none;
+				  stroke: white;
+				  stroke-width: 1;
+				  stroke-opacity: 0.5;
+				  clip-path: url(#descriptionHole);
+				}
+				#tick {
+				  stroke: white;
+				  stroke-width: 0.5;
+				}
+				#tickLong {
+				  stroke: white;
+				  stroke-width: 1;
+				}
+				#eclipticDiagram {
+				  fill: #f5ac27;
+				  fill-opacity: 1;
+				  stroke: #f5ac27;
+				  stroke-width: 0.7;
+				  stroke-opacity: 0.7;
+				  clip-path: url(#eclipticHole);
+				}
+				#eclipticDivision, #ariesFirstPoint {
+				  stroke: #f5ac27;;
+				  stroke-width: 1;
+				  stroke-opacity: 1;
+				}
+				#eclipticDivisionFine {
+				  stroke: #f5ac27;;
+				  stroke-width: 0.6;
+				  stroke-opacity: 0.6;
+				}
+				#eclipticDivisionExtraFine {
+				  stroke: #f5ac27;;
+				  stroke-width: 0.4;
+				  stroke-opacity: 0.4;
+				}
+				#limb {
+				  fill: none;
+				  stroke: white;
+				  stroke-opacity: 0.5;
+				  stroke-width: 1;
+				}
+				#seasonalArc {
+					stroke:none; 
+					fill:white; 
+					fill-opacity:1; 
+					font-family: 'IM Fell Great Primer SC', serif; 
+				  	font-variant: small-caps;
+					font-size:4pt;"
+				}
+			</style>
+
+			<symbol viewBox="0 0 20 20" id="star" style="overflow: visible">
+		        <title>star</title>
+		        <polygon points="48.37 61.63 3.43 55 48.37 48.37 55 3.43 61.63 48.37 106.57 55 61.63 61.63 55 106.57 48.37 61.63"/>
+		    </symbol>
+
+			<clipPath id="Capricorn">
+				<path id="capricornPath" d="
+						M0 100
+						A100 100 0 0 1 0 -100
+						A100 100 0 0 1 0 100z"
+					/>		
+			</clipPath>			
+
+			<clipPath id="Horizon">
+				<path id="horizonPath" d="
+						M0.0 348.90297782559264 
+						A180.62456130568754 180.62456130568754 0 0 1 0.0 -12.346144785782457
+						A180.62456130568754 180.62456130568754 0 0 1 0.0 348.90297782559264z
+					"/>
+			</clipPath>
+
+		    <clipPath id="almucantarHole">
+				<path id="almucantarHolePath" fill-rule="evenodd"  d="
+					M0 100 
+					A100 100 0 0 1 0 -100
+					A100 100 0 0 1 0 100z
+					M0 53.80856909404402 
+					A8.453629525147674 8.453629525147674 0 1 0 0 36.901310043748666
+					A8.453629525147674 8.453629525147674 0 1 0 0 53.80856909404402z
+				"/>
+		    </clipPath>
+
+		    <clipPath id="descriptionHole" >
+		    	<!-- <rect id="description" x="-10" y="73" width="20" height="19"/> -->
+		    	<path id="test" fill-rule="evenodd" d="
+		    		M0 100 
+					A100 100 0 0 1 0 -100
+					A100 100 0 0 1 0 100z
+		    		M-10,-74 10,-74 10,-93 -10,-93 -10,-74 0,-100
+
+		    	"/>
+		    </clipPath>
+
+		    <clipPath id="eclipticBoundary">
+		    	<path id="eclipticArc" fill-rule="evenodd" d="
+					M0.0 100.0
+					A71.53803340212701 71.53803340212701 0 1 0 0.0 -43.07606680425402
+					A71.53803340212701 71.53803340212701 0 1 0 0.0 100.0z"/>
+		    </clipPath>
+
+		    <clipPath id="eclipticHole">
+		    	<path id="eclipticHolePath" fill-rule="evenodd" d="
+					M0.0 100.0
+					A71.53803340212701 71.53803340212701 0 0 1 0.0 -43.07606680425402
+					A71.53803340212701 71.53803340212701 0 0 1 0.0 100.0z
+					M0.0 95.0
+					A66.53803340212701 66.53803340212701 0 1 0 0.0 -38.07606680425402
+					A66.53803340212701 66.53803340212701 0 1 0 0.0 95.0z"/>
+		    </clipPath>
+
+		
+			<path id="season0" d="
+				M65.63236000956694 -1.7763568394002505e-14
+				A71.53803340212701 71.53803340212701 0 0 1 71.12541619157273 36.13434527853026"/>
+			<path id="season30" d="
+				M71.12541619157273 36.13434527853026
+				A71.53803340212701 71.53803340212701 0 0 1 51.53773362002764 78.07599925351299"/>
+			<path id="season60" d="
+				M51.53773362002764 78.07599925351299
+				A71.53803340212701 71.53803340212701 0 0 1 0.0 100.0"/>
+			<path id="season90" d="
+				M0.0 100.0
+				A71.53803340212701 71.53803340212701 0 0 1 -51.537733620027616 78.07599925351303"/>
+			<path id="season120" d="
+				M-51.537733620027616 78.07599925351303
+				A71.53803340212701 71.53803340212701 0 0 1 -71.12541619157274 36.13434527853014"/>
+			<path id="season150" d="
+				M-71.12541619157274 36.13434527853014
+				A71.53803340212701 71.53803340212701 0 0 1 -65.63236000956694 -1.4210854715202004e-14"/>
+			<path id="season180" d="
+				M-65.63236000956694 -1.4210854715202004e-14
+				A71.53803340212701 71.53803340212701 0 0 1 -47.95607085032205 -24.62198099123093"/>
+			<path id="season210" d="
+				M-47.95607085032205 -24.62198099123093
+				A71.53803340212701 71.53803340212701 0 0 1 -24.976344298948085 -38.57438509659383"/>
+			<path id="season240" d="
+				M-24.976344298948085 -38.57438509659383
+				A71.53803340212701 71.53803340212701 0 0 1 0.0 -43.07606680425402"/>
+			<path id="season270" d="
+				M0.0 -43.07606680425402
+				A71.53803340212701 71.53803340212701 0 0 1 24.97634429894812 -38.574385096593815"/>
+			<path id="season300" d="
+				M24.97634429894812 -38.574385096593815
+				A71.53803340212701 71.53803340212701 0 0 1 47.95607085032203 -24.62198099123096"/>
+			<path id="season330" d="
+				M47.95607085032203 -24.62198099123096
+				A71.53803340212701 71.53803340212701 0 0 1 65.63236000956694 -1.7763568394002505e-14"/>
+
+		</defs>
+
+		<g id="plate" inkscape:label="plate" inkscape:groupmode="layer">
+			<g id="tropics" inkscape:label="tropics" inkscape:groupmode="layer">
+				<circle cx="0" cy="0" r="100"/>
+				<circle cx="0" cy="0" r="65.63236000956694"/>
+				<circle cx="0" cy="0" r="43.07606680425401"/>
+			</g>
+
+			<g id="horizonGroup" inkscape:label="horizon" inkscape:groupmode="layer">
+		        <title>Horizon</title>
+		        <circle id="horizon" cx="0.0" cy="168.27841651990508" r="180.62456130568754"/>
+	      	</g>
+
+			<g id="azimuthsGroup" inkscape:label="azimuths" inkscape:groupmode="layer">
+				<title>Azimuth</title>
+				
+					<circle id="azimuth" az="10" cx="12.421818535357293" cy="-25.59809373958466" r="71.53440192838207"/>
+					<circle id="azimuth" az="10" cx="-12.421818535357293" cy="-25.59809373958466" r="71.53440192838207"/>
+					<circle id="azimuth" az="20" cx="25.640841714413813" cy="-25.59809373958466" r="74.96880582848834"/>
+					<circle id="azimuth" az="20" cx="-25.640841714413813" cy="-25.59809373958466" r="74.96880582848834"/>
+					<circle id="azimuth" az="30" cx="40.67296023783681" cy="-25.59809373958466" r="81.34592047567364"/>
+					<circle id="azimuth" az="30" cx="-40.67296023783681" cy="-25.59809373958466" r="81.34592047567364"/>
+					<circle id="azimuth" az="40" cx="59.11258339302476" cy="-25.59809373958466" r="91.96285445180173"/>
+					<circle id="azimuth" az="40" cx="-59.11258339302476" cy="-25.59809373958466" r="91.96285445180173"/>
+					<circle id="azimuth" az="50" cx="83.95622046373934" cy="-25.59809373958466" r="109.59706217815317"/>
+					<circle id="azimuth" az="50" cx="-83.95622046373934" cy="-25.59809373958466" r="109.59706217815317"/>
+					<circle id="azimuth" az="60" cx="122.01888071351043" cy="-25.59809373958466" r="140.89526725232417"/>
+					<circle id="azimuth" az="60" cx="-122.01888071351043" cy="-25.59809373958466" r="140.89526725232417"/>
+					<circle id="azimuth" az="70" cx="193.55328264189245" cy="-25.59809373958466" r="205.97510117724977"/>
+					<circle id="azimuth" az="70" cx="-193.55328264189245" cy="-25.59809373958466" r="205.97510117724977"/>
+					<circle id="azimuth" az="80" cx="399.5283838191422" cy="-25.59809373958466" r="405.69175313365906"/>
+					<circle id="azimuth" az="80" cx="-399.5283838191422" cy="-25.59809373958466" r="405.69175313365906"/>			
+		    </g>
+
+			<g id="almucantarsGroup" inkscape:label="almucantars" inkscape:groupmode="layer">
+				<title>Almucantar</title>
+				
+					<circle id="almucantar" alt="0" cx="0" cy="168.2784165199051" r="180.62456130568754"/>
+					<circle id="almucantar" alt="10" cx="0" cy="113.86387502593837" r="120.36100551436813"/>
+					<circle id="almucantar" alt="20" cx="0" cy="86.68506735308874" r="87.43362729200523"/>
+					<circle id="almucantar" alt="30" cx="0" cy="70.82327143760874" r="65.83472168322515"/>
+					<circle id="almucantar" alt="40" cx="0" cy="60.772409045149345" r="49.969937640163"/>
+					<circle id="almucantar" alt="50" cx="0" cy="54.140071090034795" r="37.353792938195646"/>
+					<circle id="almucantar" alt="60" cx="0" cy="49.7370895658308" r="26.693084500195607"/>
+					<circle id="almucantar" alt="70" cx="0" cy="46.92524354442485" r="17.226879209080142"/>
+					<circle id="almucantar" alt="80" cx="0" cy="45.35493956889634" r="8.453629525147674"/>
+			</g>
+
+			<g id="primeVerticalGroup" inkscape:label="prime_vertical" inkscape:groupmode="layer">
+				<circle id="primeVertical" cx="0" cy="-25.59809373958466" r="70.4476336261621"/>
+			</g>
+
+			<!-- <use xlink:href="#test" style="fill:green;"/> -->
+
+			<g id="axisGroup" inkscape:label="axis" inkscape:groupmode="layer">
+	      		<line id="axis" x1="0" y1="-100" x2="0" y2="100"/>
+        		<line id="axis" x1="-100" y1="0" x2="100" y2="0"/>
+    		</g>
+
+    		<g id="descriptionGroup" inkscape:label="description" inkscape:groupmode="layer" transform="scale(1, -1)">
+				<text id="description" x="0" y="81" >
+					Hawaiian Islands
+		    		<tspan x="0" dy="1.2em">21.3069 </tspan>
+		    	</text>
+			</g>
+	    </g>
+
+		<g id="limb" inkscape:label="limb" inkscape:groupmode="layer">
+			<title>Limb</title>
+
+			<g id="limb_boundaries" inkscape:label="limb_boundaries" inkscape:groupmode="layer">
+				<circle id="limb" cx="0" cy="0" r="100"/>
+				<circle id="limb" cx="0" cy="0" r="105"/>
+				<circle id="limb" cx="0" cy="0" r="115"/>
+			</g>
+			<g id="ticks" inkscape:label="ticks" inkscape:groupmode="layer">
+				<g id="short_ticks" inkscape:label="short_ticks" inkscape:groupmode="layer">
+					<line id="tick" x1="0" y1="100" x2="0" y2="105"/>
+					
+				    	<use id="tick" xlink:href="#tick" transform="rotate(0)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(1)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(2)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(3)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(4)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(5)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(6)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(7)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(8)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(9)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(10)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(11)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(12)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(13)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(14)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(15)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(16)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(17)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(18)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(19)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(20)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(21)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(22)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(23)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(24)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(25)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(26)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(27)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(28)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(29)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(30)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(31)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(32)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(33)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(34)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(35)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(36)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(37)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(38)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(39)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(40)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(41)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(42)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(43)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(44)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(45)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(46)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(47)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(48)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(49)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(50)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(51)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(52)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(53)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(54)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(55)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(56)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(57)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(58)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(59)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(60)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(61)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(62)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(63)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(64)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(65)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(66)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(67)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(68)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(69)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(70)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(71)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(72)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(73)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(74)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(75)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(76)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(77)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(78)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(79)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(80)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(81)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(82)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(83)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(84)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(85)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(86)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(87)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(88)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(89)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(90)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(91)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(92)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(93)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(94)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(95)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(96)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(97)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(98)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(99)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(100)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(101)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(102)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(103)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(104)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(105)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(106)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(107)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(108)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(109)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(110)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(111)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(112)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(113)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(114)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(115)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(116)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(117)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(118)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(119)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(120)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(121)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(122)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(123)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(124)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(125)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(126)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(127)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(128)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(129)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(130)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(131)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(132)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(133)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(134)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(135)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(136)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(137)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(138)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(139)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(140)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(141)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(142)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(143)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(144)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(145)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(146)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(147)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(148)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(149)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(150)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(151)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(152)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(153)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(154)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(155)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(156)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(157)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(158)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(159)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(160)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(161)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(162)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(163)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(164)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(165)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(166)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(167)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(168)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(169)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(170)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(171)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(172)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(173)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(174)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(175)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(176)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(177)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(178)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(179)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(180)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(181)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(182)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(183)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(184)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(185)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(186)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(187)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(188)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(189)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(190)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(191)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(192)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(193)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(194)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(195)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(196)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(197)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(198)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(199)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(200)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(201)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(202)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(203)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(204)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(205)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(206)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(207)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(208)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(209)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(210)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(211)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(212)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(213)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(214)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(215)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(216)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(217)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(218)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(219)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(220)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(221)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(222)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(223)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(224)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(225)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(226)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(227)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(228)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(229)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(230)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(231)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(232)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(233)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(234)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(235)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(236)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(237)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(238)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(239)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(240)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(241)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(242)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(243)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(244)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(245)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(246)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(247)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(248)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(249)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(250)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(251)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(252)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(253)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(254)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(255)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(256)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(257)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(258)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(259)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(260)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(261)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(262)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(263)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(264)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(265)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(266)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(267)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(268)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(269)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(270)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(271)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(272)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(273)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(274)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(275)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(276)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(277)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(278)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(279)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(280)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(281)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(282)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(283)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(284)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(285)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(286)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(287)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(288)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(289)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(290)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(291)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(292)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(293)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(294)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(295)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(296)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(297)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(298)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(299)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(300)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(301)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(302)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(303)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(304)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(305)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(306)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(307)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(308)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(309)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(310)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(311)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(312)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(313)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(314)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(315)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(316)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(317)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(318)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(319)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(320)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(321)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(322)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(323)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(324)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(325)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(326)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(327)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(328)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(329)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(330)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(331)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(332)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(333)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(334)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(335)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(336)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(337)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(338)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(339)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(340)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(341)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(342)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(343)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(344)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(345)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(346)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(347)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(348)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(349)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(350)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(351)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(352)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(353)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(354)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(355)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(356)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(357)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(358)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(359)"/>
+				    	<use id="tick" xlink:href="#tick" transform="rotate(360)"/>
+				</g>
+				<g id="long_ticks" inkscape:label="long_ticks" inkscape:groupmode="layer">
+				    <line id="tickLong" x1="0" y1="100" x2="0" y2="115"/>
+					
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(0)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(15)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(30)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(45)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(60)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(75)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(90)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(105)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(120)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(135)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(150)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(165)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(180)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(195)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(210)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(225)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(240)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(255)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(270)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(285)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(300)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(315)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(330)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(345)"/>
+				    	<use id="tickLong" xlink:href="#tickLong" transform="rotate(360)"/>
+				</g>
+		    </g>
+		</g>
+
+		<g id = "rete" inkscape:label="rete" inkscape:groupmode="layer" transform="rotate(270)">
+			<g id="reteBackground" transform="translate(0.0 , 28.461966597872994)">
+				<circle cx="0" cy="0" r="71.53803340212701" style="fill:#f5ac27;; fill-opacity:0.05; stroke:#f5ac27;;"/>
+				<line id="ariesFirstPoint" x1="-65.63236000956694" y1="-28.461966597872994" x2="-100" y2="-28.461966597872994"/>
+				<g id="seasonalArcs" inkscape:label="rete" inkscape:groupmode="layer">
+				
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season0" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >pisces</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season30" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >aquarius</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season60" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >capricorn</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season90" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >sagittarius</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season120" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >scorpio</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season150" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >libra</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season180" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >virgo</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season210" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >leo</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season240" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >cancer</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season270" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >gemini</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season300" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >taurus</tspan>
+						</textPath>
+					</text>
+					<text id="seasonalArc" text-anchor="end" transform="translate(-0.0 , -28.461966597872994), scale(-1, 1)">
+						<textPath xlink:href="#season330" letter-spacing="1px" startOffset="90%">
+							<tspan dy="2em" >aries</tspan>
+						</textPath>
+					</text>
+				</g>
+			</g>
+
+			<g id="eclipticDiagram" inkscape:label="ecliptic" inkscape:groupmode="layer">
+		    	<title>Ecliptic</title>
+				<!-- <path id="eclipticPath" fill-rule="evenodd" d="
+					M0.0 100.0
+					A71.53803340212701 71.53803340212701 0 0 1 0.0 -43.07606680425402
+					A71.53803340212701 71.53803340212701 0 0 1 0.0 100.0z
+					M0.0 95.0
+					A66.53803340212701 66.53803340212701 0 0 1 0.0 -38.07606680425402
+					A66.53803340212701 66.53803340212701 0 0 1 0.0 95.0z"/> -->
+
+			    <g id="eclipticDivisions">
+			        <title>Divide Ecliptic</title>
+			        
+			        
+			            <line id="eclipticDivision" x1="0" y1="0" x2="65.63236000956694" y2="-1.7763568394002505e-14"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="71.12541619157273" y2="36.13434527853026"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="51.53773362002764" y2="78.07599925351299"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="0.0" y2="100.0"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="-51.537733620027616" y2="78.07599925351303"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="-71.12541619157274" y2="36.13434527853014"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="-65.63236000956694" y2="-1.4210854715202004e-14"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="-47.95607085032205" y2="-24.62198099123093"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="-24.976344298948085" y2="-38.57438509659383"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="0.0" y2="-43.07606680425402"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="24.97634429894812" y2="-38.574385096593815"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="47.95607085032203" y2="-24.62198099123096"/>
+			            <line id="eclipticDivision" x1="0" y1="0" x2="65.63236000956694" y2="-1.7763568394002505e-14"/>
+
+			        
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="65.63236000956694" y2="-1.7763568394002505e-14"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="69.32370349643159" y2="10.80086933347069"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="71.3207651320664" y2="22.8907293905318"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="71.12541619157273" y2="36.13434527853026"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="68.15128988820616" y2="50.21264267052713"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="61.785258705045464" y2="64.52125152969664"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="51.53773362002764" y2="78.07599925351299"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="37.30126703834628" y2="89.50544045362453"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="19.65268813467364" y2="97.2475906200849"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="0.0" y2="100.0"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="-19.652688134673614" y2="97.24759062008492"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="-37.30126703834632" y2="89.5054404536245"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="-51.537733620027616" y2="78.07599925351303"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="-61.78525870504543" y2="64.5212515296967"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="-68.15128988820614" y2="50.21264267052722"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="-71.12541619157274" y2="36.13434527853014"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="-71.32076513206638" y2="22.89072939053168"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="-69.3237034964316" y2="10.800869333470736"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="-65.63236000956694" y2="-1.4210854715202004e-14"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="-60.6456031073281" y2="-9.482743794911347"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="-54.6738347115841" y2="-17.673291296434076"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="-47.95607085032205" y2="-24.62198099123093"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="-40.67656391878168" y2="-30.38620559808488"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="-32.97875939576414" y2="-35.021036259270886"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="-24.976344298948085" y2="-38.57438509659383"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="-16.761839803159035" y2="-41.084643308412694"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="-8.413344958240453" y2="-42.57961171833203"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="0.0" y2="-43.07606680425402"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="8.413344958240412" y2="-42.57961171833203"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="16.761839803159088" y2="-41.08464330841268"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="24.97634429894812" y2="-38.574385096593815"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="32.97875939576411" y2="-35.021036259270915"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="40.67656391878166" y2="-30.386205598084896"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="47.95607085032203" y2="-24.62198099123096"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="54.67383471158409" y2="-17.673291296434076"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="60.645603107328085" y2="-9.482743794911382"/>
+			            <line id="eclipticDivisionFine" x1="0" y1="0" x2="65.63236000956694" y2="-1.7763568394002505e-14"/>
+
+			        
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="65.63236000956694" y2="-1.7763568394002505e-14"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="66.48565084452021" y2="2.0546105237714087"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="67.28453299042978" y2="4.162134431711689"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="68.02598102169114" y2="6.322496661120734"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="68.70681648026302" y2="8.535512016304846"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="69.32370349643159" y2="10.80086933347069"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="69.87314513632106" y2="13.118114024205129"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="70.35148068491795" y2="15.486628895776123"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="70.754884107391" y2="17.905613155821722"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="71.07936396874196" y2="20.374059523546098"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="71.3207651320664" y2="22.8907293905318"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="71.47477259844854" y2="25.454126003042557"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="71.53691789598606" y2="28.06246567573429"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="71.50258847048912" y2="30.713647095571943"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="71.36704057442836" y2="33.40521883620121"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="71.12541619157273" y2="36.13434527853026"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="70.77276456969636" y2="38.89777122454991"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="70.30406895926457" y2="41.691785599462264"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="69.71427916788964" y2="44.512184762913236"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="68.9983505335409" y2="47.354236093475066"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="68.15128988820616" y2="50.21264267052713"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="67.16820902148629" y2="53.08151005200246"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="66.04438605357912" y2="55.954316331019555"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="64.77533498230862" y2="58.823886843034444"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="63.35688347273841" y2="61.68237507919193"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="61.785258705045464" y2="64.52125152969664"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="60.05718078328039" y2="67.33130231908409"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="58.16996283398637" y2="70.10263958638849"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="56.121616493154804" y2="72.82472558825923"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="53.91096100179191" y2="75.48641244157339"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="51.53773362002764" y2="78.07599925351299"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="49.00269855001262" y2="80.5813080927579"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="46.307751059112945" y2="82.98977982095268"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="43.45601305443419" y2="85.28859022145885"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="40.451916020352705" y2="87.46478613496097"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="37.30126703834628" y2="89.50544045362453"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="34.01129360805147" y2="91.39782386660937"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="30.59066321962554" y2="93.12959023464573"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="27.049474118625028" y2="94.68897145955819"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="23.399214467667203" y2="96.06497677744971"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="19.65268813467364" y2="97.2475906200849"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="15.823906591492241" y2="98.22796263625524"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="11.92794782975539" y2="98.99858321374474"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="7.980784710478492" y2="99.55343794605112"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="3.999086660147209" y2="99.8881349742354"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="0.0" y2="100.0"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-3.9990866601472015" y2="99.8881349742354"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-7.980784710478517" y2="99.55343794605112"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-11.927947829755428" y2="98.99858321374472"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-15.823906591492218" y2="98.22796263625524"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-19.652688134673614" y2="97.24759062008492"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-23.39921446766724" y2="96.0649767774497"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-27.049474118625078" y2="94.68897145955818"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-30.590663219625547" y2="93.12959023464573"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-34.011293608051446" y2="91.39782386660939"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-37.30126703834632" y2="89.5054404536245"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-40.451916020352726" y2="87.46478613496097"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-43.456013054434244" y2="85.28859022145879"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-46.307751059112924" y2="82.98977982095269"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-49.00269855001263" y2="80.58130809275788"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-51.537733620027616" y2="78.07599925351303"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-53.910961001791904" y2="75.4864124415734"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-56.1216164931548" y2="72.82472558825923"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-58.16996283398639" y2="70.10263958638848"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-60.057180783280394" y2="67.33130231908407"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-61.78525870504543" y2="64.5212515296967"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-63.3568834727384" y2="61.68237507919194"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-64.77533498230862" y2="58.82388684303443"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-66.04438605357913" y2="55.954316331019534"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-67.16820902148629" y2="53.08151005200243"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-68.15128988820614" y2="50.21264267052722"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-68.99835053354093" y2="47.35423609347497"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-69.71427916788966" y2="44.512184762913186"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-70.30406895926458" y2="41.69178559946219"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-70.77276456969636" y2="38.89777122454987"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-71.12541619157274" y2="36.13434527853014"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-71.36704057442836" y2="33.40521883620127"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-71.5025884704891" y2="30.713647095572203"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-71.53691789598605" y2="28.062465675732895"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-71.47477259844854" y2="25.45412600304262"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-71.32076513206638" y2="22.89072939053168"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-71.07936396874197" y2="20.37405952354616"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-70.754884107391" y2="17.905613155821747"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-70.35148068491796" y2="15.486628895776143"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-69.87314513632106" y2="13.118114024205148"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-69.3237034964316" y2="10.800869333470736"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-68.70681648026302" y2="8.535512016304853"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-68.02598102169115" y2="6.322496661120777"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-67.28453299042977" y2="4.162134431711646"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-66.4856508445202" y2="2.0546105237713874"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-65.63236000956694" y2="-1.4210854715202004e-14"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-64.72753780663606" y2="-2.001717889305155"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-63.773918778134345" y2="-3.9506467914198176"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-62.77410028523141" y2="-5.846961634054477"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-61.730548271668205" y2="-7.6908982004120965"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-60.6456031073281" y2="-9.482743794911347"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-59.52148544098393" y2="-11.222828902955502"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-58.36030200541234" y2="-12.911519753665043"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-57.16405132983222" y2="-14.549211700380443"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-55.934629324608984" y2="-16.136323339774098"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-54.6738347115841" y2="-17.673291296434076"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-53.38337428044407" y2="-19.16056560567392"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-52.0648679574092" y2="-20.598605633006922"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-50.71985367737437" y2="-21.98787647412848"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-49.34979205460538" y2="-23.328845784354105"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-47.95607085032205" y2="-24.62198099123093"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-46.54000923809384" y2="-25.867746848472198"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-45.102861870033095" y2="-27.06660329345912"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-43.645822748381946" y2="-28.21900357431677"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-42.17002890832437" y2="-29.325392616015012"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-40.67656391878168" y2="-30.38620559808488"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-39.16646120861396" y2="-31.401866719397777"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-37.64070722611307" y2="-32.372788128039076"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-36.100244439952625" y2="-33.299368996651765"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-34.54597418991709" y2="-34.181994725732835"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-32.97875939576414" y2="-35.021036259270886"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-31.399427132531418" y2="-35.816849498821654"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-29.80877108048708" y2="-36.56977480365306"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-28.207553857755155" y2="-37.28013656597234"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-26.59650924345298" y2="-37.948242851478696"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-24.976344298948085" y2="-38.57438509659383"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-23.347741394605976" y2="-39.158837854709816"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-21.711360149146444" y2="-39.701858584681844"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-20.067839288477877" y2="-40.20368747558403"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-18.417798430629734" y2="-40.66454730245712"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-16.761839803159035" y2="-41.084643308412694"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-15.100549899177283" y2="-41.46416310902768"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-13.43450107792189" y2="-41.803276615476506"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-11.764253115592346" y2="-42.10213597330775"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-10.090354711979023" y2="-42.36087551419057"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-8.413344958240453" y2="-42.57961171833203"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-6.733754771031634" y2="-42.75844318561147"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-5.052108298044631" y2="-42.897450613793396"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-3.368924299908439" y2="-42.996696782471076"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="-1.684717513294842" y2="-43.056226541664856"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="0.0" y2="-43.07606680425402"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="1.684717513295232" y2="-43.056226541664856"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="3.368924299908384" y2="-42.99669678247109"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="5.052108298044687" y2="-42.897450613793396"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="6.73375477103169" y2="-42.75844318561147"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="8.413344958240412" y2="-42.57961171833203"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="10.09035471197908" y2="-42.36087551419055"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="11.764253115592433" y2="-42.10213597330774"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="13.4345010779219" y2="-41.80327661547649"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="15.100549899177262" y2="-41.464163109027695"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="16.761839803159088" y2="-41.08464330841268"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="18.41779843062979" y2="-40.66454730245712"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="20.067839288477856" y2="-40.20368747558403"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="21.711360149146437" y2="-39.701858584681844"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="23.347741394605954" y2="-39.15883785470983"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="24.97634429894812" y2="-38.574385096593815"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="26.596509243452928" y2="-37.948242851478724"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="28.207553857755176" y2="-37.28013656597234"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="29.808771080487027" y2="-36.56977480365309"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="31.39942713253141" y2="-35.816849498821654"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="32.97875939576411" y2="-35.021036259270915"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="34.545974189917104" y2="-34.18199472573282"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="36.10024443995257" y2="-33.29936899665179"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="37.640707226113015" y2="-32.372788128039105"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="39.16646120861402" y2="-31.40186671939774"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="40.67656391878166" y2="-30.386205598084896"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="42.170028908324426" y2="-29.325392616014984"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="43.6458227483819" y2="-28.219003574316805"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="45.10286187003311" y2="-27.066603293459107"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="46.540009238093845" y2="-25.867746848472184"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="47.95607085032203" y2="-24.62198099123096"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="49.34979205460539" y2="-23.328845784354098"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="50.71985367737437" y2="-21.98787647412848"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="52.064867957409184" y2="-20.598605633006944"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="53.38337428044407" y2="-19.16056560567392"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="54.67383471158409" y2="-17.673291296434076"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="55.93462932460895" y2="-16.136323339774126"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="57.16405132983226" y2="-14.5492117003804"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="58.36030200541237" y2="-12.911519753665"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="59.52148544098392" y2="-11.222828902955523"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="60.645603107328085" y2="-9.482743794911382"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="61.73054827166819" y2="-7.690898200412139"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="62.7741002852314" y2="-5.846961634054512"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="63.7739187781343" y2="-3.95064679141991"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="64.72753780663608" y2="-2.0017178893051373"/>
+			            <line id="eclipticDivisionExtraFine" x1="0" y1="0" x2="65.63236000956694" y2="-1.7763568394002505e-14"/>
+			    </g>
+			    
+  			</g>
+
+  			<!-- <g>
+  				<line id="eclipticPole" x1="-5" y1="19.614408331209837" x2="5" y2="19.614408331209837" style="stroke: grey;"/>
+				<line id="eclipticPole" x1="0" y1="14.614408331209837" x2="0" y2="24.614408331209837" style="stroke: grey;"/>
+  			</g> -->
+
+			<!-- <g>
+  				<line id="eclipticCenter" x1="-50" y1="28.461966597872994" x2="50" y2="28.461966597872994" style="stroke: grey; stroke-width:0.5;"/>
+				<line id="eclipticCenter" x1="0" y1="-21.538033402127006" x2="0" y2="78.46196659787299" style="stroke: grey; stroke-width:0.5;"/>
+  			</g> -->
+		        
+		 	<g id="stars" inkscape:label="stars" inkscape:groupmode="layer" transform="rotate(180)">
+		    	<title>Stars</title>
+		    	<g>
+		    		
+		    		<g id="aldebaran">
+		    			<title>aldebaran</title>
+		    			<use x="17.578752551944422" y="45.74648044631893" width="1.5" height="1.5"  xlink:href="#star" style="fill:#f5ac27;;"/>
+						<!-- <g transform="translate(17.578752551944422, 45.74648044631893)">
+							<text x="0" y="0" transform="scale(1, -1), rotate(180)" style="font-size:2pt; fill:black; fill-opacity:0.5;"><tspan dy="1.5em">aldebaran</tspan></text>
+						</g> -->
+					</g>
+		    		<g id="altair">
+		    			<title>altair</title>
+		    			<use x="26.114504596098737" y="-49.75046375289662" width="1.5" height="1.5"  xlink:href="#star" style="fill:#f5ac27;;"/>
+						<!-- <g transform="translate(26.114504596098737, -49.75046375289662)">
+							<text x="0" y="0" transform="scale(1, -1), rotate(180)" style="font-size:2pt; fill:black; fill-opacity:0.5;"><tspan dy="1.5em">altair</tspan></text>
+						</g> -->
+					</g>
+		    		<g id="arcturus">
+		    			<title>arcturus</title>
+		    			<use x="-38.71993611500217" y="-26.033433990766383" width="1.5" height="1.5"  xlink:href="#star" style="fill:#f5ac27;;"/>
+						<!-- <g transform="translate(-38.71993611500217, -26.033433990766383)">
+							<text x="0" y="0" transform="scale(1, -1), rotate(180)" style="font-size:2pt; fill:black; fill-opacity:0.5;"><tspan dy="1.5em">arcturus</tspan></text>
+						</g> -->
+					</g>
+		    		<g id="capella">
+		    			<title>capella</title>
+		    			<use x="4.981195698236938" y="26.04338728676011" width="1.5" height="1.5"  xlink:href="#star" style="fill:#f5ac27;;"/>
+						<!-- <g transform="translate(4.981195698236938, 26.04338728676011)">
+							<text x="0" y="0" transform="scale(1, -1), rotate(180)" style="font-size:2pt; fill:black; fill-opacity:0.5;"><tspan dy="1.5em">capella</tspan></text>
+						</g> -->
+					</g>
+		    		<g id="sirius">
+		    			<title>sirius</title>
+		    			<use x="-16.826837316956205" y="84.3090316651337" width="1.5" height="1.5"  xlink:href="#star" style="fill:#f5ac27;;"/>
+						<!-- <g transform="translate(-16.826837316956205, 84.3090316651337)">
+							<text x="0" y="0" transform="scale(1, -1), rotate(180)" style="font-size:2pt; fill:black; fill-opacity:0.5;"><tspan dy="1.5em">sirius</tspan></text>
+						</g> -->
+					</g>
+		    		<g id="procyon">
+		    			<title>procyon</title>
+		    			<use x="-25.150416516831474" y="54.367128145327634" width="1.5" height="1.5"  xlink:href="#star" style="fill:#f5ac27;;"/>
+						<!-- <g transform="translate(-25.150416516831474, 54.367128145327634)">
+							<text x="0" y="0" transform="scale(1, -1), rotate(180)" style="font-size:2pt; fill:black; fill-opacity:0.5;"><tspan dy="1.5em">procyon</tspan></text>
+						</g> -->
+					</g>
+		    		<g id="deneb">
+		    			<title>deneb</title>
+		    			<use x="17.484727261948013" y="-20.57538750383632" width="1.5" height="1.5"  xlink:href="#star" style="fill:#f5ac27;;"/>
+						<!-- <g transform="translate(17.484727261948013, -20.57538750383632)">
+							<text x="0" y="0" transform="scale(1, -1), rotate(180)" style="font-size:2pt; fill:black; fill-opacity:0.5;"><tspan dy="1.5em">deneb</tspan></text>
+						</g> -->
+					</g>
+		    		<g id="castor">
+		    			<title>castor</title>
+		    			<use x="-14.627773366842089" y="33.40283237771773" width="1.5" height="1.5"  xlink:href="#star" style="fill:#f5ac27;;"/>
+						<!-- <g transform="translate(-14.627773366842089, 33.40283237771773)">
+							<text x="0" y="0" transform="scale(1, -1), rotate(180)" style="font-size:2pt; fill:black; fill-opacity:0.5;"><tspan dy="1.5em">castor</tspan></text>
+						</g> -->
+					</g>
+		    		<g id="regulus">
+		    			<title>regulus</title>
+		    			<use x="-46.99707863209396" y="24.891549321148563" width="1.5" height="1.5"  xlink:href="#star" style="fill:#f5ac27;;"/>
+						<!-- <g transform="translate(-46.99707863209396, 24.891549321148563)">
+							<text x="0" y="0" transform="scale(1, -1), rotate(180)" style="font-size:2pt; fill:black; fill-opacity:0.5;"><tspan dy="1.5em">regulus</tspan></text>
+						</g> -->
+					</g>
+		    		<g id="vega">
+		    			<title>vega</title>
+		    			<use x="5.04799529435506" y="-31.04992305491608" width="1.5" height="1.5"  xlink:href="#star" style="fill:#f5ac27;;"/>
+						<!-- <g transform="translate(5.04799529435506, -31.04992305491608)">
+							<text x="0" y="0" transform="scale(1, -1), rotate(180)" style="font-size:2pt; fill:black; fill-opacity:0.5;"><tspan dy="1.5em">vega</tspan></text>
+						</g> -->
+					</g>
+		    		<g id="betelgeuse">
+		    			<title>betelgeuse</title>
+		    			<use x="1.2144835677775399" y="57.638671480578495" width="1.5" height="1.5"  xlink:href="#star" style="fill:#f5ac27;;"/>
+						<!-- <g transform="translate(1.2144835677775399, 57.638671480578495)">
+							<text x="0" y="0" transform="scale(1, -1), rotate(180)" style="font-size:2pt; fill:black; fill-opacity:0.5;"><tspan dy="1.5em">betelgeuse</tspan></text>
+						</g> -->
+					</g>
+		    		<g id="rigel">
+		    			<title>rigel</title>
+		    			<use x="14.826640678776945" y="73.75894385991481" width="1.5" height="1.5"  xlink:href="#star" style="fill:#f5ac27;;"/>
+						<!-- <g transform="translate(14.826640678776945, 73.75894385991481)">
+							<text x="0" y="0" transform="scale(1, -1), rotate(180)" style="font-size:2pt; fill:black; fill-opacity:0.5;"><tspan dy="1.5em">rigel</tspan></text>
+						</g> -->
+					</g>
+		    		<g id="bellatrix">
+		    			<title>bellatrix</title>
+		    			<use x="8.90194593916865" y="58.055878093128065" width="1.5" height="1.5"  xlink:href="#star" style="fill:#f5ac27;;"/>
+						<!-- <g transform="translate(8.90194593916865, 58.055878093128065)">
+							<text x="0" y="0" transform="scale(1, -1), rotate(180)" style="font-size:2pt; fill:black; fill-opacity:0.5;"><tspan dy="1.5em">bellatrix</tspan></text>
+						</g> -->
+					</g>
+		    		<g id="antares">
+		    			<title>antares</title>
+		    			<use x="-40.10874424001981" y="-96.126444254435" width="1.5" height="1.5"  xlink:href="#star" style="fill:#f5ac27;;"/>
+						<!-- <g transform="translate(-40.10874424001981, -96.126444254435)">
+							<text x="0" y="0" transform="scale(1, -1), rotate(180)" style="font-size:2pt; fill:black; fill-opacity:0.5;"><tspan dy="1.5em">antares</tspan></text>
+						</g> -->
+					</g>
+		    		<g id="spica">
+		    			<title>spica</title>
+		    			<use x="-73.96699104005553" y="-28.83543138643137" width="1.5" height="1.5"  xlink:href="#star" style="fill:#f5ac27;;"/>
+						<!-- <g transform="translate(-73.96699104005553, -28.83543138643137)">
+							<text x="0" y="0" transform="scale(1, -1), rotate(180)" style="font-size:2pt; fill:black; fill-opacity:0.5;"><tspan dy="1.5em">spica</tspan></text>
+						</g> -->
+					</g>
+		    	</g>
+		    </g>
+
+		    <g id="planets" inkscape:label="planets" inkscape:groupmode="layer" transform="translate(0.0, 28.461966597872994)">
+		    	<title>Planets</title>
+		    	<circle id="moon" cx="78.3193942774644" cy="60.97340898963562" r="3" style="fill:white; stroke:black;" />
+		    	<circle id="sun"  cx="-42.2168611201463"  cy="77.60260956071288" r="2" style="fill:yellow;"/>
+		    </g>
+		</g>
+		
+	</g>
+	<text id="output" x="120" y="230" style=" font-size:4pt; fill:black; stroke:none;" text-anchor="middle"></text>
+	<script type="application/ecmascript">
+    // <![CDATA[
+    var txt = document.getElementById("output");
+    var r = document.getElementById("moonLine");
+    var totalAngle = 270;
+    var startAngle = 0;
+
+    active = false;
+    
+    function init(evt) {
+        var obj;
+        obj = document.getElementById("diagram");
+
+        obj.addEventListener("dblclick", dblclickButton, false);
+
+        obj.addEventListener("mousedown", startDrag, false);
+        obj.addEventListener("mousemove", doDrag, false);
+        obj.addEventListener("mouseup", endDrag, false);
+
+        obj.addEventListener("touchstart", startDrag, false);
+        obj.addEventListener("touchmove", doDrag, false);
+        obj.addEventListener("touchend", endDrag, false);
+    }
+    
+    function angle(cx, cy, ex, ey) {
+      var dy = ey - cy;
+      var dx = ex - cx;
+      var theta = Math.atan2(dy, dx); // range (-PI, PI]
+      theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
+      //if (theta < 0) theta = 360 + theta; // range [0, 360)
+      return theta;
+    }
+    
+    function dblclickButton(evt) {
+       	var svg = document.getElementById('diagram');
+       	var rete = document.getElementById('rete');
+        var pt = svg.createSVGPoint();
+        
+        pt.x = evt.clientX; 
+        pt.y = evt.clientY; 
+
+        var ec = document.getElementById('astrolabe');
+        var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
+        console.log(ec, svgP);
+
+        var rotAngle = angle(0, 0, Math.floor(svgP.x), Math.floor(svgP.y)) + 180;
+        rete.setAttribute("transform", "rotate(" + rotAngle + ")");
+        totalAngle = rotAngle;
+    }
+    
+    function startDrag(evt) {
+        <!-- console.log(evt.target.parentNode.getAttribute("id")); -->
+        var svg = document.getElementById('diagram');
+        var pt = svg.createSVGPoint();
+        
+        pt.x = evt.clientX; 
+        pt.y = evt.clientY;
+        console.log("start", pt.x, pt.y, evt.offsetX, evt.offsetY);
+        
+        var ec = document.getElementById('axisGroup');
+        var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
+        startAngle = angle(0, 0, svgP.x, svgP.y);
+
+        var eclipticCoords = document.getElementById('stars');
+        var svgPEcliptic = pt.matrixTransform(eclipticCoords.getScreenCTM().inverse());
+        eclipticAngle = angle(0, 0, svgPEcliptic.x, svgPEcliptic.y);
+
+		printMsg(pt.x + " " + pt.y + " | " + svgPEcliptic.x + " " + svgPEcliptic.y + " | " + eclipticAngle);
+        <!-- printMsg(pt.x + " " + pt.y + " | " + svgP.x + " " + svgP.y + " | " + angle(0, 0, svgP.x, svgP.y)); -->
+
+        active = true;
+    }
+    
+    function doDrag(evt) {
+		if (active){
+			var ec = document.getElementById('axisGroup'); 
+	        var rete = document.getElementById('rete');
+	        var svg = document.getElementById('diagram');
+
+	        var pt = svg.createSVGPoint(); 
+	        pt.x = evt.clientX; 
+	        pt.y = evt.clientY;
+	        <!-- console.log("drag", pt.x, pt.y, evt.offsetX, evt.offsetY) -->
+	        
+	        var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
+	        var rotAngle = angle(0, 0, svgP.x, svgP.y);
+
+	        delta = (rotAngle - startAngle) / 100.0;
+	        console.log(delta);
+	        totalAngle = totalAngle + delta;
+	        
+	        printMsg(pt.x + " " + pt.y + " | " + svgP.x + " " + svgP.y + " | " + rotAngle);
+	        rete.setAttribute("transform", "rotate(" + totalAngle + ")");
+		}
+    }
+
+    function endDrag(evt){
+    	active = false;
+        var svg = document.getElementById('diagram');
+        var pt = svg.createSVGPoint();
+        
+        pt.x = evt.clientX; 
+        pt.y = evt.clientY;
+    	<!-- console.log("end", pt.x, pt.y, evt.offsetX, evt.offsetY); -->
+
+    	var eclipticCoords = document.getElementById('stars');
+        var svgPEcliptic = pt.matrixTransform(eclipticCoords.getScreenCTM().inverse());
+        eclipticAngle = angle(0, 0, svgPEcliptic.x, svgPEcliptic.y);
+
+		printMsg(pt.x + " " + pt.y + " | " + svgPEcliptic.x + " " + svgPEcliptic.y + " | " + eclipticAngle);
+
+    }
+    
+    function printMsg (msg){
+        txt.textContent=msg;    
+    }
+    // ]]>
+	</script>
+</svg>
+	</div>
+</body>
+</html>
