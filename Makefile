@@ -1,6 +1,8 @@
 # OSX iterm2 environment with TeXLive and iterm2 integration.
 astrolabe:
 	cd calendrical_tools; python generate_astrolabe.py; cd ..
+	mv calendrical_tools/astrolabe_generated.svg docs/assets/images
+	mv calendrical_tools/astrolabe_generated.html docs/
 
 tex:
 	python display_candybars.py
