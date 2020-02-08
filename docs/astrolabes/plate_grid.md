@@ -148,30 +148,5 @@ In ```svg``` a circle is drawn with a center ```(cx, cy)``` and radius ```r```. 
 {% endraw %}
 {% endhighlight %}
 
-{% highlight xml %}
-{% raw %}
-plate_template = '''
-<svg viewbox="<-125 -125 250 250">
-	<g id="tropics">
-		<circle id="capricorn" cx="0" cy="0" r="{{ RCapricorn }}"/>
-		<circle cx="0" cy="0" r="{{ REquator }}"/>
-		<circle cx="0" cy="0" r="{{ RCancer }}"/>
-	</g>
-	<g id="azimuths" style="clip-path:url(#capricorn); ">
-		{% for coord in azimuth_coords %}
-			<circle  cx="{{ coord.cx }}" cy="{{ coord.cy }}" 
-			         r="{{ coord.r }}"/>
-		{%- endfor %}			
-	</g>
-	<g id="almucantars" style="clip-path:url(#capricorn);>
-		{% for coord in almucantor_coords %}
-			<circle cx="{{ coord.cx }}" cy="{{ coord.cy }}" 
-			        r="{{ coord.r }}"/>
-		{%- endfor %}
-	</g>
-</svg>
-{% endraw %}
-{% endhighlight %}
-'''
 
 <img src="{{ "/assets/images/screenshot_coding_astrolabe.png" | relative_url }}" alt="coding screenshot" width="100%" style="padding:5px;"/>
