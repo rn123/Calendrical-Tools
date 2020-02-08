@@ -21,12 +21,12 @@ plate_template = '''
 			}
 			#tropics {
 				fill: none;
-				stroke: #859e6d;
+				stroke: lightgrey;
 				stroke-width: 0.5;
 			}
-			#vert {
+			#axis {
 				fill: none;
-				stroke: #859e6d;
+				stroke: lightgrey;
 				stroke-width: 0.5;				
 			}
 			#upperHorizon {
@@ -70,43 +70,68 @@ plate_template = '''
 				"/>
 		</clipPath>
 	</defs>
+	
+	<g transform="translate(100, 100), scale(1, -1)">
+
+		<g id="plate">
+			<title>Astrolabe Plate</title>
+			<g id="upperHorizon">
+				<title>Horizon</title>
+				<use xlink:href="#horizonPath" />
+			</g>
+
+			<g style="clip-path: url(#horizon);">
+				<g id="azimuth">
+					<title>Azimuth</title>
+					{% for coord in azimuth_coords %}
+						<circle cx="{{ coord.cx }}" cy="{{ coord.cy }}" 
+						         r="{{ coord.r }}"/>
+					{%- endfor %}		
+				</g>
+			</g>
+
+			<g id="almucantar">
+				<title>Almucantar</title>
+				{% for coord in almucantar_coords %}
+					<circle cx="{{ coord.cx }}" cy="{{ coord.cy }}" 
+					        r="{{ coord.r }}"/>
+				{%- endfor %}
+			</g>
+		</g>	
+
+		<g id="tropics">
+			<title>Tropic Circles</title>
+			<g>
+				<title>Tropic of Capricorn</title>
+				<circle id="tropics" cx="0" cy="0" r="{{ RCapricorn }}"/>
+			</g>
+			<g>
+				<title>Equator</title>
+				<circle id="tropics" cx="0" cy="0" r="{{ REquator }}" />
+			</g>
+			<g>
+				<title>Tropic of Cancer</title>
+				<circle id="tropics" cx="0" cy="0" r="{{ RCancer }}" />
+			</g>
+		</g>
+
+		<g id="axis">
+			<title>Axes</title>
+			<line id="axis" x1="0" y1="{{ RCapricorn }}" x2="0" y2="{{ -RCapricorn }}" />
+			<line id="axis" x1="{{ -RCapricorn }}" y1="0" x2="{{ RCapricorn }}" y2="0" />
+		</g>
+	</g>
 
 	<g transform="translate(100, 100)" style="fill: #859e6d; font-size: 9px;">
+		<title>Place Name and Latitude</title>
 		<text id="description" x="0" y="{{ -45 + RCapricorn - 19 }}" text-anchor="middle">
 			{{ place_name }}
     		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
     	</text>
-    </g>	
-	
-	<g id="plate" transform="translate(100, 100), scale(1, -1)">
-
-		<g id="upperHorizon">
-			<use xlink:href="#horizonPath" />
-		</g>
-
-		<g style="clip-path: url(#horizon);">
-			<g id="azimuth">
-				{% for coord in azimuth_coords %}
-					<circle cx="{{ coord.cx }}" cy="{{ coord.cy }}" 
-					         r="{{ coord.r }}"/>
-				{%- endfor %}		
-			</g>
-		</g>
-
-		<g id="almucantar">
-			{% for coord in almucantar_coords %}
-				<circle cx="{{ coord.cx }}" cy="{{ coord.cy }}" 
-				        r="{{ coord.r }}"/>
-			{%- endfor %}
-		</g>
-
-		<g id="tropics">
-			<circle id="tropics" cx="0" cy="0" r="{{ RCapricorn }}"/>
-			<circle id="tropics" cx="0" cy="0" r="{{ REquator }}" style="display:none"/>
-			<circle id="tropics" cx="0" cy="0" r="{{ RCancer }}" style="display:none"/>
-			<line id="vert" x1="0" y1="{{ RCapricorn }}" x2="0" y2="{{ -RCapricorn }}" />
-		</g>
-	</g>
+    	<svg width="20" height="20">
+    		<use xlink:href="USA_Hawaii_location_map.svg"/>
+    	</svg>
+    </g>
 </svg>
 '''
 
