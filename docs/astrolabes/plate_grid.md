@@ -5,10 +5,12 @@ author: Ray
 mathjax: true
 ---
 
-<img src="{{ "/assets/images/astrolabe_generated_01152020.png" | relative_url }}" alt="First version of generated astrolabe image" width="25%" align="right" style="padding:5px;"/>
 The plate grid of an astrolabe is the stereographic projection of the celestial sphere through the south celestial pole onto the plane of the equator. Quoting Morrison:
 
 > The interior of the plate can be thought of as a special kind of graph paper for finding the location of celestial objects in the sky at your location. The main difference between normal graph paper and the graph paper on the plate is the lines on graph paper are normally straight while the astrolabe lines are curve. All of the curves on the astrolabe plate are drawn as arcs of circles.
+<img src="{{ "/assets/images/plate.svg" | relative_url }}" alt="plate grid" width="200" align="right" style="padding:10px;"/>
+
+Ultimately, all that is needed to draw the plate of an astrolabe is to draw a bunch of circles. It all boils down to finding the center and radius of each circle. To make the diagrams look nice, the circles are clipped to lie in a given area.
 
 Continuing, here is Morrisons basic description:
 
@@ -35,6 +37,15 @@ R_{Cancer}  &= R_{Equator} \tan(\frac{90 - \epsilon}{2})
 $$
 
 These circles depend only on the obliquity of the ecliptic.
+{% highlight python %}
+import math
+
+obliquity=23.4443291
+RadiusCapricorn = 100
+obliquityRadiansArgument = math.radians((90 - obliquity) / 2)
+RadiusEquator = RadiusCapricorn * math.tan( obliquityRadiansArgument )
+RadiusCancer = RadiusEquator * math.tan( obliquityRadiansArgument )
+{% endhighlight %}
 
 The circles of equal altitude (almucantars) are given by the following formulas:
 
@@ -46,7 +57,30 @@ $$
 \end{align}
 $$
 
+
 In particular, the radius and center for the horizon arc is obtained for an altitude of zero.
+
+{% highlight python %}
+def almucantar_arc(altitude, latitude):
+        radiansAltitude = math.radians(altitude)
+        radiansLatitude = math.radians(latitude)
+
+        almucantorCenter = RadiusEquator * (
+            math.cos(radiansLatitude)
+            / (math.sin(radiansLatitude) + math.sin(radiansAltitude))
+        )
+
+        almucantarRadius = RadiusEquator * (
+            math.cos(radiansAltitude)
+            / (math.sin(radiansLatitude) + math.sin(radiansAltitude))
+        )
+        return {
+        	"alt": altitude, 
+      		"cx": 0, 
+           	"cy": almucantorCenter, 
+           	"r": almucantarRadius
+     	}
+{% endhighlight %}
 
 The arcs of equal azimuth are given by:
 $$
@@ -55,5 +89,89 @@ y_N &= -R_{Equator} \tan(\frac{90+\phi}{2}) & y_{Az} &= R_{Equator} / \cos\phi \
 x_A &= y_{Az} \tan A & r_A &= y_{Az} / \cos A
 \end{align}
 $$
+
+{% highlight python %}
+def azimuth_arc(azimuth=None, latitude=None):
+    radiansMinus = math.radians((90 - latitude) / 2.0)
+    radiansPlus = math.radians((90 + latitude) / 2.0)
+
+    yZenith = RadiusEquator * math.tan(radiansMinus)
+    yNadir = -RadiusEquator * math.tan(radiansPlus)
+    yCenter = (yZenith + yNadir) / 2.0
+    yAzimuth = (yZenith - yNadir) / 2.0
+
+    radiansAzimuth = math.radians(azimuth)
+    xAzimuth = yAzimuth * math.tan(radiansAzimuth)
+    radiusAzimuth = yAzimuth / math.cos(radiansAzimuth)
+
+    coord_left = {
+        "az": azimuth,
+        "cx": xAzimuth,
+        "cy": yCenter,
+        "r": radiusAzimuth,
+    }
+    coord_right = {
+        "az": azimuth,
+        "cx": -xAzimuth,
+        "cy": yCenter,
+        "r": radiusAzimuth,
+    }
+    return [coord_left, coord_right]
+{% endhighlight %}
+
+In ```svg``` a circle is drawn with a center ```(cx, cy)``` and radius ```r```. A template language alows us to loop over the arcs that need to be drawn after we've computed all of the centers and radii.
+
+{% highlight xml %}
+{% raw %}
+<svg viewbox="-125 -125 250 250">
+	<g id="tropics">
+		<circle id="capricorn" cx="0" cy="0" 
+		        r="{{ RCapricorn }}"/>
+		<circle cx="0" cy="0" r="{{ REquator }}"/>
+		<circle cx="0" cy="0" r="{{ RCancer }}"/>
+	</g>
+	<g id="azimuths" style="clip-path:url(#capricorn);">
+		{% for coord in azimuth_coords %}
+			<circle id="azimuth" az="{{ coord.az }}" 
+			        cx="{{ coord.cx }}" cy="{{ coord.cy }}" 
+			        r="{{ coord.r }}"/>
+		{%- endfor %}			
+	</g>
+	<g id="almucantars" style="clip-path:url(#capricorn);">
+		{% for coord in almucantor_coords %}
+			<circle id="almucantar" alt="{{ coord.alt }}" 
+			        cx="{{ coord.cx }}" cy="{{ coord.cy }}" 
+			        r="{{ coord.r }}"/>
+		{%- endfor %}
+	</g>
+</svg>
+{% endraw %}
+{% endhighlight %}
+
+{% highlight xml %}
+{% raw %}
+plate_template = '''
+<svg viewbox="<-125 -125 250 250">
+	<g id="tropics">
+		<circle id="capricorn" cx="0" cy="0" r="{{ RCapricorn }}"/>
+		<circle cx="0" cy="0" r="{{ REquator }}"/>
+		<circle cx="0" cy="0" r="{{ RCancer }}"/>
+	</g>
+	<g id="azimuths" style="clip-path:url(#capricorn); ">
+		{% for coord in azimuth_coords %}
+			<circle  cx="{{ coord.cx }}" cy="{{ coord.cy }}" 
+			         r="{{ coord.r }}"/>
+		{%- endfor %}			
+	</g>
+	<g id="almucantars" style="clip-path:url(#capricorn);>
+		{% for coord in almucantor_coords %}
+			<circle cx="{{ coord.cx }}" cy="{{ coord.cy }}" 
+			        r="{{ coord.r }}"/>
+		{%- endfor %}
+	</g>
+</svg>
+{% endraw %}
+{% endhighlight %}
+'''
 
 <img src="{{ "/assets/images/screenshot_coding_astrolabe.png" | relative_url }}" alt="coding screenshot" width="100%" style="padding:5px;"/>

@@ -1,0 +1,141 @@
+
+<svg viewbox="0 0 210 210" 
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<style type="text/css">
+			#plate {
+				fill: none;
+				stroke: #859e6d;
+				stroke-width: 0.5;
+				clip-path: url(#horizon);
+			}
+			#tropics {
+				fill: none;
+				stroke: #859e6d;
+				stroke-width: 0.5;
+			}
+			#vert {
+				fill: none;
+				stroke: #859e6d;
+				stroke-width: 0.5;				
+			}
+			#upperHorizon {
+				stroke: #859e6d;
+				stroke-width: 1;
+				fill: #eafee7;
+				clip-path: url(#capricorn);
+			}
+			#capricornPath {
+				stroke: #859e6d;
+				stroke-width: 0.5;
+				fill: none;
+			}
+			#azimuth {
+				fill: none;
+				stroke: #859e6d;
+				stroke-width: 0.5;
+				clip-path: url(#horizon);
+				clip-path: url(#capricorn);
+			}
+			#almucantar {
+				fill: none;
+				stroke: #859e6d;
+				stroke-width: 0.5;
+				clip-path: url(#capricorn);
+			}
+		</style>
+
+		<clipPath id="capricorn">
+			<path id="capricornPath" d="
+					M0 100
+					A100 100 0 0 1 0 -100
+					A100 100 0 0 1 0 100z"/>
+		</clipPath>
+
+		<clipPath id="horizon">
+			<path id="horizonPath" d="
+					M0.0 348.90297782559264 
+					A180.62456130568754 180.62456130568754 0 0 1 0.0 -12.346144785782457
+					A180.62456130568754 180.62456130568754 0 0 1 0.0 348.90297782559264z
+				"/>
+		</clipPath>
+	</defs>
+	
+	
+	<g id="plate" transform="translate(100, 100), scale(1, -1)">
+
+		<g id="upperHorizon">
+			<use xlink:href="#horizonPath" />
+		</g>
+
+		<g style="clip-path: url(#horizon);">
+			<g id="azimuth">
+				
+					<circle cx="0.0" cy="-25.59809373958466" 
+					         r="70.4476336261621"/>
+					<circle cx="-0.0" cy="-25.59809373958466" 
+					         r="70.4476336261621"/>
+					<circle cx="12.421818535357293" cy="-25.59809373958466" 
+					         r="71.53440192838207"/>
+					<circle cx="-12.421818535357293" cy="-25.59809373958466" 
+					         r="71.53440192838207"/>
+					<circle cx="25.640841714413813" cy="-25.59809373958466" 
+					         r="74.96880582848834"/>
+					<circle cx="-25.640841714413813" cy="-25.59809373958466" 
+					         r="74.96880582848834"/>
+					<circle cx="40.67296023783681" cy="-25.59809373958466" 
+					         r="81.34592047567364"/>
+					<circle cx="-40.67296023783681" cy="-25.59809373958466" 
+					         r="81.34592047567364"/>
+					<circle cx="59.11258339302476" cy="-25.59809373958466" 
+					         r="91.96285445180173"/>
+					<circle cx="-59.11258339302476" cy="-25.59809373958466" 
+					         r="91.96285445180173"/>
+					<circle cx="83.95622046373934" cy="-25.59809373958466" 
+					         r="109.59706217815317"/>
+					<circle cx="-83.95622046373934" cy="-25.59809373958466" 
+					         r="109.59706217815317"/>
+					<circle cx="122.01888071351043" cy="-25.59809373958466" 
+					         r="140.89526725232417"/>
+					<circle cx="-122.01888071351043" cy="-25.59809373958466" 
+					         r="140.89526725232417"/>
+					<circle cx="193.55328264189245" cy="-25.59809373958466" 
+					         r="205.97510117724977"/>
+					<circle cx="-193.55328264189245" cy="-25.59809373958466" 
+					         r="205.97510117724977"/>
+					<circle cx="399.5283838191422" cy="-25.59809373958466" 
+					         r="405.69175313365906"/>
+					<circle cx="-399.5283838191422" cy="-25.59809373958466" 
+					         r="405.69175313365906"/>		
+			</g>
+		</g>
+
+		<g id="almucantar">
+			
+				<circle cx="0" cy="113.86387502593837" 
+				        r="120.36100551436813"/>
+				<circle cx="0" cy="86.68506735308874" 
+				        r="87.43362729200523"/>
+				<circle cx="0" cy="70.82327143760874" 
+				        r="65.83472168322515"/>
+				<circle cx="0" cy="60.772409045149345" 
+				        r="49.969937640163"/>
+				<circle cx="0" cy="54.140071090034795" 
+				        r="37.353792938195646"/>
+				<circle cx="0" cy="49.7370895658308" 
+				        r="26.693084500195607"/>
+				<circle cx="0" cy="46.92524354442485" 
+				        r="17.226879209080142"/>
+				<circle cx="0" cy="45.35493956889634" 
+				        r="8.453629525147674"/>
+		</g>
+
+		<g id="tropics">
+			<circle id="tropics" cx="0" cy="0" r="100"/>
+			<circle id="tropics" cx="0" cy="0" r="65.63236000956694" style="display:none"/>
+			<circle id="tropics" cx="0" cy="0" r="43.07606680425401" style="display:none"/>
+			<line id="vert" x1="0" y1="100" x2="0" y2="-100" />
+		</g>
+	</g>
+</svg>
