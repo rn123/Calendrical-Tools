@@ -61,7 +61,13 @@
 				"/>
 		</clipPath>
 	</defs>
-	
+
+	<g transform="translate(100, 100)" style="fill: #859e6d; font-size: 9px;">
+		<text id="description" x="0" y="36" text-anchor="middle">
+			Hawaiian Islands
+    		<tspan x="0" dy="1.2em">21.3069 </tspan>
+    	</text>
+    </g>	
 	
 	<g id="plate" transform="translate(100, 100), scale(1, -1)">
 

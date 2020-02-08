@@ -70,7 +70,13 @@ plate_template = '''
 				"/>
 		</clipPath>
 	</defs>
-	
+
+	<g transform="translate(100, 100)" style="fill: #859e6d; font-size: 9px;">
+		<text id="description" x="0" y="{{ -45 + RCapricorn - 19 }}" text-anchor="middle">
+			{{ place_name }}
+    		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
+    	</text>
+    </g>	
 	
 	<g id="plate" transform="translate(100, 100), scale(1, -1)">
 
@@ -183,6 +189,8 @@ def main():
     	RCapricorn=RadiusCapricorn,
     	REquator=RadiusEquator,
     	RCancer=RadiusCancer,
+    	place_name=place,
+    	latitude=latitude,
     	horiz=horiz,
     	azimuth_coords=azimuth_coords,
     	almucantar_coords=almucantar_coords
