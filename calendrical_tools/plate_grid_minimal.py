@@ -53,6 +53,27 @@ plate_template = '''
 				stroke-width: 0.5;
 				clip-path: url(#capricorn);
 			}
+			#rect7 {
+				fill: none !important;
+			}
+			#polygon9,
+			#polygon11,
+			#polygon13,
+			#polygon15,
+			#polygon17,
+			#polygon19,
+			#polygon21,
+			#polygon23,
+			#polygon25,
+			#polygon27,
+			#polygon29,
+			#polygon31,
+			#polygon33,
+			#polygon35,
+			#polygon37,
+			#polygon39 {
+				fill: #859e6d !important;
+			}
 		</style>
 
 		<clipPath id="capricorn">
@@ -70,7 +91,18 @@ plate_template = '''
 				"/>
 		</clipPath>
 	</defs>
-	
+
+	<g transform="translate(100, 100)" style="fill: #859e6d; font-size: 9px;">
+		<title>Hawaiian Islands</title>
+    	<g id="map" transform="translate(-20, 13), scale(0.05)">
+    		{{ include_file('USA_Hawaii_location_map.svg') }}
+    	</g>
+		<text id="description" x="0" y="{{ -35 + RCapricorn - 19 }}" text-anchor="middle">
+			{{ place_name }}
+    		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
+    	</text>
+    </g>
+
 	<g transform="translate(100, 100), scale(1, -1)">
 
 		<g id="plate">
@@ -122,16 +154,7 @@ plate_template = '''
 		</g>
 	</g>
 
-	<g transform="translate(100, 100)" style="fill: #859e6d; font-size: 9px;">
-		<title>Place Name and Latitude</title>
-		<text id="description" x="0" y="{{ -45 + RCapricorn - 19 }}" text-anchor="middle">
-			{{ place_name }}
-    		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
-    	</text>
-    	<svg width="20" height="20">
-    		<use xlink:href="USA_Hawaii_location_map.svg"/>
-    	</svg>
-    </g>
+
 </svg>
 '''
 
@@ -207,19 +230,46 @@ def main():
 		almucantar_coords.append(coords)
 
 	horiz = horizon(latitude)
-	print(place, latitude)
 
-	template = jinja2.Template(plate_template)
-	svg = template.render(
-    	RCapricorn=RadiusCapricorn,
-    	REquator=RadiusEquator,
-    	RCancer=RadiusCancer,
-    	place_name=place,
-    	latitude=latitude,
-    	horiz=horiz,
-    	azimuth_coords=azimuth_coords,
-    	almucantar_coords=almucantar_coords
-    )
+	with open('plate_template.svg', 'w') as fp:
+		fp.write(plate_template)
+
+	# template = jinja2.Template(plate_template)
+	# svg = template.render(
+	# 	RCapricorn=RadiusCapricorn,
+	# 	REquator=RadiusEquator,
+	# 	RCancer=RadiusCancer,
+	# 	place_name=place,
+	# 	latitude=latitude,
+	# 	horiz=horiz,
+	# 	azimuth_coords=azimuth_coords,
+	# 	almucantar_coords=almucantar_coords
+	# )
+
+	import jinja2
+
+	# Seems like overkill, but adds "include_file" function to jinja2
+	# environment in order to include raw svg into an html template.
+	@jinja2.contextfunction                                                                                                                                                                                         
+	def include_file(ctx, name):                                                                                                                                                                                   
+	    env = ctx.environment                                                                                                                                                                                      
+	    return jinja2.Markup(env.loader.get_source(env, name)[0])
+
+
+	loader = jinja2.PackageLoader(__name__, '.')                                                                                                                                                       
+	env = jinja2.Environment(loader=loader)                                                                                                                                                                    
+	env.globals['include_file'] = include_file                                                                                                                                                                 
+
+	svg = env.get_template('plate_template.svg').render(
+		RCapricorn=RadiusCapricorn,
+		REquator=RadiusEquator,
+		RCancer=RadiusCancer,
+		place_name=place,
+		latitude=latitude,
+		horiz=horiz,
+		azimuth_coords=azimuth_coords,
+		almucantar_coords=almucantar_coords
+	) 
 
 	with open('plate.svg', 'w') as fp:
 		fp.write(svg)
