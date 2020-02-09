@@ -11,91 +11,37 @@ plate_template = '''
 <svg viewbox="0 0 210 210" 
      xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink">
+
 	<defs>
 		<style type="text/css">
 			#plate {
+				display: block;
 				fill: none;
 				stroke: #859e6d;
 				stroke-width: 0.5;
-				clip-path: url(#horizon);
 			}
-			#tropics {
+			.description {
+				stroke: none;
+				fill: #859e6d;
+				font-size: 6px;
+			}
+			.tropics {
 				fill: none;
-				stroke: lightgrey;
+				stroke: lightGrey;
 				stroke-width: 0.5;
 			}
-			#axis {
+			.axis {
 				fill: none;
-				stroke: #859e6d;
+				stroke: lightGrey;
 				stroke-width: 0.5;				
 			}
-			#axis_plate {
-				fill: none;
-				stroke: lightgrey;
-				stroke-width: 0.5;	
-			}
-			#upperHorizon {
-				stroke: #859e6d;
-				stroke-width: 1;
-				fill: #eafee7;
-				clip-path: url(#capricorn);
-			}
-			#capricornPath {
-				stroke: #859e6d;
-				stroke-width: 0.5;
-				fill: none;
-			}
-			#azimuth {
-				fill: none;
-				stroke: #859e6d;
-				stroke-width: 0.5;
-				clip-path: url(#horizon);
-				clip-path: url(#capricorn);
-			}
-			#almucantar {
-				fill: none;
-				stroke: #859e6d;
-				stroke-width: 0.5;
-				clip-path: url(#capricorn);
-			}
-			#rect7 {
-				fill: none !important;
-			}
-			#polygon9,
-			#polygon11,
-			#polygon13,
-			#polygon15,
-			#polygon17,
-			#polygon19,
-			#polygon21,
-			#polygon23,
-			#polygon25,
-			#polygon27,
-			#polygon29,
-			#polygon31,
-			#polygon33,
-			#polygon35,
-			#polygon37,
-			#polygon39 {
-				stroke: #859e6d !important;
-				stroke-width: 0.5 !important;
-				vector-effect: non-scaling-stroke;
-				fill: #eafee7 !important;
-			}
-			#line43,
-			#line45,
-			#line47 {
-				display: none;
-			}
 		</style>
-
 		<clipPath id="capricorn">
 			<path id="capricornPath" d="
 					M0 {{ RCapricorn }}
 					A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ -RCapricorn }}
 					A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ RCapricorn }}z"/>
 		</clipPath>
-
 		<clipPath id="horizon">
 			<path id="horizonPath" d="
 					M{{ horiz.cx }} {{ horiz.cy + horiz.r }} 
@@ -105,75 +51,167 @@ plate_template = '''
 		</clipPath>
 	</defs>
 
-	<g transform="translate(100, 100)" style="fill: #859e6d; font-size: 9px;">
-		<title>Hawaiian Islands</title>
-    	<g id="map" transform="translate(-15, 15), scale(0.05)">
-    		{{ include_file('USA_Hawaii_location_map.svg') }}
-    	</g>
-		<text id="description" x="0" y="{{ -35 + RCapricorn - 19 }}" text-anchor="middle">
-			{{ place_name }}
-    		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
-    	</text>
-    </g>
-
-	<g transform="translate(100, 100), scale(1, -1)">
-
-		<g id="plate">
-			<title>Astrolabe Plate</title>
-			<g id="upperHorizon">
+	<symbol id="plateGrid" viewbox="0 0 200 200">
+		<defs>
+			<style type="text/css">
+				#arcs {
+					fill: none;
+					stroke: #859e6d;
+					stroke-width: 0.5;
+					clip-path: url(#capricorn);
+				}
+				#horizon {
+					stroke: #859e6d;
+					stroke-width: 0.5;
+					fill: #eafee7;
+				}
+				.capricorn {
+					stroke: #859e6d;
+					stroke-width: 0.5;
+					fill: none;
+					clip-path: url(#horizon);
+				}
+				.azimuth {
+					fill: none;
+					stroke: #859e6d;
+					stroke-width: 0.5;
+					clip-path: url(#horizon);
+				}
+				.almucantar {
+					fill: none;
+					stroke: #859e6d;
+					stroke-width: 0.5;
+					clip-path: url(#capricorn);
+				}
+			</style>
+			<clipPath id="capricorn">
+				<path id="capricornPath" d="
+						M0 {{ RCapricorn }}
+						A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ -RCapricorn }}
+						A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ RCapricorn }}z"/>
+			</clipPath>
+			<clipPath id="horizon">
+				<path id="horizonPath" d="
+						M{{ horiz.cx }} {{ horiz.cy + horiz.r }} 
+						A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy - horiz.r }}
+						A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy + horiz.r }}z
+					"/>
+			</clipPath>
+		</defs>
+		<g id="arcs" transform="translate(100, 100), scale(1, -1)">
+			<title>Astrolabe Plate Grid</title>
+			<g id="horizon">
 				<title>Horizon</title>
 				<use xlink:href="#horizonPath" />
 			</g>
-
-			<g style="clip-path: url(#horizon);">
-				<g id="azimuth">
-					<title>Azimuth</title>
-					{% for coord in azimuth_coords %}
-						<circle cx="{{ coord.cx }}" cy="{{ coord.cy }}" 
-						         r="{{ coord.r }}"/>
-					{%- endfor %}		
-				</g>
+			<g id="azimuths">
+				<title>Azimuths</title>
+				<desc>Circles of constant azimuth.</desc>
+				{% for coord in azimuth_coords %}
+					<circle class="azimuth"
+							cx="{{ coord.cx }}" 
+							cy="{{ coord.cy }}" 
+					        r="{{ coord.r }}"/>
+				{%- endfor %}
+				<line class="azimuth" x1="0" y1="{{ -RCapricorn }}" x2="0" y2="{{ RCapricorn }}"/>
 			</g>
-
-			<g id="almucantar">
-				<title>Almucantar</title>
+			<g id="almucantars">
+				<title>Almucantars</title>
+				<desc>Circles of constant altitude.</desc>
 				{% for coord in almucantar_coords %}
-					<circle cx="{{ coord.cx }}" cy="{{ coord.cy }}" 
+					<circle class="almucantar"  
+							cx="{{ coord.cx }}" 
+							cy="{{ coord.cy }}" 
 					        r="{{ coord.r }}"/>
 				{%- endfor %}
 			</g>
-
-			<g id="axis_plate">
-				<title>Axes</title>
-				<line id="axis_plate" x1="0" y1="{{ RCapricorn }}" x2="0" y2="{{ -RCapricorn }}" />
-				<line id="axis_plate" x1="{{ -RCapricorn }}" y1="0" x2="{{ RCapricorn }}" y2="0" />
+			<g id="capricorn">
+				<circle class="capricorn" cx="0" cy="0" r="{{ RCapricorn }}"/>
 			</g>
 		</g>	
+	</symbol>
+
+	<symbol id="hawaii" viewbox="{0 0 2000 2000}">
+		<defs>
+			<style type="text/css">
+				#rect7 {
+					fill: none !important;
+					stroke: none !important;
+				}
+				#polygon9,
+				#polygon11,
+				#polygon13,
+				#polygon15,
+				#polygon17,
+				#polygon19,
+				#polygon21,
+				#polygon23,
+				#polygon25,
+				#polygon27,
+				#polygon29,
+				#polygon31,
+				#polygon33,
+				#polygon35,
+				#polygon37,
+				#polygon39 {
+					stroke: #859e6d !important;
+					stroke-width: 0.5 !important;
+					vector-effect: non-scaling-stroke;
+					fill: #eafee7 !important;
+				}
+				#line43,
+				#line45,
+				#line47 {
+					display: none;
+				}
+			</style>
+		</defs>
+		<g id="map" transform="scale(0.05)">
+    		{{ include_file('USA_Hawaii_location_map.svg') }}
+    	</g>
+	</symbol>
+	
+	<g id="plate" transform="translate(100, 100)">
+	    <g id="meridian">
+			<title>Meridian</title>
+			<line class="axis" x1="0" y1="{{ RCapricorn }}" x2="0" y2="{{ -RCapricorn }}" />
+		</g>
+
+		<g id="grid">
+			<use x="-100" y="-100" xlink:href="#plateGrid"/>
+		</g>
 
 		<g id="tropics">
 			<title>Tropic Circles</title>
 			<g>
 				<title>Tropic of Capricorn</title>
-				<circle id="tropics" cx="0" cy="0" r="{{ RCapricorn }}"/>
+				<circle class="tropics" cx="0" cy="0" r="{{ RCapricorn }}"/>
 			</g>
 			<g>
 				<title>Equator</title>
-				<circle id="tropics" cx="0" cy="0" r="{{ REquator }}" />
+				<circle class="tropics" cx="0" cy="0" r="{{ REquator }}" />
 			</g>
 			<g>
 				<title>Tropic of Cancer</title>
-				<circle id="tropics" cx="0" cy="0" r="{{ RCancer }}" />
+				<circle class="tropics" cx="0" cy="0" r="{{ RCancer }}" />
 			</g>
 		</g>
 
-		<g id="axis">
-			<title>Axes</title>
-			<line id="axis" x1="0" y1="{{ RCapricorn }}" x2="0" y2="{{ -RCapricorn }}" />
-			<line id="axis" x1="{{ -RCapricorn }}" y1="0" x2="{{ RCapricorn }}" y2="0" />
+		<g id="rightHorizon">
+			<title>Right Horizon</title>
+			<line class="axis" x1="{{ -RCapricorn }}" y1="0" x2="{{ RCapricorn }}" y2="0" />
 		</g>
+
+		<g id="description">
+			<title>Hawaiian Islands</title>
+			<desc>Latitude and inset map of the Hawaiian Islands.</desc>
+			<use x="-30" y="35" xlink:href="#hawaii"/>
+			<text class="description" x="0" y="{{ -15 + RCapricorn - 19 }}" text-anchor="middle">
+				{{ place_name }}
+	    		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
+	    	</text>
+	    </g>
 	</g>
-
-
 </svg>
 '''
 

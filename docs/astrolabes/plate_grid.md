@@ -11,7 +11,7 @@ The plate grid of an astrolabe is the stereographic projection of the celestial 
 
 <object type="image/svg+xml" data="{{ "/assets/images/plate.svg" | relative_url }}" width="33%" align="right" style="display: block; height: 200px; margin:10px auto;"> </object>
 
-Ultimately, all that is needed to draw the plate of an astrolabe is to draw a bunch of circles. It all boils down to finding the center and radius of each circle. To make the diagrams look nice, the circles are clipped to lie in a given area.
+Ultimately, all that is needed to draw the plate of an astrolabe is to draw a bunch of circles. It all boils down to finding the center and radius of each circle. In order to show only the visible sky above the horizon, the circles are clipped to lie in a given area.
 
 Continuing, here is Morrisons basic description:
 
@@ -124,26 +124,120 @@ In ```svg``` a circle is drawn with a center ```(cx, cy)``` and radius ```r```. 
 
 {% highlight xml %}
 {% raw %}
-<svg viewbox="-125 -125 250 250">
-	<g id="tropics">
-		<circle id="capricorn" cx="0" cy="0" 
-		        r="{{ RCapricorn }}"/>
-		<circle cx="0" cy="0" r="{{ REquator }}"/>
-		<circle cx="0" cy="0" r="{{ RCancer }}"/>
-	</g>
-	<g id="azimuths" style="clip-path:url(#capricorn);">
-		{% for coord in azimuth_coords %}
-			<circle id="azimuth" az="{{ coord.az }}" 
-			        cx="{{ coord.cx }}" cy="{{ coord.cy }}" 
-			        r="{{ coord.r }}"/>
-		{%- endfor %}			
-	</g>
-	<g id="almucantars" style="clip-path:url(#capricorn);">
-		{% for coord in almucantor_coords %}
-			<circle id="almucantar" alt="{{ coord.alt }}" 
-			        cx="{{ coord.cx }}" cy="{{ coord.cy }}" 
-			        r="{{ coord.r }}"/>
-		{%- endfor %}
+<svg viewbox="0 0 210 210" 
+     xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink">
+	<defs>
+		<style type="text/css">
+			#plate {
+				fill: none;
+				stroke: #859e6d;
+				stroke-width: 0.5;
+				clip-path: url(#horizon);
+			}
+			#tropics {
+				fill: none;
+				stroke: lightgrey;
+				stroke-width: 0.5;
+			}
+			#axis {
+				fill: none;
+				stroke: #859e6d;
+				stroke-width: 0.5;				
+			}
+			#axis_plate {
+				fill: none;
+				stroke: lightgrey;
+				stroke-width: 0.5;	
+			}
+			#upperHorizon {
+				stroke: #859e6d;
+				stroke-width: 1;
+				fill: #eafee7;
+				clip-path: url(#capricorn);
+			}
+			#capricornPath {
+				stroke: #859e6d;
+				stroke-width: 0.5;
+				fill: none;
+			}
+			#azimuth {
+				fill: none;
+				stroke: #859e6d;
+				stroke-width: 0.5;
+				clip-path: url(#horizon);
+				clip-path: url(#capricorn);
+			}
+			#almucantar {
+				fill: none;
+				stroke: #859e6d;
+				stroke-width: 0.5;
+				clip-path: url(#capricorn);
+			}
+		</style>
+		<clipPath id="capricorn">
+			<path id="capricornPath" d="
+					M0 {{ RCapricorn }}
+					A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ -RCapricorn }}
+					A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ RCapricorn }}z"/>
+		</clipPath>
+		<clipPath id="horizon">
+			<path id="horizonPath" d="
+					M{{ horiz.cx }} {{ horiz.cy + horiz.r }} 
+					A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy - horiz.r }}
+					A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy + horiz.r }}z
+				"/>
+		</clipPath>
+	</defs
+	<g transform="translate(100, 100), scale(1, -1)">
+		<g id="plate">
+			<title>Astrolabe Plate</title>
+			<g id="upperHorizon">
+				<title>Horizon</title>
+				<use xlink:href="#horizonPath" />
+			</g>
+			<g style="clip-path: url(#horizon);">
+				<g id="azimuth">
+					<title>Azimuth</title>
+					{% for coord in azimuth_coords %}
+						<circle cx="{{ coord.cx }}" cy="{{ coord.cy }}" 
+						         r="{{ coord.r }}"/>
+					{%- endfor %}		
+				</g>
+			</g>
+			<g id="almucantar">
+				<title>Almucantar</title>
+				{% for coord in almucantar_coords %}
+					<circle cx="{{ coord.cx }}" cy="{{ coord.cy }}" 
+					        r="{{ coord.r }}"/>
+				{%- endfor %}
+			</g>
+			<g id="axis_plate">
+				<title>Axes</title>
+				<line id="axis_plate" x1="0" y1="{{ RCapricorn }}" x2="0" y2="{{ -RCapricorn }}" />
+				<line id="axis_plate" x1="{{ -RCapricorn }}" y1="0" x2="{{ RCapricorn }}" y2="0" />
+			</g>
+		</g>	
+		<g id="tropics">
+			<title>Tropic Circles</title>
+			<g>
+				<title>Tropic of Capricorn</title>
+				<circle id="tropics" cx="0" cy="0" r="{{ RCapricorn }}"/>
+			</g>
+			<g>
+				<title>Equator</title>
+				<circle id="tropics" cx="0" cy="0" r="{{ REquator }}" />
+			</g>
+			<g>
+				<title>Tropic of Cancer</title>
+				<circle id="tropics" cx="0" cy="0" r="{{ RCancer }}" />
+			</g>
+		</g>
+		<g id="axis">
+			<title>Axes</title>
+			<line id="axis" x1="0" y1="{{ RCapricorn }}" x2="0" y2="{{ -RCapricorn }}" />
+			<line id="axis" x1="{{ -RCapricorn }}" y1="0" x2="{{ RCapricorn }}" y2="0" />
+		</g>
 	</g>
 </svg>
 {% endraw %}

@@ -2,91 +2,37 @@
 <svg viewbox="0 0 210 210" 
      xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink">
+
 	<defs>
 		<style type="text/css">
 			#plate {
+				display: block;
 				fill: none;
 				stroke: #859e6d;
 				stroke-width: 0.5;
-				clip-path: url(#horizon);
 			}
-			#tropics {
+			.description {
+				stroke: none;
+				fill: #859e6d;
+				font-size: 6px;
+			}
+			.tropics {
 				fill: none;
-				stroke: lightgrey;
+				stroke: lightGrey;
 				stroke-width: 0.5;
 			}
-			#axis {
+			.axis {
 				fill: none;
-				stroke: #859e6d;
+				stroke: lightGrey;
 				stroke-width: 0.5;				
 			}
-			#axis_plate {
-				fill: none;
-				stroke: lightgrey;
-				stroke-width: 0.5;	
-			}
-			#upperHorizon {
-				stroke: #859e6d;
-				stroke-width: 1;
-				fill: #eafee7;
-				clip-path: url(#capricorn);
-			}
-			#capricornPath {
-				stroke: #859e6d;
-				stroke-width: 0.5;
-				fill: none;
-			}
-			#azimuth {
-				fill: none;
-				stroke: #859e6d;
-				stroke-width: 0.5;
-				clip-path: url(#horizon);
-				clip-path: url(#capricorn);
-			}
-			#almucantar {
-				fill: none;
-				stroke: #859e6d;
-				stroke-width: 0.5;
-				clip-path: url(#capricorn);
-			}
-			#rect7 {
-				fill: none !important;
-			}
-			#polygon9,
-			#polygon11,
-			#polygon13,
-			#polygon15,
-			#polygon17,
-			#polygon19,
-			#polygon21,
-			#polygon23,
-			#polygon25,
-			#polygon27,
-			#polygon29,
-			#polygon31,
-			#polygon33,
-			#polygon35,
-			#polygon37,
-			#polygon39 {
-				stroke: #859e6d !important;
-				stroke-width: 0.5 !important;
-				vector-effect: non-scaling-stroke;
-				fill: #eafee7 !important;
-			}
-			#line43,
-			#line45,
-			#line47 {
-				display: none;
-			}
 		</style>
-
 		<clipPath id="capricorn">
 			<path id="capricornPath" d="
 					M0 100
 					A100 100 0 0 1 0 -100
 					A100 100 0 0 1 0 100z"/>
 		</clipPath>
-
 		<clipPath id="horizon">
 			<path id="horizonPath" d="
 					M0.0 348.90297782559264 
@@ -96,9 +42,216 @@
 		</clipPath>
 	</defs>
 
-	<g transform="translate(100, 100)" style="fill: #859e6d; font-size: 9px;">
-		<title>Hawaiian Islands</title>
-    	<g id="map" transform="translate(-15, 15), scale(0.05)">
+	<symbol id="plateGrid" viewbox="0 0 200 200">
+		<defs>
+			<style type="text/css">
+				#arcs {
+					fill: none;
+					stroke: #859e6d;
+					stroke-width: 0.5;
+					clip-path: url(#capricorn);
+				}
+				#horizon {
+					stroke: #859e6d;
+					stroke-width: 0.5;
+					fill: #eafee7;
+				}
+				.capricorn {
+					stroke: #859e6d;
+					stroke-width: 0.5;
+					fill: none;
+					clip-path: url(#horizon);
+				}
+				.azimuth {
+					fill: none;
+					stroke: #859e6d;
+					stroke-width: 0.5;
+					clip-path: url(#horizon);
+				}
+				.almucantar {
+					fill: none;
+					stroke: #859e6d;
+					stroke-width: 0.5;
+					clip-path: url(#capricorn);
+				}
+			</style>
+			<clipPath id="capricorn">
+				<path id="capricornPath" d="
+						M0 100
+						A100 100 0 0 1 0 -100
+						A100 100 0 0 1 0 100z"/>
+			</clipPath>
+			<clipPath id="horizon">
+				<path id="horizonPath" d="
+						M0.0 348.90297782559264 
+						A180.62456130568754 180.62456130568754 0 0 1 0.0 -12.346144785782457
+						A180.62456130568754 180.62456130568754 0 0 1 0.0 348.90297782559264z
+					"/>
+			</clipPath>
+		</defs>
+		<g id="arcs" transform="translate(100, 100), scale(1, -1)">
+			<title>Astrolabe Plate Grid</title>
+			<g id="horizon">
+				<title>Horizon</title>
+				<use xlink:href="#horizonPath" />
+			</g>
+			<g id="azimuths">
+				<title>Azimuths</title>
+				<desc>Circles of constant azimuth.</desc>
+				
+					<circle class="azimuth"
+							cx="0.0" 
+							cy="-25.59809373958466" 
+					        r="70.4476336261621"/>
+					<circle class="azimuth"
+							cx="-0.0" 
+							cy="-25.59809373958466" 
+					        r="70.4476336261621"/>
+					<circle class="azimuth"
+							cx="12.421818535357293" 
+							cy="-25.59809373958466" 
+					        r="71.53440192838207"/>
+					<circle class="azimuth"
+							cx="-12.421818535357293" 
+							cy="-25.59809373958466" 
+					        r="71.53440192838207"/>
+					<circle class="azimuth"
+							cx="25.640841714413813" 
+							cy="-25.59809373958466" 
+					        r="74.96880582848834"/>
+					<circle class="azimuth"
+							cx="-25.640841714413813" 
+							cy="-25.59809373958466" 
+					        r="74.96880582848834"/>
+					<circle class="azimuth"
+							cx="40.67296023783681" 
+							cy="-25.59809373958466" 
+					        r="81.34592047567364"/>
+					<circle class="azimuth"
+							cx="-40.67296023783681" 
+							cy="-25.59809373958466" 
+					        r="81.34592047567364"/>
+					<circle class="azimuth"
+							cx="59.11258339302476" 
+							cy="-25.59809373958466" 
+					        r="91.96285445180173"/>
+					<circle class="azimuth"
+							cx="-59.11258339302476" 
+							cy="-25.59809373958466" 
+					        r="91.96285445180173"/>
+					<circle class="azimuth"
+							cx="83.95622046373934" 
+							cy="-25.59809373958466" 
+					        r="109.59706217815317"/>
+					<circle class="azimuth"
+							cx="-83.95622046373934" 
+							cy="-25.59809373958466" 
+					        r="109.59706217815317"/>
+					<circle class="azimuth"
+							cx="122.01888071351043" 
+							cy="-25.59809373958466" 
+					        r="140.89526725232417"/>
+					<circle class="azimuth"
+							cx="-122.01888071351043" 
+							cy="-25.59809373958466" 
+					        r="140.89526725232417"/>
+					<circle class="azimuth"
+							cx="193.55328264189245" 
+							cy="-25.59809373958466" 
+					        r="205.97510117724977"/>
+					<circle class="azimuth"
+							cx="-193.55328264189245" 
+							cy="-25.59809373958466" 
+					        r="205.97510117724977"/>
+					<circle class="azimuth"
+							cx="399.5283838191422" 
+							cy="-25.59809373958466" 
+					        r="405.69175313365906"/>
+					<circle class="azimuth"
+							cx="-399.5283838191422" 
+							cy="-25.59809373958466" 
+					        r="405.69175313365906"/>
+				<line class="azimuth" x1="0" y1="-100" x2="0" y2="100"/>
+			</g>
+			<g id="almucantars">
+				<title>Almucantars</title>
+				<desc>Circles of constant altitude.</desc>
+				
+					<circle class="almucantar"  
+							cx="0" 
+							cy="113.86387502593837" 
+					        r="120.36100551436813"/>
+					<circle class="almucantar"  
+							cx="0" 
+							cy="86.68506735308874" 
+					        r="87.43362729200523"/>
+					<circle class="almucantar"  
+							cx="0" 
+							cy="70.82327143760874" 
+					        r="65.83472168322515"/>
+					<circle class="almucantar"  
+							cx="0" 
+							cy="60.772409045149345" 
+					        r="49.969937640163"/>
+					<circle class="almucantar"  
+							cx="0" 
+							cy="54.140071090034795" 
+					        r="37.353792938195646"/>
+					<circle class="almucantar"  
+							cx="0" 
+							cy="49.7370895658308" 
+					        r="26.693084500195607"/>
+					<circle class="almucantar"  
+							cx="0" 
+							cy="46.92524354442485" 
+					        r="17.226879209080142"/>
+					<circle class="almucantar"  
+							cx="0" 
+							cy="45.35493956889634" 
+					        r="8.453629525147674"/>
+			</g>
+			<g id="capricorn">
+				<circle class="capricorn" cx="0" cy="0" r="100"/>
+			</g>
+		</g>	
+	</symbol>
+
+	<symbol id="hawaii" viewbox="{0 0 2000 2000}">
+		<defs>
+			<style type="text/css">
+				#rect7 {
+					fill: none !important;
+					stroke: none !important;
+				}
+				#polygon9,
+				#polygon11,
+				#polygon13,
+				#polygon15,
+				#polygon17,
+				#polygon19,
+				#polygon21,
+				#polygon23,
+				#polygon25,
+				#polygon27,
+				#polygon29,
+				#polygon31,
+				#polygon33,
+				#polygon35,
+				#polygon37,
+				#polygon39 {
+					stroke: #859e6d !important;
+					stroke-width: 0.5 !important;
+					vector-effect: non-scaling-stroke;
+					fill: #eafee7 !important;
+				}
+				#line43,
+				#line45,
+				#line47 {
+					display: none;
+				}
+			</style>
+		</defs>
+		<g id="map" transform="scale(0.05)">
     		<svg
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
@@ -237,114 +390,47 @@
 </svg>
 
     	</g>
-		<text id="description" x="0" y="46" text-anchor="middle">
-			Hawaiian Islands
-    		<tspan x="0" dy="1.2em">21.3069 </tspan>
-    	</text>
-    </g>
+	</symbol>
+	
+	<g id="plate" transform="translate(100, 100)">
+	    <g id="meridian">
+			<title>Meridian</title>
+			<line class="axis" x1="0" y1="100" x2="0" y2="-100" />
+		</g>
 
-	<g transform="translate(100, 100), scale(1, -1)">
-
-		<g id="plate">
-			<title>Astrolabe Plate</title>
-			<g id="upperHorizon">
-				<title>Horizon</title>
-				<use xlink:href="#horizonPath" />
-			</g>
-
-			<g style="clip-path: url(#horizon);">
-				<g id="azimuth">
-					<title>Azimuth</title>
-					
-						<circle cx="0.0" cy="-25.59809373958466" 
-						         r="70.4476336261621"/>
-						<circle cx="-0.0" cy="-25.59809373958466" 
-						         r="70.4476336261621"/>
-						<circle cx="12.421818535357293" cy="-25.59809373958466" 
-						         r="71.53440192838207"/>
-						<circle cx="-12.421818535357293" cy="-25.59809373958466" 
-						         r="71.53440192838207"/>
-						<circle cx="25.640841714413813" cy="-25.59809373958466" 
-						         r="74.96880582848834"/>
-						<circle cx="-25.640841714413813" cy="-25.59809373958466" 
-						         r="74.96880582848834"/>
-						<circle cx="40.67296023783681" cy="-25.59809373958466" 
-						         r="81.34592047567364"/>
-						<circle cx="-40.67296023783681" cy="-25.59809373958466" 
-						         r="81.34592047567364"/>
-						<circle cx="59.11258339302476" cy="-25.59809373958466" 
-						         r="91.96285445180173"/>
-						<circle cx="-59.11258339302476" cy="-25.59809373958466" 
-						         r="91.96285445180173"/>
-						<circle cx="83.95622046373934" cy="-25.59809373958466" 
-						         r="109.59706217815317"/>
-						<circle cx="-83.95622046373934" cy="-25.59809373958466" 
-						         r="109.59706217815317"/>
-						<circle cx="122.01888071351043" cy="-25.59809373958466" 
-						         r="140.89526725232417"/>
-						<circle cx="-122.01888071351043" cy="-25.59809373958466" 
-						         r="140.89526725232417"/>
-						<circle cx="193.55328264189245" cy="-25.59809373958466" 
-						         r="205.97510117724977"/>
-						<circle cx="-193.55328264189245" cy="-25.59809373958466" 
-						         r="205.97510117724977"/>
-						<circle cx="399.5283838191422" cy="-25.59809373958466" 
-						         r="405.69175313365906"/>
-						<circle cx="-399.5283838191422" cy="-25.59809373958466" 
-						         r="405.69175313365906"/>		
-				</g>
-			</g>
-
-			<g id="almucantar">
-				<title>Almucantar</title>
-				
-					<circle cx="0" cy="113.86387502593837" 
-					        r="120.36100551436813"/>
-					<circle cx="0" cy="86.68506735308874" 
-					        r="87.43362729200523"/>
-					<circle cx="0" cy="70.82327143760874" 
-					        r="65.83472168322515"/>
-					<circle cx="0" cy="60.772409045149345" 
-					        r="49.969937640163"/>
-					<circle cx="0" cy="54.140071090034795" 
-					        r="37.353792938195646"/>
-					<circle cx="0" cy="49.7370895658308" 
-					        r="26.693084500195607"/>
-					<circle cx="0" cy="46.92524354442485" 
-					        r="17.226879209080142"/>
-					<circle cx="0" cy="45.35493956889634" 
-					        r="8.453629525147674"/>
-			</g>
-
-			<g id="axis_plate">
-				<title>Axes</title>
-				<line id="axis_plate" x1="0" y1="100" x2="0" y2="-100" />
-				<line id="axis_plate" x1="-100" y1="0" x2="100" y2="0" />
-			</g>
-		</g>	
+		<g id="grid">
+			<use x="-100" y="-100" xlink:href="#plateGrid"/>
+		</g>
 
 		<g id="tropics">
 			<title>Tropic Circles</title>
 			<g>
 				<title>Tropic of Capricorn</title>
-				<circle id="tropics" cx="0" cy="0" r="100"/>
+				<circle class="tropics" cx="0" cy="0" r="100"/>
 			</g>
 			<g>
 				<title>Equator</title>
-				<circle id="tropics" cx="0" cy="0" r="65.63236000956694" />
+				<circle class="tropics" cx="0" cy="0" r="65.63236000956694" />
 			</g>
 			<g>
 				<title>Tropic of Cancer</title>
-				<circle id="tropics" cx="0" cy="0" r="43.07606680425401" />
+				<circle class="tropics" cx="0" cy="0" r="43.07606680425401" />
 			</g>
 		</g>
 
-		<g id="axis">
-			<title>Axes</title>
-			<line id="axis" x1="0" y1="100" x2="0" y2="-100" />
-			<line id="axis" x1="-100" y1="0" x2="100" y2="0" />
+		<g id="rightHorizon">
+			<title>Right Horizon</title>
+			<line class="axis" x1="-100" y1="0" x2="100" y2="0" />
 		</g>
+
+		<g id="description">
+			<title>Hawaiian Islands</title>
+			<desc>Latitude and inset map of the Hawaiian Islands.</desc>
+			<use x="-30" y="35" xlink:href="#hawaii"/>
+			<text class="description" x="0" y="66" text-anchor="middle">
+				Hawaiian Islands
+	    		<tspan x="0" dy="1.2em">21.3069 </tspan>
+	    	</text>
+	    </g>
 	</g>
-
-
 </svg>
