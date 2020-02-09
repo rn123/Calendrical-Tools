@@ -4,6 +4,11 @@ astrolabe:
 	mv calendrical_tools/astrolabe_generated.svg docs/assets/images
 	mv calendrical_tools/astrolabe_generated.html docs/
 
+plate:
+	cd calendrical_tools; python plate_grid_minimal.py; cd ..
+	mv calendrical_tools/plate.svg docs/_includes
+	cp docs/_includes/plate.svg docs/assets/images/
+
 tex:
 	python display_candybars.py
 
