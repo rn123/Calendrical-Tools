@@ -8,7 +8,8 @@ mathjax: true
 The plate grid of an astrolabe is the stereographic projection of the celestial sphere through the south celestial pole onto the plane of the equator. Quoting Morrison:
 
 > The interior of the plate can be thought of as a special kind of graph paper for finding the location of celestial objects in the sky at your location. The main difference between normal graph paper and the graph paper on the plate is the lines on graph paper are normally straight while the astrolabe lines are curve. All of the curves on the astrolabe plate are drawn as arcs of circles.
-<img src="{{ "/assets/images/plate.svg" | relative_url }}" alt="plate grid" width="33%" align="right" style="display: block; height: 200px; margin:10px auto;"/>
+
+<object type="image/svg+xml" data="/assets/images/plate.svg" width="33%" align="right" style="display: block; height: 200px; margin:10px auto;"> </object>
 
 Ultimately, all that is needed to draw the plate of an astrolabe is to draw a bunch of circles. It all boils down to finding the center and radius of each circle. To make the diagrams look nice, the circles are clipped to lie in a given area.
 
