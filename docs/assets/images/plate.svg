@@ -69,7 +69,14 @@
 			#polygon37,
 			#polygon39 {
 				stroke: #859e6d !important;
+				stroke-width: 0.5 !important;
+				vector-effect: non-scaling-stroke;
 				fill: #eafee7 !important;
+			}
+			#line43,
+			#line45,
+			#line47 {
+				display: none;
 			}
 		</style>
 
@@ -91,7 +98,7 @@
 
 	<g transform="translate(100, 100)" style="fill: #859e6d; font-size: 9px;">
 		<title>Hawaiian Islands</title>
-    	<g id="map" transform="translate(-20, 13), scale(0.05)">
+    	<g id="map" transform="translate(-15, 15), scale(0.05)">
     		<svg
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"

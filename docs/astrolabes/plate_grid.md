@@ -62,7 +62,7 @@ $$
 In particular, the radius and center for the horizon arc is obtained for an altitude of zero.
 
 {% highlight python %}
-def almucantar_arc(altitude, latitude):
+def almucantar_arc(altitude=None, latitude=None):
         radiansAltitude = math.radians(altitude)
         radiansLatitude = math.radians(latitude)
 

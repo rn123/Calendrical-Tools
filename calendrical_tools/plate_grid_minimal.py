@@ -78,7 +78,14 @@ plate_template = '''
 			#polygon37,
 			#polygon39 {
 				stroke: #859e6d !important;
+				stroke-width: 0.5 !important;
+				vector-effect: non-scaling-stroke;
 				fill: #eafee7 !important;
+			}
+			#line43,
+			#line45,
+			#line47 {
+				display: none;
 			}
 		</style>
 
@@ -100,7 +107,7 @@ plate_template = '''
 
 	<g transform="translate(100, 100)" style="fill: #859e6d; font-size: 9px;">
 		<title>Hawaiian Islands</title>
-    	<g id="map" transform="translate(-20, 13), scale(0.05)">
+    	<g id="map" transform="translate(-15, 15), scale(0.05)">
     		{{ include_file('USA_Hawaii_location_map.svg') }}
     	</g>
 		<text id="description" x="0" y="{{ -35 + RCapricorn - 19 }}" text-anchor="middle">
