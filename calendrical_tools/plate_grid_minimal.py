@@ -26,8 +26,13 @@ plate_template = '''
 			}
 			#axis {
 				fill: none;
-				stroke: lightgrey;
+				stroke: #859e6d;
 				stroke-width: 0.5;				
+			}
+			#axis_plate {
+				fill: none;
+				stroke: lightgrey;
+				stroke-width: 0.5;	
 			}
 			#upperHorizon {
 				stroke: #859e6d;
@@ -72,7 +77,8 @@ plate_template = '''
 			#polygon35,
 			#polygon37,
 			#polygon39 {
-				fill: #859e6d !important;
+				stroke: #859e6d !important;
+				fill: #eafee7 !important;
 			}
 		</style>
 
@@ -128,6 +134,12 @@ plate_template = '''
 					<circle cx="{{ coord.cx }}" cy="{{ coord.cy }}" 
 					        r="{{ coord.r }}"/>
 				{%- endfor %}
+			</g>
+
+			<g id="axis_plate">
+				<title>Axes</title>
+				<line id="axis_plate" x1="0" y1="{{ RCapricorn }}" x2="0" y2="{{ -RCapricorn }}" />
+				<line id="axis_plate" x1="{{ -RCapricorn }}" y1="0" x2="{{ RCapricorn }}" y2="0" />
 			</g>
 		</g>	
 

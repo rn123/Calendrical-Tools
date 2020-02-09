@@ -17,8 +17,13 @@
 			}
 			#axis {
 				fill: none;
-				stroke: lightgrey;
+				stroke: #859e6d;
 				stroke-width: 0.5;				
+			}
+			#axis_plate {
+				fill: none;
+				stroke: lightgrey;
+				stroke-width: 0.5;	
 			}
 			#upperHorizon {
 				stroke: #859e6d;
@@ -63,7 +68,8 @@
 			#polygon35,
 			#polygon37,
 			#polygon39 {
-				fill: #859e6d !important;
+				stroke: #859e6d !important;
+				fill: #eafee7 !important;
 			}
 		</style>
 
@@ -301,6 +307,12 @@
 					        r="17.226879209080142"/>
 					<circle cx="0" cy="45.35493956889634" 
 					        r="8.453629525147674"/>
+			</g>
+
+			<g id="axis_plate">
+				<title>Axes</title>
+				<line id="axis_plate" x1="0" y1="100" x2="0" y2="-100" />
+				<line id="axis_plate" x1="-100" y1="0" x2="100" y2="0" />
 			</g>
 		</g>	
 
