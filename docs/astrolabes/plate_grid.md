@@ -41,11 +41,11 @@ These circles depend only on the obliquity of the ecliptic.
 {% highlight python %}
 import math
 
-obliquity=23.4443291
+obliquity = 23.4443291
 RadiusCapricorn = 100
 obliquityRadiansArgument = math.radians((90 - obliquity) / 2)
-RadiusEquator = RadiusCapricorn * math.tan( obliquityRadiansArgument )
-RadiusCancer = RadiusEquator * math.tan( obliquityRadiansArgument )
+RadiusEquator = RadiusCapricorn * math.tan(obliquityRadiansArgument)
+RadiusCancer = RadiusEquator * math.tan(obliquityRadiansArgument)
 {% endhighlight %}
 
 The circles of equal altitude (almucantars) are given by the following formulas:
@@ -63,24 +63,19 @@ In particular, the radius and center for the horizon arc is obtained for an alti
 
 {% highlight python %}
 def almucantar_arc(altitude=None, latitude=None):
-        radiansAltitude = math.radians(altitude)
-        radiansLatitude = math.radians(latitude)
+    radiansAltitude = math.radians(altitude)
+    radiansLatitude = math.radians(latitude)
 
-        almucantorCenter = RadiusEquator * (
-            math.cos(radiansLatitude)
-            / (math.sin(radiansLatitude) + math.sin(radiansAltitude))
-        )
+    almucantorCenter = RadiusEquator * (
+        math.cos(radiansLatitude)
+        / (math.sin(radiansLatitude) + math.sin(radiansAltitude))
+    )
 
-        almucantarRadius = RadiusEquator * (
-            math.cos(radiansAltitude)
-            / (math.sin(radiansLatitude) + math.sin(radiansAltitude))
-        )
-        return {
-        	"alt": altitude, 
-      		"cx": 0, 
-           	"cy": almucantorCenter, 
-           	"r": almucantarRadius
-     	}
+    almucantarRadius = RadiusEquator * (
+        math.cos(radiansAltitude)
+        / (math.sin(radiansLatitude) + math.sin(radiansAltitude))
+    )
+    return {"alt": altitude, "cx": 0, "cy": almucantorCenter, "r": almucantarRadius}
 {% endhighlight %}
 
 The arcs of equal azimuth are given by:
@@ -120,67 +115,64 @@ def azimuth_arc(azimuth=None, latitude=None):
     return [coord_left, coord_right]
 {% endhighlight %}
 
+Compute horizon circle:
+
+{% highlight python %}
+def horizon(latitude=None):
+    radiansLatitude = math.radians(latitude)
+    rHorizon = RadiusEquator / math.sin(radiansLatitude)
+    yHorizon = RadiusEquator / math.tan(radiansLatitude)
+    xHorizon = 0.0
+    return {"cx": xHorizon, "cy": yHorizon, "r": rHorizon}
+{% endhighlight %}
+
 In ```svg``` a circle is drawn with a center ```(cx, cy)``` and radius ```r```. A template language alows us to loop over the arcs that need to be drawn after we've computed all of the centers and radii.
 
 {% highlight xml %}
 {% raw %}
-<svg viewbox="0 0 210 210" 
-     xmlns="http://www.w3.org/2000/svg"
-     xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg id="plateGrid" viewbox="0 0 200 200"
+	 xmlns="http://www.w3.org/2000/svg"
+	 xmlns:xlink="http://www.w3.org/1999/xlink">
 	<defs>
 		<style type="text/css">
-			#plate {
-				fill: none;
-				stroke: #859e6d;
+			#arcs {
+				stroke: {{ stroke_color }};
 				stroke-width: 0.5;
-				clip-path: url(#horizon);
-			}
-			#tropics {
 				fill: none;
-				stroke: lightgrey;
-				stroke-width: 0.5;
-			}
-			#axis {
-				fill: none;
-				stroke: #859e6d;
-				stroke-width: 0.5;				
-			}
-			#axis_plate {
-				fill: none;
-				stroke: lightgrey;
-				stroke-width: 0.5;	
-			}
-			#upperHorizon {
-				stroke: #859e6d;
-				stroke-width: 1;
-				fill: #eafee7;
 				clip-path: url(#capricorn);
 			}
-			#capricornPath {
-				stroke: #859e6d;
+			#horizon {
+				stroke: {{ stroke_color }};
 				stroke-width: 0.5;
-				fill: none;
+				fill: {{ fill_color }};
 			}
-			#azimuth {
-				fill: none;
-				stroke: #859e6d;
+			.capricorn {
+				stroke: {{ stroke_color }};
 				stroke-width: 0.5;
+				fill: none;
 				clip-path: url(#horizon);
-				clip-path: url(#capricorn);
 			}
-			#almucantar {
-				fill: none;
-				stroke: #859e6d;
+			.azimuth {
+				stroke: {{ stroke_color }};
 				stroke-width: 0.5;
+				fill: none;
+				clip-path: url(#horizon);
+			}
+			.almucantar {
+				stroke: {{ stroke_color }};
+				stroke-width: 0.5;
+				fill: none;
 				clip-path: url(#capricorn);
 			}
 		</style>
+
 		<clipPath id="capricorn">
 			<path id="capricornPath" d="
 					M0 {{ RCapricorn }}
 					A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ -RCapricorn }}
 					A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ RCapricorn }}z"/>
 		</clipPath>
+
 		<clipPath id="horizon">
 			<path id="horizonPath" d="
 					M{{ horiz.cx }} {{ horiz.cy + horiz.r }} 
@@ -188,60 +180,90 @@ In ```svg``` a circle is drawn with a center ```(cx, cy)``` and radius ```r```. 
 					A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy + horiz.r }}z
 				"/>
 		</clipPath>
-	</defs
-	<g transform="translate(100, 100), scale(1, -1)">
-		<g id="plate">
-			<title>Astrolabe Plate</title>
-			<g id="upperHorizon">
-				<title>Horizon</title>
-				<use xlink:href="#horizonPath" />
-			</g>
-			<g style="clip-path: url(#horizon);">
-				<g id="azimuth">
-					<title>Azimuth</title>
-					{% for coord in azimuth_coords %}
-						<circle cx="{{ coord.cx }}" cy="{{ coord.cy }}" 
-						         r="{{ coord.r }}"/>
-					{%- endfor %}		
-				</g>
-			</g>
-			<g id="almucantar">
-				<title>Almucantar</title>
-				{% for coord in almucantar_coords %}
-					<circle cx="{{ coord.cx }}" cy="{{ coord.cy }}" 
-					        r="{{ coord.r }}"/>
-				{%- endfor %}
-			</g>
-			<g id="axis_plate">
-				<title>Axes</title>
-				<line id="axis_plate" x1="0" y1="{{ RCapricorn }}" x2="0" y2="{{ -RCapricorn }}" />
-				<line id="axis_plate" x1="{{ -RCapricorn }}" y1="0" x2="{{ RCapricorn }}" y2="0" />
-			</g>
-		</g>	
-		<g id="tropics">
-			<title>Tropic Circles</title>
-			<g>
-				<title>Tropic of Capricorn</title>
-				<circle id="tropics" cx="0" cy="0" r="{{ RCapricorn }}"/>
-			</g>
-			<g>
-				<title>Equator</title>
-				<circle id="tropics" cx="0" cy="0" r="{{ REquator }}" />
-			</g>
-			<g>
-				<title>Tropic of Cancer</title>
-				<circle id="tropics" cx="0" cy="0" r="{{ RCancer }}" />
-			</g>
+	</defs>
+
+	<g id="arcs" transform="translate(100, 100), scale(1, -1)">
+		<title>Astrolabe Plate Grid</title>
+
+		<g id="horizon">
+			<title>Horizon</title>
+			<use xlink:href="#horizonPath" />
 		</g>
-		<g id="axis">
-			<title>Axes</title>
-			<line id="axis" x1="0" y1="{{ RCapricorn }}" x2="0" y2="{{ -RCapricorn }}" />
-			<line id="axis" x1="{{ -RCapricorn }}" y1="0" x2="{{ RCapricorn }}" y2="0" />
+
+		<g id="azimuths">
+			<title>Azimuths</title>
+			<desc>Circles of constant azimuth.</desc>
+			{% for coord in azimuth_coords %}
+				<circle class="azimuth"
+						cx="{{ coord.cx }}" 
+						cy="{{ coord.cy }}" 
+				        r="{{ coord.r }}"/>
+			{%- endfor %}
+			<line class="azimuth" x1="0" y1="{{ -RCapricorn }}" 
+								  x2="0" y2="{{ RCapricorn }}"/>
 		</g>
-	</g>
+
+		<g id="almucantars">
+			<title>Almucantars</title>
+			<desc>Circles of constant altitude.</desc>
+			{% for coord in almucantar_coords %}
+				<circle class="almucantar"  
+						cx="{{ coord.cx }}" 
+						cy="{{ coord.cy }}" 
+				        r="{{ coord.r }}"/>
+			{%- endfor %}
+		</g>
+		<g id="capricorn">
+			<circle class="capricorn" 
+					cx="0" cy="0" 
+					r="{{ RCapricorn }}"/>
+		</g>
+	</g>	
 </svg>
 {% endraw %}
 {% endhighlight %}
 
+A main routine to compute the arcs and fill in the template.
+
+{% highlight python %}
+def main():
+    place, latitude = ("Hawaiian Islands", 21.3069)
+
+    azimuth_coords = []
+    for azimuth in list(range(0, 90, 10)):
+        coords = azimuth_arc(azimuth=azimuth, latitude=latitude)
+        azimuth_coords.extend(coords)
+
+    almucantar_coords = []
+    for altitude in list(range(10, 90, 10)):
+        coords = almucantar_arc(altitude=altitude, latitude=latitude)
+        almucantar_coords.append(coords)
+
+    horiz = horizon(latitude)
+
+    with open("plate_template.svg") as fp:
+        plate_template = fp.read()
+
+    template = jinja2.Template(plate_template)
+    svg = template.render(
+        stroke_color="#859e6d",
+        fill_color="#eafee7",
+        RCapricorn=RadiusCapricorn,
+        REquator=RadiusEquator,
+        RCancer=RadiusCancer,
+        place_name=place,
+        latitude=latitude,
+        horiz=horiz,
+        azimuth_coords=azimuth_coords,
+        almucantar_coords=almucantar_coords,
+    )
+
+    with open("p.svg", "w") as fp:
+        fp.write(svg)
+
+
+if __name__ == "__main__":
+    main()
+{% endhighlight %}
 
 <img src="{{ "/assets/images/screenshot_coding_astrolabe.png" | relative_url }}" alt="coding screenshot" width="100%" style="padding:5px;"/>

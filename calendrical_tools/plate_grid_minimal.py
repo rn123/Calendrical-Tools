@@ -1,13 +1,13 @@
 import math
 import jinja2
 
-obliquity=23.4443291
+obliquity = 23.4443291
 RadiusCapricorn = 100
 obliquityRadiansArgument = math.radians((90 - obliquity) / 2)
-RadiusEquator = RadiusCapricorn * math.tan( obliquityRadiansArgument )
-RadiusCancer = RadiusEquator * math.tan( obliquityRadiansArgument )
+RadiusEquator = RadiusCapricorn * math.tan(obliquityRadiansArgument)
+RadiusCancer = RadiusEquator * math.tan(obliquityRadiansArgument)
 
-plate_template = '''
+plate_template = """
 <svg viewbox="0 0 210 210" 
      xmlns="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -16,32 +16,34 @@ plate_template = '''
 		<style type="text/css">
 			#plate {
 				display: block;
-				fill: none;
-				stroke: #859e6d;
+				stroke: {{ stroke_color }};
 				stroke-width: 0.5;
+				fill: none;
 			}
 			.description {
 				stroke: none;
-				fill: #859e6d;
+				fill: {{ stroke_color }};
 				font-size: 6px;
 			}
 			.tropics {
-				fill: none;
 				stroke: lightGrey;
 				stroke-width: 0.5;
+				fill: none;
 			}
 			.axis {
-				fill: none;
 				stroke: lightGrey;
-				stroke-width: 0.5;				
+				stroke-width: 0.5;	
+				fill: none;			
 			}
 		</style>
+
 		<clipPath id="capricorn">
 			<path id="capricornPath" d="
 					M0 {{ RCapricorn }}
 					A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ -RCapricorn }}
 					A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ RCapricorn }}z"/>
 		</clipPath>
+
 		<clipPath id="horizon">
 			<path id="horizonPath" d="
 					M{{ horiz.cx }} {{ horiz.cy + horiz.r }} 
@@ -55,41 +57,43 @@ plate_template = '''
 		<defs>
 			<style type="text/css">
 				#arcs {
-					fill: none;
-					stroke: #859e6d;
+					stroke: {{ stroke_color }};
 					stroke-width: 0.5;
+					fill: none;
 					clip-path: url(#capricorn);
 				}
 				#horizon {
-					stroke: #859e6d;
+					stroke: {{ stroke_color }};
 					stroke-width: 0.5;
-					fill: #eafee7;
+					fill: {{ fill_color }};
 				}
 				.capricorn {
-					stroke: #859e6d;
+					stroke: {{ stroke_color }};
 					stroke-width: 0.5;
 					fill: none;
 					clip-path: url(#horizon);
 				}
 				.azimuth {
-					fill: none;
-					stroke: #859e6d;
+					stroke: {{ stroke_color }};
 					stroke-width: 0.5;
+					fill: none;
 					clip-path: url(#horizon);
 				}
 				.almucantar {
-					fill: none;
-					stroke: #859e6d;
+					stroke: {{ stroke_color }};
 					stroke-width: 0.5;
+					fill: none;
 					clip-path: url(#capricorn);
 				}
 			</style>
+
 			<clipPath id="capricorn">
 				<path id="capricornPath" d="
 						M0 {{ RCapricorn }}
 						A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ -RCapricorn }}
 						A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ RCapricorn }}z"/>
 			</clipPath>
+
 			<clipPath id="horizon">
 				<path id="horizonPath" d="
 						M{{ horiz.cx }} {{ horiz.cy + horiz.r }} 
@@ -98,12 +102,15 @@ plate_template = '''
 					"/>
 			</clipPath>
 		</defs>
+
 		<g id="arcs" transform="translate(100, 100), scale(1, -1)">
 			<title>Astrolabe Plate Grid</title>
+
 			<g id="horizon">
 				<title>Horizon</title>
 				<use xlink:href="#horizonPath" />
 			</g>
+
 			<g id="azimuths">
 				<title>Azimuths</title>
 				<desc>Circles of constant azimuth.</desc>
@@ -113,8 +120,10 @@ plate_template = '''
 							cy="{{ coord.cy }}" 
 					        r="{{ coord.r }}"/>
 				{%- endfor %}
-				<line class="azimuth" x1="0" y1="{{ -RCapricorn }}" x2="0" y2="{{ RCapricorn }}"/>
+				<line class="azimuth" x1="0" y1="{{ -RCapricorn }}" 
+									  x2="0" y2="{{ RCapricorn }}"/>
 			</g>
+
 			<g id="almucantars">
 				<title>Almucantars</title>
 				<desc>Circles of constant altitude.</desc>
@@ -126,7 +135,9 @@ plate_template = '''
 				{%- endfor %}
 			</g>
 			<g id="capricorn">
-				<circle class="capricorn" cx="0" cy="0" r="{{ RCapricorn }}"/>
+				<circle class="capricorn" 
+						cx="0" cy="0" 
+						r="{{ RCapricorn }}"/>
 			</g>
 		</g>	
 	</symbol>
@@ -154,10 +165,10 @@ plate_template = '''
 				#polygon35,
 				#polygon37,
 				#polygon39 {
-					stroke: #859e6d !important;
+					stroke: {{ stroke_color }} !important;
 					stroke-width: 0.5 !important;
 					vector-effect: non-scaling-stroke;
-					fill: #eafee7 !important;
+					fill: {{ fill_color }} !important;
 				}
 				#line43,
 				#line45,
@@ -166,12 +177,14 @@ plate_template = '''
 				}
 			</style>
 		</defs>
+
 		<g id="map" transform="scale(0.05)">
     		{{ include_file('USA_Hawaii_location_map.svg') }}
     	</g>
 	</symbol>
 	
 	<g id="plate" transform="translate(100, 100)">
+
 	    <g id="meridian">
 			<title>Meridian</title>
 			<line class="axis" x1="0" y1="{{ RCapricorn }}" x2="0" y2="{{ -RCapricorn }}" />
@@ -213,28 +226,23 @@ plate_template = '''
 	    </g>
 	</g>
 </svg>
-'''
+"""
 
 
 def almucantar_arc(altitude=None, latitude=None):
-        radiansAltitude = math.radians(altitude)
-        radiansLatitude = math.radians(latitude)
+    radiansAltitude = math.radians(altitude)
+    radiansLatitude = math.radians(latitude)
 
-        almucantorCenter = RadiusEquator * (
-            math.cos(radiansLatitude)
-            / (math.sin(radiansLatitude) + math.sin(radiansAltitude))
-        )
+    almucantorCenter = RadiusEquator * (
+        math.cos(radiansLatitude)
+        / (math.sin(radiansLatitude) + math.sin(radiansAltitude))
+    )
 
-        almucantarRadius = RadiusEquator * (
-            math.cos(radiansAltitude)
-            / (math.sin(radiansLatitude) + math.sin(radiansAltitude))
-        )
-        return {
-        	"alt": altitude, 
-      		"cx": 0, 
-           	"cy": almucantorCenter, 
-           	"r": almucantarRadius
-     	}
+    almucantarRadius = RadiusEquator * (
+        math.cos(radiansAltitude)
+        / (math.sin(radiansLatitude) + math.sin(radiansAltitude))
+    )
+    return {"alt": altitude, "cx": 0, "cy": almucantorCenter, "r": almucantarRadius}
 
 
 def azimuth_arc(azimuth=None, latitude=None):
@@ -266,70 +274,72 @@ def azimuth_arc(azimuth=None, latitude=None):
 
 
 def horizon(latitude=None):
-        radiansLatitude = math.radians(latitude)
-        rHorizon = RadiusEquator / math.sin(radiansLatitude)
-        yHorizon = RadiusEquator / math.tan(radiansLatitude)
-        xHorizon = 0.0
-        return {"cx": xHorizon, "cy": yHorizon, "r": rHorizon}
+    radiansLatitude = math.radians(latitude)
+    rHorizon = RadiusEquator / math.sin(radiansLatitude)
+    yHorizon = RadiusEquator / math.tan(radiansLatitude)
+    xHorizon = 0.0
+    return {"cx": xHorizon, "cy": yHorizon, "r": rHorizon}
 
 
 def main():
-	place, latitude = ("Hawaiian Islands", 21.3069)
+    place, latitude = ("Hawaiian Islands", 21.3069)
 
-	azimuth_coords = []
-	for azimuth in list(range(0, 90, 10)):
-		coords = azimuth_arc(azimuth=azimuth, latitude=latitude)
-		azimuth_coords.extend(coords)
+    azimuth_coords = []
+    for azimuth in list(range(0, 90, 10)):
+        coords = azimuth_arc(azimuth=azimuth, latitude=latitude)
+        azimuth_coords.extend(coords)
 
-	almucantar_coords = []
-	for altitude in list(range(10, 90, 10)):
-		coords = almucantar_arc(altitude=altitude, latitude=latitude)
-		almucantar_coords.append(coords)
+    almucantar_coords = []
+    for altitude in list(range(10, 90, 10)):
+        coords = almucantar_arc(altitude=altitude, latitude=latitude)
+        almucantar_coords.append(coords)
 
-	horiz = horizon(latitude)
+    horiz = horizon(latitude)
 
-	with open('plate_template.svg', 'w') as fp:
-		fp.write(plate_template)
+    with open("plate_template.svg", "w") as fp:
+        fp.write(plate_template)
 
-	# template = jinja2.Template(plate_template)
-	# svg = template.render(
-	# 	RCapricorn=RadiusCapricorn,
-	# 	REquator=RadiusEquator,
-	# 	RCancer=RadiusCancer,
-	# 	place_name=place,
-	# 	latitude=latitude,
-	# 	horiz=horiz,
-	# 	azimuth_coords=azimuth_coords,
-	# 	almucantar_coords=almucantar_coords
-	# )
+    # template = jinja2.Template(plate_template)
+    # svg = template.render(
+    # 	RCapricorn=RadiusCapricorn,
+    # 	REquator=RadiusEquator,
+    # 	RCancer=RadiusCancer,
+    # 	place_name=place,
+    # 	latitude=latitude,
+    # 	horiz=horiz,
+    # 	azimuth_coords=azimuth_coords,
+    # 	almucantar_coords=almucantar_coords
+    # )
 
-	import jinja2
+    import jinja2
 
-	# Seems like overkill, but adds "include_file" function to jinja2
-	# environment in order to include raw svg into an html template.
-	@jinja2.contextfunction                                                                                                                                                                                         
-	def include_file(ctx, name):                                                                                                                                                                                   
-	    env = ctx.environment                                                                                                                                                                                      
-	    return jinja2.Markup(env.loader.get_source(env, name)[0])
+    # Seems like overkill, but adds "include_file" function to jinja2
+    # environment in order to include raw svg into an html template.
+    @jinja2.contextfunction
+    def include_file(ctx, name):
+        env = ctx.environment
+        return jinja2.Markup(env.loader.get_source(env, name)[0])
 
+    loader = jinja2.PackageLoader(__name__, ".")
+    env = jinja2.Environment(loader=loader)
+    env.globals["include_file"] = include_file
 
-	loader = jinja2.PackageLoader(__name__, '.')                                                                                                                                                       
-	env = jinja2.Environment(loader=loader)                                                                                                                                                                    
-	env.globals['include_file'] = include_file                                                                                                                                                                 
+    svg = env.get_template("plate_template.svg").render(
+        stroke_color="#859e6d",
+        fill_color="#eafee7",
+        RCapricorn=RadiusCapricorn,
+        REquator=RadiusEquator,
+        RCancer=RadiusCancer,
+        place_name=place,
+        latitude=latitude,
+        horiz=horiz,
+        azimuth_coords=azimuth_coords,
+        almucantar_coords=almucantar_coords,
+    )
 
-	svg = env.get_template('plate_template.svg').render(
-		RCapricorn=RadiusCapricorn,
-		REquator=RadiusEquator,
-		RCancer=RadiusCancer,
-		place_name=place,
-		latitude=latitude,
-		horiz=horiz,
-		azimuth_coords=azimuth_coords,
-		almucantar_coords=almucantar_coords
-	) 
+    with open("plate.svg", "w") as fp:
+        fp.write(svg)
 
-	with open('plate.svg', 'w') as fp:
-		fp.write(svg)
 
 if __name__ == "__main__":
     main()

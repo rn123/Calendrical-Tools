@@ -7,9 +7,9 @@
 		<style type="text/css">
 			#plate {
 				display: block;
-				fill: none;
 				stroke: #859e6d;
 				stroke-width: 0.5;
+				fill: none;
 			}
 			.description {
 				stroke: none;
@@ -17,22 +17,24 @@
 				font-size: 6px;
 			}
 			.tropics {
-				fill: none;
 				stroke: lightGrey;
 				stroke-width: 0.5;
+				fill: none;
 			}
 			.axis {
-				fill: none;
 				stroke: lightGrey;
-				stroke-width: 0.5;				
+				stroke-width: 0.5;	
+				fill: none;			
 			}
 		</style>
+
 		<clipPath id="capricorn">
 			<path id="capricornPath" d="
 					M0 100
 					A100 100 0 0 1 0 -100
 					A100 100 0 0 1 0 100z"/>
 		</clipPath>
+
 		<clipPath id="horizon">
 			<path id="horizonPath" d="
 					M0.0 348.90297782559264 
@@ -46,9 +48,9 @@
 		<defs>
 			<style type="text/css">
 				#arcs {
-					fill: none;
 					stroke: #859e6d;
 					stroke-width: 0.5;
+					fill: none;
 					clip-path: url(#capricorn);
 				}
 				#horizon {
@@ -63,24 +65,26 @@
 					clip-path: url(#horizon);
 				}
 				.azimuth {
-					fill: none;
 					stroke: #859e6d;
 					stroke-width: 0.5;
+					fill: none;
 					clip-path: url(#horizon);
 				}
 				.almucantar {
-					fill: none;
 					stroke: #859e6d;
 					stroke-width: 0.5;
+					fill: none;
 					clip-path: url(#capricorn);
 				}
 			</style>
+
 			<clipPath id="capricorn">
 				<path id="capricornPath" d="
 						M0 100
 						A100 100 0 0 1 0 -100
 						A100 100 0 0 1 0 100z"/>
 			</clipPath>
+
 			<clipPath id="horizon">
 				<path id="horizonPath" d="
 						M0.0 348.90297782559264 
@@ -89,12 +93,15 @@
 					"/>
 			</clipPath>
 		</defs>
+
 		<g id="arcs" transform="translate(100, 100), scale(1, -1)">
 			<title>Astrolabe Plate Grid</title>
+
 			<g id="horizon">
 				<title>Horizon</title>
 				<use xlink:href="#horizonPath" />
 			</g>
+
 			<g id="azimuths">
 				<title>Azimuths</title>
 				<desc>Circles of constant azimuth.</desc>
@@ -171,8 +178,10 @@
 							cx="-399.5283838191422" 
 							cy="-25.59809373958466" 
 					        r="405.69175313365906"/>
-				<line class="azimuth" x1="0" y1="-100" x2="0" y2="100"/>
+				<line class="azimuth" x1="0" y1="-100" 
+									  x2="0" y2="100"/>
 			</g>
+
 			<g id="almucantars">
 				<title>Almucantars</title>
 				<desc>Circles of constant altitude.</desc>
@@ -211,7 +220,9 @@
 					        r="8.453629525147674"/>
 			</g>
 			<g id="capricorn">
-				<circle class="capricorn" cx="0" cy="0" r="100"/>
+				<circle class="capricorn" 
+						cx="0" cy="0" 
+						r="100"/>
 			</g>
 		</g>	
 	</symbol>
@@ -251,6 +262,7 @@
 				}
 			</style>
 		</defs>
+
 		<g id="map" transform="scale(0.05)">
     		<svg
    xmlns:svg="http://www.w3.org/2000/svg"
@@ -393,6 +405,7 @@
 	</symbol>
 	
 	<g id="plate" transform="translate(100, 100)">
+
 	    <g id="meridian">
 			<title>Meridian</title>
 			<line class="axis" x1="0" y1="100" x2="0" y2="-100" />
