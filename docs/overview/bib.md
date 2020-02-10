@@ -17,5 +17,5 @@ author: Ray
 - Sidoli, Nathan, and J L Berggren. “The Arabic Version of Ptolemy’s Planisphere or Flattening the Surface of the Sphere: Text, Translation, Commentary,” n.d., 103.
 - Ptolemy, and G. J. Toomer. Ptolemy’s Almagest. Springer-Verlag, 1984.
 - Meeus, Jean. Astronomical Algorithms. Willmann-Bell, 1998.
-- “[Skyfield](https://rhodesmill.org/skyfield/).” Accessed February 10, 2020. https://rhodesmill.org/skyfield/.
+- Rhodes, Brandon. “[Skyfield](https://rhodesmill.org/skyfield/): High Precision Research-Grade Positions for Planets and Earth Satellites Generator.” Astrophysics Source Code Library, July 1, 2019, ascl:1907.024.
 - Kaler, James B. The Ever-Changing Sky: A Guide to the Celestial Sphere. Cambridge University Press, 2002.
