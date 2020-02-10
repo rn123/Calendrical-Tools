@@ -131,94 +131,94 @@ In ```svg``` a circle is drawn with a center ```(cx, cy)``` and radius ```r```. 
 {% highlight xml %}
 {% raw %}
 <svg id="plateGrid" viewbox="0 0 200 200"
-	 xmlns="http://www.w3.org/2000/svg"
-	 xmlns:xlink="http://www.w3.org/1999/xlink">
-	<defs>
-		<style type="text/css">
-			#arcs {
-				stroke: {{ stroke_color }};
-				stroke-width: 0.5;
-				fill: none;
-				clip-path: url(#capricorn);
-			}
-			#horizon {
-				stroke: {{ stroke_color }};
-				stroke-width: 0.5;
-				fill: {{ fill_color }};
-			}
-			.capricorn {
-				stroke: {{ stroke_color }};
-				stroke-width: 0.5;
-				fill: none;
-				clip-path: url(#horizon);
-			}
-			.azimuth {
-				stroke: {{ stroke_color }};
-				stroke-width: 0.5;
-				fill: none;
-				clip-path: url(#horizon);
-			}
-			.almucantar {
-				stroke: {{ stroke_color }};
-				stroke-width: 0.5;
-				fill: none;
-				clip-path: url(#capricorn);
-			}
-		</style>
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  <defs>
+    <style type="text/css">
+      #arcs {
+        stroke: {{ stroke_color }};
+        stroke-width: 0.5;
+        fill: none;
+        clip-path: url(#capricorn);
+      }
+      #horizon {
+        stroke: {{ stroke_color }};
+        stroke-width: 0.5;
+        fill: {{ fill_color }};
+      }
+      .capricorn {
+        stroke: {{ stroke_color }};
+        stroke-width: 0.5;
+        fill: none;
+        clip-path: url(#horizon);
+      }
+      .azimuth {
+        stroke: {{ stroke_color }};
+        stroke-width: 0.5;
+        fill: none;
+        clip-path: url(#horizon);
+      }
+      .almucantar {
+        stroke: {{ stroke_color }};
+        stroke-width: 0.5;
+        fill: none;
+        clip-path: url(#capricorn);
+      }
+    </style>
 
-		<clipPath id="capricorn">
-			<path id="capricornPath" d="
-					M0 {{ RCapricorn }}
-					A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ -RCapricorn }}
-					A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ RCapricorn }}z"/>
-		</clipPath>
+    <clipPath id="capricorn">
+      <path id="capricornPath" d="
+        M0 {{ RCapricorn }}
+        A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ -RCapricorn }}
+        A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ RCapricorn }}z"/>
+    </clipPath>
 
-		<clipPath id="horizon">
-			<path id="horizonPath" d="
-					M{{ horiz.cx }} {{ horiz.cy + horiz.r }} 
-					A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy - horiz.r }}
-					A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy + horiz.r }}z
-				"/>
-		</clipPath>
-	</defs>
+    <clipPath id="horizon">
+      <path id="horizonPath" d="
+        M{{ horiz.cx }} {{ horiz.cy + horiz.r }} 
+        A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy - horiz.r }}
+        A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy + horiz.r }}z"/>
+    </clipPath>
+  </defs>
 
-	<g id="arcs" transform="translate(100, 100), scale(1, -1)">
-		<title>Astrolabe Plate Grid</title>
-
-		<g id="horizon">
-			<title>Horizon</title>
-			<use xlink:href="#horizonPath" />
-		</g>
-
-		<g id="azimuths">
-			<title>Azimuths</title>
-			<desc>Circles of constant azimuth.</desc>
-			{% for coord in azimuth_coords %}
-				<circle class="azimuth"
-						cx="{{ coord.cx }}" 
-						cy="{{ coord.cy }}" 
-				        r="{{ coord.r }}"/>
-			{%- endfor %}
-			<line class="azimuth" x1="0" y1="{{ -RCapricorn }}" 
-								  x2="0" y2="{{ RCapricorn }}"/>
-		</g>
-
-		<g id="almucantars">
-			<title>Almucantars</title>
-			<desc>Circles of constant altitude.</desc>
-			{% for coord in almucantar_coords %}
-				<circle class="almucantar"  
-						cx="{{ coord.cx }}" 
-						cy="{{ coord.cy }}" 
-				        r="{{ coord.r }}"/>
-			{%- endfor %}
-		</g>
-		<g id="capricorn">
-			<circle class="capricorn" 
-					cx="0" cy="0" 
-					r="{{ RCapricorn }}"/>
-		</g>
-	</g>	
+  <g id="arcs" transform="translate(100, 100), scale(1, -1)">
+    <title>Astrolabe Plate Grid</title>
+    
+    <g id="horizon">
+      <title>Horizon</title>
+      <use xlink:href="#horizonPath" />
+    </g>
+    
+    <g id="azimuths">
+      <title>Azimuths</title>
+      <desc>Circles of constant azimuth.</desc>
+        {% for coord in azimuth_coords %}
+          <circle class="azimuth"
+                  cx="{{ coord.cx }}" 
+                  cy="{{ coord.cy }}" 
+                  r="{{ coord.r }}"/>
+        {%- endfor %}
+        <line class="azimuth"
+              x1="0" y1="{{ -RCapricorn }}"
+              x2="0" y2="{{ RCapricorn }}"/>
+    </g>
+    
+    <g id="almucantars">
+      <title>Almucantars</title>
+      <desc>Circles of constant altitude.</desc>
+      {% for coord in almucantar_coords %}
+        <circle class="almucantar"  
+                cx="{{ coord.cx }}" 
+                cy="{{ coord.cy }}" 
+                r="{{ coord.r }}"/>
+      {%- endfor %}
+    </g>
+    <g id="capricorn">
+      <circle class="capricorn" 
+              cx="0" cy="0" 
+              r="{{ RCapricorn }}"/>
+    </g>
+  </g>	
 </svg>
 {% endraw %}
 {% endhighlight %}
