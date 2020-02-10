@@ -226,6 +226,8 @@ In ```svg``` a circle is drawn with a center ```(cx, cy)``` and radius ```r```. 
 A main routine to compute the arcs and fill in the template.
 
 {% highlight python %}
+import jinja2
+
 def main():
     place, latitude = ("Hawaiian Islands", 21.3069)
 
