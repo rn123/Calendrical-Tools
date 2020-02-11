@@ -260,7 +260,7 @@ def main():
         almucantar_coords=almucantar_coords,
     )
 
-    with open("p.svg", "w") as fp:
+    with open("plate.svg", "w") as fp:
         fp.write(svg)
 
 
