@@ -1,232 +1,13 @@
 import math
 import jinja2
 
+from calendrical_tools.generate_astrolabe import *
+
 obliquity = 23.4443291
 RadiusCapricorn = 100
 obliquityRadiansArgument = math.radians((90 - obliquity) / 2)
 RadiusEquator = RadiusCapricorn * math.tan(obliquityRadiansArgument)
 RadiusCancer = RadiusEquator * math.tan(obliquityRadiansArgument)
-
-plate_template = """
-<svg viewbox="0 0 210 210" 
-     xmlns="http://www.w3.org/2000/svg"
-     xmlns:xlink="http://www.w3.org/1999/xlink">
-
-	<defs>
-		<style type="text/css">
-			#plate {
-				display: block;
-				stroke: {{ stroke_color }};
-				stroke-width: 0.5;
-				fill: none;
-			}
-			.description {
-				stroke: none;
-				fill: {{ stroke_color }};
-				font-size: 6px;
-			}
-			.tropics {
-				stroke: lightGrey;
-				stroke-width: 0.5;
-				fill: none;
-			}
-			.axis {
-				stroke: lightGrey;
-				stroke-width: 0.5;	
-				fill: none;			
-			}
-		</style>
-
-		<clipPath id="capricorn">
-			<path id="capricornPath" d="
-					M0 {{ RCapricorn }}
-					A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ -RCapricorn }}
-					A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ RCapricorn }}z"/>
-		</clipPath>
-
-		<clipPath id="horizon">
-			<path id="horizonPath" d="
-					M{{ horiz.cx }} {{ horiz.cy + horiz.r }} 
-					A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy - horiz.r }}
-					A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy + horiz.r }}z
-				"/>
-		</clipPath>
-	</defs>
-
-	<symbol id="plateGrid" viewbox="0 0 200 200">
-		<defs>
-			<style type="text/css">
-				#arcs {
-					stroke: {{ stroke_color }};
-					stroke-width: 0.5;
-					fill: none;
-					clip-path: url(#capricorn);
-				}
-				#horizon {
-					stroke: {{ stroke_color }};
-					stroke-width: 0.5;
-					fill: {{ fill_color }};
-				}
-				.capricorn {
-					stroke: {{ stroke_color }};
-					stroke-width: 0.5;
-					fill: none;
-					clip-path: url(#horizon);
-				}
-				.azimuth {
-					stroke: {{ stroke_color }};
-					stroke-width: 0.5;
-					fill: none;
-					clip-path: url(#horizon);
-				}
-				.almucantar {
-					stroke: {{ stroke_color }};
-					stroke-width: 0.5;
-					fill: none;
-					clip-path: url(#capricorn);
-				}
-			</style>
-
-			<clipPath id="capricorn">
-				<path id="capricornPath" d="
-						M0 {{ RCapricorn }}
-						A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ -RCapricorn }}
-						A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ RCapricorn }}z"/>
-			</clipPath>
-
-			<clipPath id="horizon">
-				<path id="horizonPath" d="
-						M{{ horiz.cx }} {{ horiz.cy + horiz.r }} 
-						A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy - horiz.r }}
-						A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy + horiz.r }}z
-					"/>
-			</clipPath>
-		</defs>
-
-		<g id="arcs" transform="translate(100, 100), scale(1, -1)">
-			<title>Astrolabe Plate Grid</title>
-
-			<g id="horizon">
-				<title>Horizon</title>
-				<use xlink:href="#horizonPath" />
-			</g>
-
-			<g id="azimuths">
-				<title>Azimuths</title>
-				<desc>Circles of constant azimuth.</desc>
-				{% for coord in azimuth_coords %}
-					<circle class="azimuth"
-							cx="{{ coord.cx }}" 
-							cy="{{ coord.cy }}" 
-					        r="{{ coord.r }}"/>
-				{%- endfor %}
-				<line class="azimuth" x1="0" y1="{{ -RCapricorn }}" 
-									  x2="0" y2="{{ RCapricorn }}"/>
-			</g>
-
-			<g id="almucantars">
-				<title>Almucantars</title>
-				<desc>Circles of constant altitude.</desc>
-				{% for coord in almucantar_coords %}
-					<circle class="almucantar"  
-							cx="{{ coord.cx }}" 
-							cy="{{ coord.cy }}" 
-					        r="{{ coord.r }}"/>
-				{%- endfor %}
-			</g>
-			<g id="capricorn">
-				<circle class="capricorn" 
-						cx="0" cy="0" 
-						r="{{ RCapricorn }}"/>
-			</g>
-		</g>	
-	</symbol>
-
-	<symbol id="hawaii" viewbox="{0 0 2000 2000}">
-		<defs>
-			<style type="text/css">
-				#rect7 {
-					fill: none !important;
-					stroke: none !important;
-				}
-				#polygon9,
-				#polygon11,
-				#polygon13,
-				#polygon15,
-				#polygon17,
-				#polygon19,
-				#polygon21,
-				#polygon23,
-				#polygon25,
-				#polygon27,
-				#polygon29,
-				#polygon31,
-				#polygon33,
-				#polygon35,
-				#polygon37,
-				#polygon39 {
-					stroke: {{ stroke_color }} !important;
-					stroke-width: 0.5 !important;
-					vector-effect: non-scaling-stroke;
-					fill: {{ fill_color }} !important;
-				}
-				#line43,
-				#line45,
-				#line47 {
-					display: none;
-				}
-			</style>
-		</defs>
-
-		<g id="map" transform="scale(0.05)">
-    		{{ include_file('USA_Hawaii_location_map.svg') }}
-    	</g>
-	</symbol>
-	
-	<g id="plate" transform="translate(100, 100)">
-
-	    <g id="meridian">
-			<title>Meridian</title>
-			<line class="axis" x1="0" y1="{{ RCapricorn }}" x2="0" y2="{{ -RCapricorn }}" />
-		</g>
-
-		<g id="grid">
-			<use x="-100" y="-100" xlink:href="#plateGrid"/>
-		</g>
-
-		<g id="tropics">
-			<title>Tropic Circles</title>
-			<g>
-				<title>Tropic of Capricorn</title>
-				<circle class="tropics" cx="0" cy="0" r="{{ RCapricorn }}"/>
-			</g>
-			<g>
-				<title>Equator</title>
-				<circle class="tropics" cx="0" cy="0" r="{{ REquator }}" />
-			</g>
-			<g>
-				<title>Tropic of Cancer</title>
-				<circle class="tropics" cx="0" cy="0" r="{{ RCancer }}" />
-			</g>
-		</g>
-
-		<g id="rightHorizon">
-			<title>Right Horizon</title>
-			<line class="axis" x1="{{ -RCapricorn }}" y1="0" x2="{{ RCapricorn }}" y2="0" />
-		</g>
-
-		<g id="description">
-			<title>Hawaiian Islands</title>
-			<desc>Latitude and inset map of the Hawaiian Islands.</desc>
-			<use x="-30" y="35" xlink:href="#hawaii"/>
-			<text class="description" x="0" y="{{ -15 + RCapricorn - 19 }}" text-anchor="middle">
-				{{ place_name }}
-	    		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
-	    	</text>
-	    </g>
-	</g>
-</svg>
-"""
 
 
 def almucantar_arc(altitude=None, latitude=None):
@@ -283,6 +64,9 @@ def horizon(latitude=None):
 
 def main():
     place, latitude = ("Hawaiian Islands", 21.3069)
+    plate_parameters = {"Hawaiian Islands": 21.3069}
+    astrolabe = Astrolabe(plate_parameters=plate_parameters)
+    plate = astrolabe.plates["Hawaiian Islands"]
 
     azimuth_coords = []
     for azimuth in list(range(0, 90, 10)):
@@ -296,9 +80,6 @@ def main():
 
     horiz = horizon(latitude)
 
-    with open("plate_template.svg", "w") as fp:
-        fp.write(plate_template)
-
     # template = jinja2.Template(plate_template)
     # svg = template.render(
     # 	RCapricorn=RadiusCapricorn,
@@ -310,6 +91,106 @@ def main():
     # 	azimuth_coords=azimuth_coords,
     # 	almucantar_coords=almucantar_coords
     # )
+
+    ecliptic = {
+        "cx": astrolabe.xEclipticCenter,
+        "cy": astrolabe.yEclipticCenter,
+        "r": astrolabe.RadiusEcliptic,
+        "width": 5,
+    }
+
+    outer_radius = ecliptic["r"]
+    inner_radius = outer_radius - ecliptic["width"]
+
+    top_middle_outer = {"x": (ecliptic["cx"]), "y": (ecliptic["cy"] + outer_radius)}
+    bottom_middle_outer = {"x": (ecliptic["cx"]), "y": (ecliptic["cy"] - outer_radius)}
+
+    top_middle_inner = {"x": (ecliptic["cx"]), "y": (ecliptic["cy"] + inner_radius)}
+    bottom_middle_inner = {"x": (ecliptic["cx"]), "y": (ecliptic["cy"] - inner_radius)}
+
+    aries_first_point = astrolabe.ecliptic_division(180)
+    aries_first_point_angle = math.degrees(
+        math.atan2(aries_first_point["y2"], aries_first_point["x2"])
+    )
+
+    ecliptic_divisions = []
+    for angle in list(range(0, 361, 30)):
+        ecliptic_divisions.append(astrolabe.ecliptic_division(angle))
+
+    ecliptic_divisions_fine = []
+    for angle in list(range(0, 361, 10)):
+        ecliptic_divisions_fine.append(astrolabe.ecliptic_division(angle))
+
+    ecliptic_divisions_efine = []
+    for angle in list(range(0, 361, 2)):
+        ecliptic_divisions_efine.append(astrolabe.ecliptic_division(angle))
+
+    seasonal_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
+    seasonal_names = [
+        "pisces",
+        "aquarius",
+        "capricorn",
+        "sagittarius",
+        "scorpio",
+        "libra",
+        "virgo",
+        "leo",
+        "cancer",
+        "gemini",
+        "taurus",
+        "aries",
+    ]
+
+    angle = 0
+    seasonal_arcs = []
+    for n, division in enumerate(ecliptic_divisions[0:12]):
+        tag = "season" + str(angle)
+        angle += 30
+        next_division = ecliptic_divisions[(n + 1) % 12]
+        sarc = Path(
+            Arc(
+                start=complex(division["x2"], division["y2"]),
+                radius=complex(ecliptic["r"], ecliptic["r"]),
+                rotation=0.0,
+                large_arc=True,
+                sweep=False,
+                end=complex(next_division["x2"], next_division["y2"]),
+            )
+        )
+        seasonal_arcs.append(
+            {
+                "tag": tag,
+                "name": seasonal_names[n],
+                "r": ecliptic["r"],
+                "start_x": division["x2"],
+                "start_y": division["y2"],
+                "end_x": next_division["x2"],
+                "end_y": next_division["y2"],
+                "reversed": sarc.reversed().d(),
+            }
+        )
+
+    stars = [
+        {"name":"aldebaran",  "r": 0.7467, "theta": 68.98},
+        {"name":"altair",     "r": 0.8561, "theta": 297.69542},
+        {"name":"arcturus",   "r": 0.7109, "theta": 213.91500},
+        {"name":"capella",    "r": 0.4040, "theta": 79.17208},
+        {"name":"sirius",     "r": 1.3099, "theta": 101.28708},
+        {"name":"procyon",    "r": 0.9127, "theta":114.82542},
+        {"name":"deneb",      "r": 0.4114, "theta": 310.35750},
+        {"name":"castor",     "r": 0.5556, "theta": 113.64958},
+        {"name":"regulus",    "r": 0.8103, "theta": 152.09250},
+        {"name":"vega",       "r": 0.4793, "theta": 279.23417},
+        {"name":"betelgeuse", "r": 0.8784, "theta": 88.79292},
+        {"name":"rigel",      "r": 1.1463, "theta": 78.63417},
+        {"name":"bellatrix",  "r": 0.8949, "theta": 81.28250},
+        {"name":"antares",    "r": 1.5870, "theta": 247.35167},
+        {"name":"spica",      "r": 1.2096, "theta": 201.29792}
+    ]
+
+    for star in stars:
+        star["cx"] = astrolabe.RadiusEquator * star["r"] * math.cos(math.radians(star["theta"]))
+        star["cy"] = astrolabe.RadiusEquator * star["r"] * math.sin(math.radians(star["theta"]))
 
     import jinja2
 
@@ -324,9 +205,12 @@ def main():
     env = jinja2.Environment(loader=loader)
     env.globals["include_file"] = include_file
 
+    print(seasonal_arcs)
+
     svg = env.get_template("plate_template.svg").render(
         stroke_color="#859e6d",
         fill_color="#eafee7",
+        ecliptic_stroke_color="#f5ac27;",
         RCapricorn=RadiusCapricorn,
         REquator=RadiusEquator,
         RCancer=RadiusCancer,
@@ -335,6 +219,22 @@ def main():
         horiz=horiz,
         azimuth_coords=azimuth_coords,
         almucantar_coords=almucantar_coords,
+        ecliptic=ecliptic,
+        ecliptic_divisions=ecliptic_divisions,
+        ecliptic_divisions_fine=ecliptic_divisions_fine,
+        ecliptic_divisions_efine=ecliptic_divisions_efine,
+        aries_first_point=aries_first_point,
+        aries_first_point_angle=astrolabe.obliquity,
+        top_middle_outer=top_middle_outer,
+        bottom_middle_outer=bottom_middle_outer,
+        outer_radius=outer_radius,
+        inner_radius=inner_radius,
+        top_middle_inner=top_middle_inner,
+        bottom_middle_inner=bottom_middle_inner,
+        # ecliptic_center=ecliptic_center,
+        ecliptic_pole=astrolabe.ecliptic_pole,
+        seasonal_arcs=seasonal_arcs,
+        stars=stars,
     )
 
     with open("plate.svg", "w") as fp:
