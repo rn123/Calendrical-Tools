@@ -14,7 +14,7 @@ author: Ray
 - Evans, James. The History & Practice of Ancient Astronomy. Oxford University Press US, 1998.
 - Rhodes, Geminus of, James Evans, and J. Lennart Berggren. Geminos’s “Introduction to the Phenomena”: A Translation and Study of a Hellenistic Survey of Astronomy. Princeton University Press, 2006.
 - Ptolemy, Claudius. The Almagest: Introduction to the Mathematics of the Heavens. Green Lion Press, 2014.
-- Sidoli, Nathan, and J L Berggren. “The Arabic Version of Ptolemy’s Planisphere or Flattening the Surface of the Sphere: Text, Translation, Commentary,” n.d., 103.
+- [Sidoli, Nathan](http://individual.utoronto.ca/acephalous/Sidoli_Berggren_2007.pdf), and J L Berggren. “The Arabic Version of Ptolemy’s Planisphere or Flattening the Surface of the Sphere: Text, Translation, Commentary,” n.d., 103.
 - Ptolemy, and G. J. Toomer. Ptolemy’s Almagest. Springer-Verlag, 1984.
 - Meeus, Jean. Astronomical Algorithms. Willmann-Bell, 1998.
 - Rhodes, Brandon. “[Skyfield](https://rhodesmill.org/skyfield/): High Precision Research-Grade Positions for Planets and Earth Satellites Generator.” Astrophysics Source Code Library, July 1, 2019, ascl:1907.024.
