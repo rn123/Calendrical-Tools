@@ -1,16 +1,17 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
-	<title> minimal test </title>
+	<!-- <title> minimal test </title> -->
+	<script src="/assets/js/rotodrag.js"></script>
 </head>
-<body> -->
-<svg id="diagram" 
+<body>
+<svg id="diagram" class="draggables"
 	 viewbox="0 0 200 200" width="200" height="200"
      xmlns="http://www.w3.org/2000/svg"
-     xmlns:xlink="http://www.w3.org/1999/xlink"
-     onload="init(evt)">
+     xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>Astrolabe Plate Grid</title>
+    <g id="astrolabe" transform="translate(100, 100)">
 	<defs>
 		<style type="text/css">
 			#astrolabe {
@@ -50,284 +51,295 @@
 					A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy + horiz.r }}z
 				"/>
 		</clipPath>
-	</defs>
 
-	<symbol id="plateGrid" viewbox="0 0 200 200">
-		<defs>
-			<style type="text/css">
-				#arcs {
-					stroke: {{ stroke_color }};
-					stroke-width: 0.5;
-					fill: none;
-					clip-path: url(#capricorn);
-				}
-				#horizon {
-					stroke: {{ stroke_color }};
-					stroke-width: 0.5;
-					fill: {{ fill_color }};
-				}
-				.capricorn {
-					stroke: {{ stroke_color }};
-					stroke-width: 0.5;
-					fill: none;
-					clip-path: url(#horizon);
-				}
-				.azimuth {
-					stroke: {{ stroke_color }};
-					stroke-width: 0.5;
-					fill: none;
-					clip-path: url(#horizon);
-				}
-				.almucantar {
-					stroke: {{ stroke_color }};
-					stroke-width: 0.5;
-					fill: none;
-					clip-path: url(#capricorn);
-				}
-			</style>
+		<symbol id="plateGrid" viewbox="0 0 200 200">
+			<defs>
+				<style type="text/css">
+					#arcs {
+						stroke: {{ stroke_color }};
+						stroke-width: 0.5;
+						fill: none;
+						clip-path: url(#capricorn);
+					}
+					#horizon {
+						stroke: {{ stroke_color }};
+						stroke-width: 0.5;
+						fill: {{ fill_color }};
+					}
+					.capricorn {
+						stroke: {{ stroke_color }};
+						stroke-width: 0.5;
+						fill: none;
+						clip-path: url(#horizon);
+					}
+					.azimuth {
+						stroke: {{ stroke_color }};
+						stroke-width: 0.5;
+						fill: none;
+						clip-path: url(#horizon);
+					}
+					.almucantar {
+						stroke: {{ stroke_color }};
+						stroke-width: 0.5;
+						fill: none;
+						clip-path: url(#capricorn);
+					}
+				</style>
 
-			<clipPath id="capricorn">
-				<path id="capricornPath" d="
-						M0 {{ RCapricorn }}
-						A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ -RCapricorn }}
-						A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ RCapricorn }}z"/>
-			</clipPath>
+				<clipPath id="capricorn">
+					<path id="capricornPath" d="
+							M0 {{ RCapricorn }}
+							A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ -RCapricorn }}
+							A{{ RCapricorn }} {{ RCapricorn }} 0 0 1 0 {{ RCapricorn }}z"/>
+				</clipPath>
 
-			<clipPath id="horizon">
-				<path id="horizonPath" d="
-						M{{ horiz.cx }} {{ horiz.cy + horiz.r }} 
-						A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy - horiz.r }}
-						A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy + horiz.r }}z
-					"/>
-			</clipPath>
-		</defs>
+				<clipPath id="horizon">
+					<path id="horizonPath" d="
+							M{{ horiz.cx }} {{ horiz.cy + horiz.r }} 
+							A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy - horiz.r }}
+							A{{ horiz.r }} {{ horiz.r }} 0 0 1 {{ horiz.cx }} {{ horiz.cy + horiz.r }}z
+						"/>
+				</clipPath>
+			</defs>
 
-		<g id="arcs" transform="translate(100, 100), scale(1, -1)">
-			<title>Astrolabe Plate Grid</title>
+			<g id="arcs" transform="translate(100, 100), scale(1, -1)">
+				<title>Astrolabe Plate Grid</title>
 
-			<g id="horizon">
-				<title>Horizon</title>
-				<use xlink:href="#horizonPath" />
-			</g>
-
-			<g id="azimuths">
-				<title>Azimuths</title>
-				<desc>Circles of constant azimuth.</desc>
-				{% for coord in azimuth_coords %}
-					<circle class="azimuth"
-							cx="{{ coord.cx }}" 
-							cy="{{ coord.cy }}" 
-					        r="{{ coord.r }}"/>
-				{%- endfor %}
-				<line class="azimuth" x1="0" y1="{{ -RCapricorn }}" 
-									  x2="0" y2="{{ RCapricorn }}"/>
-			</g>
-
-			<g id="almucantars">
-				<title>Almucantars</title>
-				<desc>Circles of constant altitude.</desc>
-				{% for coord in almucantar_coords %}
-					<circle class="almucantar"  
-							cx="{{ coord.cx }}" 
-							cy="{{ coord.cy }}" 
-					        r="{{ coord.r }}"/>
-				{%- endfor %}
-			</g>
-			<g id="capricorn">
-				<circle class="capricorn" 
-						cx="0" cy="0" 
-						r="{{ RCapricorn }}"/>
-			</g>
-		</g>	
-	</symbol>
-
-	<symbol id="star" viewBox="0 0 20 20" style="overflow: visible; fill: #f5ac27;">
-        <title>star</title>
-        <polygon points="48.37 61.63 3.43 55 48.37 48.37 55 3.43 61.63 48.37 106.57 55 61.63 61.63 55 106.57 48.37 61.63"/>
-    </symbol>
-
-	<symbol id="ecliptic" viewbox="0 0 200 200" style="overflow: visible">
-		<title>Ecliptic</title>
-		<defs>
-		  <style type="text/css">
-			#eclipticDiagram {
-			  fill: {{ ecliptic_stroke_color }}
-			  fill-opacity: 1;
-			  stroke: {{ stroke_color }}
-			  stroke-width: 0.7;
-			  stroke-opacity: 0.7;
-			  clip-path: url(#eclipticHole);
-			}
-			.eclipticDivision, #ariesFirstPoint {
-			  stroke: {{ ecliptic_stroke_color }};
-			  stroke-width: 1;
-			  stroke-opacity: 1;
-			}
-			.eclipticDivisionFine {
-			  stroke: {{ ecliptic_stroke_color }};
-			  stroke-width: 0.6;
-			  stroke-opacity: 0.6;
-			}
-			.eclipticDivisionExtraFine {
-			  stroke: {{ ecliptic_stroke_color }};
-			  stroke-width: 0.4;
-			  stroke-opacity: 0.4;
-			}
-			.seasonalArc {
-			  stroke:none; 
-			  fill:black; 
-			  fill-opacity:1; 
-			  font-family: 'IM Fell Great Primer SC', serif; 
-		  	  font-variant: small-caps;
-			  font-size:4pt;
-			}
-		  </style>
-		  <clipPath id="eclipticBoundary">
-			<path id="eclipticArc" fill-rule="evenodd" d="
-				M{{ top_middle_outer.x }} {{ top_middle_outer.y }}
-				A{{ outer_radius }} {{ outer_radius }} 0 1 0 {{ bottom_middle_outer.x }} {{ bottom_middle_outer.y }}
-				A{{ outer_radius }} {{ outer_radius }} 0 1 0 {{ top_middle_outer.x }} {{ top_middle_outer.y }}z"/>
-		  </clipPath>
-
-		  <clipPath id="eclipticHole">
-			<path id="eclipticHolePath" fill-rule="evenodd" d="
-				M{{ top_middle_outer.x }} {{ top_middle_outer.y }}
-				A{{ outer_radius }} {{ outer_radius }} 0 0 1 {{ bottom_middle_outer.x }} {{ bottom_middle_outer.y }}
-				A{{ outer_radius }} {{ outer_radius }} 0 0 1 {{ top_middle_outer.x }} {{ top_middle_outer.y }}z
-				M{{ top_middle_inner.x }} {{ top_middle_inner.y }}
-				A{{ inner_radius }} {{ inner_radius }} 0 1 0 {{ bottom_middle_inner.x }} {{ bottom_middle_inner.y }}
-				A{{ inner_radius }} {{ inner_radius }} 0 1 0 {{top_middle_inner.x }} {{ top_middle_inner.y }}z"/>
-		  </clipPath>		  
-		</defs>
-
-		<g id="rete">
-			<g id="reteBackground"
-			   transform="translate({{ ecliptic.cx }} , {{ ecliptic.cy }})">
-
-				<circle cx="0" cy="0" r="{{ ecliptic.r }}" 
-					    style="fill:{{ ecliptic_stroke_color }}; 
-					           fill-opacity:0.05; 
-					           stroke:{{ ecliptic_stroke_color }};"/>
-				<line id="ariesFirstPoint" x1="{{ aries_first_point.x2 }}" 
-				                           y1="{{ -ecliptic.cy }}" 
-				                           x2="{{ -RCapricorn }}" 
-				                           y2="{{ -ecliptic.cy }}"/>
-
-				<g id="seasonalArcs">
-				{% for arc in seasonal_arcs %}
-					<text class="seasonalArc" text-anchor="end" transform="translate({{ -ecliptic.cx }} , {{ -ecliptic.cy }}), scale(-1, 1)">
-						<textPath xlink:href="#{{ arc.tag }}" letter-spacing="1px" startOffset="90%">
-							<tspan dy="2em" >{{ arc.name }}</tspan>
-						</textPath>
-					</text>
-				{%- endfor %}
+				<g id="horizon">
+					<title>Horizon</title>
+					<use xlink:href="#horizonPath" />
 				</g>
-			</g>
 
-			<g id="eclipticDiagram">
-		    	<title>Ecliptic</title>
-				<!-- <path id="eclipticPath" fill-rule="evenodd" d="
-					M{{ top_middle_outer.x }} {{ top_middle_outer.y }}
-					A{{ outer_radius }} {{ outer_radius }} 0 0 1 {{ bottom_middle_outer.x }} {{ bottom_middle_outer.y }}
-					A{{ outer_radius }} {{ outer_radius }} 0 0 1 {{ top_middle_outer.x }} {{ top_middle_outer.y }}z
-					M{{ top_middle_inner.x }} {{ top_middle_inner.y }}
-					A{{ inner_radius }} {{ inner_radius }} 0 0 1 {{ bottom_middle_inner.x }} {{ bottom_middle_inner.y }}
-					A{{ inner_radius }} {{ inner_radius }} 0 0 1 {{top_middle_inner.x }} {{ top_middle_inner.y }}z"/> -->
+				<g id="azimuths">
+					<title>Azimuths</title>
+					<desc>Circles of constant azimuth.</desc>
+					{% for coord in azimuth_coords %}
+						<circle class="azimuth"
+								cx="{{ coord.cx }}" 
+								cy="{{ coord.cy }}" 
+						        r="{{ coord.r }}"/>
+					{%- endfor %}
+					<line class="azimuth" x1="0" y1="{{ -RCapricorn }}" 
+										  x2="0" y2="{{ RCapricorn }}"/>
+				</g>
 
-			    <g id="eclipticDivisions">
-			        <title>Divide Ecliptic</title>
-			        
-			        {% for division in ecliptic_divisions %}
-			            <line class="eclipticDivision" x1="0" y1="0" x2="{{ division.x2 }}" y2="{{ division.y2 }}"/>
-			        {%- endfor %}
+				<g id="almucantars">
+					<title>Almucantars</title>
+					<desc>Circles of constant altitude.</desc>
+					{% for coord in almucantar_coords %}
+						<circle class="almucantar"  
+								cx="{{ coord.cx }}" 
+								cy="{{ coord.cy }}" 
+						        r="{{ coord.r }}"/>
+					{%- endfor %}
+				</g>
+				<g id="capricorn">
+					<circle class="capricorn" 
+							cx="0" cy="0" 
+							r="{{ RCapricorn }}"/>
+				</g>
+			</g>	
+		</symbol>
 
-			        {% for division in ecliptic_divisions_fine %}
-			            <line class="eclipticDivisionFine" x1="0" y1="0" x2="{{ division.x2 }}" y2="{{ division.y2 }}"/>
-			        {%- endfor %}
+		<symbol id="star" viewBox="0 0 20 20" style="overflow: visible; fill: #f5ac27;">
+		    <title>star</title>
+		    <polygon points="48.37 61.63 3.43 55 48.37 48.37 55 3.43 61.63 48.37 106.57 55 61.63 61.63 55 106.57 48.37 61.63"/>
+		</symbol>
 
-			        {% for division in ecliptic_divisions_efine %}
-			            <line class="eclipticDivisionExtraFine" x1="0" y1="0" x2="{{ division.x2 }}" y2="{{ division.y2 }}"/>
-			        {%- endfor %}
-			    </g>
-			    
-  			</g>
+		<symbol id="ecliptic" viewbox="0 0 200 200"> <!-- style="overflow: visible" --> 
+			<title>Ecliptic</title>
+			<g id="rete" transform="translate(100, 100)">
+				<defs>
+				  <style type="text/css">
+				  	@font-face {
+						font-family: 'IM Fell Great Primer SC', serif;
+						src: https://fonts.googleapis.com/css?family=IM+Fell+Great+Primer+SC;
+						<!-- src: local(IM FELL Double Pica PRO); -->
+					}
+					#eclipticDiagram {
+					  fill: {{ ecliptic_stroke_color }}
+					  fill-opacity: 1;
+					  stroke: {{ stroke_color }}
+					  stroke-width: 0.7;
+					  stroke-opacity: 0.7;
+					  clip-path: url(#eclipticHole);
+					}
+					.eclipticDivision, #ariesFirstPoint {
+					  stroke: {{ ecliptic_stroke_color }};
+					  stroke-width: 1;
+					  stroke-opacity: 1;
+					}
+					.eclipticDivisionFine {
+					  stroke: {{ ecliptic_stroke_color }};
+					  stroke-width: 0.6;
+					  stroke-opacity: 0.6;
+					}
+					.eclipticDivisionExtraFine {
+					  stroke: {{ ecliptic_stroke_color }};
+					  stroke-width: 0.4;
+					  stroke-opacity: 0.4;
+					}
+					.seasonalArc {
+					  stroke:none; 
+					  fill:black; 
+					  fill-opacity:1; 
+					  font-family: 'IM Fell Great Primer SC', serif; 
+				  	  font-variant: small-caps;
+					  font-size:4pt;
+					}
+				  </style>
+				  <clipPath id="eclipticBoundary">
+					<path id="eclipticArc" fill-rule="evenodd" d="
+						M{{ top_middle_outer.x }} {{ top_middle_outer.y }}
+						A{{ outer_radius }} {{ outer_radius }} 0 1 0 {{ bottom_middle_outer.x }} {{ bottom_middle_outer.y }}
+						A{{ outer_radius }} {{ outer_radius }} 0 1 0 {{ top_middle_outer.x }} {{ top_middle_outer.y }}z"/>
+				  </clipPath>
 
-  			<!-- <g>
-  				<line id="eclipticPole" x1="-5" y1="{{ ecliptic_pole }}" x2="5" y2="{{ ecliptic_pole }}" style="stroke: grey;"/>
-				<line id="eclipticPole" x1="0" y1="{{ ecliptic_pole -5 }}" x2="0" y2="{{ ecliptic_pole + 5 }}" style="stroke: grey;"/>
-  			</g> -->
+				  <clipPath id="eclipticHole">
+					<path id="eclipticHolePath" fill-rule="evenodd" d="
+						M{{ top_middle_outer.x }} {{ top_middle_outer.y }}
+						A{{ outer_radius }} {{ outer_radius }} 0 0 1 {{ bottom_middle_outer.x }} {{ bottom_middle_outer.y }}
+						A{{ outer_radius }} {{ outer_radius }} 0 0 1 {{ top_middle_outer.x }} {{ top_middle_outer.y }}z
+						M{{ top_middle_inner.x }} {{ top_middle_inner.y }}
+						A{{ inner_radius }} {{ inner_radius }} 0 1 0 {{ bottom_middle_inner.x }} {{ bottom_middle_inner.y }}
+						A{{ inner_radius }} {{ inner_radius }} 0 1 0 {{top_middle_inner.x }} {{ top_middle_inner.y }}z"/>
+				  </clipPath>
 
-			<!-- <g>
-  				<line id="eclipticCenter" x1="-50" y1="{{ ecliptic.cy }}" x2="50" y2="{{ ecliptic.cy }}" style="stroke: grey; stroke-width:0.5;"/>
-				<line id="eclipticCenter" x1="0" y1="{{ ecliptic.cy - 50 }}" x2="0" y2="{{ ecliptic.cy + 50}}" style="stroke: grey; stroke-width:0.5;"/>
-  			</g> -->
-		        
-		 	<g id="stars" transform="rotate({{ 180 }})">
-		    	<title>Stars</title>
-		    	<g>
-		    		{% for star in stars %}
-		    		<g id="{{ star.name }}">
-		    			<title>{{ star.name }}</title>
-		    			<use x="{{ star.cx }}" 
-		    				 y="{{ star.cy }}" 
-		    				 width="1.5" height="1.5"  
-		    				 xlink:href="#star" 
-		    				 style="fill:{{ stroke_color }};"/>
+				  {% for arc in seasonal_arcs %}
+					<path id="{{ arc.tag }}" d="
+						M{{ arc.start_x }} {{ arc.start_y }}
+						A{{ arc.r }} {{ arc.r }} 0 0 1 {{ arc.end_x }} {{ arc.end_y }}"/>
+				  {%- endfor %}	  
+				</defs>
+
+				<g id="reteBackground"
+				   transform="translate({{ ecliptic.cx }} , {{ ecliptic.cy }})">
+
+					<circle cx="0" cy="0" r="{{ ecliptic.r }}" 
+						    style="fill:{{ ecliptic_stroke_color }}; 
+						           fill-opacity:0.05; 
+						           stroke:{{ ecliptic_stroke_color }};"/>
+					<line id="ariesFirstPoint" x1="{{ aries_first_point.x2 }}" 
+					                           y1="{{ -ecliptic.cy }}" 
+					                           x2="{{ -RCapricorn }}" 
+					                           y2="{{ -ecliptic.cy }}"/>
+
+					<g id="seasonalArcs">
+					{% for arc in seasonal_arcs %}
+						<text class="seasonalArc" text-anchor="end" 
+							transform="translate({{ -ecliptic.cx }} , {{ -ecliptic.cy }})">
+							<textPath xlink:href="#{{ arc.tag }}" letter-spacing="1px" startOffset="90%">
+								<tspan dy="2em" >{{ arc.name }}</tspan>
+							</textPath>
+						</text>
+					{%- endfor %}
 					</g>
-		    		{%- endfor %}
-		    	</g>
-		    </g>
+				</g>
 
-		    <g id="planets" transform="rotate(180)">
-		    	<title>Planets</title>  
-		    	<circle id="moon" cx="-7.364113659953016" cy="42.85753770184805" r="2" style="fill:white; stroke:black;" />
-		    	<!-- <circle id="sun"  cx="-42.2168611201463"  cy="77.60260956071288" r="2" style="fill:yellow;"/> -->
-		    </g>
-		</g>
-	</symbol>
+				<g id="eclipticDiagram">
+			    	<title>Ecliptic</title>
+					<!-- <path id="eclipticPath" fill-rule="evenodd" d="
+						M{{ top_middle_outer.x }} {{ top_middle_outer.y }}
+						A{{ outer_radius }} {{ outer_radius }} 0 0 1 {{ bottom_middle_outer.x }} {{ bottom_middle_outer.y }}
+						A{{ outer_radius }} {{ outer_radius }} 0 0 1 {{ top_middle_outer.x }} {{ top_middle_outer.y }}z
+						M{{ top_middle_inner.x }} {{ top_middle_inner.y }}
+						A{{ inner_radius }} {{ inner_radius }} 0 0 1 {{ bottom_middle_inner.x }} {{ bottom_middle_inner.y }}
+						A{{ inner_radius }} {{ inner_radius }} 0 0 1 {{top_middle_inner.x }} {{ top_middle_inner.y }}z"/> -->
 
-	<symbol id="hawaii" viewbox="0 0 20 20">
-		<defs>
-			<style type="text/css">
-				#rect7 {
-					fill: none !important;
-					stroke: none !important;
-				}
-				#polygon9,
-				#polygon11,
-				#polygon13,
-				#polygon15,
-				#polygon17,
-				#polygon19,
-				#polygon21,
-				#polygon23,
-				#polygon25,
-				#polygon27,
-				#polygon29,
-				#polygon31,
-				#polygon33,
-				#polygon35,
-				#polygon37,
-				#polygon39 {
-					stroke: {{ stroke_color }} !important;
-					stroke-width: 0.5 !important;
-					vector-effect: non-scaling-stroke;
-					fill: {{ fill_color }} !important;
-				}
-				#line43,
-				#line45,
-				#line47 {
-					display: none;
-				}
-			</style>
-		</defs>
+				    <g id="eclipticDivisions">
+				        <title>Divide Ecliptic</title>
+				        
+				        {% for division in ecliptic_divisions %}
+				            <line class="eclipticDivision" x1="0" y1="0" x2="{{ division.x2 }}" y2="{{ division.y2 }}"/>
+				        {%- endfor %}
 
-		<g id="map" transform="scale(0.05)">
-    		{{ include_file('USA_Hawaii_location_map.svg') }}
-    	</g>
-	</symbol>
+				        {% for division in ecliptic_divisions_fine %}
+				            <line class="eclipticDivisionFine" x1="0" y1="0" x2="{{ division.x2 }}" y2="{{ division.y2 }}"/>
+				        {%- endfor %}
 
-	<g id="astrolabe" transform="translate(100, 100)">
+				        {% for division in ecliptic_divisions_efine %}
+				            <line class="eclipticDivisionExtraFine" x1="0" y1="0" x2="{{ division.x2 }}" y2="{{ division.y2 }}"/>
+				        {%- endfor %}
+				    </g>
+				    
+	  			</g>
+
+	  			<!-- <g>
+	  				<line id="eclipticPole" x1="-5" y1="{{ ecliptic_pole }}" x2="5" y2="{{ ecliptic_pole }}" style="stroke: grey;"/>
+					<line id="eclipticPole" x1="0" y1="{{ ecliptic_pole -5 }}" x2="0" y2="{{ ecliptic_pole + 5 }}" style="stroke: grey;"/>
+	  			</g> -->
+
+				<!-- <g>
+	  				<line id="eclipticCenter" x1="-50" y1="{{ ecliptic.cy }}" x2="50" y2="{{ ecliptic.cy }}" style="stroke: grey; stroke-width:0.5;"/>
+					<line id="eclipticCenter" x1="0" y1="{{ ecliptic.cy - 50 }}" x2="0" y2="{{ ecliptic.cy + 50}}" style="stroke: grey; stroke-width:0.5;"/>
+	  			</g> -->
+			        
+			 	<g id="stars" transform="rotate({{ 180 }})">
+			    	<title>Stars</title>
+			    	<g>
+			    		{% for star in stars %}
+			    		<g id="{{ star.name }}">
+			    			<title>{{ star.name }}</title>
+			    			<use x="{{ star.cx }}" 
+			    				 y="{{ star.cy }}" 
+			    				 width="1.5" height="1.5"  
+			    				 xlink:href="#star" 
+			    				 style="fill:{{ stroke_color }};"/>
+						</g>
+			    		{%- endfor %}
+			    	</g>
+			    </g>
+
+			    <g id="planets" transform="rotate(180)">
+			    	<title>Planets</title>  
+			    	<circle id="moon" cx="-7.364113659953016" cy="42.85753770184805" r="2" style="fill:white; stroke:black;" />
+			    	<circle id="sun"  cx="-16.6800678669703"  cy="-98.01520714423019" r="2" style="fill:yellow; stroke:black;"/> -->
+			    </g>
+			</g>
+		</symbol>
+
+		<symbol id="hawaii" viewbox="0 0 20 20">
+			<defs>
+				<style type="text/css">
+					#rect7 {
+						fill: none !important;
+						stroke: none !important;
+					}
+					#polygon9,
+					#polygon11,
+					#polygon13,
+					#polygon15,
+					#polygon17,
+					#polygon19,
+					#polygon21,
+					#polygon23,
+					#polygon25,
+					#polygon27,
+					#polygon29,
+					#polygon31,
+					#polygon33,
+					#polygon35,
+					#polygon37,
+					#polygon39 {
+						stroke: {{ stroke_color }} !important;
+						stroke-width: 0.5 !important;
+						vector-effect: non-scaling-stroke;
+						fill: {{ fill_color }} !important;
+					}
+					#line43,
+					#line45,
+					#line47 {
+						display: none;
+					}
+				</style>
+			</defs>
+
+			<g id="map" transform="scale(0.05)">
+	    		{{ include_file('USA_Hawaii_location_map.svg') }}
+	    	</g>
+		</symbol>
+	</defs>
+	
 
 	    <g id="meridian">
 			<title>Meridian</title>
@@ -335,7 +347,7 @@
 		</g>
 
 		<g id="grid">
-			<use x="-100" y="-100" xlink:href="#plateGrid" />
+			<use x="-100" y="-100" width="200" xlink:href="#plateGrid" />
 		</g>
 
 		<g id="tropics">
@@ -363,140 +375,25 @@
 			<title>Hawaiian Islands</title>
 			<desc>Latitude and inset map of the Hawaiian Islands.</desc>
 			<use x="-22" y="38" height="100" xlink:href="#hawaii"/>
-			<text class="description" x="0" y="{{ -15 + RCapricorn - 19 }}" text-anchor="middle">
+			<text class="description" 
+				  x="0" y="{{ -15 + RCapricorn - 19 }}" 
+				  text-anchor="middle">
 				{{ place_name }}
 	    		<tspan x="0" dy="1.2em">{{ latitude }} </tspan>
 	    	</text>
 	    </g>
 
-	    <g id="eclipticCircle">
+	</g>
+
+	<g id="eclipticCircle" class="draggable" 
+	   transform="translate(100, 100)" 
+	   data-dragstyle="rotate" 
+	   data-fixed-x="100"
+	   data-fixed-y="100">
+    	<g transform="translate(-100, -100)" >
 			<use x="0" y="0" width="200" xlink:href="#ecliptic" transform="rotate(0)"/>
 		</g>
 	</g>
-
-	<text id="output" x="120" y="230" style=" font-size:4pt; fill:black; stroke:none;" text-anchor="middle"></text>
-	<script type="application/ecmascript">
-    // <![CDATA[
-    var txt = document.getElementById("output");
-    var r = document.getElementById("moonLine");
-    var totalAngle = 270;
-    var startAngle = 0;
-
-    active = false;
-    
-    function init(evt) {
-        var obj;
-        obj = document.getElementById("diagram");
-
-        obj.addEventListener("dblclick", dblclickButton, false);
-
-        obj.addEventListener("mousedown", startDrag, false);
-        obj.addEventListener("mousemove", doDrag, false);
-        obj.addEventListener("mouseup", endDrag, false);
-
-        obj.addEventListener("touchstart", startDrag, false);
-        obj.addEventListener("touchmove", doDrag, false);
-        obj.addEventListener("touchend", endDrag, false);
-    }
-    
-    function angle(cx, cy, ex, ey) {
-      var dy = ey - cy;
-      var dx = ex - cx;
-      var theta = Math.atan2(dy, dx); // range (-PI, PI]
-      theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
-      if (theta < 0) {
-      	console.log("before: " + theta);
-      	theta = 360 + theta; // range [0, 360)
-      	console.log("after: " + theta);
-      }
-      return theta;
-    }
-    
-    function dblclickButton(evt) {
-       	var svg = document.getElementById('diagram');
-       	var rete = document.getElementById('eclipticCircle');
-        var pt = svg.createSVGPoint();
-        
-        pt.x = evt.clientX; 
-        pt.y = evt.clientY; 
-
-        var ec = document.getElementById('astrolabe');
-        var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
-        <!-- console.log(ec, svgP); -->
-
-        var rotAngle = angle(0, 0, Math.floor(svgP.x), Math.floor(svgP.y)) + 180;
-        rete.setAttribute("transform", "rotate(" + rotAngle + ")");
-        totalAngle = rotAngle;
-    }
-    
-    function startDrag(evt) {
-        <!-- console.log(evt.target.parentNode.getAttribute("id")); -->
-        var svg = document.getElementById('diagram');
-        var pt = svg.createSVGPoint();
-        
-        pt.x = evt.clientX; 
-        pt.y = evt.clientY;
-        <!-- console.log("start", pt.x, pt.y, evt.offsetX, evt.offsetY); -->
-        
-        var ec = document.getElementById('meridian');
-        var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
-        startAngle = angle(0, 0, svgP.x, svgP.y);
-
-        var eclipticCoords = document.getElementById('stars');
-        var svgPEcliptic = pt.matrixTransform(eclipticCoords.getScreenCTM().inverse());
-        eclipticAngle = angle(0, 0, svgPEcliptic.x, svgPEcliptic.y);
-
-		printMsg(pt.x + " " + pt.y + " | " + svgPEcliptic.x + " " + svgPEcliptic.y + " | " + eclipticAngle);
-        <!-- printMsg(pt.x + " " + pt.y + " | " + svgP.x + " " + svgP.y + " | " + angle(0, 0, svgP.x, svgP.y)); -->
-
-        active = true;
-    }
-    
-    function doDrag(evt) {
-		if (active){
-			var ec = document.getElementById('meridian'); 
-	        var rete = document.getElementById('eclipticCircle');
-	        var svg = document.getElementById('diagram');
-
-	        var pt = svg.createSVGPoint(); 
-	        pt.x = evt.clientX; 
-	        pt.y = evt.clientY;
-	        <!-- console.log("drag", pt.x, pt.y, evt.offsetX, evt.offsetY) -->
-	        
-	        var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
-	        var rotAngle = angle(0, 0, svgP.x, svgP.y);
-
-	        delta = (rotAngle - startAngle) / 100.0;
-	        <!-- console.log(delta); -->
-	        totalAngle = totalAngle + delta;
-	        
-	        printMsg(pt.x + " " + pt.y + " | " + svgP.x + " " + svgP.y + " | " + rotAngle);
-	        rete.setAttribute("transform", "rotate(" + totalAngle + ")");
-		}
-    }
-
-    function endDrag(evt){
-    	active = false;
-        var svg = document.getElementById('diagram');
-        var pt = svg.createSVGPoint();
-        
-        pt.x = evt.clientX; 
-        pt.y = evt.clientY;
-    	<!-- console.log("end", pt.x, pt.y, evt.offsetX, evt.offsetY); -->
-
-    	var eclipticCoords = document.getElementById('stars');
-        var svgPEcliptic = pt.matrixTransform(eclipticCoords.getScreenCTM().inverse());
-        eclipticAngle = angle(0, 0, svgPEcliptic.x, svgPEcliptic.y);
-
-		printMsg(pt.x + " " + pt.y + " | " + svgPEcliptic.x + " " + svgPEcliptic.y + " | " + eclipticAngle);
-
-    }
-    
-    function printMsg (msg){
-        txt.textContent=msg;    
-    }
-    // ]]>
-	</script>
 </svg>
-<!-- </body>
-</html> -->
+</body>
+</html>
