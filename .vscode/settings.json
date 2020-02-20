@@ -1,0 +1,4 @@
+{
+    "python.pythonPath": "/Users/ray/miniconda3/envs/numba_py38/bin/python",
+    "python.formatting.provider": "black"
+}
