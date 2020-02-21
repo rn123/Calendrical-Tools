@@ -11,6 +11,7 @@ author: Ray
 - Gentili, Graziano, Luisa Simonutti, and Daniele Struppa. [“The Mathematics of the Astrolabe and Its History.”](https://doi.org/10.5642/jhummath.202001.07) Journal of Humanistic Mathematics 10, no. 1 (January 2020): 101–44.
 - Cullen, Christopher. Heavenly Numbers: Astronomy and Authority in Early Imperial China. 1 edition. Oxford, United Kingdom ; New York, NY, United States of America: Oxford University Press, 2018.
 - Heilbron, J. L. The Sun in the Church: Cathedrals as Solar Observatories. Harvard University Press, 1999.
+- Eustachio Manfredi. De gnomone meridiano Bononiensi ad divi Petronii deque observationibus astronomicis eo instrumento ab ejus constructione ad hoc tempus peractis auctore Eustachio Manfredio .. ex typographia Laelii a Vulpe, 1736. http://archive.org/details/bub_gb_gBAAnTXm89EC.
 - [Schwerdtfeger, Berndt E.](http://berndt-schwerdtfeger.de/wp-content/uploads/pdf/sphere.pdf) “Spherical Design with Metapost,” n.d., 16.
 - Evans, James. The History & Practice of Ancient Astronomy. Oxford University Press US, 1998.
 - Rhodes, Geminus of, James Evans, and J. Lennart Berggren. Geminos’s “Introduction to the Phenomena”: A Translation and Study of a Hellenistic Survey of Astronomy. Princeton University Press, 2006.
