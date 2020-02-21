@@ -8,6 +8,7 @@ author: Ray
 <img src="{{ "/assets/images/janus_personal_astrolabes.png" | relative_url }}" alt="In memory, fantastic work by James Morrison." width="25%" align="right"/>
 
 - [Morrison, James E.](https://web.archive.org/web/20051210070051/http://www.astrolabes.org/personal.htm) The Astrolabe. Softcover. Janus, 2007.
+- Gentili, Graziano, Luisa Simonutti, and Daniele Struppa. [“The Mathematics of the Astrolabe and Its History.”](https://doi.org/10.5642/jhummath.202001.07) Journal of Humanistic Mathematics 10, no. 1 (January 2020): 101–44.
 - Cullen, Christopher. Heavenly Numbers: Astronomy and Authority in Early Imperial China. 1 edition. Oxford, United Kingdom ; New York, NY, United States of America: Oxford University Press, 2018.
 - Heilbron, J. L. The Sun in the Church: Cathedrals as Solar Observatories. Harvard University Press, 1999.
 - [Schwerdtfeger, Berndt E.](http://berndt-schwerdtfeger.de/wp-content/uploads/pdf/sphere.pdf) “Spherical Design with Metapost,” n.d., 16.
