@@ -21,3 +21,6 @@ author: Ray
 - Meeus, Jean. Astronomical Algorithms. Willmann-Bell, 1998.
 - Rhodes, Brandon. “[Skyfield](https://rhodesmill.org/skyfield/): High Precision Research-Grade Positions for Planets and Earth Satellites Generator.” Astrophysics Source Code Library, July 1, 2019, ascl:1907.024.
 - Kaler, James B. The Ever-Changing Sky: A Guide to the Celestial Sphere. Cambridge University Press, 2002.
+
+<img src="{{ "/assets/images/eudoxus.jpg" | relative_url }}" alt="Eudoxus" width="100%"/>
+[eudoxus](https://art.rmngp.fr/fr/library/artworks/papyrus-astronomique-d-eudoxe_papyrus-papier?force-download=180019)
