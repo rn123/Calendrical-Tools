@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Suggested Bibliography"
+title: "Suggested Bibliography"
 author: Ray
 ---
 
