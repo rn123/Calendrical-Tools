@@ -343,6 +343,11 @@ def main():
     background_color = "white;"
     graph_color = "white;"
 
+    # Morisson Blue
+    stroke_color = "#f5ac27;"
+    graph_color = "#596581;"
+    background_color = "#051633"
+
     # In order to place parts of the figure in Inkscape layers, need the attributes below.
     # This will cause errors, of course, in other renderers unless the inkscape namespace
     # (xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape") is included.
