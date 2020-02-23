@@ -1,3 +1,5 @@
+# Solar Observation Data
+
 <img src="{{ "/assets/images/gb_gBAAnTXm89EC_000103.png" | relative_url }}" alt="data" width="100%" style="padding:5px;"/>
 
 {% highlight python %}
@@ -10,31 +12,31 @@ file = "images/bub_gb_gBAAnTXm89EC_images/gb_gBAAnTXm89EC_000364.png"
 img = cv2.imread(file, 0)
 (thresh, img_bin) = cv2.threshold(img, 128, 255, cv2.THRESH_BINARY|cv2.THRESH_OTSU)
 
-# Invert the image
+## Invert the image
 
 img_bin = 255 - img_bin
 
-# Defining a kernel length
+## Defining a kernel length
 
 horiz_kernel_length = np.array(img).shape[0]//200
 vert_kernel_length = np.array(img).shape[1]//150
 
-# Detect horizontal lines
+## Detect horizontal lines
 
 horizontal_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (horiz_kernel_length, 1))
 
 detect_horizontal = cv2.morphologyEx(img_bin, cv2.MORPH_OPEN, horizontal_kernel, iterations=3)
 
-# Detect vertical lines
+## Detect vertical lines
 
 vertical_kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (1, vert_kernel_length))
 detect_vertical = cv2.morphologyEx(img_bin, cv2.MORPH_OPEN, vertical_kernel, iterations=3)
 
-# A kernel of (3 X 3) ones
+## A kernel of (3 X 3) ones
 
 kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (3, 3))
 
-# Weighting parameters, this will decide the quantity of an image to be added to make a new image
+## Weighting parameters, this will decide the quantity of an image to be added to make a new image
 
 alpha = 0.5
 beta = 1.0 - alpha
