@@ -19,3 +19,5 @@ toc:
       url: astrolabes/plate_grid.html
     - page: Dividing the Ecliptic
       url: astrolabes/ecliptic_division.html
+    - page: 黄道
+      url: astrolabes/黄道.html
