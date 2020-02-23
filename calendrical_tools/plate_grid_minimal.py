@@ -121,9 +121,9 @@ def main():
     for angle in list(range(0, 361, 10)):
         ecliptic_divisions_fine.append(astrolabe.ecliptic_division(angle))
 
-    ecliptic_divisions_efine = []
+    ecliptic_divisions_extra_fine = []
     for angle in list(range(0, 361, 2)):
-        ecliptic_divisions_efine.append(astrolabe.ecliptic_division(angle))
+        ecliptic_divisions_extra_fine.append(astrolabe.ecliptic_division(angle))
 
     seasonal_names = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
     seasonal_names = [
@@ -222,7 +222,7 @@ def main():
         ecliptic=ecliptic,
         ecliptic_divisions=ecliptic_divisions,
         ecliptic_divisions_fine=ecliptic_divisions_fine,
-        ecliptic_divisions_efine=ecliptic_divisions_efine,
+        ecliptic_divisions_extra_fine=ecliptic_divisions_extra_fine,
         aries_first_point=aries_first_point,
         aries_first_point_angle=astrolabe.obliquity,
         top_middle_outer=top_middle_outer,
