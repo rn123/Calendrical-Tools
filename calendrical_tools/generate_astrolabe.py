@@ -554,31 +554,29 @@ def main():
     with open("astrolabe_generated.svg", "w") as fp:
         fp.write(svg)
 
-
     import jinja2
 
     # Seems like overkill, but adds "include_file" function to jinja2
     # environment in order to include raw svg into an html template.
-    @jinja2.contextfunction                                                                                                                                                                                         
-    def include_file(ctx, name):                                                                                                                                                                                   
-        env = ctx.environment                                                                                                                                                                                      
+    @jinja2.contextfunction
+    def include_file(ctx, name):
+        env = ctx.environment
         return jinja2.Markup(env.loader.get_source(env, name)[0])
 
+    loader = jinja2.PackageLoader(__name__, ".")
+    env = jinja2.Environment(loader=loader)
+    env.globals["include_file"] = include_file
 
-    loader = jinja2.PackageLoader(__name__, '.')                                                                                                                                                       
-    env = jinja2.Environment(loader=loader)                                                                                                                                                                    
-    env.globals['include_file'] = include_file                                                                                                                                                                 
+    # html = env.get_template('calendrical_tools/astrolabe_template.html').render()
 
-    html = env.get_template('astrolabe_template.html').render() 
+    # with open("astrolabe_template.html") as fp:
+    #     html_template = fp.read()
 
-    with open("astrolabe_template.html") as fp:
-        html_template = fp.read()
+    # # template = Template(html_template)
+    # # html = env.get_template(html_template).render()
 
-    # template = Template(html_template)
-    # html = env.get_template(html_template).render()
-
-    with open("astrolabe_generated.html", "w") as fp:
-        fp.write(html)
+    # with open("astrolabe_generated.html", "w") as fp:
+    #     fp.write(html)
 
 
 if __name__ == "__main__":
