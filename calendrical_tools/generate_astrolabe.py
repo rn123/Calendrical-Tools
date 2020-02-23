@@ -41,7 +41,7 @@ class Astrolabe:
     Morrison:
     > The earliest astrolabes, which were deeply influenced by Greek tradition,
     included plates for the latitudes of the *climates.* The climates of the world 
-    were defined by Ptolemy to be the latitudes where the lenght of the longest 
+    were defined by Ptolemy to be the latitudes where the length of the longest 
     day of the year varied by one-half hour. Ptolemy calculated the latitude
     corresponding to a 15-minute difference in the length of the longest day
     (using a value of 23 degrees 51 minutes 20 seconds for the obliquity of
@@ -167,7 +167,7 @@ class Astrolabe:
         return {"cx": xHorizon, "cy": yHorizon, "r": rHorizon}
 
     def tropic_arcs(self):
-        """ The size of an astrolabe is contolled by the radius of the
+        r""" The size of an astrolabe is contolled by the radius of the
         tropic of Capricorn. Recall that the tropics represent the
         extreme positions of the sun on its path (the ecliptic) through 
         the course of a year. Summer solstice occurs when the sun reaches
@@ -192,7 +192,7 @@ class Astrolabe:
         )
 
     def almucantar_arc(self, altitude, latitude):
-        """Generate circle of constant altitude.
+        r"""Generate circle of constant altitude.
 
         Plate grid equation 2, circles of equal altitude (almucantars).
         y_{center} &= R_{Equator}(\frac{\cos\phi}{\sin\phi + \sin a}), & 
@@ -203,7 +203,7 @@ class Astrolabe:
         radiansAltitude = math.radians(altitude)
         radiansLatitude = math.radians(latitude)
 
-        almucantorCenter = self.RadiusEquator * (
+        almucantarCenter = self.RadiusEquator * (
             math.cos(radiansLatitude)
             / (math.sin(radiansLatitude) + math.sin(radiansAltitude))
         )
@@ -211,16 +211,16 @@ class Astrolabe:
             math.cos(radiansAltitude)
             / (math.sin(radiansLatitude) + math.sin(radiansAltitude))
         )
-        return {"alt": altitude, "cx": 0, "cy": almucantorCenter, "r": almucantarRadius}
+        return {"alt": altitude, "cx": 0, "cy": almucantarCenter, "r": almucantarRadius}
 
     def almucantar_arcs(self, altitudes=None, latitude=None):
-        almucantor_coords = []
+        almucantar_coords = []
 
         for altitude in altitudes:
-            almucantor_coords.append(
+            almucantar_coords.append(
                 self.almucantar_arc(altitude=altitude, latitude=latitude)
             )
-        return almucantor_coords
+        return almucantar_coords
 
     def azimuth_arc(self, azimuth=None, latitude=None, prime=False):
         # Plate grid equation 3, circles of azimuth.
@@ -345,7 +345,7 @@ def main():
     background_color = "white;"
     graph_color = "white;"
 
-    # Morisson Blue
+    # Morrison Blue
     stroke_color = "#f5ac27;"
     graph_color = "#596581;"
     background_color = "#051633"
@@ -509,7 +509,7 @@ def main():
         REquator=astrolabe.RadiusEquator,
         RCancer=astrolabe.RadiusCancer,
         horiz=plate["horizon"],
-        almucantor_coords=plate["almucantars"],
+        almucantar_coords=plate["almucantars"],
         almucantar_center=plate["almucantar_center"],
         azimuth_coords=plate["azimuths"],
         prime_vertical=plate["prime_vertical"],
