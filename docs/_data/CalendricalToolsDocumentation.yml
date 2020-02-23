@@ -5,6 +5,8 @@ toc:
   subfolderitems:
     - page: Project Concept
       url: overview/concept.html
+    - page: Solar Observations
+      url: overview/solar_data.html
     - page: Suggested Bibliography
       url: overview/bib.html
 - title: Calendars
