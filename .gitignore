@@ -4,6 +4,10 @@
 *.dvi
 *.pdf
 *.png
+*.bsp
+*.gz
+*.otf
+*.dat
 .DS_Store
 calendrical_tools/__pycache__
 .ipynb_checkpoints
