@@ -6,6 +6,8 @@ from jinja2 import Template
 
 from svgpathtools import Path, Arc, Line, svg2paths
 
+# from generate_astrolabe import *
+
 # Flat list of all of the parts of an astrolabe. Once computed, these will be used in
 # a jinja template to generate an svg diagram.
 identifiers = [
@@ -496,7 +498,7 @@ def main():
 
     print(astrolabe.obliquity)
 
-    with open("calendrical_tools/astrolabe_template.svg") as fp:
+    with open("calendrical_tools/astrolabe_template.svg.j2") as fp:
         template_text = fp.read()
 
     template = Template(template_text)
@@ -567,9 +569,9 @@ def main():
     env = jinja2.Environment(loader=loader)
     env.globals["include_file"] = include_file
 
-    # html = env.get_template('calendrical_tools/astrolabe_template.html').render()
+    # html = env.get_template('calendrical_tools/astrolabe_template.html.j2').render()
 
-    # with open("astrolabe_template.html") as fp:
+    # with open("astrolabe_template.html.j2") as fp:
     #     html_template = fp.read()
 
     # # template = Template(html_template)
