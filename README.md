@@ -1,6 +1,6 @@
 # Calendrical Tools
 
-Calendrical Tools is a Python package for computing different calendars using the code from Reingold & Dershowitz, Calendrical Computations. 
+Calendrical Tools is a Python package for computing different calendars using the code from Reingold & Dershowitz, Calendrical Computations.
 
 Candybar is a tool for computing calendars and displaying then in a rectangular format. The goal is to produce output similar to Appendix C of Reingold & Dershowitz.
 
@@ -8,7 +8,7 @@ Candybar is a tool for computing calendars and displaying then in a rectangular 
 
 ## Installation
 
-```
+```bash
 pip install git+https://github.com/rn123/Calendrical-Tools#egg=Calendrical-Tools
 ```
 
@@ -22,6 +22,7 @@ cal.prcandybar()
 ```
 
 ## License
+
 Includes a version of pycalcal
 
 [MIT](https://choosealicense.com/licenses/mit/)
