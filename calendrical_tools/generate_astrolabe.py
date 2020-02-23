@@ -469,30 +469,34 @@ def main():
         )
 
     stars = [
-        {"name":"aldebaran",  "r": 0.7467, "theta": 68.98},
-        {"name":"altair",     "r": 0.8561, "theta": 297.69542},
-        {"name":"arcturus",   "r": 0.7109, "theta": 213.91500},
-        {"name":"capella",    "r": 0.4040, "theta": 79.17208},
-        {"name":"sirius",     "r": 1.3099, "theta": 101.28708},
-        {"name":"procyon",    "r": 0.9127, "theta":114.82542},
-        {"name":"deneb",      "r": 0.4114, "theta": 310.35750},
-        {"name":"castor",     "r": 0.5556, "theta": 113.64958},
-        {"name":"regulus",    "r": 0.8103, "theta": 152.09250},
-        {"name":"vega",       "r": 0.4793, "theta": 279.23417},
-        {"name":"betelgeuse", "r": 0.8784, "theta": 88.79292},
-        {"name":"rigel",      "r": 1.1463, "theta": 78.63417},
-        {"name":"bellatrix",  "r": 0.8949, "theta": 81.28250},
-        {"name":"antares",    "r": 1.5870, "theta": 247.35167},
-        {"name":"spica",      "r": 1.2096, "theta": 201.29792}
+        {"name": "aldebaran", "r": 0.7467, "theta": 68.98},
+        {"name": "altair", "r": 0.8561, "theta": 297.69542},
+        {"name": "arcturus", "r": 0.7109, "theta": 213.91500},
+        {"name": "capella", "r": 0.4040, "theta": 79.17208},
+        {"name": "sirius", "r": 1.3099, "theta": 101.28708},
+        {"name": "procyon", "r": 0.9127, "theta": 114.82542},
+        {"name": "deneb", "r": 0.4114, "theta": 310.35750},
+        {"name": "castor", "r": 0.5556, "theta": 113.64958},
+        {"name": "regulus", "r": 0.8103, "theta": 152.09250},
+        {"name": "vega", "r": 0.4793, "theta": 279.23417},
+        {"name": "betelgeuse", "r": 0.8784, "theta": 88.79292},
+        {"name": "rigel", "r": 1.1463, "theta": 78.63417},
+        {"name": "bellatrix", "r": 0.8949, "theta": 81.28250},
+        {"name": "antares", "r": 1.5870, "theta": 247.35167},
+        {"name": "spica", "r": 1.2096, "theta": 201.29792},
     ]
 
     for star in stars:
-        star["cx"] = astrolabe.RadiusEquator * star["r"] * math.cos(math.radians(star["theta"]))
-        star["cy"] = astrolabe.RadiusEquator * star["r"] * math.sin(math.radians(star["theta"]))
+        star["cx"] = (
+            astrolabe.RadiusEquator * star["r"] * math.cos(math.radians(star["theta"]))
+        )
+        star["cy"] = (
+            astrolabe.RadiusEquator * star["r"] * math.sin(math.radians(star["theta"]))
+        )
 
     print(astrolabe.obliquity)
 
-    with open("astrolabe_template.svg") as fp:
+    with open("calendrical_tools/astrolabe_template.svg") as fp:
         template_text = fp.read()
 
     template = Template(template_text)
