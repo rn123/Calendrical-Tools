@@ -19,21 +19,24 @@
 				  clipPath: url(#Capricorn);
 				}
 				#description {
-				  fill: {{ background_color }}
+				  fill: {{ graph_color }}
 				  text-anchor: middle;
 				  font-size: 6pt;
 				  font-family: 'IM Fell Great Primer SC', serif; 
 				  font-variant: small-caps;
 				}
+				#background_rectangle {
+					fill: {{ background_color }}
+				}
 				#horizon {
 				  fill: none;
-				  stroke: {{ background_color }}
+				  stroke: {{ graph_color }}
 				  stroke-width: 1;
 				  stroke-opacity: 0.8;
 				}
 				#tropics {
 				  fill: none;
-				  stroke: {{ background_color }}
+				  stroke: {{ graph_color }}
 				  stroke-width: 1;
 				  stroke-opacity: 0.5;
 				  clip-path: url(#almucantarHole);
@@ -65,17 +68,17 @@
 				}
 				#axisGroup {
 				  fill: none;
-				  stroke: {{ background_color }}
+				  stroke: {{ graph_color }}
 				  stroke-width: 1;
 				  stroke-opacity: 0.5;
 				  clip-path: url(#descriptionHole);
 				}
 				#tick {
-				  stroke: {{ background_color }}
+				  stroke: {{ graph_color }}
 				  stroke-width: 0.5;
 				}
 				#tickLong {
-				  stroke: {{ background_color }}
+				  stroke: {{ graph_color }}
 				  stroke-width: 1;
 				}
 				#eclipticDiagram {
@@ -184,6 +187,10 @@
 		{%- endfor %}
 
 		</defs>
+
+		<g id="background_rectangle">
+			<rect x="-125" y="-125" width="250" height="250"/>
+		</g>
 
 		<g id="plate" {{ inkscape.plate }}>
 			<g id="tropics" {{ inkscape.tropics }}>
