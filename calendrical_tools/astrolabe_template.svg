@@ -382,7 +382,11 @@
       var dx = ex - cx;
       var theta = Math.atan2(dy, dx); // range (-PI, PI]
       theta *= 180 / Math.PI; // rads to degs, range (-180, 180]
-      //if (theta < 0) theta = 360 + theta; // range [0, 360)
+      if (theta < 0) {
+      	console.log("before: " + theta);
+      	theta = 360 + theta; // range [0, 360)
+      	console.log("after: " + theta);
+      }
       return theta;
     }
     
@@ -396,7 +400,7 @@
 
         var ec = document.getElementById('astrolabe');
         var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
-        console.log(ec, svgP);
+        <!-- console.log(ec, svgP); -->
 
         var rotAngle = angle(0, 0, Math.floor(svgP.x), Math.floor(svgP.y)) + 180;
         rete.setAttribute("transform", "rotate(" + rotAngle + ")");
@@ -410,7 +414,7 @@
         
         pt.x = evt.clientX; 
         pt.y = evt.clientY;
-        console.log("start", pt.x, pt.y, evt.offsetX, evt.offsetY);
+        <!-- console.log("start", pt.x, pt.y, evt.offsetX, evt.offsetY); -->
         
         var ec = document.getElementById('axisGroup');
         var svgP = pt.matrixTransform(ec.getScreenCTM().inverse());
@@ -441,7 +445,7 @@
 	        var rotAngle = angle(0, 0, svgP.x, svgP.y);
 
 	        delta = (rotAngle - startAngle) / 100.0;
-	        console.log(delta);
+	        <!-- console.log(delta); -->
 	        totalAngle = totalAngle + delta;
 	        
 	        printMsg(pt.x + " " + pt.y + " | " + svgP.x + " " + svgP.y + " | " + rotAngle);
