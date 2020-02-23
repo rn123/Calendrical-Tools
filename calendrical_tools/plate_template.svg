@@ -343,7 +343,7 @@
 				</style>
 			</defs>
 
-			<g id="map" transform="scale(0.05)">
+			<g id="map">
 	    		{{ include_file('USA_Hawaii_location_map.svg') }}
 	    	</g>
 		</symbol>
@@ -383,7 +383,7 @@
 		<g id="description">
 			<title>Hawaiian Islands</title>
 			<desc>Latitude and inset map of the Hawaiian Islands.</desc>
-			<use x="-22" y="38" height="100" xlink:href="#hawaii"/>
+			<use x="0" y="0" xlink:href="#hawaii" width="40"/>
 			<text class="description" 
 				  x="0" y="{{ -15 + RCapricorn - 19 }}" 
 				  text-anchor="middle">
@@ -392,17 +392,19 @@
 	    	</text>
 	    </g>
 
+		<g id="eclipticCircle" class="draggable" 
+		   transform="translate(100, 100)" 
+		   data-dragstyle="rotate" 
+		   data-fixed-x="100"
+		   data-fixed-y="100">
+	    	<g transform="translate(-100, -100)" >
+				<use x="0" y="0" width="200" xlink:href="#ecliptic" transform="rotate(0)"/>
+			</g>
+		</g>
+
 	</g>
 
-	<g id="eclipticCircle" class="draggable" 
-	   transform="translate(100, 100)" 
-	   data-dragstyle="rotate" 
-	   data-fixed-x="100"
-	   data-fixed-y="100">
-    	<g transform="translate(-100, -100)" >
-			<use x="0" y="0" width="200" xlink:href="#ecliptic" transform="rotate(0)"/>
-		</g>
-	</g>
+
 </svg>
-</body>
+<!-- </body>
 </html>
